@@ -20240,7 +20240,9 @@ footer {
               margin-right: 0;
               margin-left: 10px; }
             .sidebar .nav .nav-item .nav-link i.menu-icon:before {
-              vertical-align: middle; }
+              vertical-align: middle;
+              color : red;
+            }
           .sidebar .nav .nav-item .nav-link i.menu-arrow {
             font: normal normal normal 24px/1 "Material Design Icons";
             line-height: 1;
@@ -20265,7 +20267,7 @@ footer {
         .sidebar .nav .nav-item .nav-link small, .sidebar .nav .nav-item .nav-link .small {
           display: block; }
         .sidebar .nav .nav-item .nav-link .menu-title {
-          color: #141212;
+          color: #df1d1d;
           display: inline-block;
           font-size: 0.875rem;
           line-height: 1;
@@ -20415,7 +20417,7 @@ footer {
             font-weight: 600;
             background: transparent; }
           .sidebar .nav.sub-menu .nav-item .nav-link:hover {
-            color: #15191e; }
+            color: #df1d1d; }
         .sidebar .nav.sub-menu .nav-item:hover {
           background: transparent; }
 

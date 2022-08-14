@@ -56,21 +56,37 @@
               <span class="menu-title">Dashboard</span>
             </a>
           </li>
+
           <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="collapse" href="#CatalogueManagement" aria-expanded="false" aria-controls="apps">
-              <i class="mdi mdi-buffer menu-icon"></i>
-              <span class="menu-title">Catalogue Management</span>
+            <a class="nav-link" data-bs-toggle="collapse" href="#menulist" aria-expanded="false" aria-controls="apps">
+              <i class="mdi mdi-menu menu-icon"></i>
+              <span class="menu-title">Menu</span>
               <i class="menu-arrow"></i>
             </a>
-            <div class="collapse" id="CatalogueManagement">
+            <div class="collapse" id="menulist">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="<?php echo e(url('/')); ?>">Sections</a></li>
-                <li class="nav-item"> <a class="nav-link" href="<?php echo e(url('/')); ?>">Categories</a></li>
-                <li class="nav-item"> <a class="nav-link" href="<?php echo e(url('/')); ?>">Brands</a></li>
-                <li class="nav-item"> <a class="nav-link" href="<?php echo e(url('/')); ?>">Products</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<?php echo e(url('/admin/category')); ?>">Category</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<?php echo e(url('/admin/sub-category')); ?>">Sub Category</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<?php echo e(url('/admin/sub-category-item')); ?>">Sub Category Item</a></li>
               </ul>
             </div>
           </li>
+
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#attributes" aria-expanded="false" aria-controls="apps">
+              <i class="mdi mdi-layers menu-icon"></i>
+              <span class="menu-title">Attributes</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="attributes">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="<?php echo e(url('/admin/attributes-category')); ?>">Attributes Category</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<?php echo e(url('/admin/attributes-field')); ?>">Attributes Field</a></li>
+              </ul>
+            </div>
+          </li>
+
+          
 
           <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#Setting" aria-expanded="false" aria-controls="apps">
