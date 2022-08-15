@@ -22,6 +22,8 @@
     <link rel="stylesheet" href="{{ asset('adminpanel/assets/css/demo_1/style.css') }}">
     <!-- End layout styles -->
     <link rel="shortcut icon" href="{{ asset('adminpanel/assets/images/favicon.png') }}" />
+
+    <link rel="stylesheet" href="{{ asset('adminpanel/assets/vendors/datatables.net-bs4/dataTables.bootstrap4.css') }}">
   </head>
   <body>
     <div class="container-scroller">
@@ -46,18 +48,18 @@
       <!-- partial:partials/_sidebar.html -->
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
-          <li class="nav-item nav-profile border-bottom">
+          {{-- <li class="nav-item nav-profile border-bottom">
             <a href="#" class="nav-link flex-column">
               <div class="nav-profile-image">
                 <img src="{{ asset('adminpanel/assets/images/faces/face1.jpg') }}" alt="profile">
-                <!--change to offline or busy as needed-->
+
               </div>
               <div class="nav-profile-text d-flex ms-0 mb-3 flex-column">
                 <span class="font-weight-semibold mb-1 mt-2 text-center">Antonio Olson</span>
                 <span class="text-secondary icon-sm text-center">$3499.00</span>
               </div>
             </a>
-          </li>
+          </li> --}}
           <li class="nav-item pt-3">
             <a class="nav-link d-block" href="{{url('/admin/dashboard')}}">
               <img class="sidebar-brand-logo" src="{{ asset('adminpanel/assets/images/logo.png') }}"  alt="" width="100%" height="50px;">
@@ -84,7 +86,7 @@
             </a>
           </li>
 
-          <li class="nav-item">
+          <li class="nav-item @if(Request::segment(2) == "category") active @elseif (Request::segment(2) == "sub-category")  active @elseif(Request::segment(2) == "sub-category-item") @endif ">
             <a class="nav-link" data-bs-toggle="collapse" href="#menulist" aria-expanded="false" aria-controls="apps">
               <i class="mdi mdi-menu menu-icon"></i>
               <span class="menu-title">Menu</span>
@@ -92,26 +94,28 @@
             </a>
             <div class="collapse" id="menulist">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/category') }}">Category</a></li>
+                <li class="nav-item active"> <a class="nav-link" href="{{ url('/admin/category') }}">Category</a></li>
                 <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/sub-category') }}">Sub Category</a></li>
                 <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/sub-category-item') }}">Sub Category Item</a></li>
               </ul>
             </div>
           </li>
 
-          <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="collapse" href="#attributes" aria-expanded="false" aria-controls="apps">
+          <li class="nav-item @if(Request::segment(2) == "attributes") active @elseif(Request::segment(2) == "attributes-field") @endif ">
+            <a class="nav-link" data-bs-toggle="collapse" href="#Attribute" aria-expanded="false" aria-controls="apps">
               <i class="mdi mdi-layers menu-icon"></i>
-              <span class="menu-title">Attributes</span>
+              <span class="menu-title">Attribute</span>
               <i class="menu-arrow"></i>
             </a>
-            <div class="collapse" id="attributes">
+            <div class="collapse" id="Attribute">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/attributes-category') }}">Attributes Category</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/attributes') }}">Attributes</a></li>
                 <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/attributes-field') }}">Attributes Field</a></li>
               </ul>
             </div>
           </li>
+
+
 
           {{-- <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#CatalogueManagement" aria-expanded="false" aria-controls="apps">
@@ -173,12 +177,12 @@
         <!-- partial:partials/_navbar.html -->
         <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
           <div class="navbar-menu-wrapper d-flex align-items-stretch">
-            <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+            {{-- <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
               <span class="mdi mdi-chevron-double-left"></span>
-            </button>
-            <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+            </button> --}}
+            {{-- <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
               <a class="navbar-brand brand-logo-mini" href="index-2.html"><img src="https://www.bootstrapdash.com/demo/plus/jquery/template/assets/images/logo-mini.svg" alt="logo" /></a>
-            </div>
+            </div> --}}
             <ul class="navbar-nav">
               <li class="nav-item dropdown">
                 <a class="nav-link" id="messageDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
@@ -267,14 +271,14 @@
                 </div>
               </li>
             </ul>
-            <ul class="navbar-nav navbar-nav-right">
-              <li class="nav-item nav-logout d-none d-md-block me-3">
+           <ul class="navbar-nav navbar-nav-right">
+            {{--   <li class="nav-item nav-logout d-none d-md-block me-3">
                 <a class="nav-link" href="#">Status</a>
               </li>
               <li class="nav-item nav-logout d-none d-md-block">
                 <button class="btn btn-sm btn-danger">Trailing</button>
               </li>
-              <li class="nav-item nav-profile dropdown d-none d-md-block">
+               <li class="nav-item nav-profile dropdown d-none d-md-block">
                 <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
                   <div class="nav-profile-text">English </div>
                 </a>
@@ -291,10 +295,10 @@
                   <a class="dropdown-item" href="#">
                     <i class="flag-icon flag-icon-ru me-3"></i>Russian </a>
                 </div>
-              </li>
+              </li> --}}
               <li class="nav-item nav-logout d-none d-lg-block">
-                <a class="nav-link" href="index-2.html">
-                  <i class="mdi mdi-home-circle"></i>
+                <a class="nav-link" href="{{ url('/admin/logout') }}">
+                  <i class="mdi mdi-logout-variant"></i>
                 </a>
               </li>
             </ul>
@@ -323,6 +327,12 @@
     <!-- plugins:js -->
     <script src="{{ asset('adminpanel/assets/vendors/js/vendor.bundle.base.js') }}"></script>
     <!-- endinject -->
+
+    <!-- Plugin js for this page -->
+    <script src="{{ asset('adminpanel/assets/vendors/datatables.net/jquery.dataTables.js') }}"></script>
+    <script src="{{ asset('adminpanel/assets/vendors/datatables.net-bs4/dataTables.bootstrap4.js') }}"></script>
+    <!-- End plugin js for this page -->
+
     <!-- Plugin js for this page -->
     <script src="{{ asset('adminpanel/assets/vendors/jquery-bar-rating/jquery.barrating.min.js') }}"></script>
     <script src="{{ asset('adminpanel/assets/vendors/chart.js/Chart.min.js') }}"></script>
@@ -343,6 +353,11 @@
     <!-- Custom js for this page -->
     <script src="{{ asset('adminpanel/assets/js/dashboard.js') }}"></script>
     <!-- End custom js for this page -->
+    <script src="{{ asset('adminpanel/assets/js/data-table.js') }}"></script>
+
+
+    @stack('scripts')
+
   </body>
 
 </html>

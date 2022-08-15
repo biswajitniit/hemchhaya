@@ -12231,7 +12231,7 @@ code {
 
 .main-panel .content-wrapper .header-right .btn-icon-text {
   font-size: 14px;
-  background: #00d284;
+  background: #d62447;
   padding: 0 19px 0 0;
   border: 0;
   color: #ffffff;
@@ -12246,7 +12246,7 @@ code {
   .main-panel .content-wrapper .header-right .btn-icon-text i {
     padding: 7px;
     display: inline-block;
-    background: #069962;
+    background: #d62447;
     margin-right: 15px;
     border-radius: 0;
     border-top-left-radius: 4px;
@@ -20355,7 +20355,8 @@ footer {
           border-top-left-radius: 50px;
           border-bottom-left-radius: 50px; }
       .sidebar .nav .nav-item:not(:nth-child(2)).active {
-        background: #1a55e3; }
+        /* background: #1a55e3;  */
+    }
         .sidebar .nav .nav-item:not(:nth-child(2)).active > .nav-link .menu-title {
           color: #ffffff;
           font-family: "Open Sans", sans-serif;

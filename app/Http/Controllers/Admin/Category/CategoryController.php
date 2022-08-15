@@ -1,11 +1,11 @@
 <?php
-namespace App\Http\Controllers\Admin\Dashboard;
+namespace App\Http\Controllers\Admin\Category;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Session;
 use DB;
-class DashboardController extends Controller
+class CategoryController extends Controller
 {
 
     public function __construct()
@@ -14,13 +14,13 @@ class DashboardController extends Controller
     }
 
     /**
-     * Show the Admin Dashboard Page.
+     * Show the Admin Category Page.
      *
      * @return \Illuminate\Http\Response
      */
-	public function dashboard(Request $request){
+	public function category_list(Request $request){
 
-		return view("admin.dashboard.index");
+		return view("admin.category.category-list");
 
 	}
 
