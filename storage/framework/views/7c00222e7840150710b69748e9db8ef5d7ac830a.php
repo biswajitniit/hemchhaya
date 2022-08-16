@@ -1,8 +1,20 @@
+
 <?php $__env->startSection('title', 'Dashboard'); ?>
 <?php $__env->startSection('content'); ?>
 
 
 
+    <!-- content-wrapper ends -->
+    <!-- partial:partials/_footer.html -->
+    <footer class="footer">
+      <div class="d-sm-flex justify-content-center justify-content-sm-between">
+        <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © <?php echo e(date('Y')); ?> <a href="<?php echo e(url('/')); ?>" target="_blank">Hemchhaya</a>. All rights reserved.</span>
+        
+      </div>
+    </footer>
+    <!-- partial -->
+  </div>
+  <!-- main-panel ends -->
 
 
 

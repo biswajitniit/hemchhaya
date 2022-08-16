@@ -328,10 +328,7 @@
     <script src="{{ asset('adminpanel/assets/vendors/js/vendor.bundle.base.js') }}"></script>
     <!-- endinject -->
 
-    <!-- Plugin js for this page -->
-    <script src="{{ asset('adminpanel/assets/vendors/datatables.net/jquery.dataTables.js') }}"></script>
-    <script src="{{ asset('adminpanel/assets/vendors/datatables.net-bs4/dataTables.bootstrap4.js') }}"></script>
-    <!-- End plugin js for this page -->
+
 
     <!-- Plugin js for this page -->
     <script src="{{ asset('adminpanel/assets/vendors/jquery-bar-rating/jquery.barrating.min.js') }}"></script>
@@ -355,6 +352,10 @@
     <!-- End custom js for this page -->
     <script src="{{ asset('adminpanel/assets/js/data-table.js') }}"></script>
 
+        <!-- Plugin js for this page -->
+        <script src="{{ asset('adminpanel/assets/vendors/datatables.net/jquery.dataTables.js') }}"></script>
+        <script src="{{ asset('adminpanel/assets/vendors/datatables.net-bs4/dataTables.bootstrap4.js') }}"></script>
+        <!-- End plugin js for this page -->
 
     @stack('scripts')
 

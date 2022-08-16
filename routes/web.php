@@ -43,6 +43,8 @@ Route::get('/admin/logout', [LogoutController::class, 'adminlogout'])->name('/ad
 // Admin Category
 Route::get('/admin/category', [CategoryController::class, 'category_list'])->name('admin/category');
 
+Route::get('/categorylist', [CategoryController::class, 'categorylistdata'])->name('categorylist');
+
 Route::get('/admin/add-category',[CategoryController::class, 'add_category'])->name('admin/add-category');
 Route::post('/admin/add-category-post-data',[CategoryController::class, 'add_category_post_data'])->name('admin/add-category-post-data');
 
@@ -50,3 +52,8 @@ Route::any('/admin/edit-category/{categoryid}',[CategoryController::class, 'edit
 Route::post('/admin/edit-category-post/{categoryid}',[CategoryController::class, 'edit_category_post'])->name('admin/edit-category-post');
 
 Route::any('/admin/delete-category/{categoryid}',[CategoryController::class, 'delete_category'])->name('admin/delete-category');
+
+//Route::delete('posts/{id}', [PostController::class, 'destroy'])->name('posts.destroy');
+//Route::get('posts/restore/{id}', [PostController::class, 'restore'])->name('posts.restore');
+//Route::get('posts/restore-all', [PostController::class, 'restoreAll'])->name('posts.restoreAll');
+
