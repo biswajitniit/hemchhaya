@@ -23,10 +23,16 @@
         </div>
         <div class="header-right d-flex flex-wrap mt-2 mt-sm-0">
 
-          <button type="button" class="btn btn-primary mt-2 mt-sm-0 btn-icon-text">
+          <button type="button" onclick="location.href='{{ route('admin.add-category') }}'" class="btn btn-primary mt-2 mt-sm-0 btn-icon-text">
             <i class="mdi mdi-plus-circle"></i> Add Category </button>
         </div>
       </div>
+
+      @if(session()->has('message'))
+            <div class="alert alert-danger">
+                {{ session()->get('message') }}
+            </div>
+      @endif
 
 
       <div class="card">
@@ -36,7 +42,7 @@
             <div class="col-12">
               <div class="table-responsive">
                 {{-- <table id="order_listing" class="table order_listing"> --}}
-                <table class="table" id="my-table">
+                <table class="table table-bordered table-striped mb-none" id="my-table">
                   <thead>
                     <tr>
                       <th>Category Name</th>
@@ -69,12 +75,17 @@
 
 @push('scripts')
     <script type="text/javascript">
+        $(".alert").delay(2000).slideUp(200, function () {
+            $(this).alert('close');
+        });
+
+
         $(document).ready(function(){
         // DataTable
             $('#my-table').DataTable({
                 processing: true,
                 serverSide: true,
-                lengthMenu: [[1, 100, 200], [1, 100, 200]],
+                lengthMenu: [[100, 200, 300], [100, 200, 300]],
                 order: [[ 0, "desc" ]],
                 columnDefs: [{
                     "searchable": true,
@@ -92,11 +103,9 @@
                         {data: 'menu_dropdown'},
                         {data: 'menu_show_div_type'},
                         {data: 'menu_show_in_header'},
-                        //{data: 'status'},
                         {
                             data: 'status',
                             render: function (data, type, row){
-                               // return '<a href="javascript:void(0)" onclick="get_meeting_note(\'' +data+'\')" title="Edit Category"><i class="mdi mdi-table-edit"></i></a> | <a href="javascript:void(0)" onclick="get_meeting_note(\'' +data+'\')" title="Delete Category"><i class="mdi mdi-delete-forever"></i></a> ';
                                 if(data == "Active"){
                                     return '<label class="badge badge-success">Active</label>';
                                 }else{
@@ -104,11 +113,10 @@
                                 }
                             },
                         },
-                       // {data: 'action'},
                        {
                             data: 'action',
                             render: function (data, type, row){
-                                return '<a href="javascript:void(0)" onclick="get_meeting_note(\'' +data+'\')" title="Edit Category"><i class="mdi mdi-table-edit"></i></a> | <a href="javascript:void(0)" onclick="get_meeting_note(\'' +data+'\')" title="Delete Category"><i class="mdi mdi-delete-forever"></i></a> ';
+                                return '<a href="<?php echo url("admin/edit-category")?>/'+data+'" title="Edit Category"><i class="mdi mdi-table-edit"></i></a> | <a href="<?php echo url("admin/categorytrash")?>/'+data+'" title="Trash Category" onclick="return confirm("Are you sure?")"><i class="mdi mdi-delete-forever"></i></a> ';
                             },
                         },
 
@@ -116,7 +124,14 @@
             });
         });
 
-
+        function confirmMsg()
+        {
+            var answer = confirm("Delete selected record?")
+            if (answer){
+                return true;
+            }
+            return false;
+        }
     </script>
 @endpush
 @endsection

@@ -1,4 +1,4 @@
-<?php $__env->startSection('title', 'Category Listing'); ?>
+<?php $__env->startSection('title', 'Sub Category Item Listing'); ?>
 <?php $__env->startSection('content'); ?>
 
 
@@ -12,9 +12,8 @@
           
         </div>
         <div class="header-right d-flex flex-wrap mt-2 mt-sm-0">
-
-          <button type="button" onclick="location.href='<?php echo e(route('admin.add-category')); ?>'" class="btn btn-primary mt-2 mt-sm-0 btn-icon-text">
-            <i class="mdi mdi-plus-circle"></i> Add Category </button>
+          <button type="button" onclick="location.href='<?php echo e(route('admin.add-sub-category-item')); ?>'" class="btn btn-primary mt-2 mt-sm-0 btn-icon-text">
+            <i class="mdi mdi-plus-circle"></i> Add Sub Category Item</button>
         </div>
       </div>
 
@@ -28,7 +27,7 @@
 
       <div class="card">
         <div class="card-body">
-          <h4 class="card-title">Category table</h4>
+          <h4 class="card-title">Sub Category Item table</h4>
           <div class="row">
             <div class="col-12">
               <div class="table-responsive">
@@ -37,10 +36,8 @@
                   <thead>
                     <tr>
                       <th>Category Name</th>
-                      <th>Category Sort No</th>
-                      <th>Menu Dropdown</th>
-                      <th>Menu Show Div Type</th>
-                      <th>Menu Show In Header</th>
+                      <th>Sub Category Name</th>
+                      <th>Sub Category Item Name</th>
                       <th>Status</th>
                       <th>Actions</th>
                     </tr>
@@ -77,7 +74,7 @@
                 processing: true,
                 serverSide: true,
                 lengthMenu: [[100, 200, 300], [100, 200, 300]],
-                order: [[ 0, "desc" ]],
+                order: [[ 2, "asc" ]],
                 columnDefs: [{
                     "searchable": true,
                     "orderable": false,
@@ -85,15 +82,13 @@
                 }],
                 "ajax": {
                     data: ({_token: '<?php echo e(csrf_token()); ?>'}),
-                    url : "<?php echo e(url('/')); ?>/categorylist",
+                    url : "<?php echo e(url('/')); ?>/subcategoryitemlist",
                     type : 'GET',
                 },
                 columns: [
                         {data: 'category_name' },
-                        {data: 'category_sort_no'},
-                        {data: 'menu_dropdown'},
-                        {data: 'menu_show_div_type'},
-                        {data: 'menu_show_in_header'},
+                        {data: 'sub_category_name'},
+                        {data: 'sub_category_item_name'},
                         {
                             data: 'status',
                             render: function (data, type, row){
@@ -107,7 +102,7 @@
                        {
                             data: 'action',
                             render: function (data, type, row){
-                                return '<a href="<?php echo url("admin/edit-category")?>/'+data+'" title="Edit Category"><i class="mdi mdi-table-edit"></i></a> | <a href="<?php echo url("admin/categorytrash")?>/'+data+'" title="Trash Category" onclick="return confirm("Are you sure?")"><i class="mdi mdi-delete-forever"></i></a> ';
+                                return '<a href="<?php echo url("admin/edit-sub-category-item")?>/'+data+'" title="Edit Sub Category"><i class="mdi mdi-table-edit"></i></a> | <a href="<?php echo url("admin/subcategoryitemtrash")?>/'+data+'" title="Trash Category" onclick="return confirm("Are you sure?")"><i class="mdi mdi-delete-forever"></i></a> ';
                             },
                         },
 
@@ -127,4 +122,4 @@
 <?php $__env->stopPush(); ?>
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('layouts.admin', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH E:\webdev\hemchhaya\resources\views/admin/category/category-list.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.admin', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH E:\webdev\hemchhaya\resources\views/admin/subcategoryitem/sub-category-item-list.blade.php ENDPATH**/ ?>

@@ -17,7 +17,7 @@
     <!-- Layout styles -->
     <link rel="stylesheet" href="{{ asset('adminpanel/assets/css/demo_1/style.css') }}">
     <!-- End layout styles -->
-    <link rel="shortcut icon" href="{{ asset('adminpanel/assets/images/favicon.png') }}" />
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('adminpanel/assets/images/favicon.ico') }}">
   </head>
   <body>
     <div class="container-scroller">

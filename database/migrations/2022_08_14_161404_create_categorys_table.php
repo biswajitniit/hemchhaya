@@ -22,6 +22,7 @@ class CreateCategorysTable extends Migration
             $table->enum('menu_show_in_header', ['1', '2'])->comment('1=Show,2=Not Show');
             $table->enum('status', ['1', '2'])->comment('1=Active,2=InActive');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -32,6 +33,9 @@ class CreateCategorysTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('categorys');
+       //Schema::dropIfExists('categorys');
+       Schema::table('categorys', function (Blueprint $table) {
+        $table->dropSoftDeletes();
+      });
     }
 }

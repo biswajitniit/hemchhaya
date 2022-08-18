@@ -6,6 +6,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AdminLoginController;
 use App\Http\Controllers\Admin\Category\CategoryController;
 use App\Http\Controllers\Admin\Dashboard\DashboardController;
+use App\Http\Controllers\Admin\Subcategoryitem\SubCategoryItemController;
+use App\Http\Controllers\Admin\Subcategory\SubCategoryController;
+
 use App\Http\Controllers\Admin\LogoutController;
 /*
 |--------------------------------------------------------------------------
@@ -41,19 +44,49 @@ Route::get('/admin/logout', [LogoutController::class, 'adminlogout'])->name('/ad
 
 
 // Admin Category
-Route::get('/admin/category', [CategoryController::class, 'category_list'])->name('admin/category');
+Route::get('/admin/category', [CategoryController::class, 'category_list'])->name('admin.category');
 
 Route::get('/categorylist', [CategoryController::class, 'categorylistdata'])->name('categorylist');
 
-Route::get('/admin/add-category',[CategoryController::class, 'add_category'])->name('admin/add-category');
-Route::post('/admin/add-category-post-data',[CategoryController::class, 'add_category_post_data'])->name('admin/add-category-post-data');
+Route::get('/admin/add-category',[CategoryController::class, 'add_category'])->name('admin.add-category');
+Route::post('/admin/add-category-post-data',[CategoryController::class, 'add_category_post_data'])->name('admin.add-category-post-data');
 
-Route::any('/admin/edit-category/{categoryid}',[CategoryController::class, 'edit_category'])->name('admin/edit-category');
-Route::post('/admin/edit-category-post/{categoryid}',[CategoryController::class, 'edit_category_post'])->name('admin/edit-category-post');
+Route::any('/admin/edit-category/{categoryid}',[CategoryController::class, 'edit_category'])->name('admin.edit-category');
+Route::post('/admin/edit-category-post',[CategoryController::class, 'edit_category_post'])->name('admin.edit-category-post');
 
-Route::any('/admin/delete-category/{categoryid}',[CategoryController::class, 'delete_category'])->name('admin/delete-category');
+Route::any('/admin/categorytrash/{categoryid}',[CategoryController::class, 'categorytrash'])->name('admin.categorytrash');
 
 //Route::delete('posts/{id}', [PostController::class, 'destroy'])->name('posts.destroy');
 //Route::get('posts/restore/{id}', [PostController::class, 'restore'])->name('posts.restore');
 //Route::get('posts/restore-all', [PostController::class, 'restoreAll'])->name('posts.restoreAll');
 
+
+// Admin Sub Category
+Route::get('/admin/sub-category', [SubCategoryController::class, 'sub_category_list'])->name('admin.subcategory');
+
+Route::get('/subcategorylist', [SubCategoryController::class, 'subcategorylistdata'])->name('subcategorylist');
+
+Route::get('/admin/add-sub-category',[SubCategoryController::class, 'add_sub_category'])->name('admin.add-sub-category');
+Route::post('/admin/add-sub-category-post-data',[SubCategoryController::class, 'add_sub_category_post_data'])->name('admin.add-sub-category-post-data');
+
+Route::any('/admin/edit-sub-category/{subcategoryid}',[SubCategoryController::class, 'edit_sub_category'])->name('admin.edit-sub-category');
+Route::post('/admin/edit-sub-category-post',[SubCategoryController::class, 'edit_sub_category_post'])->name('admin.edit-sub-category-post');
+
+Route::any('/admin/subcategorytrash/{subcategoryid}',[SubCategoryController::class, 'subcategorytrash'])->name('admin.subcategorytrash');
+
+
+
+// Admin Sub Category Item
+Route::get('/admin/sub-category-item', [SubCategoryItemController::class, 'sub_category_item_list'])->name('admin.subcategoryitem');
+
+Route::get('/subcategoryitemlist', [SubCategoryItemController::class, 'subcategoryitemlistdata'])->name('subcategoryitemlist');
+
+Route::get('/admin/add-sub-category-item',[SubCategoryItemController::class, 'add_sub_category_item'])->name('admin.add-sub-category-item');
+Route::post('/admin/add-sub-category-item-post-data',[SubCategoryItemController::class, 'add_sub_category_post_data'])->name('admin.add-sub-category-post-data');
+
+Route::any('/admin/edit-sub-category-item/{subcategoryitemid}',[SubCategoryItemController::class, 'edit_sub_category_item'])->name('admin.edit-sub-category-item');
+Route::post('/admin/edit-sub-category-item-post',[SubCategoryItemController::class, 'edit_sub_category_item_post'])->name('admin.edit-sub-category-item-post');
+
+Route::any('/admin/subcategoryitemtrash/{subcategoryitemid}',[SubCategoryItemController::class, 'subcategoryitemtrash'])->name('admin.subcategoryitemtrash');
+
+//Route::any('/ajaxSubCategoryGetCategoryId', 'Admin\SubCategoryItemController@ajax_sub_category_get_category_id');  // GET Subcategory LIST

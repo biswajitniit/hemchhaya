@@ -6399,7 +6399,7 @@ textarea.is-invalid.tt-hint {
     float: left;
     padding-right: 0.5rem;
     color: #6c757d;
-    content: var(--bs-breadcrumb-divider, "https://www.bootstrapdash.com/") /* rtl: var(--bs-breadcrumb-divider, "/") */; }
+    content: var(--bs-breadcrumb-divider, "/") /* rtl: var(--bs-breadcrumb-divider, "/") */; }
 
 .breadcrumb-item.active {
   color: #495057; }
@@ -20355,7 +20355,7 @@ footer {
           border-top-left-radius: 50px;
           border-bottom-left-radius: 50px; }
       .sidebar .nav .nav-item:not(:nth-child(2)).active {
-        /* background: #1a55e3;  */
+        background: #1e184f;
     }
         .sidebar .nav .nav-item:not(:nth-child(2)).active > .nav-link .menu-title {
           color: #ffffff;
@@ -20837,4 +20837,12 @@ footer {
   -ms-flex-positive: 1;
   flex-grow: 1; }
 
+  .required {
+    display: inline-block;
+    color: #d2322d;
+    font-size: 0.8em;
+    font-weight: bold;
+    position: relative;
+    top: -0.2em;
+}
 /*# sourceMappingURL=style.css.map */

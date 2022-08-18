@@ -25,6 +25,87 @@ class CategoryController extends Controller
 	}
 
     /**
+     * Show the Admin Add Category View Page.
+     *
+     * @return \Illuminate\Http\Response
+     */
+	public function add_category(Request $request){
+		return view("admin.category.add-category");
+	}
+
+    /**
+     * Save category post data.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function add_category_post_data(Request $request){
+        $this->validate($request, [
+            'category_name' => 'required'
+        ],[
+            'category_name.required' => 'Please enter a category name',
+        ]);
+
+    	$category = new Categorys();
+			$category->category_name           = $request['category_name'];
+			$category->category_sort_no        = $request['category_sort_no'];
+			$category->menu_dropdown           = $request['menu_dropdown'];
+			$category->menu_show_div_type      = $request['menu_show_div_type'];
+			$category->menu_show_in_header     = $request['menu_show_in_header'];
+			$category->status                  = $request['status'];
+		$category->save();
+        return redirect()->back()->with('message', 'Category added successfully.');
+    }
+
+    /**
+     * Edit Category view page
+     *
+     * @return true or false
+     */
+    public function edit_category(Request $request, $categoryid){
+		 $category = Categorys::where('id',$categoryid)->first();
+		 return view('admin.category.edit-category',compact('category'));
+	 }
+
+   /**
+     * Edit country after post
+     *
+     * @return true or false
+     */
+    public function edit_category_post(Request $request){
+
+        $this->validate($request, [
+            'category_name' => 'required'
+        ],[
+            'category_name.required' => 'Please enter a category name',
+        ]);
+
+        $data = array(
+                        'category_name'          => $request['category_name'],
+                        'category_sort_no'       => $request['category_sort_no'],
+                        'menu_dropdown'          => $request['menu_dropdown'],
+                        'menu_show_div_type'	 => $request['menu_show_div_type'],
+                        'menu_show_in_header'    => $request['menu_show_in_header'],
+                        'status'                 => $request['status']
+                    );
+
+        Categorys::where('id', $request['catid'])->update($data);
+
+        return redirect()->back()->with('message', 'Category updated successfully.');
+
+    }
+
+    /**
+     * Soft delets
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function categorytrash(Request $request, $categoryid){
+        Categorys::where('id',$categoryid)->delete();
+        return redirect()->back()->with('message', 'Category delete successfully.');
+    }
+
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response

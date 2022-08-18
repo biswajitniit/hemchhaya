@@ -12,6 +12,10 @@
     <link rel="stylesheet" href="<?php echo e(asset('adminpanel/assets/vendors/flag-icon-css/css/flag-icon.min.css')); ?>">
     <link rel="stylesheet" href="<?php echo e(asset('adminpanel/assets/vendors/css/vendor.bundle.base.css')); ?>">
     <!-- endinject -->
+
+    <link rel="stylesheet" href="<?php echo e(asset('adminpanel/assets/vendors/select2/select2.min.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('adminpanel/assets/vendors/select2-bootstrap-theme/select2-bootstrap.min.css')); ?>">
+
     <!-- Plugin css for this page -->
     <link rel="stylesheet" href="<?php echo e(asset('adminpanel/assets/vendors/jquery-bar-rating/css-stars.css')); ?>">
     <link rel="stylesheet" href="<?php echo e(asset('adminpanel/assets/vendors/font-awesome/css/font-awesome.min.css')); ?>">
@@ -21,10 +25,13 @@
     <!-- Layout styles -->
     <link rel="stylesheet" href="<?php echo e(asset('adminpanel/assets/css/demo_1/style.css')); ?>">
     <!-- End layout styles -->
-    <link rel="shortcut icon" href="<?php echo e(asset('adminpanel/assets/images/favicon.png')); ?>" />
+
+    <link rel="shortcut icon" type="image/x-icon" href="<?php echo e(asset('adminpanel/assets/images/favicon.ico')); ?>">
 
     <link rel="stylesheet" href="<?php echo e(asset('adminpanel/assets/vendors/datatables.net-bs4/dataTables.bootstrap4.css')); ?>">
-  </head>
+
+
+</head>
   <body>
     <div class="container-scroller">
       
@@ -56,7 +63,7 @@
             </a>
             <div class="collapse" id="menulist">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item active"> <a class="nav-link" href="<?php echo e(url('/admin/category')); ?>">Category</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<?php echo e(url('/admin/category')); ?>">Category</a></li>
                 <li class="nav-item"> <a class="nav-link" href="<?php echo e(url('/admin/sub-category')); ?>">Sub Category</a></li>
                 <li class="nav-item"> <a class="nav-link" href="<?php echo e(url('/admin/sub-category-item')); ?>">Sub Category Item</a></li>
               </ul>
@@ -248,6 +255,8 @@
     <!-- plugins:js -->
     <script src="<?php echo e(asset('adminpanel/assets/vendors/js/vendor.bundle.base.js')); ?>"></script>
     <!-- endinject -->
+    <script src="<?php echo e(asset('adminpanel/assets/vendors/jquery-validation/jquery.validate.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('adminpanel/assets/vendors/bootstrap-maxlength/bootstrap-maxlength.min.js')); ?>"></script>
 
 
 
@@ -273,10 +282,20 @@
     <!-- End custom js for this page -->
     <script src="<?php echo e(asset('adminpanel/assets/js/data-table.js')); ?>"></script>
 
-        <!-- Plugin js for this page -->
-        <script src="<?php echo e(asset('adminpanel/assets/vendors/datatables.net/jquery.dataTables.js')); ?>"></script>
-        <script src="<?php echo e(asset('adminpanel/assets/vendors/datatables.net-bs4/dataTables.bootstrap4.js')); ?>"></script>
-        <!-- End plugin js for this page -->
+    <!-- Plugin js for this page -->
+    <script src="<?php echo e(asset('adminpanel/assets/vendors/datatables.net/jquery.dataTables.js')); ?>"></script>
+    <script src="<?php echo e(asset('adminpanel/assets/vendors/datatables.net-bs4/dataTables.bootstrap4.js')); ?>"></script>
+    <!-- End plugin js for this page -->
+
+    <!-- Custom js for this page -->
+    
+    <script src="<?php echo e(asset('adminpanel/assets/js/bt-maxLength.js')); ?>"></script>
+
+    <script src="<?php echo e(asset('adminpanel/assets/vendors/select2/select2.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('adminpanel/assets/vendors/typeahead.js/typeahead.bundle.min.js')); ?>"></script>
+
+    <script src="<?php echo e(asset('adminpanel/assets/js/typeahead.js')); ?>"></script>
+    <script src="<?php echo e(asset('adminpanel/assets/js/select2.js')); ?>"></script>
 
     <?php echo $__env->yieldPushContent('scripts'); ?>
 

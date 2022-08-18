@@ -1,16 +1,16 @@
 @extends('layouts.admin')
-@section('title', 'Add Category')
+@section('title', 'Add Sub Category Item')
 @section('content')
 
 
 <div class="main-panel">
     <div class="content-wrapper">
       <div class="page-header">
-        <h3 class="page-title"> Add Category </h3>
+        <h3 class="page-title"> Add Sub Category Item</h3>
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ route('admin.category') }}">Categorys</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Add Category</li>
+            <li class="breadcrumb-item"><a href="{{ route('admin.subcategory') }}">Sub Category Item</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Add Sub Category Item</li>
           </ol>
         </nav>
       </div>
@@ -39,43 +39,37 @@
 
 
 
-              <form class="cmxform" id="addcategory" method="post" action="{{ route('admin.add-category-post-data') }}" name="addcategory">
+              <form class="cmxform" id="addsubcategoryitem" method="post" action="{{ route('admin.add-sub-category-post-data') }}" name="addsubcategoryitem">
                 @csrf
                 <fieldset>
 
+                  <div class="form-group">
+                    <label for="category_id">Category Name</label>
+                    <select name="category_id" class="js-example-basic-single" style="width:100%" >
+                        <option value="">Select Category</option>
+                        @if($category)
+                            @foreach ($category as $rowcategory)
+                                <option value="{{ $rowcategory->id }}">{{ $rowcategory->category_name }}</option>
+                            @endforeach
+                        @endif
+
+                    </select>
+                  </div>
+
 
                   <div class="form-group">
-                    <label for="category_name">Category Name <span class="required">*</span></label>
-                    <input id="category_name" class="form-control" name="category_name" type="text">
-                  </div>
-                  <div class="form-group">
-                    <label for="category_sort_no">Category Sort No </label>
-                    <input id="category_sort_no" class="form-control" name="category_sort_no" type="text">
-                  </div>
-
-                  <div class="form-group">
-                    <label for="menu_dropdown">Menu Dropdown</label>
-                    <select name="menu_dropdown" class="js-example-basic-single" style="width:100%" >
-                        <option value="1">Yes</option>
-                        <option value="2">No</option>
+                    <label for="sub_category_id">Sub Category Name</label>
+                    <select name="sub_category_id" class="js-example-basic-single" style="width:100%" >
+                        <option value="">Select Sub Category</option>
                     </select>
                   </div>
 
                   <div class="form-group">
-                    <label for="menu_show_div_type">Menu Show Div Type</label>
-                    <select name="menu_show_div_type" class="js-example-basic-single" style="width:100%" >
-                        <option value="1">Dropdown</option>
-                        <option value="2">Megamenu</option>
-                    </select>
+                    <label for="sub_category_name">Sub Category Name </label>
+                    <input id="sub_category_name" class="form-control" name="sub_category_name" type="text">
                   </div>
 
-                  <div class="form-group">
-                    <label for="menu_show_in_header">Menu Show In Header</label>
-                    <select name="menu_show_in_header" class="js-example-basic-single" style="width:100%" >
-                        <option value="1">Show</option>
-                        <option value="2">Not Show</option>
-                    </select>
-                  </div>
+
 
                   <div class="form-group row">
                     <label class="col-sm-3 col-form-label">Status</label>
@@ -126,21 +120,24 @@
 
         $(function() {
             // validate signup form on keyup and submit
-            $("#addcategory").validate({
-            rules: {
-                category_name: "required",
-            },
-            messages: {
-                category_name: "Please enter category name",
-            },
-            errorPlacement: function(label, element) {
-                label.addClass('mt-2 text-danger');
-                label.insertAfter(element);
-            },
-            highlight: function(element, errorClass) {
-                $(element).parent().addClass('has-danger')
-                $(element).addClass('form-control-danger')
-            }
+            $("#addsubcategory").validate({
+                rules: {
+                    category_id: "required",
+                    sub_category_name: "required",
+
+                },
+                messages: {
+                    category_id: "Please select category",
+                    sub_category_name: "Please enter sub category",
+                },
+                errorPlacement: function(label, element) {
+                    label.addClass('mt-2 text-danger');
+                    label.insertAfter(element);
+                },
+                highlight: function(element, errorClass) {
+                    $(element).parent().addClass('has-danger')
+                    $(element).addClass('form-control-danger')
+                }
             });
         });
 
