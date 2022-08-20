@@ -1,16 +1,16 @@
 @extends('layouts.admin')
-@section('title', 'Add Sub Category Item')
+@section('title', 'Edit Attribute')
 @section('content')
 
 
 <div class="main-panel">
     <div class="content-wrapper">
       <div class="page-header">
-        <h3 class="page-title"> Add Sub Category Item</h3>
+        <h3 class="page-title"> Edit Attribute</h3>
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ route('admin.subcategoryitem') }}">Sub Category Items</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Add Sub Category Item</li>
+            <li class="breadcrumb-item"><a href="{{ route('attribute') }}">Attributes</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Edit Attributes</li>
           </ol>
         </nav>
       </div>
@@ -39,49 +39,51 @@
 
 
 
-              <form class="cmxform" id="addsubcategoryitem" method="post" action="{{ route('admin.add-sub-category-item-post-data') }}" name="addsubcategoryitem">
+              <form class="cmxform" id="editattribute" method="post" action="{{ route('admin.edit-attribute-post') }}" name="editattribute">
                 @csrf
+                <input type="hidden" name="attributeid" value="{{ $attribute->id }}">
                 <fieldset>
 
+
+                    <div class="form-group">
+                        <label for="column_name">Column Name </label>
+                        <input id="column_name" class="form-control" name="column_name" type="text" value="{{ $attribute->column_name }}">
+                    </div>
+
                   <div class="form-group">
-                    <label for="category_id">Category Name</label>
-                    <select name="category_id" class="js-example-basic-single" style="width:100%">
-                        <option value="">Select Category</option>
-                        @if($category)
-                            @foreach ($category as $rowcategory)
-                                <option value="{{ $rowcategory->id }}">{{ $rowcategory->category_name }}</option>
-                            @endforeach
-                        @endif
+                    <label for="column_type">Column Type</label>
+                    <select name="column_type" class="js-example-basic-single" style="width:100%">
+                        <option value="">Select Column Type</option>
+                        <option value="1" @if($attribute->id == 1) selected="selected" @endif>TextBox</option>
+                        <option value="2" @if($attribute->id == 2) selected="selected" @endif>Drop Down</option>
+                        <option value="3" @if($attribute->id == 3) selected="selected" @endif>Editor</option>
+                        <option value="4" @if($attribute->id == 4) selected="selected" @endif>Password</option>
+                        <option value="5" @if($attribute->id == 5) selected="selected" @endif>Email</option>
                     </select>
                   </div>
 
 
                   <div class="form-group">
-                    <label for="sub_category_id">Sub Category</label>
-                    <select name="sub_category_id" class="subcategory" style="width:100%;">
-                        <option value="">Select Sub Category</option>
+                    <label for="column_validation">Column Validation</label>
+                    <select name="column_validation" class="js-example-basic-single" style="width:100%;">
+                        <option value="">Select Column Validation</option>
+                        <option value="1" @if($attribute->column_validation == 1) selected="selected" @endif>Optional</option>
+                        <option value="2" @if($attribute->column_validation == 2) selected="selected" @endif>Required</option>
                     </select>
                   </div>
-
-                  <div class="form-group">
-                    <label for="sub_category_item_name">Sub Category Name </label>
-                    <input id="sub_category_item_name" class="form-control" name="sub_category_item_name" type="text">
-                  </div>
-
-
 
                   <div class="form-group row">
                     <label class="col-sm-3 col-form-label">Status</label>
                     <div class="col-sm-4">
                       <div class="form-check">
                         <label class="form-check-label">
-                          <input type="radio" class="form-check-input" name="status" id="status1" value="1" checked> Active </label>
+                          <input type="radio" class="form-check-input" name="status" id="status1" value="1" @if($attribute->status == 1) checked @endif> Active </label>
                       </div>
                     </div>
                     <div class="col-sm-5">
                       <div class="form-check">
                         <label class="form-check-label">
-                          <input type="radio" class="form-check-input" name="status" id="status2" value="2"> InActive </label>
+                          <input type="radio" class="form-check-input" name="status" id="status2" value="2" @if($attribute->status == 2) checked @endif> InActive </label>
                       </div>
                     </div>
                   </div>

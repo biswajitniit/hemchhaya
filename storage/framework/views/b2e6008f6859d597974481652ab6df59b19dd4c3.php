@@ -1,15 +1,15 @@
-<?php $__env->startSection('title', 'Add Sub Category Item'); ?>
+<?php $__env->startSection('title', 'Edit Attribute'); ?>
 <?php $__env->startSection('content'); ?>
 
 
 <div class="main-panel">
     <div class="content-wrapper">
       <div class="page-header">
-        <h3 class="page-title"> Add Sub Category Item</h3>
+        <h3 class="page-title"> Edit Attribute</h3>
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="<?php echo e(route('admin.subcategoryitem')); ?>">Sub Category Item</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Add Sub Category Item</li>
+            <li class="breadcrumb-item"><a href="<?php echo e(route('attribute')); ?>">Attributes</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Edit Attributes</li>
           </ol>
         </nav>
       </div>
@@ -39,49 +39,51 @@
 
 
 
-              <form class="cmxform" id="addsubcategoryitem" method="post" action="<?php echo e(route('admin.add-sub-category-item-post-data')); ?>" name="addsubcategoryitem">
+              <form class="cmxform" id="editattribute" method="post" action="<?php echo e(route('admin.edit-attribute-post')); ?>" name="editattribute">
                 <?php echo csrf_field(); ?>
+                <input type="hidden" name="attributeid" value="<?php echo e($attribute->id); ?>">
                 <fieldset>
 
+
+                    <div class="form-group">
+                        <label for="column_name">Column Name </label>
+                        <input id="column_name" class="form-control" name="column_name" type="text" value="<?php echo e($attribute->column_name); ?>">
+                    </div>
+
                   <div class="form-group">
-                    <label for="category_id">Category Name</label>
-                    <select name="category_id" class="js-example-basic-single" style="width:100%">
-                        <option value="">Select Category</option>
-                        <?php if($category): ?>
-                            <?php $__currentLoopData = $category; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $rowcategory): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <option value="<?php echo e($rowcategory->id); ?>"><?php echo e($rowcategory->category_name); ?></option>
-                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                        <?php endif; ?>
+                    <label for="column_type">Column Type</label>
+                    <select name="column_type" class="js-example-basic-single" style="width:100%">
+                        <option value="">Select Column Type</option>
+                        <option value="1" <?php if($attribute->id == 1): ?> selected="selected" <?php endif; ?>>TextBox</option>
+                        <option value="2" <?php if($attribute->id == 2): ?> selected="selected" <?php endif; ?>>Drop Down</option>
+                        <option value="3" <?php if($attribute->id == 3): ?> selected="selected" <?php endif; ?>>Editor</option>
+                        <option value="4" <?php if($attribute->id == 4): ?> selected="selected" <?php endif; ?>>Password</option>
+                        <option value="5" <?php if($attribute->id == 5): ?> selected="selected" <?php endif; ?>>Email</option>
                     </select>
                   </div>
 
 
                   <div class="form-group">
-                    <label for="sub_category_id">Sub Category</label>
-                    <select name="sub_category_id" class="subcategory" style="width:100%;">
-                        <option value="">Select Sub Category</option>
+                    <label for="column_validation">Column Validation</label>
+                    <select name="column_validation" class="js-example-basic-single" style="width:100%;">
+                        <option value="">Select Column Validation</option>
+                        <option value="1" <?php if($attribute->column_validation == 1): ?> selected="selected" <?php endif; ?>>Optional</option>
+                        <option value="2" <?php if($attribute->column_validation == 2): ?> selected="selected" <?php endif; ?>>Required</option>
                     </select>
                   </div>
-
-                  <div class="form-group">
-                    <label for="sub_category_item_name">Sub Category Name </label>
-                    <input id="sub_category_item_name" class="form-control" name="sub_category_item_name" type="text">
-                  </div>
-
-
 
                   <div class="form-group row">
                     <label class="col-sm-3 col-form-label">Status</label>
                     <div class="col-sm-4">
                       <div class="form-check">
                         <label class="form-check-label">
-                          <input type="radio" class="form-check-input" name="status" id="status1" value="1" checked> Active </label>
+                          <input type="radio" class="form-check-input" name="status" id="status1" value="1" <?php if($attribute->status == 1): ?> checked <?php endif; ?>> Active </label>
                       </div>
                     </div>
                     <div class="col-sm-5">
                       <div class="form-check">
                         <label class="form-check-label">
-                          <input type="radio" class="form-check-input" name="status" id="status2" value="2"> InActive </label>
+                          <input type="radio" class="form-check-input" name="status" id="status2" value="2" <?php if($attribute->status == 2): ?> checked <?php endif; ?>> InActive </label>
                       </div>
                     </div>
                   </div>
@@ -172,4 +174,4 @@
 <?php $__env->stopPush(); ?>
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('layouts.admin', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH E:\webdev\hemchhaya\resources\views/admin/subcategoryitem/add-sub-category-item.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.admin', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH E:\webdev\hemchhaya\resources\views/admin/attribute/edit-attribute.blade.php ENDPATH**/ ?>

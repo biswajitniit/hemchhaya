@@ -70,7 +70,7 @@
             </div>
           </li>
 
-          <li class="nav-item <?php if(Request::segment(2) == "attributes"): ?> active <?php elseif(Request::segment(2) == "attributes-field"): ?> <?php endif; ?> ">
+          <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#Attribute" aria-expanded="false" aria-controls="apps">
               <i class="mdi mdi-layers menu-icon"></i>
               <span class="menu-title">Attribute</span>
@@ -78,13 +78,110 @@
             </a>
             <div class="collapse" id="Attribute">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="<?php echo e(url('/admin/attributes')); ?>">Attributes</a></li>
-                <li class="nav-item"> <a class="nav-link" href="<?php echo e(url('/admin/attributes-field')); ?>">Attributes Field</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<?php echo e(url('/admin/attribute')); ?>">Attribute</a></li>
+                
+                <li class="nav-item"> <a class="nav-link" href="<?php echo e(url('/admin/brands')); ?>">Brands</a></li>
+              </ul>
+            </div>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#HPS" aria-expanded="false" aria-controls="apps">
+              <i class="mdi mdi-menu menu-icon"></i>
+              <span class="menu-title">Home page settings</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="HPS">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="">Sliders</a></li>
+                <li class="nav-item"> <a class="nav-link" href="">Top Banner</a></li>
+                <li class="nav-item"> <a class="nav-link" href="">Large Banner</a></li>
+                <li class="nav-item"> <a class="nav-link" href="">Left Banner</a></li>
+                <li class="nav-item"> <a class="nav-link" href="">Bottom Banner</a></li>
+                <li class="nav-item"> <a class="nav-link" href="">Popup Banner</a></li>
               </ul>
             </div>
           </li>
 
 
+          <li class="nav-item">
+            <a class="nav-link" href="<?php echo e(url('/')); ?>">
+              <i class="mdi mdi-account-multiple-plus menu-icon"></i>
+              <span class="menu-title">Vendors</span>
+            </a>
+          </li>
+
+
+          <li class="nav-item">
+            <a class="nav-link" href="<?php echo e(url('/')); ?>">
+              <i class="mdi mdi-account-multiple-outline menu-icon"></i>
+              <span class="menu-title">Customers</span>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="<?php echo e(url('/')); ?>">
+              <i class="mdi mdi-currency-inr menu-icon"></i>
+              <span class="menu-title">Payments</span>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="<?php echo e(url('/')); ?>">
+              <i class="mdi mdi-gift menu-icon"></i>
+              <span class="menu-title">Coupons</span>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="<?php echo e(url('/')); ?>">
+              <i class="mdi mdi-cart menu-icon"></i>
+              <span class="menu-title">Orders</span>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="<?php echo e(url('/')); ?>">
+              <i class="mdi mdi-keyboard-return menu-icon"></i>
+              <span class="menu-title">Return Conditions</span>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="<?php echo e(url('/')); ?>">
+              <i class="mdi mdi-credit-card menu-icon"></i>
+              <span class="menu-title">Payout request</span>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="<?php echo e(url('/')); ?>">
+              <i class="mdi mdi-comment-question-outline menu-icon"></i>
+              <span class="menu-title">Help</span>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="<?php echo e(url('/')); ?>">
+              <i class="mdi mdi-bookmark-check menu-icon"></i>
+              <span class="menu-title">Subscribers</span>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#cmspage" aria-expanded="false" aria-controls="apps">
+              <i class="mdi mdi-menu menu-icon"></i>
+              <span class="menu-title">CMS Pages</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="cmspage">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="<?php echo e(url('/')); ?>">About</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<?php echo e(url('/')); ?>">Privacy policy</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<?php echo e(url('/')); ?>">Terms Conditions</a></li>
+              </ul>
+            </div>
+          </li>
 
           
 

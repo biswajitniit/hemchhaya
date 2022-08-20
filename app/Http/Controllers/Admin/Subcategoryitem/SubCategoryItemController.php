@@ -36,29 +36,29 @@ class SubCategoryItemController extends Controller
 	}
 
     /**
-     * Save category post data.
+     * Save category item post data.
      *
      * @return \Illuminate\Http\Response
      */
-    public function add_sub_category_post_data(Request $request){
+    public function add_sub_category_item_post_data(Request $request){
         $this->validate($request, [
-            'category_id'       => 'required',
-            'sub_category_name' => 'required',
+            'category_id'            => 'required',
+            'sub_category_id'        => 'required',
+            'sub_category_item_name' => 'required',
         ],[
             'category_id.required' => 'Please select one category',
-            'sub_category_name.required' => 'Please enter a sub category name',
+            'sub_category_id.required' => 'Please select one sub category',
+            'sub_category_item_name.required' => 'Please enter a sub category item name',
         ]);
 
-    	$subcategory = new Subcategory();
-            $subcategory->category_id           = $request['category_id'];
-            $subcategory->sub_category_name     = $request['sub_category_name'];
-            $subcategory->sub_category_sort_no  = $request['sub_category_sort_no'];
-            $subcategory->menu_dropdown         = $request['menu_dropdown'];
-            $subcategory->menu_show_sub_item    = $request['menu_show_sub_item'];
-            $subcategory->menu_show_div         = $request['menu_show_div'];
-            $subcategory->status                = $request['status'];
-		$subcategory->save();
-        return redirect()->back()->with('message', 'Sub Category added successfully.');
+    	$subcategoryitem = new Subcategoryitem();
+            $subcategoryitem->category_id            = $request['category_id'];
+            $subcategoryitem->sub_category_id        = $request['sub_category_id'];
+            $subcategoryitem->sub_category_item_name = $request['sub_category_item_name'];
+            $subcategoryitem->status                 = $request['status'];
+		$subcategoryitem->save();
+
+        return redirect()->back()->with('message', 'Sub category item added successfully.');
     }
 
     /**
@@ -66,40 +66,39 @@ class SubCategoryItemController extends Controller
      *
      * @return true or false
      */
-    public function edit_sub_category(Request $request, $subcategoryid){
+    public function edit_sub_category_item(Request $request, $subcategoryitemid){
          $category = Categorys::where('status','1')->orderBy('category_name')->get();
-		 $subcategory = subcategory::where('id',$subcategoryid)->first();
-		 return view('admin.subcategory.edit-sub-category',compact('category','subcategory'));
+		 $subcategoryitem = Subcategoryitem::where('id',$subcategoryitemid)->first();
+		 return view('admin.subcategoryitem.edit-sub-category-item',compact('category','subcategoryitem'));
 	 }
 
    /**
-     * Edit country after post
+     * Edit category after post
      *
      * @return true or false
      */
-    public function edit_sub_category_post(Request $request){
+    public function edit_sub_category_item_post(Request $request){
 
         $this->validate($request, [
-            'category_id'       => 'required',
-            'sub_category_name' => 'required',
+            'category_id'            => 'required',
+            'sub_category_id'        => 'required',
+            'sub_category_item_name' => 'required',
         ],[
             'category_id.required' => 'Please select one category',
-            'sub_category_name.required' => 'Please enter a sub category name',
+            'sub_category_id.required' => 'Please select one sub category',
+            'sub_category_item_name.required' => 'Please enter a sub category item name',
         ]);
 
         $data = array(
-                        'category_id'            => $request['category_id'],
-                        'sub_category_name'      => $request['sub_category_name'],
-                        'sub_category_sort_no'   => $request['sub_category_sort_no'],
-                        'menu_dropdown'          => $request['menu_dropdown'],
-                        'menu_show_sub_item'     => $request['menu_show_sub_item'],
-                        'menu_show_div'          => $request['menu_show_div'],
-                        'status'                 => $request['status']
-                    );
+            'category_id'              => $request['category_id'],
+            'sub_category_id'          => $request['sub_category_id'],
+            'sub_category_item_name'   => $request['sub_category_item_name'],
+            'status'                   => $request['status']
+        );
 
-        subcategory::where('id', $request['subcatid'])->update($data);
+        Subcategoryitem::where('id', $request['subcatitemid'])->update($data);
 
-        return redirect()->back()->with('message', 'Sub Category updated successfully.');
+        return redirect()->back()->with('message', 'Sub category item updated successfully.');
 
     }
 
@@ -108,9 +107,9 @@ class SubCategoryItemController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function subcategorytrash(Request $request, $subcategoryid){
-        subcategory::where('id',$subcategoryid)->delete();
-        return redirect()->back()->with('message', 'Sub category delete successfully.');
+    public function subcategoryitemtrash(Request $request, $subcategoryitemid){
+        Subcategoryitem::where('id',$subcategoryitemid)->delete();
+        return redirect()->back()->with('message', 'Sub category item delete successfully.');
     }
 
 
@@ -150,6 +149,32 @@ class SubCategoryItemController extends Controller
 
     }
 
+
+    /**
+     * get subcategory list by categoryid
+     *
+     * @return void
+     */
+    public function ajax_sub_category_get_category_id(Request $request){
+
+        $employees = Subcategory::orderby('sub_category_name','asc')->select('id','sub_category_name')->where('category_id',$request->categoryid)->get();
+
+        $response = array();
+        if(count($employees) > 0){
+            foreach($employees as $employee){
+            $response[] = array(
+                    "id"=>$employee->id,
+                    "text"=>$employee->sub_category_name
+            );
+            }
+        }else{
+            $response[] = array(
+                "id"=>'',
+                "text"=>"No Records Found"
+            );
+        }
+        return response()->json($response);
+    }
 
 
     /**

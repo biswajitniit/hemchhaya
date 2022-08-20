@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\Category\CategoryController;
 use App\Http\Controllers\Admin\Dashboard\DashboardController;
 use App\Http\Controllers\Admin\Subcategoryitem\SubCategoryItemController;
 use App\Http\Controllers\Admin\Subcategory\SubCategoryController;
+use App\Http\Controllers\Admin\Attribute\AttributeController;
 
 use App\Http\Controllers\Admin\LogoutController;
 /*
@@ -82,11 +83,25 @@ Route::get('/admin/sub-category-item', [SubCategoryItemController::class, 'sub_c
 Route::get('/subcategoryitemlist', [SubCategoryItemController::class, 'subcategoryitemlistdata'])->name('subcategoryitemlist');
 
 Route::get('/admin/add-sub-category-item',[SubCategoryItemController::class, 'add_sub_category_item'])->name('admin.add-sub-category-item');
-Route::post('/admin/add-sub-category-item-post-data',[SubCategoryItemController::class, 'add_sub_category_post_data'])->name('admin.add-sub-category-post-data');
+Route::post('/admin/add-sub-category-item-post-data',[SubCategoryItemController::class, 'add_sub_category_item_post_data'])->name('admin.add-sub-category-item-post-data');
 
 Route::any('/admin/edit-sub-category-item/{subcategoryitemid}',[SubCategoryItemController::class, 'edit_sub_category_item'])->name('admin.edit-sub-category-item');
 Route::post('/admin/edit-sub-category-item-post',[SubCategoryItemController::class, 'edit_sub_category_item_post'])->name('admin.edit-sub-category-item-post');
 
 Route::any('/admin/subcategoryitemtrash/{subcategoryitemid}',[SubCategoryItemController::class, 'subcategoryitemtrash'])->name('admin.subcategoryitemtrash');
 
-//Route::any('/ajaxSubCategoryGetCategoryId', 'Admin\SubCategoryItemController@ajax_sub_category_get_category_id');  // GET Subcategory LIST
+Route::any('/admin/getsubcategory', [SubCategoryItemController::class, 'ajax_sub_category_get_category_id'])->name('admin.getsubcategory');  // GET Subcategory LIST
+
+
+// Admin Attribute
+Route::get('/admin/attribute', [AttributeController::class, 'attribute_list'])->name('attribute');
+
+ Route::get('/attributelist', [AttributeController::class, 'attributelistdata'])->name('attributelist');
+
+ Route::get('/admin/add-attribute',[AttributeController::class, 'add_attribute'])->name('admin.add-attribute');
+ Route::post('/admin/add-attribute-post-data',[AttributeController::class, 'add_attribute_post_data'])->name('admin.add-attribute-post-data');
+
+ Route::any('/admin/edit-attribute/{attributeid}',[AttributeController::class, 'edit_attribute'])->name('admin.edit-attribute');
+ Route::post('/admin/edit-attribute-post',[AttributeController::class, 'edit_attribute_post'])->name('admin.edit-attribute-post');
+
+ Route::any('/admin/attributetrash/{attributeid}',[AttributeController::class, 'attributetrash'])->name('admin.attributetrash');

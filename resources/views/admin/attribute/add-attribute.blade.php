@@ -1,16 +1,16 @@
 @extends('layouts.admin')
-@section('title', 'Add Sub Category Item')
+@section('title', 'Add Attribute')
 @section('content')
 
 
 <div class="main-panel">
     <div class="content-wrapper">
       <div class="page-header">
-        <h3 class="page-title"> Add Sub Category Item</h3>
+        <h3 class="page-title"> Add Attribute</h3>
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ route('admin.subcategoryitem') }}">Sub Category Items</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Add Sub Category Item</li>
+            <li class="breadcrumb-item"><a href="{{ route('attribute') }}">Attributes</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Add Attributes</li>
           </ol>
         </nav>
       </div>
@@ -39,36 +39,37 @@
 
 
 
-              <form class="cmxform" id="addsubcategoryitem" method="post" action="{{ route('admin.add-sub-category-item-post-data') }}" name="addsubcategoryitem">
+              <form class="cmxform" id="addattribute" method="post" action="{{ route('admin.add-attribute-post-data') }}" name="addattribute">
                 @csrf
                 <fieldset>
 
+
+                    <div class="form-group">
+                        <label for="column_name">Column Name </label>
+                        <input id="column_name" class="form-control" name="column_name" type="text">
+                    </div>
+
                   <div class="form-group">
-                    <label for="category_id">Category Name</label>
-                    <select name="category_id" class="js-example-basic-single" style="width:100%">
-                        <option value="">Select Category</option>
-                        @if($category)
-                            @foreach ($category as $rowcategory)
-                                <option value="{{ $rowcategory->id }}">{{ $rowcategory->category_name }}</option>
-                            @endforeach
-                        @endif
+                    <label for="column_type">Column Type</label>
+                    <select name="column_type" class="js-example-basic-single" style="width:100%">
+                        <option value="">Select Column Type</option>
+                        <option value="1">TextBox</option>
+                        <option value="2">Drop Down</option>
+                        <option value="3">Editor</option>
+                        <option value="4">Password</option>
+                        <option value="5">Email</option>
                     </select>
                   </div>
 
 
                   <div class="form-group">
-                    <label for="sub_category_id">Sub Category</label>
-                    <select name="sub_category_id" class="subcategory" style="width:100%;">
-                        <option value="">Select Sub Category</option>
+                    <label for="column_validation">Column Validation</label>
+                    <select name="column_validation" class="js-example-basic-single" style="width:100%;">
+                        <option value="">Select Column Validation</option>
+                        <option value="1">Optional</option>
+                        <option value="2">Required</option>
                     </select>
                   </div>
-
-                  <div class="form-group">
-                    <label for="sub_category_item_name">Sub Category Name </label>
-                    <input id="sub_category_item_name" class="form-control" name="sub_category_item_name" type="text">
-                  </div>
-
-
 
                   <div class="form-group row">
                     <label class="col-sm-3 col-form-label">Status</label>
