@@ -4,12 +4,15 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AdminLoginController;
+use App\Http\Controllers\Auth\VendorLoginController;
 use App\Http\Controllers\Admin\Category\CategoryController;
 use App\Http\Controllers\Admin\Dashboard\DashboardController;
+
+use App\Http\Controllers\Vendor\Dashboard\VendorDashboardController;
 use App\Http\Controllers\Admin\Subcategoryitem\SubCategoryItemController;
 use App\Http\Controllers\Admin\Subcategory\SubCategoryController;
 use App\Http\Controllers\Admin\Attribute\AttributeController;
-
+use App\Http\Controllers\Vendor\Product\ProductController;
 use App\Http\Controllers\Admin\LogoutController;
 /*
 |--------------------------------------------------------------------------
@@ -105,3 +108,28 @@ Route::get('/admin/attribute', [AttributeController::class, 'attribute_list'])->
  Route::post('/admin/edit-attribute-post',[AttributeController::class, 'edit_attribute_post'])->name('admin.edit-attribute-post');
 
  Route::any('/admin/attributetrash/{attributeid}',[AttributeController::class, 'attributetrash'])->name('admin.attributetrash');
+
+
+
+
+
+ Route::group(['middleware' => ['vendor']], function () {
+    Route::get('/vendor', [VendorLoginController::class, 'index'])->name('vendor.login');
+    Route::post('/vendor/login', [VendorLoginController::class, 'postvendorlogin'])->name('vendorLoginPost');
+ });
+ Route::get('/vendor/dashboard', [VendorDashboardController::class, 'dashboard'])->name('vendor/dashboard');
+ Route::get('/vendor/logout', [VendorLogoutController::class, 'vendorlogout'])->name('/vendor/logout');
+
+
+ // Vendor Products
+ Route::get('/vendor/products', [ProductController::class, 'product_list'])->name('products');
+
+// Route::get('/productlist', [ProductController::class, 'productdata'])->name('productlist');
+
+ Route::get('/vendor/add-product',[ProductController::class, 'add_product'])->name('vendor.add-product');
+ Route::post('/vendor/add-product-post-data',[ProductController::class, 'add_product_post_data'])->name('vendor.add-product-post-data');
+
+// Route::any('/vendor/edit-product/{attributeid}',[ProductController::class, 'edit_product'])->name('vendor.edit-product');
+// Route::post('/vendor/edit-product-post',[ProductController::class, 'edit_product_post'])->name('vendor.edit-product-post');
+
+// Route::any('/vendor/producttrash/{attributeid}',[ProductController::class, 'producttrash'])->name('vendor.producttrash');
