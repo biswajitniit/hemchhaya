@@ -1,4 +1,3 @@
-
 <?php $__env->startSection('title', 'Add products'); ?>
 <?php $__env->startSection('content'); ?>
 
@@ -22,7 +21,7 @@
               
               <form id="example-form" action="#" autocomplete="off">
                 <div>
-                  <h3>Selling Information</h3>
+                  <h3>Category</h3>
                   <section>
                     <h6>Listing Information</h6>
                     <hr />
@@ -58,7 +57,7 @@
 
                 </section>
 
-                  <h3>Image</h3>
+                  <h3>Price, Stock and Shipping Information</h3>
                   <section>
                     
                     <div class="form-group">
@@ -74,7 +73,7 @@
                       <input type="password" class="form-control" placeholder="Profession">
                     </div>
                   </section>
-                  <h3>Price</h3>
+                  <h3>Product Description</h3>
                   <section>
                     
                     <div class="form-group">
@@ -82,7 +81,7 @@
                       <textarea class="form-control" rows="3"></textarea>
                     </div>
                   </section>
-                  <h3>Meta Information</h3>
+                  <h3>Additional Description (Optional)</h3>
                   <section>
                     
                     <div class="form-check">

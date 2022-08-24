@@ -41,6 +41,67 @@ class AttributeController extends Controller
 
       return $text;
     }
+   /**
+     * get subcategory list by categoryid
+     *
+     * @return void
+     */
+    public function ajax_sub_category_get_category_id(Request $request){
+
+        $employees = Subcategory::orderby('sub_category_name','asc')->select('id','sub_category_name')->where('category_id',$request->categoryid)->get();
+
+        $response = array();
+        if(count($employees) > 0){
+            foreach($employees as $employee){
+            $response[] = array(
+                    "id"=>$employee->id,
+                    "text"=>$employee->sub_category_name
+            );
+            }
+        }else{
+            $response[] = array(
+                "id"=>'',
+                "text"=>"No Records Found"
+            );
+        }
+        return response()->json($response);
+    }
+   /**
+     * get subcategory item list by sub categoryid
+     *
+     * @return void
+     */
+    public function ajax_sub_category_item_get_category_id(Request $request){
+
+        $employees = Subcategoryitem::orderby('sub_category_item_name','asc')->select('id','sub_category_item_name')->where('sub_category_id',$request->subcategoryid)->get();
+
+        $response = array();
+        if(count($employees) > 0){
+            foreach($employees as $employee){
+            $response[] = array(
+                    "id"=>$employee->id,
+                    "text"=>$employee->sub_category_item_name
+            );
+            }
+        }else{
+            $response[] = array(
+                "id"=>'',
+                "text"=>"No Records Found"
+            );
+        }
+        return response()->json($response);
+    }
+
+
+    /**
+     * Show the Admin Attribute Search.
+     *
+     * @return \Illuminate\Http\Response
+     */
+	public function searchattribute(Request $request){
+        $category = Categorys::where('status','1')->orderBy('category_name')->get();
+		return view("admin.attribute.attribute-list-search",compact('category'));
+	}
 
 
     /**
@@ -49,7 +110,8 @@ class AttributeController extends Controller
      * @return \Illuminate\Http\Response
      */
 	public function attribute_list(Request $request){
-		return view("admin.attribute.attribute-list");
+        $category = Categorys::where('status','1')->orderBy('category_name')->get();
+		return view("admin.attribute.attribute-list",compact('category'));
 	}
 
     /**

@@ -96,8 +96,8 @@ Route::any('/admin/subcategoryitemtrash/{subcategoryitemid}',[SubCategoryItemCon
 Route::any('/admin/getsubcategory', [SubCategoryItemController::class, 'ajax_sub_category_get_category_id'])->name('admin.getsubcategory');  // GET Subcategory LIST
 
 
-// Admin Attribute
-Route::get('/admin/attribute', [AttributeController::class, 'attribute_list'])->name('attribute');
+ // Admin Attribute
+ Route::get('/admin/attribute', [AttributeController::class, 'attribute_list'])->name('attribute');
 
  Route::get('/attributelist', [AttributeController::class, 'attributelistdata'])->name('attributelist');
 
@@ -109,6 +109,10 @@ Route::get('/admin/attribute', [AttributeController::class, 'attribute_list'])->
 
  Route::any('/admin/attributetrash/{attributeid}',[AttributeController::class, 'attributetrash'])->name('admin.attributetrash');
 
+ Route::get('/admin/searchattribute', [AttributeController::class, 'searchattribute'])->name('admin.searchattribute');
+
+ Route::any('/admin/getsubcategoryattribute', [AttributeController::class, 'ajax_sub_category_get_category_id'])->name('admin.getsubcategoryattribute');  // GET Subcategory LIST on attribute page
+ Route::any('/admin/getsubcategoryitemattribute', [AttributeController::class, 'ajax_sub_category_item_get_category_id'])->name('admin.getsubcategoryitemattribute');  // GET Subcategory Item LIST on attribute page
 
 
 
