@@ -35,6 +35,8 @@ class ProductController extends Controller
 
     public function add_product_post_data(Request $request){
 
+
+
     }
 
 }

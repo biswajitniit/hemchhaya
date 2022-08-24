@@ -130,7 +130,7 @@
                                     <ul>
                                         <li class="header-phone">
                                             <div class="icon"><i class="flaticon-telephone"></i></div>
-                                            <a href="tel:1234566789"><span>Call Us Now</span>+185 4124 650</a>
+                                            <a href="tel:1234566789"><span>Call Us Now</span>+91 9832250382</a>
                                         </li>
                                         <li class="header-user"><a href="#"><i class="flaticon-user"></i></a></li>
                                         <li class="header-wishlist">
@@ -441,19 +441,19 @@
                                     <ul>
                                         <li>
                                             <div class="icon"><i class="flaticon-place"></i></div>
-                                            <p>PO Box W75 Street West New Queens, TX 16819</p>
+                                            <p>
+                                                2/50/A, Vidyasagar Colony, Naktala,<br>
+                                                kolkata, west bengal, pin-700047
+                                            </p>
                                         </li>
                                         <li>
                                             <div class="icon"><i class="flaticon-telephone-1"></i></div>
-                                            <h5 class="number"><a href="tel:12027993245">+120 279 932 45</a></h5>
+                                            <h5 class="number"><a href="tel:12027993245">+91 9832250382</a></h5>
                                         </li>
-                                        <li>
-                                            <div class="icon"><i class="flaticon-mail"></i></div>
-                                            <p><a href="https://themebeyond.com/cdn-cgi/l/email-protection#80f3f5f0f0eff2f4c0f6e5e7e5eeaee3efed"><span class="__cf_email__" data-cfemail="47343237372835330731222022296924282a">[email&#160;protected]</span></a></p>
-                                        </li>
+                                        
                                         <li>
                                             <div class="icon"><i class="flaticon-wall-clock"></i></div>
-                                            <p>Week 7 days from 7:00 to 20:00</p>
+                                            <p>sales@salesanta.com</p>
                                         </li>
                                     </ul>
                                 </div>

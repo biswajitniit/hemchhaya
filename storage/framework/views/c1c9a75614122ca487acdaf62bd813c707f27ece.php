@@ -1,5 +1,5 @@
 
-<?php $__env->startSection('title', 'Product Listing'); ?>
+<?php $__env->startSection('title', 'Sub Category Item Listing'); ?>
 <?php $__env->startSection('content'); ?>
 
 
@@ -13,8 +13,8 @@
           
         </div>
         <div class="header-right d-flex flex-wrap mt-2 mt-sm-0">
-          <button type="button" onclick="location.href='<?php echo e(route('vendor.add-product')); ?>'" class="btn btn-primary mt-2 mt-sm-0 btn-icon-text">
-            <i class="mdi mdi-plus-circle"></i> Add Product</button>
+          <button type="button" onclick="location.href='<?php echo e(route('admin.add-sub-category-item')); ?>'" class="btn btn-primary mt-2 mt-sm-0 btn-icon-text">
+            <i class="mdi mdi-plus-circle"></i> Add Sub Category Item</button>
         </div>
       </div>
 
@@ -28,12 +28,23 @@
 
       <div class="card">
         <div class="card-body">
-          <h4 class="card-title">Product table</h4>
+          <h4 class="card-title">Sub Category Item table</h4>
           <div class="row">
             <div class="col-12">
               <div class="table-responsive">
                 
-                
+                <table class="table table-bordered table-striped mb-none" id="my-table">
+                  <thead>
+                    <tr>
+                      <th>Category Name</th>
+                      <th>Sub Category Name</th>
+                      <th>Sub Category Item Name</th>
+                      <th>Status</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+
+                </table>
               </div>
             </div>
           </div>
@@ -112,4 +123,4 @@
 <?php $__env->stopPush(); ?>
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('layouts.vendor', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH E:\webdev\hemchhaya\resources\views/vendor/product/product-list.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.admin', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH E:\webdev\hemchhaya\resources\views/admin/subcategoryitem/sub-category-item-list.blade.php ENDPATH**/ ?>
