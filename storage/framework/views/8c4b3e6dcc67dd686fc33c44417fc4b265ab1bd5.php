@@ -78,7 +78,8 @@
             </a>
             <div class="collapse" id="Attribute">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="<?php echo e(url('/admin/attribute')); ?>">Attribute</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<?php echo e(url('/admin/attribute-category')); ?>">Attribute Category</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<?php echo e(url('/admin/attribute')); ?>">Attribute Field's</a></li>
                 
                 <li class="nav-item"> <a class="nav-link" href="<?php echo e(url('/admin/brands')); ?>">Brands</a></li>
               </ul>

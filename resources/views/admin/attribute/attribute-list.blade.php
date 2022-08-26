@@ -7,12 +7,10 @@
     <div class="content-wrapper pb-0">
         <div class="page-header">
             <h3 class="page-title">Search Attribute</h3>
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#">Attributes</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Search Attribute</li>
-                </ol>
-            </nav>
+            <div class="header-right d-flex flex-wrap mt-2 mt-sm-0">
+                <button type="button" onclick="location.href='{{ route('admin.add-attribute') }}'" class="btn btn-primary mt-2 mt-sm-0 btn-icon-text">
+                  <i class="mdi mdi-plus-circle"></i> Add Attribute</button>
+            </div>
         </div>
 
         <!-- first row starts here -->
@@ -22,16 +20,13 @@
                     <form action="{{ route('admin.searchattribute') }}" name="searchattribute" id="searchattribute" method="GET">
                         <div class="card-body">
                             <div class="row">
-                                @csrf
                                 <div class="col">
                                     <div class="form-group">
                                         <select name="category" class="category" style="width: 100%;">
                                             <option value="">Select Category</option>
-                                            @if($category)
-                                                @foreach ($category as $rowcategory)
-                                                    <option value="{{ $rowcategory->id }}">{{ $rowcategory->category_name }}</option>
-                                                @endforeach
-                                            @endif
+                                            @if($category) @foreach ($category as $rowcategory)
+                                            <option value="{{ Crypt::encryptString($rowcategory->id) }}">{{ $rowcategory->category_name }}</option>
+                                            @endforeach @endif
                                         </select>
                                     </div>
                                 </div>
@@ -51,7 +46,7 @@
                                 </div>
                                 <div class="col">
                                     <div class="form-group">
-                                        <input class="btn btn-primary" type="submit" value="Submit" />
+                                        <input class="btn btn-primary btn-lg" type="submit" value="Search" />
                                     </div>
                                 </div>
                             </div>
@@ -74,6 +69,7 @@
 <!-- main-panel ends -->
 
 
+
 @push('scripts')
 <script type="text/javascript">
     $(".alert").delay(2000).slideUp(200, function () {
@@ -82,16 +78,16 @@
 
     $(function() {
         // validate signup form on keyup and submit
-        $("#addsubcategoryitem").validate({
+        $("#searchattribute").validate({
             rules: {
-                category_id: "required",
-                sub_category_id: "required",
-                sub_category_item_name : "required",
+                category: "required",
+                subcategory: "required",
+                subcategoryitem : "required",
             },
             messages: {
-                category_id: "Please select category",
-                sub_category_id: "Please select sub category",
-                sub_category_item_name: "Please enter sub category item name",
+                category: "Please select category",
+                subcategory: "Please select sub category",
+                subcategoryitem: "Please select sub category item",
             },
             errorPlacement: function(label, element) {
                 label.addClass('mt-2 text-danger');

@@ -1,14 +1,12 @@
-<?php $__env->startSection('title', 'Attribute search category / subcategory / subcategory item wise'); ?>
+<?php $__env->startSection('title', 'Attribute list search'); ?>
 <?php $__env->startSection('content'); ?>
-
 
 <div class="main-panel">
     <div class="content-wrapper pb-0">
         <div class="page-header">
             <h3 class="page-title">Search Attribute</h3>
             <div class="header-right d-flex flex-wrap mt-2 mt-sm-0">
-                <button type="button" onclick="location.href='<?php echo e(route('admin.add-attribute')); ?>'" class="btn btn-primary mt-2 mt-sm-0 btn-icon-text">
-                  <i class="mdi mdi-plus-circle"></i> Add Attribute</button>
+                <button type="button" onclick="location.href='<?php echo e(route('admin.add-attribute')); ?>'" class="btn btn-primary mt-2 mt-sm-0 btn-icon-text"><i class="mdi mdi-plus-circle"></i> Add Attribute</button>
             </div>
         </div>
 
@@ -54,8 +52,32 @@
                 </div>
             </div>
         </div>
+
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Attribute table</h4>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped mb-none" id="my-table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Type</th>
+                                        <th>Validation</th>
+                                        <th>Actions</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <!-- content-wrapper ends -->
+
     <!-- partial:../../partials/_footer.html -->
     <footer class="footer">
         <div class="d-sm-flex justify-content-center justify-content-sm-between">
@@ -69,37 +91,34 @@
 
 
 
+
 <?php $__env->startPush('scripts'); ?>
-<script type="text/javascript">
-    $(".alert").delay(2000).slideUp(200, function () {
-        $(this).alert('close');
-    });
-
-    $(function() {
-        // validate signup form on keyup and submit
-        $("#searchattribute").validate({
-            rules: {
-                category: "required",
-                subcategory: "required",
-                subcategoryitem : "required",
-            },
-            messages: {
-                category: "Please select category",
-                subcategory: "Please select sub category",
-                subcategoryitem: "Please select sub category item",
-            },
-            errorPlacement: function(label, element) {
-                label.addClass('mt-2 text-danger');
-                label.insertAfter(element);
-            },
-            highlight: function(element, errorClass) {
-                $(element).parent().addClass('has-danger')
-                $(element).addClass('form-control-danger')
-            }
+    <script type="text/javascript">
+        $(function() {
+            // validate signup form on keyup and submit
+            $("#searchattribute").validate({
+                rules: {
+                    category: "required",
+                    subcategory: "required",
+                    subcategoryitem : "required",
+                },
+                messages: {
+                    category: "Please select category",
+                    subcategory: "Please select sub category",
+                    subcategoryitem: "Please select sub category item",
+                },
+                errorPlacement: function(label, element) {
+                    label.addClass('mt-2 text-danger');
+                    label.insertAfter(element);
+                },
+                highlight: function(element, errorClass) {
+                    $(element).parent().addClass('has-danger')
+                    $(element).addClass('form-control-danger')
+                }
+            });
         });
-    });
 
-    (function($) {
+        (function($) {
 
         if ($(".category").length) {
             $(".category").select2();
@@ -110,9 +129,9 @@
         if ($(".subcategoryitem").length) {
             $(".subcategoryitem").select2();
         }
-    })(jQuery);
+        })(jQuery);
 
-    $("document").ready(function () {
+        $("document").ready(function () {
         $('select[name="category"]').on('change', function () {
             var catId = $(this).val();
             if (catId) {
@@ -156,8 +175,66 @@
 
 
     });
-</script>
+
+
+
+        $(".alert").delay(2000).slideUp(200, function () {
+            $(this).alert('close');
+        });
+
+
+        $(document).ready(function(){
+        // DataTable
+            $('#my-table').DataTable({
+                processing: true,
+                serverSide: true,
+                lengthMenu: [[100, 200, 300], [100, 200, 300]],
+                order: [[ 2, "asc" ]],
+                columnDefs: [{
+                    "searchable": true,
+                    "orderable": false,
+                    "targets": 0
+                }],
+                "ajax": {
+                    data: ({_token: '<?php echo e(csrf_token()); ?>'}),
+                    url : "<?php echo e(url('/')); ?>/attributelist",
+                    type : 'GET',
+                },
+                columns: [
+                        {data: 'column_name' },
+                        {data: 'column_type'},
+                        {data: 'column_validation'},
+                        {
+                            data: 'status',
+                            render: function (data, type, row){
+                                if(data == "Active"){
+                                    return '<label class="badge badge-success">Active</label>';
+                                }else{
+                                    return '<label class="badge badge-danger">In Active</label>';
+                                }
+                            },
+                        },
+                       {
+                            data: 'action',
+                            render: function (data, type, row){
+                                return '<a href="<?php echo url("admin/edit-attribute")?>/'+data+'" title="Edit Attribute"><i class="mdi mdi-table-edit"></i></a> | <a href="<?php echo url("admin/attributetrash")?>/'+data+'" title="Trash Attribute" onclick="return confirm("Are you sure?")"><i class="mdi mdi-delete-forever"></i></a> ';
+                            },
+                        },
+
+                ]
+            });
+        });
+
+        function confirmMsg()
+        {
+            var answer = confirm("Delete selected record?")
+            if (answer){
+                return true;
+            }
+            return false;
+        }
+    </script>
 <?php $__env->stopPush(); ?>
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('layouts.admin', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH E:\webdev\hemchhaya\resources\views/admin/attribute/attribute-list.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.admin', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH E:\webdev\hemchhaya\resources\views/admin/attribute/attribute-list-search.blade.php ENDPATH**/ ?>

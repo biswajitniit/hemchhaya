@@ -1,14 +1,15 @@
-<?php $__env->startSection('title', 'Attribute search category / subcategory / subcategory item wise'); ?>
-<?php $__env->startSection('content'); ?>
+@extends('layouts.admin')
+@section('title', 'Attribute category search category / subcategory / subcategory item wise')
+@section('content')
 
 
 <div class="main-panel">
     <div class="content-wrapper pb-0">
         <div class="page-header">
-            <h3 class="page-title">Search Attribute</h3>
+            <h3 class="page-title">Search attribute category</h3>
             <div class="header-right d-flex flex-wrap mt-2 mt-sm-0">
-                <button type="button" onclick="location.href='<?php echo e(route('admin.add-attribute')); ?>'" class="btn btn-primary mt-2 mt-sm-0 btn-icon-text">
-                  <i class="mdi mdi-plus-circle"></i> Add Attribute</button>
+                <button type="button" onclick="location.href='{{ route('admin.add-attribute-category') }}'" class="btn btn-primary mt-2 mt-sm-0 btn-icon-text">
+                  <i class="mdi mdi-plus-circle"></i> Add Attribute Category</button>
             </div>
         </div>
 
@@ -16,16 +17,16 @@
         <div class="row">
             <div class="col-xl-12 stretch-card grid-margin">
                 <div class="card">
-                    <form action="<?php echo e(route('admin.searchattribute')); ?>" name="searchattribute" id="searchattribute" method="GET">
+                    <form action="{{ route('admin.searchattributecategory') }}" name="searchattributecategory" id="searchattributecategory" method="GET">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col">
                                     <div class="form-group">
                                         <select name="category" class="category" style="width: 100%;">
                                             <option value="">Select Category</option>
-                                            <?php if($category): ?> <?php $__currentLoopData = $category; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $rowcategory): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                            <option value="<?php echo e(Crypt::encryptString($rowcategory->id)); ?>"><?php echo e($rowcategory->category_name); ?></option>
-                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?> <?php endif; ?>
+                                            @if($category) @foreach ($category as $rowcategory)
+                                            <option value="{{ Crypt::encryptString($rowcategory->id) }}">{{ $rowcategory->category_name }}</option>
+                                            @endforeach @endif
                                         </select>
                                     </div>
                                 </div>
@@ -69,7 +70,7 @@
 
 
 
-<?php $__env->startPush('scripts'); ?>
+@push('scripts')
 <script type="text/javascript">
     $(".alert").delay(2000).slideUp(200, function () {
         $(this).alert('close');
@@ -77,7 +78,7 @@
 
     $(function() {
         // validate signup form on keyup and submit
-        $("#searchattribute").validate({
+        $("#searchattributecategory").validate({
             rules: {
                 category: "required",
                 subcategory: "required",
@@ -117,9 +118,9 @@
             var catId = $(this).val();
             if (catId) {
                 $.ajax({
-                    url: "<?php echo e(route('admin.getsubcategoryattribute')); ?>",
+                    url: "{{route('admin.getsubcategoryattribute')}}",
                     type: "POST",
-                    data:{categoryid:catId, _token: '<?php echo e(csrf_token()); ?>'},
+                    data:{categoryid:catId, _token: '{{csrf_token()}}'},
                     dataType: "json",
                     success: function (returndata) {
                         $('select[name="subcategory"]').empty();
@@ -137,9 +138,9 @@
             var subcatId = $(this).val();
             if (subcatId) {
                 $.ajax({
-                    url: "<?php echo e(route('admin.getsubcategoryitemattribute')); ?>",
+                    url: "{{route('admin.getsubcategoryitemattribute')}}",
                     type: "POST",
-                    data:{subcategoryid:subcatId, _token: '<?php echo e(csrf_token()); ?>'},
+                    data:{subcategoryid:subcatId, _token: '{{csrf_token()}}'},
                     dataType: "json",
                     success: function (returndata) {
                         $('select[name="subcategoryitem"]').empty();
@@ -157,7 +158,5 @@
 
     });
 </script>
-<?php $__env->stopPush(); ?>
-<?php $__env->stopSection(); ?>
-
-<?php echo $__env->make('layouts.admin', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH E:\webdev\hemchhaya\resources\views/admin/attribute/attribute-list.blade.php ENDPATH**/ ?>
+@endpush
+@endsection

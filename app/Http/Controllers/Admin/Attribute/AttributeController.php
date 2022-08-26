@@ -9,6 +9,9 @@ use App\Models\Subcategory;
 use App\Models\Subcategoryitem;
 use App\Models\Attribute;
 use DataTables;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Contracts\Encryption\DecryptException;
+
 class AttributeController extends Controller
 {
     public function __construct()
@@ -48,13 +51,13 @@ class AttributeController extends Controller
      */
     public function ajax_sub_category_get_category_id(Request $request){
 
-        $employees = Subcategory::orderby('sub_category_name','asc')->select('id','sub_category_name')->where('category_id',$request->categoryid)->get();
+        $employees = Subcategory::orderby('sub_category_name','asc')->select('id','sub_category_name')->where('category_id',Crypt::decryptString($request->categoryid))->get();
 
         $response = array();
         if(count($employees) > 0){
             foreach($employees as $employee){
             $response[] = array(
-                    "id"=>$employee->id,
+                    "id"=>Crypt::encryptString($employee->id),
                     "text"=>$employee->sub_category_name
             );
             }
@@ -73,13 +76,13 @@ class AttributeController extends Controller
      */
     public function ajax_sub_category_item_get_category_id(Request $request){
 
-        $employees = Subcategoryitem::orderby('sub_category_item_name','asc')->select('id','sub_category_item_name')->where('sub_category_id',$request->subcategoryid)->get();
+        $employees = Subcategoryitem::orderby('sub_category_item_name','asc')->select('id','sub_category_item_name')->where('sub_category_id',Crypt::decryptString($request->subcategoryid))->get();
 
         $response = array();
         if(count($employees) > 0){
             foreach($employees as $employee){
             $response[] = array(
-                    "id"=>$employee->id,
+                    "id"=>Crypt::encryptString($employee->id),
                     "text"=>$employee->sub_category_item_name
             );
             }

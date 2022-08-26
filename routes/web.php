@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\Dashboard\DashboardController;
 use App\Http\Controllers\Vendor\Dashboard\VendorDashboardController;
 use App\Http\Controllers\Admin\Subcategoryitem\SubCategoryItemController;
 use App\Http\Controllers\Admin\Subcategory\SubCategoryController;
+use App\Http\Controllers\Admin\Attributecategory\AttributecategoryController;
 use App\Http\Controllers\Admin\Attribute\AttributeController;
 use App\Http\Controllers\Vendor\Product\ProductController;
 use App\Http\Controllers\Admin\LogoutController;
@@ -94,6 +95,28 @@ Route::post('/admin/edit-sub-category-item-post',[SubCategoryItemController::cla
 Route::any('/admin/subcategoryitemtrash/{subcategoryitemid}',[SubCategoryItemController::class, 'subcategoryitemtrash'])->name('admin.subcategoryitemtrash');
 
 Route::any('/admin/getsubcategory', [SubCategoryItemController::class, 'ajax_sub_category_get_category_id'])->name('admin.getsubcategory');  // GET Subcategory LIST
+
+ // Admin Attribute Heading
+  Route::get('/admin/attribute-category', [AttributecategoryController::class, 'attribute_category_list'])->name('attribute.category');
+
+ // Route::get('/attributelist', [AttributecategoryController::class, 'attributelistdata'])->name('attributelist');
+
+  Route::get('/admin/add-attribute-category',[AttributecategoryController::class, 'add_attribute_category'])->name('admin.add-attribute-category');
+  Route::post('/admin/add-attribute-category-post-data',[AttributecategoryController::class, 'add_attribute_category_post_data'])->name('admin.add-attribute-category-post-data');
+
+//  Route::any('/admin/edit-attribute/{attributeid}',[AttributeController::class, 'edit_attribute'])->name('admin.edit-attribute');
+//  Route::post('/admin/edit-attribute-post',[AttributeController::class, 'edit_attribute_post'])->name('admin.edit-attribute-post');
+
+//  Route::any('/admin/attributetrash/{attributeid}',[AttributeController::class, 'attributetrash'])->name('admin.attributetrash');
+
+  Route::get('/admin/searchattributecategory', [AttributecategoryController::class, 'searchattributecategory'])->name('admin.searchattributecategory');
+
+//  Route::any('/admin/getsubcategoryattribute', [AttributeController::class, 'ajax_sub_category_get_category_id'])->name('admin.getsubcategoryattribute');  // GET Subcategory LIST on attribute page
+//  Route::any('/admin/getsubcategoryitemattribute', [AttributeController::class, 'ajax_sub_category_item_get_category_id'])->name('admin.getsubcategoryitemattribute');  // GET Subcategory Item LIST on attribute page
+
+Route::any('/admin/getsubcategoryonattributepage', [AttributecategoryController::class, 'ajax_sub_category_get_category_id_on_attribute_page'])->name('admin.getsubcategoryonattributepage');  // GET Subcategory LIST
+Route::any('/admin/getsubcategoryitemonattributepage', [AttributecategoryController::class, 'ajax_sub_category_item_get_category_id_on_attribute_page'])->name('admin.getsubcategoryitemonattributepage');  // GET Subcategory Item LIST
+
 
 
  // Admin Attribute

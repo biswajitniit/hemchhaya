@@ -1,14 +1,14 @@
-<?php $__env->startSection('title', 'Attribute search category / subcategory / subcategory item wise'); ?>
+<?php $__env->startSection('title', 'Attribute category search category / subcategory / subcategory item wise'); ?>
 <?php $__env->startSection('content'); ?>
 
 
 <div class="main-panel">
     <div class="content-wrapper pb-0">
         <div class="page-header">
-            <h3 class="page-title">Search Attribute</h3>
+            <h3 class="page-title">Search attribute category</h3>
             <div class="header-right d-flex flex-wrap mt-2 mt-sm-0">
-                <button type="button" onclick="location.href='<?php echo e(route('admin.add-attribute')); ?>'" class="btn btn-primary mt-2 mt-sm-0 btn-icon-text">
-                  <i class="mdi mdi-plus-circle"></i> Add Attribute</button>
+                <button type="button" onclick="location.href='<?php echo e(route('admin.add-attribute-category')); ?>'" class="btn btn-primary mt-2 mt-sm-0 btn-icon-text">
+                  <i class="mdi mdi-plus-circle"></i> Add Attribute Category</button>
             </div>
         </div>
 
@@ -16,7 +16,7 @@
         <div class="row">
             <div class="col-xl-12 stretch-card grid-margin">
                 <div class="card">
-                    <form action="<?php echo e(route('admin.searchattribute')); ?>" name="searchattribute" id="searchattribute" method="GET">
+                    <form action="<?php echo e(route('admin.searchattributecategory')); ?>" name="searchattributecategory" id="searchattributecategory" method="GET">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col">
@@ -77,7 +77,7 @@
 
     $(function() {
         // validate signup form on keyup and submit
-        $("#searchattribute").validate({
+        $("#searchattributecategory").validate({
             rules: {
                 category: "required",
                 subcategory: "required",
@@ -160,4 +160,4 @@
 <?php $__env->stopPush(); ?>
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('layouts.admin', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH E:\webdev\hemchhaya\resources\views/admin/attribute/attribute-list.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.admin', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH E:\webdev\hemchhaya\resources\views/admin/attributecategory/attribute-category-list-search.blade.php ENDPATH**/ ?>
