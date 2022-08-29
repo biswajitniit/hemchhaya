@@ -44,7 +44,7 @@
                 {{-- <table id="order_listing" class="table order_listing"> --}}
                 <table class="table table-bordered table-striped mb-none" id="my-table">
                   <thead>
-                    <tr>
+                    <tr class="bg-primary text-white">
                       <th>Category Name</th>
                       <th>Sub Category Name</th>
                       <th>Sub Category Sort No</th>

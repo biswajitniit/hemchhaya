@@ -1,4 +1,3 @@
-
 <?php $__env->startSection('title', 'Sub Category Listing'); ?>
 <?php $__env->startSection('content'); ?>
 
@@ -36,7 +35,7 @@
                 
                 <table class="table table-bordered table-striped mb-none" id="my-table">
                   <thead>
-                    <tr>
+                    <tr class="bg-primary text-white">
                       <th>Category Name</th>
                       <th>Sub Category Name</th>
                       <th>Sub Category Sort No</th>

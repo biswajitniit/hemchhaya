@@ -9,7 +9,7 @@
         <h3 class="page-title"> Add Attribute Category</h3>
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ route('attribute') }}">Attribute Category</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('attribute.category') }}">Attribute Category</a></li>
             <li class="breadcrumb-item active" aria-current="page">Add Attribute Category</li>
           </ol>
         </nav>

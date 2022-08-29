@@ -8,6 +8,7 @@ use App\Models\Categorys;
 use App\Models\Subcategory;
 use App\Models\Subcategoryitem;
 use App\Models\Attributecategory;
+use DataTables;
 
 class AttributecategoryController extends Controller
 {
@@ -152,5 +153,34 @@ class AttributecategoryController extends Controller
         $category = Categorys::where('status','1')->orderBy('category_name')->get();
 		return view("admin.attributecategory.attribute-category-list-search",compact('category'));
     }
+   /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function ajax_get_list_attribute_category_by_cat_subcat_subcatitem_wise(Request $request){
+
+        $query=Attributecategory::where('category_id',$request->categoryid)->where('sub_category_id',$request->subcategoryid)->where('sub_category_item_id',$request->subcategoryitemid)->orderby('created_at','desc')->get();
+        $totalData =count($query);
+        $totalFiltered = $totalData;  // when there is no search parameter then total number rows = total number filtered rows.
+        return DataTables::of($query)
+        ->addColumn('attribute_category_name', function ($query) {
+            return $query->attribute_category_name;
+        })
+        ->addColumn('status', function ($query) {
+            if($query->status==1){
+                $mstatus='Active';
+            }else{
+                $mstatus='InActive';
+            }
+            return $mstatus;
+        })
+        ->addColumn('action', function ($query) {
+            return $query->id;
+        })->rawColumns(['action'])
+        ->make('true');
+    }
+
+
 
 }

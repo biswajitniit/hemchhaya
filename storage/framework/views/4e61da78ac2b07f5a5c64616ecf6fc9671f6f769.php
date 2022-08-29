@@ -1,4 +1,3 @@
-
 <?php $__env->startSection('title', 'Category Listing'); ?>
 <?php $__env->startSection('content'); ?>
 
@@ -36,7 +35,7 @@
                 
                 <table class="table table-bordered table-striped mb-none" id="my-table">
                   <thead>
-                    <tr>
+                    <tr class="bg-primary text-white">
                       <th>Category Name</th>
                       <th>Category Sort No</th>
                       <th>Menu Dropdown</th>

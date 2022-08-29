@@ -24,7 +24,7 @@
                                         <select name="category" class="category" style="width: 100%;">
                                             <option value="">Select Category</option>
                                             <?php if($category): ?> <?php $__currentLoopData = $category; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $rowcategory): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                            <option value="<?php echo e(Crypt::encryptString($rowcategory->id)); ?>"><?php echo e($rowcategory->category_name); ?></option>
+                                            <option value="<?php echo e(Crypt::encryptString($rowcategory->id)); ?>" <?php if($rowcategory->id == Crypt::decryptString(request()->category)): ?> selected <?php endif; ?>><?php echo e($rowcategory->category_name); ?></option>
                                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?> <?php endif; ?>
                                         </select>
                                     </div>
@@ -33,6 +33,12 @@
                                     <div class="form-group">
                                         <select name="subcategory" class="subcategory" style="width: 100%;">
                                             <option value="">Select Sub Category</option>
+                                            <?php
+                                                $getsubcategorylistbycategory = GetSubcategoryBycatid(Crypt::decryptString(request()->category));
+                                            ?>
+                                            <?php if($getsubcategorylistbycategory): ?> <?php $__currentLoopData = $getsubcategorylistbycategory; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $rowsubcategory): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <option value="<?php echo e(Crypt::encryptString($rowsubcategory->id)); ?>" <?php if($rowsubcategory->id == Crypt::decryptString(request()->subcategory)): ?> selected <?php endif; ?>><?php echo e($rowsubcategory->sub_category_name); ?></option>
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?> <?php endif; ?>
                                         </select>
                                     </div>
                                 </div>
@@ -40,6 +46,13 @@
                                     <div class="form-group">
                                         <select name="subcategoryitem" class="subcategoryitem" style="width: 100%;">
                                             <option value="">Select Sub Category Item</option>
+                                            <?php
+                                                $getsubcategoryitemlistbycategory = GetSubcategoryitemBysubcatid(Crypt::decryptString(request()->subcategory));
+                                            ?>
+                                            <?php if($getsubcategoryitemlistbycategory): ?> <?php $__currentLoopData = $getsubcategoryitemlistbycategory; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $rowsubcategoryitem): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <option value="<?php echo e(Crypt::encryptString($rowsubcategoryitem->id)); ?>" <?php if($rowsubcategoryitem->id == Crypt::decryptString(request()->subcategoryitem)): ?> selected <?php endif; ?>><?php echo e($rowsubcategoryitem->sub_category_item_name); ?></option>
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?> <?php endif; ?>
+
                                         </select>
                                     </div>
                                 </div>
@@ -54,18 +67,122 @@
                 </div>
             </div>
         </div>
+
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Attribute category table</h4>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped mb-none" id="my-table">
+                                <thead>
+                                    <tr class="bg-primary text-white">
+                                        <th>Attribute Category Name</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <!-- Modal -->
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Edit attribute category</h4>
+                </div>
+                <div class="modal-body">
+
+                    <form class="cmxform" id="addattributecategory" method="post" action="<?php echo e(route('admin.add-attribute-category-post-data')); ?>" name="addattributecategory">
+                        <?php echo csrf_field(); ?>
+                        <fieldset>
+
+                            <div class="form-group">
+                                <label for="category_id">Category Name</label>
+                                <select name="category_id" class="js-example-basic-single" style="width:100%">
+                                    <option value="">Select Category</option>
+                                    <?php if($category): ?>
+                                        <?php $__currentLoopData = $category; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $rowcategory): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <option value="<?php echo e($rowcategory->id); ?>"><?php echo e($rowcategory->category_name); ?></option>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                    <?php endif; ?>
+                                </select>
+                              </div>
+
+
+                              <div class="form-group">
+                                <label for="sub_category_id">Sub Category</label>
+                                <select name="sub_category_id" class="subcategory" style="width:100%;">
+                                    <option value="">Select Sub Category</option>
+                                </select>
+                              </div>
+
+                              <div class="form-group">
+                                <label for="sub_category_item_id">Sub Category Item</label>
+                                <select name="sub_category_item_id" class="subcategory" style="width:100%;">
+                                    <option value="">Select Sub Category</option>
+                                </select>
+                              </div>
+
+                              <div class="form-group">
+                                <label for="attribute_category_name">Attribute Category Name </label>
+                                <input id="attribute_category_name" class="form-control" name="attribute_category_name" type="text">
+                              </div>
+
+                              <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Status</label>
+                                <div class="col-sm-4">
+                                  <div class="form-check">
+                                    <label class="form-check-label">
+                                      <input type="radio" class="form-check-input" name="status" id="status1" value="1" checked> Active </label>
+                                  </div>
+                                </div>
+                                <div class="col-sm-5">
+                                  <div class="form-check">
+                                    <label class="form-check-label">
+                                      <input type="radio" class="form-check-input" name="status" id="status2" value="2"> InActive </label>
+                                  </div>
+                                </div>
+                              </div>
+
+
+                          <input class="btn btn-primary btn-lg" type="submit" value="Submit">
+                        </fieldset>
+                      </form>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
     </div>
     <!-- content-wrapper ends -->
     <!-- partial:../../partials/_footer.html -->
     <footer class="footer">
         <div class="d-sm-flex justify-content-center justify-content-sm-between">
-            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2021 <a href="https://www.bootstrapdash.com/" target="_blank">BootstrapDash</a>. All rights reserved.</span>
-            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with <i class="mdi mdi-heart text-danger"></i></span>
+            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © <?php echo e(date('Y')); ?> <a href="<?php echo e(url('/')); ?>" target="_blank">Hemchhaya</a>. All rights reserved.</span>
         </div>
     </footer>
     <!-- partial -->
 </div>
 <!-- main-panel ends -->
+
+
+
+
 
 
 
@@ -156,6 +273,57 @@
 
 
     });
+
+
+    $(document).ready(function(){
+        // DataTable
+            $('#my-table').DataTable({
+                processing: true,
+                serverSide: true,
+                lengthMenu: [[1,100, 200, 300], [1,100, 200, 300]],
+                order: [[ 0, "asc" ]],
+                columnDefs: [{
+                    "searchable": true,
+                    "orderable": false,
+                    "targets": 0
+                }],
+                "ajax": {
+                    data: ({categoryid:'<?php echo e(Crypt::decryptString(request()->category)); ?>',subcategoryid:'<?php echo e(Crypt::decryptString(request()->subcategory)); ?>',subcategoryitemid:'<?php echo e(Crypt::decryptString(request()->subcategoryitem)); ?>',_token: '<?php echo e(csrf_token()); ?>'}),
+                    url : "<?php echo e(route('admin.attributecategorylistajax')); ?>",
+                    type : 'GET',
+                },
+                columns: [
+                        {data: 'attribute_category_name' },
+                        {
+                            data: 'status',
+                            render: function (data, type, row){
+                                if(data == "Active"){
+                                    return '<label class="badge badge-success">Active</label>';
+                                }else{
+                                    return '<label class="badge badge-danger">In Active</label>';
+                                }
+                            },
+                        },
+                       {
+                            data: 'action',
+                            render: function (data, type, row){
+                                //return '<a href="<?php echo url("admin/edit-sub-category-item")?>/'+data+'" title="Edit Sub Category Item"><i class="mdi mdi-table-edit"></i></a> | <a href="<?php echo url("admin/subcategoryitemtrash")?>/'+data+'" title="Trash Sub Category Item" onclick="return confirm("Are you sure?")"><i class="mdi mdi-delete-forever"></i></a> ';
+                                return '<a href="#" data-toggle="modal" data-target="#myModal" title="Edit Sub Category Item"><i class="mdi mdi-table-edit"></i></a> | <a href="<?php echo url("admin/subcategoryitemtrash")?>/'+data+'" title="Trash Sub Category Item" onclick="return confirm("Are you sure?")"><i class="mdi mdi-delete-forever"></i></a>';
+                            },
+                        },
+
+                ]
+            });
+        });
+
+        function confirmMsg()
+        {
+            var answer = confirm("Delete selected record?")
+            if (answer){
+                return true;
+            }
+            return false;
+        }
 </script>
 <?php $__env->stopPush(); ?>
 <?php $__env->stopSection(); ?>
