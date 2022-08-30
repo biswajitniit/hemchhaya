@@ -1,3 +1,4 @@
+
 <?php $__env->startSection('title', 'Attribute category search category / subcategory / subcategory item wise'); ?>
 <?php $__env->startSection('content'); ?>
 
@@ -16,6 +17,7 @@
         <div class="row">
             <div class="col-xl-12 stretch-card grid-margin">
                 <div class="card">
+
                     <form action="<?php echo e(route('admin.searchattributecategory')); ?>" name="searchattributecategory" id="searchattributecategory" method="GET">
                         <div class="card-body">
                             <div class="row">
@@ -23,9 +25,11 @@
                                     <div class="form-group">
                                         <select name="category" class="category" style="width: 100%;">
                                             <option value="">Select Category</option>
-                                            <?php if($category): ?> <?php $__currentLoopData = $category; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $rowcategory): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                            <option value="<?php echo e(Crypt::encryptString($rowcategory->id)); ?>"><?php echo e($rowcategory->category_name); ?></option>
-                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?> <?php endif; ?>
+                                            <?php if($category): ?>
+                                                <?php $__currentLoopData = $category; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $rowcategory): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                    <option value="<?php echo e(Crypt::encryptString($rowcategory->id)); ?>"><?php echo e($rowcategory->category_name); ?></option>
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                            <?php endif; ?>
                                         </select>
                                     </div>
                                 </div>
@@ -51,6 +55,7 @@
                             </div>
                         </div>
                     </form>
+
                 </div>
             </div>
         </div>

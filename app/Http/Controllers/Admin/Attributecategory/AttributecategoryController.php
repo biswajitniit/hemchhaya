@@ -141,8 +141,48 @@ class AttributecategoryController extends Controller
         return redirect()->back()->with('message', 'Attribute category added successfully.');
     }
 
+    /**
+     * Edit attribute category view page.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function edit_attribute_category(Request $request, $attributecatid){
+        $category = Categorys::where('status','1')->orderBy('category_name')->get();
+        $attributecategory = Attributecategory::where('id',$attributecatid)->first();
+        return view('admin.attributecategory.edit-attribute-category',compact('category','attributecategory'));
+    }
 
+    /**
+     * Edit attribute category post view page.
+     *
+     * @return \Illuminate\Http\Response
+    */
+    public function edit_attribute_category_post(Request $request){
+        $this->validate($request, [
+            'category_id' => 'required',
+            'sub_category_id' => 'required',
+            'sub_category_item_id' => 'required',
+            'attribute_category_name' => 'required',
 
+        ],[
+            'category_id.required' => 'Please select category',
+            'sub_category_id.required' => 'Please select sub category',
+            'sub_category_item_id.required' => 'Please select sub category item',
+            'attribute_category_name.required' => 'Please enter attribute category name',
+        ]);
+
+        $data = array(
+            'category_id'               => $request['category_id'],
+            'sub_category_id'           => $request['sub_category_id'],
+            'sub_category_item_id'      => $request['sub_category_item_id'],
+            'attribute_category_name'   => $request['attribute_category_name'],
+            'status'                    => $request['status']
+        );
+
+        Attributecategory::where('id', $request['attributecategoryid'])->update($data);
+
+        return redirect()->back()->with('message', 'Attribute category updated successfully.');
+    }
 
     /**
      * search attribute category

@@ -104,8 +104,8 @@ Route::any('/admin/getsubcategory', [SubCategoryItemController::class, 'ajax_sub
   Route::get('/admin/add-attribute-category',[AttributecategoryController::class, 'add_attribute_category'])->name('admin.add-attribute-category');
   Route::post('/admin/add-attribute-category-post-data',[AttributecategoryController::class, 'add_attribute_category_post_data'])->name('admin.add-attribute-category-post-data');
 
-//  Route::any('/admin/edit-attribute/{attributeid}',[AttributeController::class, 'edit_attribute'])->name('admin.edit-attribute');
-//  Route::post('/admin/edit-attribute-post',[AttributeController::class, 'edit_attribute_post'])->name('admin.edit-attribute-post');
+  Route::get('/admin/edit-attribute-category/{attributecatid}',[AttributecategoryController::class, 'edit_attribute_category'])->name('admin.edit-attribute-category');
+  Route::post('/admin/edit-attribute-category-post',[AttributecategoryController::class, 'edit_attribute_category_post'])->name('admin.edit-attribute-category-post');
 
 //  Route::any('/admin/attributetrash/{attributeid}',[AttributeController::class, 'attributetrash'])->name('admin.attributetrash');
 
