@@ -1,4 +1,3 @@
-
 <?php $__env->startSection('title', 'Add Attribute Category'); ?>
 <?php $__env->startSection('content'); ?>
 

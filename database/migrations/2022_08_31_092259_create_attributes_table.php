@@ -15,9 +15,18 @@ class CreateAttributesTable extends Migration
     {
         Schema::create('attributes', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('category_id');
+            $table->foreign('category_id')->references('id')->on('categorys')->onDelete('cascade');
+            $table->unsignedBigInteger('sub_category_id');
+            $table->foreign('sub_category_id')->references('id')->on('subcategories')->onDelete('cascade');
+            $table->unsignedBigInteger('sub_category_item_id');
+            $table->foreign('sub_category_item_id')->references('id')->on('subcategoryitems')->onDelete('cascade');
+            $table->unsignedBigInteger('attribute_category_id');
+            $table->foreign('attribute_category_id')->references('id')->on('attributecategories')->onDelete('cascade');
             $table->string('column_name');
             $table->string('column_slug');
-            $table->enum('column_type', ['1', '2', '3', '4', '5', '6'])->comment('1=TextBox,2=DropDown,3=Editor,4=Password,5=Email');
+            $table->enum('column_type', ['1', '2', '3', '4', '5', '6'])->comment('1=TextBox,2=Password,3=Email,4=Dropdown,5=Multi Select Dropdown,6=Editor');
+            $table->string('tags')->nullable();
             $table->enum('column_validation',['1', '2'])->comment('1=Optional,2=Required');
             $table->enum('status', ['1', '2'])->comment('1=Active,2=InActive');
             $table->timestamps();
@@ -32,7 +41,6 @@ class CreateAttributesTable extends Migration
      */
     public function down()
     {
-        //Schema::dropIfExists('attributes');
         Schema::table('attributes', function (Blueprint $table) {
             $table->dropSoftDeletes();
         });

@@ -12,6 +12,15 @@
             </div>
         </div>
 
+        <?php if(session()->has('message')): ?>
+            <div class="alert alert-danger">
+                <?php echo e(session()->get('message')); ?>
+
+            </div>
+        <?php endif; ?>
+
+
+
         <!-- first row starts here -->
         <div class="row">
             <div class="col-xl-12 stretch-card grid-margin">
@@ -89,20 +98,19 @@
             </div>
         </div>
 
-    <!-- Modal -->
-    
+        <div id="myModal" class="modal fade" role="dialog" >
+            <div class="modal-dialog" style="width:700px;max-width:initial;height:500px;">
+            <!-- Modal content-->
+                <div class="modal-content">
 
-    <div id="myModal" class="modal fade" role="dialog" >
-        <div class="modal-dialog" style="width:700px;max-width:initial;height:500px;">
-          <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-body">
+                    <div class="modal-body">
 
+                    </div>
+                    
                 </div>
             </div>
         </div>
     </div>
-
     <!-- content-wrapper ends -->
     <!-- partial:../../partials/_footer.html -->
     <footer class="footer">
@@ -245,7 +253,7 @@
                        {
                             data: 'action',
                             render: function (data, type, row){
-                                return '<a href="<?php echo url("admin/edit-attribute-category") ?>/'+data+'" onclick="geturldata(event)" title="Edit Attribute Category"><i class="mdi mdi-table-edit"></i></a> | <a href="<?php echo url("admin/subcategoryitemtrash")?>/'+data+'" title="Trash Sub Category Item" onclick="return confirm("Are you sure?")"><i class="mdi mdi-delete-forever"></i></a>';
+                                return '<a href="<?php echo url("admin/edit-attribute-category") ?>/'+data+'" onclick="geturldata(event)" title="Edit Attribute Category"><i class="mdi mdi-table-edit"></i></a> | <a href="<?php echo url("admin/attribute-category-trash")?>/'+data+'" title="Trash attribute category" onclick="confirmMsg(event)"><i class="mdi mdi-delete-forever"></i></a>';
                             },
                         },
 
@@ -253,13 +261,13 @@
             });
         });
 
-        function confirmMsg()
+        function confirmMsg(e)
         {
-            var answer = confirm("Delete selected record?")
+            var answer = confirm("Are you sure you want to delete this record?")
             if (answer){
                 return true;
             }
-            return false;
+            e.preventDefault();
         }
 
         function geturldata(e){

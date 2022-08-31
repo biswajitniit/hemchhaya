@@ -1,4 +1,3 @@
-
 <?php $__env->startSection('title', 'Attribute list search'); ?>
 <?php $__env->startSection('content'); ?>
 
@@ -54,28 +53,8 @@
             </div>
         </div>
 
-        <div class="card">
-            <div class="card-body">
-                <h4 class="card-title">Attribute table</h4>
-                <div class="row">
-                    <div class="col-12">
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-striped mb-none" id="my-table">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Type</th>
-                                        <th>Validation</th>
-                                        <th>Actions</th>
-                                        <th>Status</th>
-                                    </tr>
-                                </thead>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        
+
     </div>
     <!-- content-wrapper ends -->
 

@@ -54,7 +54,7 @@
             </div>
         </div>
 
-        <div class="card">
+        {{-- <div class="card">
             <div class="card-body">
                 <h4 class="card-title">Attribute table</h4>
                 <div class="row">
@@ -75,7 +75,8 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
+
     </div>
     <!-- content-wrapper ends -->
 

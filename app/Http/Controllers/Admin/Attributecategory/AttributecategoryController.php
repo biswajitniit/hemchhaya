@@ -42,6 +42,30 @@ class AttributecategoryController extends Controller
 
       return $text;
     }
+/**
+     * Show the admin attribute category subcategory list.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function ajax_sub_category_get_category_id(Request $request){
+        $employees = Subcategory::orderby('sub_category_name','asc')->select('id','sub_category_name')->where('category_id',Crypt::decryptString($request->categoryid))->get();
+
+        $response = array();
+        if(count($employees) > 0){
+            foreach($employees as $employee){
+            $response[] = array(
+                    "id"=>$employee->id,
+                    "text"=>$employee->sub_category_name
+            );
+            }
+        }else{
+            $response[] = array(
+                "id"=>'',
+                "text"=>"No Records Found"
+            );
+        }
+        return response()->json($response);
+    }
 
     /**
      * Show the admin attribute category subcategory list.
@@ -193,6 +217,18 @@ class AttributecategoryController extends Controller
         $category = Categorys::where('status','1')->orderBy('category_name')->get();
 		return view("admin.attributecategory.attribute-category-list-search",compact('category'));
     }
+
+    /**
+     * Soft delets attribute category
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function attribute_category_trash(Request $request, $attributecatid){
+        Attributecategory::where('id',$attributecatid)->delete();
+        return redirect()->back()->with('message', 'Record deleted successfully.');
+    }
+
+
    /**
      * Display a listing of the resource.
      *

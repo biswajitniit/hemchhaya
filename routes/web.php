@@ -42,7 +42,7 @@ Auth::routes();
 Route::group(['middleware' => ['admin']], function () {
     Route::get('/admin', [AdminLoginController::class, 'index'])->name('admin.login');
     Route::post('/admin/login', [AdminLoginController::class, 'postlogin'])->name('adminLoginPost');
- });
+});
 
 Route::get('/admin/dashboard', [DashboardController::class, 'dashboard'])->name('admin/dashboard');
 Route::get('/admin/logout', [LogoutController::class, 'adminlogout'])->name('/admin/logout');
@@ -96,47 +96,44 @@ Route::any('/admin/subcategoryitemtrash/{subcategoryitemid}',[SubCategoryItemCon
 
 Route::any('/admin/getsubcategory', [SubCategoryItemController::class, 'ajax_sub_category_get_category_id'])->name('admin.getsubcategory');  // GET Subcategory LIST
 
- // Admin Attribute Category Heading
-  Route::get('/admin/attribute-category', [AttributecategoryController::class, 'attribute_category_list'])->name('attribute.category');
+// Admin Attribute Category Heading
+Route::get('/admin/attribute-category', [AttributecategoryController::class, 'attribute_category_list'])->name('attribute.category');
 
- // Route::get('/attributelist', [AttributecategoryController::class, 'attributelistdata'])->name('attributelist');
+Route::get('/admin/add-attribute-category',[AttributecategoryController::class, 'add_attribute_category'])->name('admin.add-attribute-category');
+Route::post('/admin/add-attribute-category-post-data',[AttributecategoryController::class, 'add_attribute_category_post_data'])->name('admin.add-attribute-category-post-data');
 
-  Route::get('/admin/add-attribute-category',[AttributecategoryController::class, 'add_attribute_category'])->name('admin.add-attribute-category');
-  Route::post('/admin/add-attribute-category-post-data',[AttributecategoryController::class, 'add_attribute_category_post_data'])->name('admin.add-attribute-category-post-data');
+Route::get('/admin/edit-attribute-category/{attributecatid}',[AttributecategoryController::class, 'edit_attribute_category'])->name('admin.edit-attribute-category');
+Route::post('/admin/edit-attribute-category-post',[AttributecategoryController::class, 'edit_attribute_category_post'])->name('admin.edit-attribute-category-post');
 
-  Route::get('/admin/edit-attribute-category/{attributecatid}',[AttributecategoryController::class, 'edit_attribute_category'])->name('admin.edit-attribute-category');
-  Route::post('/admin/edit-attribute-category-post',[AttributecategoryController::class, 'edit_attribute_category_post'])->name('admin.edit-attribute-category-post');
+Route::any('/admin/attribute-category-trash/{attributecatid}',[AttributecategoryController::class, 'attribute_category_trash'])->name('admin.attribute-category-trash');
 
-//  Route::any('/admin/attributetrash/{attributeid}',[AttributeController::class, 'attributetrash'])->name('admin.attributetrash');
-
-  Route::get('/admin/searchattributecategory', [AttributecategoryController::class, 'searchattributecategory'])->name('admin.searchattributecategory');
-
-  Route::any('/admin/attributecategorylistajax', [AttributecategoryController::class, 'ajax_get_list_attribute_category_by_cat_subcat_subcatitem_wise'])->name('admin.attributecategorylistajax');  // GET Subcategory LIST on attribute page
-//  Route::any('/admin/getsubcategoryitemattribute', [AttributeController::class, 'ajax_sub_category_item_get_category_id'])->name('admin.getsubcategoryitemattribute');  // GET Subcategory Item LIST on attribute page
-
+Route::get('/admin/searchattributecategory', [AttributecategoryController::class, 'searchattributecategory'])->name('admin.searchattributecategory');
+Route::any('/admin/attributecategorylistajax', [AttributecategoryController::class, 'ajax_get_list_attribute_category_by_cat_subcat_subcatitem_wise'])->name('admin.attributecategorylistajax');  // GET Subcategory LIST on attribute page
 Route::any('/admin/getsubcategoryonattributepage', [AttributecategoryController::class, 'ajax_sub_category_get_category_id_on_attribute_page'])->name('admin.getsubcategoryonattributepage');  // GET Subcategory LIST
 Route::any('/admin/getsubcategoryitemonattributepage', [AttributecategoryController::class, 'ajax_sub_category_item_get_category_id_on_attribute_page'])->name('admin.getsubcategoryitemonattributepage');  // GET Subcategory Item LIST
 
 
 
- // Admin Attribute
- Route::get('/admin/attribute', [AttributeController::class, 'attribute_list'])->name('attribute');
+// Admin Attribute field's
+Route::get('/admin/attribute', [AttributeController::class, 'attribute_list'])->name('attribute');
 
- Route::get('/attributelist', [AttributeController::class, 'attributelistdata'])->name('attributelist');
+Route::get('/attributelist', [AttributeController::class, 'attributelistdata'])->name('attributelist');
 
- Route::get('/admin/add-attribute',[AttributeController::class, 'add_attribute'])->name('admin.add-attribute');
- Route::post('/admin/add-attribute-post-data',[AttributeController::class, 'add_attribute_post_data'])->name('admin.add-attribute-post-data');
+Route::get('/admin/add-attribute',[AttributeController::class, 'add_attribute'])->name('admin.add-attribute');
+Route::post('/admin/add-attribute-post-data',[AttributeController::class, 'add_attribute_post_data'])->name('admin.add-attribute-post-data');
 
- Route::any('/admin/edit-attribute/{attributeid}',[AttributeController::class, 'edit_attribute'])->name('admin.edit-attribute');
- Route::post('/admin/edit-attribute-post',[AttributeController::class, 'edit_attribute_post'])->name('admin.edit-attribute-post');
+Route::any('/admin/edit-attribute/{attributeid}',[AttributeController::class, 'edit_attribute'])->name('admin.edit-attribute');
+Route::post('/admin/edit-attribute-post',[AttributeController::class, 'edit_attribute_post'])->name('admin.edit-attribute-post');
 
- Route::any('/admin/attributetrash/{attributeid}',[AttributeController::class, 'attributetrash'])->name('admin.attributetrash');
+Route::any('/admin/attributetrash/{attributeid}',[AttributeController::class, 'attributetrash'])->name('admin.attributetrash');
 
- Route::get('/admin/searchattribute', [AttributeController::class, 'searchattribute'])->name('admin.searchattribute');
+Route::get('/admin/searchattribute', [AttributeController::class, 'searchattribute'])->name('admin.searchattribute');
 
- Route::any('/admin/getsubcategoryattribute', [AttributeController::class, 'ajax_sub_category_get_category_id'])->name('admin.getsubcategoryattribute');  // GET Subcategory LIST on attribute page
- Route::any('/admin/getsubcategoryitemattribute', [AttributeController::class, 'ajax_sub_category_item_get_category_id'])->name('admin.getsubcategoryitemattribute');  // GET Subcategory Item LIST on attribute page
+Route::any('/admin/getsubcategoryattribute', [AttributeController::class, 'ajax_sub_category_get_category_id'])->name('admin.getsubcategoryattribute');  // GET Subcategory LIST on attribute page
+Route::any('/admin/getsubcategoryattribute', [AttributeController::class, 'ajax_sub_category_get_category_id'])->name('admin.getsubcategoryattribute');  // GET Subcategory LIST on attribute page
 
+Route::any('/admin/getsubcategoryitemattribute', [AttributeController::class, 'ajax_sub_category_item_get_category_id'])->name('admin.getsubcategoryitemattribute');  // GET Subcategory Item LIST on attribute page
+Route::any('/admin/getattributecategory', [AttributeController::class, 'ajax_getattributecategory'])->name('admin.getattributecategory');
 
 
 

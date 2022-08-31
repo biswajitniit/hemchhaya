@@ -8,6 +8,7 @@ use App\Models\Categorys;
 use App\Models\Subcategory;
 use App\Models\Subcategoryitem;
 use App\Models\Attribute;
+use App\Models\Attributecategory;
 use DataTables;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Contracts\Encryption\DecryptException;
@@ -49,9 +50,34 @@ class AttributeController extends Controller
      *
      * @return void
      */
+    public function ajax_getattributecategory(Request $request){
+
+        $employees = Attributecategory::orderby('attribute_category_name')->select('id','attribute_category_name')->where('sub_category_item_id',$request->subcategoryitemid)->get();
+
+        $response = array();
+        if(count($employees) > 0){
+            foreach($employees as $employee){
+            $response[] = array(
+                    "id"=>$employee->id,
+                    "text"=>$employee->attribute_category_name
+            );
+            }
+        }else{
+            $response[] = array(
+                "id"=>'',
+                "text"=>"No Records Found"
+            );
+        }
+        return response()->json($response);
+    }
+    /**
+     * get subcategory list by categoryid
+     *
+     * @return void
+     */
     public function ajax_sub_category_get_category_id(Request $request){
 
-        $employees = Subcategory::orderby('sub_category_name','asc')->select('id','sub_category_name')->where('category_id',Crypt::decryptString($request->categoryid))->get();
+        $employees = Subcategory::orderby('sub_category_name')->select('id','sub_category_name')->where('category_id',Crypt::decryptString($request->categoryid))->get();
 
         $response = array();
         if(count($employees) > 0){
@@ -69,14 +95,14 @@ class AttributeController extends Controller
         }
         return response()->json($response);
     }
-   /**
-     * get subcategory item list by sub categoryid
+    /**
+     * get subcategory list by categoryid
      *
      * @return void
      */
     public function ajax_sub_category_item_get_category_id(Request $request){
 
-        $employees = Subcategoryitem::orderby('sub_category_item_name','asc')->select('id','sub_category_item_name')->where('sub_category_id',Crypt::decryptString($request->subcategoryid))->get();
+        $employees = Subcategoryitem::orderby('sub_category_item_name')->select('id','sub_category_item_name')->where('sub_category_id',Crypt::decryptString($request->subcategoryid))->get();
 
         $response = array();
         if(count($employees) > 0){
@@ -94,7 +120,6 @@ class AttributeController extends Controller
         }
         return response()->json($response);
     }
-
 
     /**
      * Show the Admin Attribute Search.
@@ -123,7 +148,8 @@ class AttributeController extends Controller
      * @return \Illuminate\Http\Response
      */
 	public function add_attribute(Request $request){
-		return view("admin.attribute.add-attribute");
+        $category = Categorys::where('status','1')->orderBy('category_name')->get();
+		return view("admin.attribute.add-attribute",compact('category'));
 	}
 
    /**
@@ -132,21 +158,35 @@ class AttributeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function add_attribute_post_data(Request $request){
+        //echo "<pre>"; print_r($_POST); die;
         $this->validate($request, [
-            'column_name' => 'required',
-            'column_type' => 'required',
-            'column_validation' => 'required',
+            'category_id'           => 'required',
+            'sub_category_id'       => 'required',
+            'sub_category_item_id'  => 'required',
+            'attribute_cat_id'      => 'required',
+            'column_name'           => 'required',
+            'column_type'           => 'required',
+            'column_validation'     => 'required',
         ],[
-            'column_name.required' => 'Please enter column name',
-            'column_type.required' => 'Please select column type',
+            'category_id.required'           => 'Please select category',
+            'sub_category_id.required'       => 'Please select sub category',
+            'sub_category_item_id.required'  => 'Please select sub category item',
+            'attribute_cat_id.required'      => 'Please select attribute category',
+            'column_name.required'           => 'Please enter column name',
+            'column_type.required'           => 'Please select column type',
         ]);
 
     	$attribute = new Attribute();
-            $attribute->column_name       = $request['column_name'];
-            $attribute->column_slug       = $this->slugify($request['column_name'],'_');
-            $attribute->column_type       = $request['column_type'];
-            $attribute->column_validation = $request['column_validation'];
-            $attribute->status            = $request['status'];
+            $attribute->category_id             = $request['category_id'];
+            $attribute->sub_category_id         = $request['sub_category_id'];
+            $attribute->sub_category_item_id    = $request['sub_category_item_id'];
+            $attribute->attribute_category_id   = $request['attribute_cat_id'];
+            $attribute->column_name             = $request['column_name'];
+            $attribute->column_slug             = $this->slugify($request['column_name'],'_');
+            $attribute->column_type             = $request['column_type'];
+            $attribute->tags                    = $request['tags'];
+            $attribute->column_validation       = $request['column_validation'];
+            $attribute->status                  = $request['status'];
 		$attribute->save();
 
         return redirect()->back()->with('message', 'Attribute added successfully.');

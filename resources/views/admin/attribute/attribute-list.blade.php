@@ -101,7 +101,6 @@
     });
 
     (function($) {
-
         if ($(".category").length) {
             $(".category").select2();
         }

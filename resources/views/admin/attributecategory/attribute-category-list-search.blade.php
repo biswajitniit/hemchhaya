@@ -13,6 +13,14 @@
             </div>
         </div>
 
+        @if(session()->has('message'))
+            <div class="alert alert-danger">
+                {{ session()->get('message') }}
+            </div>
+        @endif
+
+
+
         <!-- first row starts here -->
         <div class="row">
             <div class="col-xl-12 stretch-card grid-margin">
@@ -90,32 +98,21 @@
             </div>
         </div>
 
-    <!-- Modal -->
-    {{-- <div id="myModal" class="modal fade" role="dialog">
-        <div class="modal-dialog">
+        <div id="myModal" class="modal fade" role="dialog" >
+            <div class="modal-dialog" style="width:700px;max-width:initial;height:500px;">
             <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-body">
+                <div class="modal-content">
 
-                </div>
-                <div class="modal-footer" style="width: 700px;">
+                    <div class="modal-body">
+
+                    </div>
+                    {{-- <div class="modal-footer" style="width: 700px;z-index: -1;">
                     <a href="javascript:void(0)" class="btn btn-danger" onclick="submit_or_refresh()">Close</a>
-                </div>
-            </div>
-        </div>
-    </div> --}}
-
-    <div id="myModal" class="modal fade" role="dialog" >
-        <div class="modal-dialog" style="width:700px;max-width:initial;height:500px;">
-          <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-body">
-
+                    </div> --}}
                 </div>
             </div>
         </div>
     </div>
-
     <!-- content-wrapper ends -->
     <!-- partial:../../partials/_footer.html -->
     <footer class="footer">
@@ -258,7 +255,7 @@
                        {
                             data: 'action',
                             render: function (data, type, row){
-                                return '<a href="<?php echo url("admin/edit-attribute-category") ?>/'+data+'" onclick="geturldata(event)" title="Edit Attribute Category"><i class="mdi mdi-table-edit"></i></a> | <a href="<?php echo url("admin/subcategoryitemtrash")?>/'+data+'" title="Trash Sub Category Item" onclick="return confirm("Are you sure?")"><i class="mdi mdi-delete-forever"></i></a>';
+                                return '<a href="<?php echo url("admin/edit-attribute-category") ?>/'+data+'" onclick="geturldata(event)" title="Edit Attribute Category"><i class="mdi mdi-table-edit"></i></a> | <a href="<?php echo url("admin/attribute-category-trash")?>/'+data+'" title="Trash attribute category" onclick="confirmMsg(event)"><i class="mdi mdi-delete-forever"></i></a>';
                             },
                         },
 
@@ -266,13 +263,13 @@
             });
         });
 
-        function confirmMsg()
+        function confirmMsg(e)
         {
-            var answer = confirm("Delete selected record?")
+            var answer = confirm("Are you sure you want to delete this record?")
             if (answer){
                 return true;
             }
-            return false;
+            e.preventDefault();
         }
 
         function geturldata(e){
