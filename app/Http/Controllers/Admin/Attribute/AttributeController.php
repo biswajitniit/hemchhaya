@@ -120,6 +120,32 @@ class AttributeController extends Controller
         }
         return response()->json($response);
     }
+   /**
+     * get subcategory list by categoryid
+     *
+     * @return void
+     */
+    public function ajax_getattributecategorysearch(Request $request){
+
+        $employees = Attributecategory::orderby('attribute_category_name')->select('id','attribute_category_name')->where('sub_category_item_id',Crypt::decryptString($request->subcategoryitemid))->get();
+
+        $response = array();
+        if(count($employees) > 0){
+            foreach($employees as $employee){
+            $response[] = array(
+                    "id"=>Crypt::encryptString($employee->id),
+                    "text"=>$employee->attribute_category_name
+            );
+            }
+        }else{
+            $response[] = array(
+                "id"=>'',
+                "text"=>"No Records Found"
+            );
+        }
+        return response()->json($response);
+    }
+
 
     /**
      * Show the Admin Attribute Search.
@@ -250,7 +276,7 @@ class AttributeController extends Controller
      */
     public function attributelistdata(Request $request){
 
-        $query=Attribute::orderby('created_at','desc')->get();
+        $query=Attribute::where('category_id',$request->category)->where('sub_category_id',$request->subcategoryid)->where('sub_category_item_id',$request->subcategoryitemid)->where('attribute_category_id',$request->attributecategoryid)->orderby('created_at','desc')->get();
         $totalData =count($query);
         $totalFiltered = $totalData;  // when there is no search parameter then total number rows = total number filtered rows.
         return Datatables::of($query)
@@ -261,13 +287,15 @@ class AttributeController extends Controller
             if($query->column_type==1){
                 $ctype='TextBox';
             }elseif($query->column_type==2){
-                $ctype='DropDown';
-            }elseif($query->column_type==3){
-                $ctype='Editor';
-            }elseif($query->column_type==4){
                 $ctype='Password';
-            }elseif($query->column_type==5){
+            }elseif($query->column_type==3){
                 $ctype='Email';
+            }elseif($query->column_type==4){
+                $ctype='Dropdown';
+            }elseif($query->column_type==5){
+                $ctype='Multi Select Dropdown';
+            }elseif($query->column_type==6){
+                $ctype='Editor';
             }
             return $ctype;
         })

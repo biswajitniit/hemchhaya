@@ -8,6 +8,7 @@ use App\Models\Categorys;
 use App\Models\Subcategory;
 use App\Models\Subcategoryitem;
 use DataTables;
+use Illuminate\Support\Facades\DB;
 
 class SubCategoryItemController extends Controller
 {
@@ -95,9 +96,9 @@ class SubCategoryItemController extends Controller
             'sub_category_item_name'   => $request['sub_category_item_name'],
             'status'                   => $request['status']
         );
-
+        //DB::enableQueryLog();
         Subcategoryitem::where('id', $request['subcatitemid'])->update($data);
-
+        //dd(DB::getQueryLog());die;
         return redirect()->back()->with('message', 'Sub category item updated successfully.');
 
     }

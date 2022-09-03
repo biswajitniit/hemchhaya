@@ -41,6 +41,15 @@
                                         </select>
                                     </div>
                                 </div>
+
+                                <div class="col">
+                                    <div class="form-group">
+                                        <select name="attributecategory" class="attributecategory" style="width: 100%;">
+                                            <option value="">Select Attribute Category</option>
+                                        </select>
+                                    </div>
+                                </div>
+
                                 <div class="col">
                                     <div class="form-group">
                                         <input class="btn btn-primary btn-lg" type="submit" value="Search" />
@@ -53,7 +62,41 @@
             </div>
         </div>
 
-        
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Attribute category table</h4>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped mb-none" id="my-table">
+                                <thead>
+                                    <tr class="bg-primary text-white">
+                                        <th>Attribute Category Name</th>
+                                        <th>Column Type</th>
+                                        <th>Column Validation</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="myModal" class="modal fade" role="dialog" >
+            <div class="modal-dialog" style="width:700px;max-width:initial;height:500px;">
+            <!-- Modal content-->
+                <div class="modal-content">
+
+                    <div class="modal-body">
+
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
 
     </div>
     <!-- content-wrapper ends -->
@@ -99,16 +142,18 @@
         });
 
         (function($) {
-
-        if ($(".category").length) {
-            $(".category").select2();
-        }
-        if ($(".subcategory").length) {
-            $(".subcategory").select2();
-        }
-        if ($(".subcategoryitem").length) {
-            $(".subcategoryitem").select2();
-        }
+            if ($(".category").length) {
+                $(".category").select2();
+            }
+            if ($(".subcategory").length) {
+                $(".subcategory").select2();
+            }
+            if ($(".subcategoryitem").length) {
+                $(".subcategoryitem").select2();
+            }
+            if ($(".attributecategory").length) {
+                $(".attributecategory").select2();
+            }
         })(jQuery);
 
         $("document").ready(function () {
@@ -152,6 +197,26 @@
             }
         });
 
+        $('select[name="subcategoryitem"]').on('change', function () {
+            var subcatitemId = $(this).val();
+            //alert(subcatitemId); return false;
+            if (subcatitemId) {
+                $.ajax({
+                    url: "<?php echo e(route('admin.getattributecategorysearch')); ?>",
+                    type: "POST",
+                    data:{subcategoryitemid:subcatitemId, _token: '<?php echo e(csrf_token()); ?>'},
+                    dataType: "json",
+                    success: function (returndata) {
+                        $('select[name="attributecategory"]').empty();
+                        $.each(returndata, function (key, value) {
+                            $('select[name="attributecategory"]').append('<option value=\'' +value.id+'\'>' + value.text + '</option>');
+                        })
+                    }
+                })
+            } else {
+                $('select[name="attributecategory"]').empty();
+            }
+        });
 
 
     });
@@ -176,7 +241,7 @@
                     "targets": 0
                 }],
                 "ajax": {
-                    data: ({_token: '<?php echo e(csrf_token()); ?>'}),
+                    data: ({categoryid:'<?php echo e(Crypt::decryptString(request()->category)); ?>',subcategoryid:'<?php echo e(Crypt::decryptString(request()->subcategory)); ?>',subcategoryitemid:'<?php echo e(Crypt::decryptString(request()->subcategoryitem)); ?>',attributecategoryid:'<?php echo e(Crypt::decryptString(request()->attributecategory)); ?>',_token: '<?php echo e(csrf_token()); ?>'}),
                     url : "<?php echo e(url('/')); ?>/attributelist",
                     type : 'GET',
                 },

@@ -134,7 +134,7 @@ Route::any('/admin/getsubcategoryattribute', [AttributeController::class, 'ajax_
 
 Route::any('/admin/getsubcategoryitemattribute', [AttributeController::class, 'ajax_sub_category_item_get_category_id'])->name('admin.getsubcategoryitemattribute');  // GET Subcategory Item LIST on attribute page
 Route::any('/admin/getattributecategory', [AttributeController::class, 'ajax_getattributecategory'])->name('admin.getattributecategory');
-
+Route::any('/admin/getattributecategorysearch', [AttributeController::class, 'ajax_getattributecategorysearch'])->name('admin.getattributecategorysearch');
 
 
  Route::group(['middleware' => ['vendor']], function () {

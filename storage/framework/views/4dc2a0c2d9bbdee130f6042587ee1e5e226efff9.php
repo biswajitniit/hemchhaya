@@ -1,4 +1,3 @@
-
 <?php $__env->startSection('title', 'Edit Sub Category Item'); ?>
 <?php $__env->startSection('content'); ?>
 
@@ -42,7 +41,7 @@
 
               <form class="cmxform" id="editsubcategoryitem" method="post" action="<?php echo e(route('admin.edit-sub-category-item-post')); ?>" name="editsubcategoryitem">
                 <?php echo csrf_field(); ?>
-                <input type="hidden" name="subcatid" value="<?php echo e($subcategoryitem->id); ?>">
+                <input type="hidden" name="subcatitemid" value="<?php echo e($subcategoryitem->id); ?>">
                 <fieldset>
 
                     <div class="form-group">
@@ -70,7 +69,7 @@
                       </div>
 
                       <div class="form-group">
-                        <label for="sub_category_item_name">Sub Category Name </label>
+                        <label for="sub_category_item_name">Sub Category Item Name </label>
                         <input id="sub_category_item_name" class="form-control" name="sub_category_item_name" type="text" value="<?php echo e($subcategoryitem->sub_category_item_name); ?>">
                       </div>
 
