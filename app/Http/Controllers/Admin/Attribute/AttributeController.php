@@ -276,7 +276,7 @@ class AttributeController extends Controller
      */
     public function attributelistdata(Request $request){
 
-        $query=Attribute::where('category_id',$request->category)->where('sub_category_id',$request->subcategoryid)->where('sub_category_item_id',$request->subcategoryitemid)->where('attribute_category_id',$request->attributecategoryid)->orderby('created_at','desc')->get();
+        $query=Attribute::where('category_id',$request->categoryid)->where('sub_category_id',$request->subcategoryid)->where('sub_category_item_id',$request->subcategoryitemid)->where('attribute_category_id',$request->attributecategoryid)->orderby('created_at','desc')->get();
         $totalData =count($query);
         $totalFiltered = $totalData;  // when there is no search parameter then total number rows = total number filtered rows.
         return Datatables::of($query)

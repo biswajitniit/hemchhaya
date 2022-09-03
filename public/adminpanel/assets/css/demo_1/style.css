@@ -18274,12 +18274,13 @@ div.tagsinput {
       position: absolute;
       left: -999em; }
     .wizard > .content > .body {
-      float: left;
+      /* float: left;
       position: absolute;
       width: 95%;
       height: 95%;
       padding: 2.5%;
-      overflow-y: auto; }
+      overflow-y: auto;  */
+      }
       .wizard > .content > .body ul {
         list-style: disc; }
         .wizard > .content > .body ul > li {

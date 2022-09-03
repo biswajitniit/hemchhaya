@@ -1,4 +1,3 @@
-
 <?php $__env->startSection('title', 'Attribute search category / subcategory / subcategory item wise'); ?>
 <?php $__env->startSection('content'); ?>
 
@@ -44,6 +43,15 @@
                                         </select>
                                     </div>
                                 </div>
+
+                                <div class="col">
+                                    <div class="form-group">
+                                        <select name="attributecategory" class="attributecategory" style="width: 100%;">
+                                            <option value="">Select Attribute Category</option>
+                                        </select>
+                                    </div>
+                                </div>
+
                                 <div class="col">
                                     <div class="form-group">
                                         <input class="btn btn-primary btn-lg" type="submit" value="Search" />
@@ -100,16 +108,20 @@
         });
     });
 
+
     (function($) {
-        if ($(".category").length) {
-            $(".category").select2();
-        }
-        if ($(".subcategory").length) {
-            $(".subcategory").select2();
-        }
-        if ($(".subcategoryitem").length) {
-            $(".subcategoryitem").select2();
-        }
+            if ($(".category").length) {
+                $(".category").select2();
+            }
+            if ($(".subcategory").length) {
+                $(".subcategory").select2();
+            }
+            if ($(".subcategoryitem").length) {
+                $(".subcategoryitem").select2();
+            }
+            if ($(".attributecategory").length) {
+                $(".attributecategory").select2();
+            }
     })(jQuery);
 
     $("document").ready(function () {
@@ -153,7 +165,26 @@
             }
         });
 
-
+        $('select[name="subcategoryitem"]').on('change', function () {
+            var subcatitemId = $(this).val();
+            //alert(subcatitemId); return false;
+            if (subcatitemId) {
+                $.ajax({
+                    url: "<?php echo e(route('admin.getattributecategorysearch')); ?>",
+                    type: "POST",
+                    data:{subcategoryitemid:subcatitemId, _token: '<?php echo e(csrf_token()); ?>'},
+                    dataType: "json",
+                    success: function (returndata) {
+                        $('select[name="attributecategory"]').empty();
+                        $.each(returndata, function (key, value) {
+                            $('select[name="attributecategory"]').append('<option value=\'' +value.id+'\'>' + value.text + '</option>');
+                        })
+                    }
+                })
+            } else {
+                $('select[name="attributecategory"]').empty();
+            }
+        });
 
     });
 </script>
