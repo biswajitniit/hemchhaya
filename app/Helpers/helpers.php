@@ -4,7 +4,8 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Categorys;
 use App\Models\Subcategory;
 use App\Models\Subcategoryitem;
-
+use App\Models\Attribute;
+use App\Models\Attributecategory;
 
 
 if (! function_exists('GetSubcategoryBycatid')) {
@@ -21,3 +22,14 @@ if (! function_exists('GetSubcategoryitemBysubcatid')) {
     }
 }
 
+if (! function_exists('Getattributecategory')) {
+    function Getattributecategory($catid,$subcatid,$subcatitemid) {
+       return Attributecategory::where('category_id',$catid)->where('sub_category_id',$subcatid)->where('sub_category_item_id',$subcatitemid)->where('status','1')->get();
+    }
+}
+
+if (! function_exists('Getattributebyattributecategory')) {
+    function Getattributebyattributecategory($attributecatid) {
+       return Attribute::where('category_id',$attributecatid)->where('status','1')->get();
+    }
+}

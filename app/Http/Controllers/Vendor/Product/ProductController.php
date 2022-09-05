@@ -147,6 +147,14 @@ class ProductController extends Controller
      */
     public function ajax_get_attributecat_with_attribute_on_product_page(Request $request){
 
+        //echo $request->categoryid.'--'.$request->subcategoryid.'--'.$request->subcategoryitemid;
+        $attributecategory = Attributecategory::where('category_id',$request->categoryid)->where('sub_category_id',$request->subcategoryid)->where('sub_category_item_id',$request->subcategoryitemid)->where('status','1')->get();
+        foreach($attributecategory as $rowattribute){
+
+           echo '<h6>'.$rowattribute->attribute_category_name.'</h6><hr />';
+
+        }
+
     }
 
 

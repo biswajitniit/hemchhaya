@@ -22,7 +22,7 @@
               {{-- <h4 class="card-title">Add Product</h4> --}}
               <form id="example-form" action="#" autocomplete="off">
                 <div>
-                  <h3>Categories</h3>
+                  <h3>Product Categories Information</h3>
                     <section>
                         <h6>Categories Information</h6>
                         <hr />
@@ -33,7 +33,7 @@
                                     <option value="">Select category</option>
                                     @if($category)
                                         @foreach ($category as $rowcategory)
-                                            <option value="{{ $rowcategory->id }}">{{ $rowcategory->category_name }}</option>
+                                            <option value="{{ $rowcategory->id }}" @if(request()->catid == $rowcategory->id) selected @endif>{{ $rowcategory->category_name }}</option>
                                         @endforeach
                                     @endif
                                 </select>
@@ -45,6 +45,14 @@
                             <div class="col-sm-6">
                                 <select name="sub_category_id" class="subcategory" style="width: 100%;">
                                     <option value="">Select sub category</option>
+                                    @if(request()->subcatid)
+                                        @php
+                                        $getsubcategorylistbycategory = GetSubcategoryBycatid(request()->catid);
+                                        @endphp
+                                        @foreach ($getsubcategorylistbycategory as $rowsubcategory)
+                                            <option value="{{ $rowsubcategory->id }}" @if($rowsubcategory->id == request()->subcatid) selected @endif>{{ $rowsubcategory->sub_category_name }}</option>
+                                        @endforeach
+                                    @endif
                                 </select>
                             </div>
                         </div>
@@ -54,6 +62,15 @@
                             <div class="col-sm-6">
                                 <select name="sub_category_item_id" class="subcategoryitem" style="width: 100%;">
                                     <option value="">Select sub category item</option>
+                                    @if(request()->subcatitemid)
+                                        @php
+                                        $getsubcategoryitemlistbycategory = GetSubcategoryitemBysubcatid(request()->subcatid);
+                                        @endphp
+                                        @foreach ($getsubcategoryitemlistbycategory as $rowsubcategoryitem)
+                                            <option value="{{ $rowsubcategoryitem->id }}" @if($rowsubcategoryitem->id == request()->subcatitemid) selected @endif>{{ $rowsubcategoryitem->sub_category_item_name }}</option>
+                                        @endforeach
+                                    @endif
+
                                 </select>
                             </div>
                         </div>
@@ -260,12 +277,113 @@
                     </section>
 
 
-                    <h3>Product Description</h3>
+                    <h3>Product Description and Images</h3>
                     <hr>
-
                     <section>
+                        <h6>Product Images</h6>
+                        <hr>
+                        <div class="form-group row">
+                            <label for="seller_hsn" class="col-sm-3 col-form-label">Image <span class="required">*</span></label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="seller_hsn" placeholder="" />
+                            </div>
+                        </div>
 
-                        <div id="product_desc"></div>
+
+
+                        @if (!empty(request()->catid) &&  !empty(request()->subcatid) && !empty(request()->subcatitemid))
+                            @php
+                                $getattributecategory = Getattributecategory(request()->catid,request()->subcatid,request()->subcatitemid);
+                            @endphp
+                            @if($getattributecategory)
+                                @foreach ($getattributecategory as $rowattributecat)
+
+                                <h6>{{ $rowattributecat->attribute_category_name }}</h6>
+                                <hr />
+
+                                        @php
+                                        $getattribute = Getattributebyattributecategory($rowattributecat->id);
+                                        @endphp
+                                        @if($getattribute)
+                                            @foreach ($getattribute as $rowattribute)
+
+                                                @if($rowattribute->column_type == 1)
+                                                    <!-- For TextBox -->
+                                                    <div class="form-group row">
+                                                        <label for="{{ $rowattribute->column_slug }}" class="col-sm-3 col-form-label">{{ $rowattribute->column_name }} @if($rowattribute->column_validation == 2) <span class="required">*</span> @endif</label>
+                                                        <div class="col-sm-6">
+                                                            <input type="text" class="form-control" id="{{ $rowattribute->column_slug }}" placeholder="" @if($rowattribute->column_validation == 2) required @endif/>
+                                                        </div>
+                                                    </div>
+                                                @endif
+
+                                                @if($rowattribute->column_type == 2)
+                                                    <!-- For TextBox Password-->
+                                                    <div class="form-group row">
+                                                        <label for="{{ $rowattribute->column_slug }}" class="col-sm-3 col-form-label">{{ $rowattribute->column_name }} @if($rowattribute->column_validation == 2) <span class="required">*</span> @endif</label>
+                                                        <div class="col-sm-6">
+                                                            <input type="password" class="form-control" id="{{ $rowattribute->column_slug }}" placeholder="" @if($rowattribute->column_validation == 2) required @endif/>
+                                                        </div>
+                                                    </div>
+                                                @endif
+
+                                                @if($rowattribute->column_type == 3)
+                                                <!-- For TextBox Email-->
+                                                <div class="form-group row">
+                                                    <label for="{{ $rowattribute->column_slug }}" class="col-sm-3 col-form-label">{{ $rowattribute->column_name }} @if($rowattribute->column_validation == 2) <span class="required">*</span> @endif</label>
+                                                    <div class="col-sm-6">
+                                                        <input type="email" class="form-control" id="{{ $rowattribute->column_slug }}" placeholder="" @if($rowattribute->column_validation == 2) required @endif/>
+                                                    </div>
+                                                </div>
+                                                @endif
+
+                                                @if($rowattribute->column_type == 4)
+                                                <!-- For TextBox Dropdown-->
+                                                <div class="form-group row">
+                                                    <label for="{{ $rowattribute->column_slug }}" class="col-sm-3 col-form-label">{{ $rowattribute->column_name }} @if($rowattribute->column_validation == 2) <span class="required">*</span> @endif</label>
+                                                    <div class="col-sm-6">
+                                                        <select name="{{ $rowattribute->column_slug }}" id="{{ $rowattribute->column_slug }}"  style="width: 100%;" @if($rowattribute->column_validation == 2) required @endif>
+                                                            <option value="">Select Column Validation</option>
+                                                            <option value="1">Optional</option>
+                                                            <option value="2">Required</option>
+                                                        </select>
+
+                                                    </div>
+                                                </div>
+                                                @endif
+
+                                                @if($rowattribute->column_type == 5)
+                                                <!-- For Tags-->
+                                                <div class="form-group row">
+                                                    <label for="{{ $rowattribute->column_slug }}" class="col-sm-3 col-form-label">{{ $rowattribute->column_name }} @if($rowattribute->column_validation == 2) <span class="required">*</span> @endif</label>
+                                                    <div class="col-sm-6">
+                                                        <input name="{{ $rowattribute->column_slug }}" id="tags" value="{{ $rowattribute->tags }}" />
+                                                    </div>
+                                                </div>
+                                                @endif
+
+                                                @if($rowattribute->column_type == 6)
+                                                <!-- For Tags-->
+                                                <div class="form-group row">
+                                                    <label for="{{ $rowattribute->column_slug }}" class="col-sm-3 col-form-label">{{ $rowattribute->column_name }} @if($rowattribute->column_validation == 2) <span class="required">*</span> @endif</label>
+                                                    <div class="col-sm-6">
+                                                        <input name="{{ $rowattribute->column_slug }}" id="tags" value="{{ $rowattribute->tags }}" />
+                                                    </div>
+                                                </div>
+                                                @endif
+
+
+
+
+                                            @endforeach
+                                        @endif
+
+
+
+
+                                @endforeach
+                            @endif
+                        @endif
 
                     </section>
 
@@ -400,20 +518,24 @@
             });
 
             $('select[name="sub_category_item_id"]').on('change', function () {
+                var catId = $(".category_id").val();
+                var subcatId = $(".subcategory").val();
                 var subcatitemId = $(this).val();
-                if (subcatitemId) {
-                    $.ajax({
-                        url: "{{route('admin.get_attributecat_with_attribute_on_product_page')}}",
-                        type: "POST",
-                        data:{subcategoryitemid:subcatitemId, _token: '{{csrf_token()}}'},
-                        dataType: "json",
-                        success: function (returndata) {
 
-                            console.log(returndata); return false;
+                location.href = '<?php echo url('/'); ?>/vendor/add-product?catid='+catId+'&subcatid='+subcatId+'&subcatitemid='+subcatitemId+'';
+                // $.ajax({
+                //     url: "{{route('admin.get_attributecat_with_attribute_on_product_page')}}",
+                //     type: "POST",
+                //     data:{categoryid:catId,subcategoryid:subcatId,subcategoryitemid:subcatitemId, _token: '{{csrf_token()}}'},
+                //     dataType: "json",
+                //     success: function (returndata) {
 
-                        }
-                    })
-                }
+                //         //console.log(returndata); return false;
+                //         $("#product_desc").html(returndata);
+
+                //     }
+                // });
+
             });
 
         });

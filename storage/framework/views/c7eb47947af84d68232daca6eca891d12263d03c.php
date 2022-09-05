@@ -20,6 +20,34 @@
     <link rel="stylesheet" href="<?php echo e(asset('adminpanel/assets/vendors/jquery-bar-rating/css-stars.css')); ?>">
     <link rel="stylesheet" href="<?php echo e(asset('adminpanel/assets/vendors/font-awesome/css/font-awesome.min.css')); ?>">
     <!-- End plugin css for this page -->
+
+
+
+      <!-- Plugin css for this page -->
+      <link rel="stylesheet" href="<?php echo e(asset('adminpanel/assets/vendors/dropzone/dropzone.css')); ?>">
+      <link rel="stylesheet" href="<?php echo e(asset('adminpanel/assets/vendors/font-awesome/css/font-awesome.min.css')); ?>">
+      <link rel="stylesheet" href="<?php echo e(asset('adminpanel/assets/vendors/jquery-bar-rating/bars-1to10.css')); ?>">
+      <link rel="stylesheet" href="<?php echo e(asset('adminpanel/assets/vendors/jquery-bar-rating/bars-horizontal.css')); ?>">
+      <link rel="stylesheet" href="<?php echo e(asset('adminpanel/assets/vendors/jquery-bar-rating/bars-movie.css')); ?>">
+      <link rel="stylesheet" href="<?php echo e(asset('adminpanel/assets/vendors/jquery-bar-rating/bars-pill.css')); ?>">
+      <link rel="stylesheet" href="<?php echo e(asset('adminpanel/assets/vendors/jquery-bar-rating/bars-reversed.css')); ?>">
+      <link rel="stylesheet" href="<?php echo e(asset('adminpanel/assets/vendors/jquery-bar-rating/bars-square.css')); ?>">
+      <link rel="stylesheet" href="<?php echo e(asset('adminpanel/assets/vendors/jquery-bar-rating/bootstrap-stars.css')); ?>">
+      <link rel="stylesheet" href="<?php echo e(asset('adminpanel/assets/vendors/jquery-bar-rating/css-stars.css')); ?>">
+      <link rel="stylesheet" href="<?php echo e(asset('adminpanel/assets/vendors/jquery-bar-rating/examples.css')); ?>">
+      <link rel="stylesheet" href="<?php echo e(asset('adminpanel/assets/vendors/jquery-bar-rating/fontawesome-stars-o.css')); ?>">
+      <link rel="stylesheet" href="<?php echo e(asset('adminpanel/assets/vendors/jquery-bar-rating/fontawesome-stars.css')); ?>">
+      <link rel="stylesheet" href="<?php echo e(asset('adminpanel/assets/vendors/jquery-asColorPicker/css/asColorPicker.min.css')); ?>">
+      <link rel="stylesheet" href="<?php echo e(asset('adminpanel/assets/vendors/x-editable/bootstrap-editable.css')); ?>">
+      <link rel="stylesheet" href="<?php echo e(asset('adminpanel/assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css')); ?>">
+      <link rel="stylesheet" href="<?php echo e(asset('adminpanel/assets/vendors/dropify/dropify.min.css')); ?>">
+      <link rel="stylesheet" href="<?php echo e(asset('adminpanel/assets/vendors/jquery-file-upload/uploadfile.css')); ?>">
+      <link rel="stylesheet" href="<?php echo e(asset('adminpanel/assets/vendors/jquery-tags-input/jquery.tagsinput.min.css')); ?>">
+      <link rel="stylesheet" href="<?php echo e(asset('adminpanel/assets/vendors/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.min.css')); ?>">
+      <!-- End plugin css for this page -->
+
+
+
     <!-- inject:css -->
     <!-- endinject -->
     <!-- Layout styles -->
@@ -299,6 +327,39 @@
     <script src="<?php echo e(asset('adminpanel/assets/js/typeahead.js')); ?>"></script>
     <script src="<?php echo e(asset('adminpanel/assets/js/select2.js')); ?>"></script>
     <script src="<?php echo e(asset('adminpanel/assets/js/wizard.js')); ?>"></script>
+
+
+
+        <!-- Plugin js for this page -->
+        <script src="<?php echo e(asset('adminpanel/assets/vendors/jquery-bar-rating/jquery.barrating.min.js')); ?>"></script>
+        <script src="<?php echo e(asset('adminpanel/assets/vendors/jquery-asColor/jquery-asColor.min.js')); ?>"></script>
+        <script src="<?php echo e(asset('adminpanel/assets/vendors/jquery-asGradient/jquery-asGradient.min.js')); ?>"></script>
+        <script src="<?php echo e(asset('adminpanel/assets/vendors/jquery-asColorPicker/jquery-asColorPicker.min.js')); ?>"></script>
+        <script src="<?php echo e(asset('adminpanel/assets/vendors/x-editable/bootstrap-editable.min.js')); ?>"></script>
+        <script src="<?php echo e(asset('adminpanel/assets/vendors/moment/moment.min.js')); ?>"></script>
+        <script src="<?php echo e(asset('adminpanel/assets/vendors/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.js')); ?>"></script>
+        <script src="<?php echo e(asset('adminpanel/assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js')); ?>"></script>
+        <script src="<?php echo e(asset('adminpanel/assets/vendors/dropify/dropify.min.js')); ?>"></script>
+        <script src="<?php echo e(asset('adminpanel/assets/vendors/jquery-file-upload/jquery.uploadfile.min.js')); ?>"></script>
+        <script src="<?php echo e(asset('adminpanel/assets/vendors/jquery-tags-input/jquery.tagsinput.min.js')); ?>"></script>
+        <script src="<?php echo e(asset('adminpanel/assets/vendors/dropzone/dropzone.js')); ?>"></script>
+        <script src="<?php echo e(asset('adminpanel/assets/vendors/jquery.repeater/jquery.repeater.min.js')); ?>"></script>
+        <script src="<?php echo e(asset('adminpanel/assets/vendors/inputmask/jquery.inputmask.bundle.js')); ?>"></script>
+        <!-- End plugin js for this page -->
+
+        <!-- Custom js for this page -->
+        <script src="<?php echo e(asset('adminpanel/assets/js/formpickers.js')); ?>"></script>
+        <script src="<?php echo e(asset('adminpanel/assets/js/form-addons.js')); ?>"></script>
+        <script src="<?php echo e(asset('adminpanel/assets/js/x-editable.js')); ?>"></script>
+        <script src="<?php echo e(asset('adminpanel/assets/js/dropify.js')); ?>"></script>
+        <script src="<?php echo e(asset('adminpanel/assets/js/dropzone.js')); ?>"></script>
+        <script src="<?php echo e(asset('adminpanel/assets/js/jquery-file-upload.js')); ?>"></script>
+        <script src="<?php echo e(asset('adminpanel/assets/js/formpickers.js')); ?>"></script>
+        <script src="<?php echo e(asset('adminpanel/assets/js/form-repeater.js')); ?>"></script>
+        <script src="<?php echo e(asset('adminpanel/assets/js/inputmask.js')); ?>"></script>
+        <!-- End custom js for this page -->
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
     <?php echo $__env->yieldPushContent('scripts'); ?>
 

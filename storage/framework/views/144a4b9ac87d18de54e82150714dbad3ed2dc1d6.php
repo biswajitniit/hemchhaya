@@ -21,7 +21,7 @@
               
               <form id="example-form" action="#" autocomplete="off">
                 <div>
-                  <h3>Categories</h3>
+                  <h3>Product Categories Information</h3>
                     <section>
                         <h6>Categories Information</h6>
                         <hr />
@@ -32,7 +32,7 @@
                                     <option value="">Select category</option>
                                     <?php if($category): ?>
                                         <?php $__currentLoopData = $category; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $rowcategory): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                            <option value="<?php echo e($rowcategory->id); ?>"><?php echo e($rowcategory->category_name); ?></option>
+                                            <option value="<?php echo e($rowcategory->id); ?>" <?php if(request()->catid == $rowcategory->id): ?> selected <?php endif; ?>><?php echo e($rowcategory->category_name); ?></option>
                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     <?php endif; ?>
                                 </select>
@@ -44,6 +44,14 @@
                             <div class="col-sm-6">
                                 <select name="sub_category_id" class="subcategory" style="width: 100%;">
                                     <option value="">Select sub category</option>
+                                    <?php if(request()->subcatid): ?>
+                                        <?php
+                                        $getsubcategorylistbycategory = GetSubcategoryBycatid(request()->catid);
+                                        ?>
+                                        <?php $__currentLoopData = $getsubcategorylistbycategory; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $rowsubcategory): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <option value="<?php echo e($rowsubcategory->id); ?>" <?php if($rowsubcategory->id == request()->subcatid): ?> selected <?php endif; ?>><?php echo e($rowsubcategory->sub_category_name); ?></option>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                    <?php endif; ?>
                                 </select>
                             </div>
                         </div>
@@ -53,6 +61,15 @@
                             <div class="col-sm-6">
                                 <select name="sub_category_item_id" class="subcategoryitem" style="width: 100%;">
                                     <option value="">Select sub category item</option>
+                                    <?php if(request()->subcatitemid): ?>
+                                        <?php
+                                        $getsubcategoryitemlistbycategory = GetSubcategoryitemBysubcatid(request()->subcatid);
+                                        ?>
+                                        <?php $__currentLoopData = $getsubcategoryitemlistbycategory; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $rowsubcategoryitem): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <option value="<?php echo e($rowsubcategoryitem->id); ?>" <?php if($rowsubcategoryitem->id == request()->subcatitemid): ?> selected <?php endif; ?>><?php echo e($rowsubcategoryitem->sub_category_item_name); ?></option>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                    <?php endif; ?>
+
                                 </select>
                             </div>
                         </div>
@@ -259,12 +276,106 @@
                     </section>
 
 
-                    <h3>Product Description</h3>
+                    <h3>Product Description and Images</h3>
                     <hr>
-
                     <section>
+                        <h3>Product Images</h3>
+                        <hr>
 
-                        <div id="product_desc"></div>
+
+                        <?php if(!empty(request()->catid) &&  !empty(request()->subcatid) && !empty(request()->subcatitemid)): ?>
+                            <?php
+                                $getattributecategory = Getattributecategory(request()->catid,request()->subcatid,request()->subcatitemid);
+                            ?>
+                            <?php if($getattributecategory): ?>
+                                <?php $__currentLoopData = $getattributecategory; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $rowattributecat): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+
+                                <h6><?php echo e($rowattributecat->attribute_category_name); ?></h6>
+                                <hr />
+
+                                        <?php
+                                        $getattribute = Getattributebyattributecategory($rowattributecat->id);
+                                        ?>
+                                        <?php if($getattribute): ?>
+                                            <?php $__currentLoopData = $getattribute; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $rowattribute): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+
+                                                <?php if($rowattribute->column_type == 1): ?>
+                                                    <!-- For TextBox -->
+                                                    <div class="form-group row">
+                                                        <label for="<?php echo e($rowattribute->column_slug); ?>" class="col-sm-3 col-form-label"><?php echo e($rowattribute->column_name); ?> <?php if($rowattribute->column_validation == 2): ?> <span class="required">*</span> <?php endif; ?></label>
+                                                        <div class="col-sm-6">
+                                                            <input type="text" class="form-control" id="<?php echo e($rowattribute->column_slug); ?>" placeholder="" <?php if($rowattribute->column_validation == 2): ?> required <?php endif; ?>/>
+                                                        </div>
+                                                    </div>
+                                                <?php endif; ?>
+
+                                                <?php if($rowattribute->column_type == 2): ?>
+                                                    <!-- For TextBox Password-->
+                                                    <div class="form-group row">
+                                                        <label for="<?php echo e($rowattribute->column_slug); ?>" class="col-sm-3 col-form-label"><?php echo e($rowattribute->column_name); ?> <?php if($rowattribute->column_validation == 2): ?> <span class="required">*</span> <?php endif; ?></label>
+                                                        <div class="col-sm-6">
+                                                            <input type="password" class="form-control" id="<?php echo e($rowattribute->column_slug); ?>" placeholder="" <?php if($rowattribute->column_validation == 2): ?> required <?php endif; ?>/>
+                                                        </div>
+                                                    </div>
+                                                <?php endif; ?>
+
+                                                <?php if($rowattribute->column_type == 3): ?>
+                                                <!-- For TextBox Email-->
+                                                <div class="form-group row">
+                                                    <label for="<?php echo e($rowattribute->column_slug); ?>" class="col-sm-3 col-form-label"><?php echo e($rowattribute->column_name); ?> <?php if($rowattribute->column_validation == 2): ?> <span class="required">*</span> <?php endif; ?></label>
+                                                    <div class="col-sm-6">
+                                                        <input type="email" class="form-control" id="<?php echo e($rowattribute->column_slug); ?>" placeholder="" <?php if($rowattribute->column_validation == 2): ?> required <?php endif; ?>/>
+                                                    </div>
+                                                </div>
+                                                <?php endif; ?>
+
+                                                <?php if($rowattribute->column_type == 4): ?>
+                                                <!-- For TextBox Dropdown-->
+                                                <div class="form-group row">
+                                                    <label for="<?php echo e($rowattribute->column_slug); ?>" class="col-sm-3 col-form-label"><?php echo e($rowattribute->column_name); ?> <?php if($rowattribute->column_validation == 2): ?> <span class="required">*</span> <?php endif; ?></label>
+                                                    <div class="col-sm-6">
+                                                        <select name="<?php echo e($rowattribute->column_slug); ?>" id="<?php echo e($rowattribute->column_slug); ?>"  style="width: 100%;" <?php if($rowattribute->column_validation == 2): ?> required <?php endif; ?>>
+                                                            <option value="">Select Column Validation</option>
+                                                            <option value="1">Optional</option>
+                                                            <option value="2">Required</option>
+                                                        </select>
+
+                                                    </div>
+                                                </div>
+                                                <?php endif; ?>
+
+                                                <?php if($rowattribute->column_type == 5): ?>
+                                                <!-- For Tags-->
+                                                <div class="form-group row">
+                                                    <label for="<?php echo e($rowattribute->column_slug); ?>" class="col-sm-3 col-form-label"><?php echo e($rowattribute->column_name); ?> <?php if($rowattribute->column_validation == 2): ?> <span class="required">*</span> <?php endif; ?></label>
+                                                    <div class="col-sm-6">
+                                                        <input name="<?php echo e($rowattribute->column_slug); ?>" id="tags" value="<?php echo e($rowattribute->tags); ?>" />
+                                                    </div>
+                                                </div>
+                                                <?php endif; ?>
+
+                                                <?php if($rowattribute->column_type == 6): ?>
+                                                <!-- For Tags-->
+                                                <div class="form-group row">
+                                                    <label for="<?php echo e($rowattribute->column_slug); ?>" class="col-sm-3 col-form-label"><?php echo e($rowattribute->column_name); ?> <?php if($rowattribute->column_validation == 2): ?> <span class="required">*</span> <?php endif; ?></label>
+                                                    <div class="col-sm-6">
+                                                        <input name="<?php echo e($rowattribute->column_slug); ?>" id="tags" value="<?php echo e($rowattribute->tags); ?>" />
+                                                    </div>
+                                                </div>
+                                                <?php endif; ?>
+
+
+
+
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                        <?php endif; ?>
+
+
+
+
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            <?php endif; ?>
+                        <?php endif; ?>
 
                     </section>
 
@@ -399,20 +510,24 @@
             });
 
             $('select[name="sub_category_item_id"]').on('change', function () {
+                var catId = $(".category_id").val();
+                var subcatId = $(".subcategory").val();
                 var subcatitemId = $(this).val();
-                if (subcatitemId) {
-                    $.ajax({
-                        url: "<?php echo e(route('admin.get_attributecat_with_attribute_on_product_page')); ?>",
-                        type: "POST",
-                        data:{subcategoryitemid:subcatitemId, _token: '<?php echo e(csrf_token()); ?>'},
-                        dataType: "json",
-                        success: function (returndata) {
 
-                            console.log(returndata); return false;
+                location.href = '<?php echo url('/'); ?>/vendor/add-product?catid='+catId+'&subcatid='+subcatId+'&subcatitemid='+subcatitemId+'';
+                // $.ajax({
+                //     url: "<?php echo e(route('admin.get_attributecat_with_attribute_on_product_page')); ?>",
+                //     type: "POST",
+                //     data:{categoryid:catId,subcategoryid:subcatId,subcategoryitemid:subcatitemId, _token: '<?php echo e(csrf_token()); ?>'},
+                //     dataType: "json",
+                //     success: function (returndata) {
 
-                        }
-                    })
-                }
+                //         //console.log(returndata); return false;
+                //         $("#product_desc").html(returndata);
+
+                //     }
+                // });
+
             });
 
         });
