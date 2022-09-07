@@ -21,7 +21,7 @@
               
               <form id="example-form" action="#" autocomplete="off">
                 <div>
-                  <h3>Product Categories Information</h3>
+                  <h3>Categories</h3>
                     <section>
                         <h6>Categories Information</h6>
                         <hr />
@@ -77,176 +77,54 @@
                     </section>
 
 
-                  <h3>Price, Stock and Shipping Information</h3>
+                  <h3>Description</h3>
                     <section>
-                        <h6>Brand</h6>
-                        <hr />
+
+                        <div class="form-group row">
+                            <label for="seller_brand_name" class="col-sm-3 col-form-label">Name <span class="required">*</span></label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="seller_brand_name" placeholder="" />
+                            </div>
+                        </div>
+
                         <div class="form-group row">
                             <label for="seller_brand_name" class="col-sm-3 col-form-label">Brand <span class="required">*</span></label>
                             <div class="col-sm-6">
                                 <input type="text" class="form-control" id="seller_brand_name" placeholder="" />
                             </div>
                         </div>
-                        <h6>Listing Information</h6>
-                        <hr />
-                        <div class="form-group row">
-                            <label for="seller_sku_id" class="col-sm-3 col-form-label">Seller SKU ID <span class="required">*</span></label>
-                            <div class="col-sm-6">
-                                <input type="text" class="form-control" id="seller_sku_id" placeholder="" autocomplete="nope" />
-                            </div>
-                        </div>
-                        <h6>Price Details</h6>
-                        <hr />
-                        <div class="form-group row">
-                            <label for="mrp" class="col-sm-3 col-form-label">MRP <span class="required">*</span></label>
-                            <div class="col-sm-6">
-                                <input type="text" class="form-control" id="mrp" placeholder="" autocomplete="nope" />
-                            </div>
-                            <div class="col-sm-3">
-                                <span>INR</span>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="mrp" class="col-sm-3 col-form-label">Your Selling Price <span class="required">*</span></label>
-                            <div class="col-sm-6">
-                                <input type="text" class="form-control" id="mrp" placeholder="" autocomplete="nope" />
-                            </div>
-                            <div class="col-sm-3">
-                                <span>INR</span>
-                            </div>
-                        </div>
-                        <h6>Inventory Details</h6>
-                        <hr />
-                        <div class="form-group row">
-                            <label for="procurement_type" class="col-sm-3 col-form-label">Procurement Type <span class="required">*</span></label>
-                            <div class="col-sm-6">
-                                <select name="procurement_type" class="procurement_type" style="width: 100%;">
-                                    <option value="">Select procurement type</option>
-                                    <option value="instock">Instock</option>
-                                    <option value="express">Express</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="mrp" class="col-sm-3 col-form-label">Procurement SLA <span class="required">*</span></label>
-                            <div class="col-sm-6">
-                                <input type="text" class="form-control" id="procurement_sla" placeholder="" autocomplete="nope" />
-                            </div>
-                            <div class="col-sm-3">
-                                <span>DAY</span>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="seller_stock" class="col-sm-3 col-form-label">Stock <span class="required">*</span></label>
-                            <div class="col-sm-6">
-                                <input type="text" class="form-control" id="seller_stock" placeholder="" />
-                            </div>
-                        </div>
 
-                        <hr />
                         <div class="form-group row">
-                            <label for="shipping_provider" class="col-sm-3 col-form-label">Shipping Provider <span class="required">*</span></label>
-                            <div class="col-sm-6">
-                                <select name="shipping_provider" class="shipping_provider" style="width: 100%;">
-                                    <option value="">Select shipping provider</option>
-                                    <option value="Salesanta">Salesanta</option>
-                                </select>
-                            </div>
-                        </div>
-                        <hr />
-                        <h6>Delivery Charge To Customer</h6>
-                        <hr />
-                        <div class="form-group row">
-                            <label for="mrp" class="col-sm-3 col-form-label">Local Delivery Charge <span class="required">*</span></label>
-                            <div class="col-sm-6">
-                                <input type="text" class="form-control" id="mrp" placeholder="" autocomplete="nope" />
-                            </div>
-                            <div class="col-sm-3">
-                                <span>INR</span>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="mrp" class="col-sm-3 col-form-label">Zonal Delivery Charge <span class="required">*</span></label>
-                            <div class="col-sm-6">
-                                <input type="text" class="form-control" id="mrp" placeholder="" autocomplete="nope" />
-                            </div>
-                            <div class="col-sm-3">
-                                <span>INR</span>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="mrp" class="col-sm-3 col-form-label">National Delivery Charge <span class="required">*</span></label>
-                            <div class="col-sm-6">
-                                <input type="text" class="form-control" id="mrp" placeholder="" autocomplete="nope" />
-                            </div>
-                            <div class="col-sm-3">
-                                <span>INR</span>
-                            </div>
-                        </div>
-                        <h6>Packaging Details</h6>
-                        <hr />
-                        <div class="form-group row">
-                            <label for="mrp" class="col-sm-3 col-form-label">Packaging Weight <span class="required">*</span></label>
-                            <div class="col-sm-6">
-                                <input type="text" class="form-control" id="procurement_sla" placeholder="" autocomplete="nope" />
-                            </div>
-                            <div class="col-sm-3">
-                                <span>KG</span>
+                            <label for="seller_brand_name" class="col-sm-3 col-form-label">Highlights <span class="required">*</span></label>
+                            <div class="col-sm-9">
+                                <textarea name="highlights" id="highlights-ckeditor" rows="10" cols="80"/></textarea>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="mrp" class="col-sm-3 col-form-label">Packaging Length <span class="required">*</span></label>
-                            <div class="col-sm-6">
-                                <input type="text" class="form-control" id="procurement_sla" placeholder="" autocomplete="nope" />
-                            </div>
-                            <div class="col-sm-3">
-                                <span>CM</span>
+                            <label for="seller_brand_name" class="col-sm-3 col-form-label">Description <span class="required">*</span></label>
+                            <div class="col-sm-9">
+                                <textarea name="description" id="description-ckeditor" rows="10" cols="80"/></textarea>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="mrp" class="col-sm-3 col-form-label">Packaging Breadth <span class="required">*</span></label>
-                            <div class="col-sm-6">
-                                <input type="text" class="form-control" id="procurement_sla" placeholder="" autocomplete="nope" />
+                            <label class="col-sm-3 col-form-label">Is featured?</label>
+                            <div class="col-sm-4">
+                              <div class="form-check">
+                                <label class="form-check-label">
+                                  <input type="radio" class="form-check-input" name="status" id="status1" value="1" > Yes </label>
+                              </div>
                             </div>
-                            <div class="col-sm-3">
-                                <span>CM</span>
+                            <div class="col-sm-5">
+                              <div class="form-check">
+                                <label class="form-check-label">
+                                  <input type="radio" class="form-check-input" name="status" id="status2" value="2" checked> No </label>
+                              </div>
                             </div>
-                        </div>
+                          </div>
 
-                        <div class="form-group row">
-                            <label for="mrp" class="col-sm-3 col-form-label">Packaging Height <span class="required">*</span></label>
-                            <div class="col-sm-6">
-                                <input type="text" class="form-control" id="procurement_sla" placeholder="" autocomplete="nope" />
-                            </div>
-                            <div class="col-sm-3">
-                                <span>CM</span>
-                            </div>
-                        </div>
-                        <h6>Tax Details</h6>
-                        <hr />
-                        <div class="form-group row">
-                            <label for="seller_hsn" class="col-sm-3 col-form-label">HSN <span class="required">*</span></label>
-                            <div class="col-sm-6">
-                                <input type="text" class="form-control" id="seller_hsn" placeholder="" />
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="gst_code" class="col-sm-3 col-form-label">Tax Code <span class="required">*</span></label>
-                            <div class="col-sm-6">
-                                <select name="gst_code" class="gst_code" style="width: 100%;">
-                                    <option value="">Select tax code</option>
-                                    <option value="Gst_0">Gst_0</option>
-                                    <option value="Gst_3">Gst_3</option>
-                                    <option value="Gst_5">Gst_5</option>
-                                    <option value="Gst_12">Gst_12</option>
-                                    <option value="Gst_18">Gst_18</option>
-                                    <option value="Gst_28">Gst_28</option>
-                                    <option value="Gst_APPAREL">Gst_APPAREL</option>
-                                </select>
-                            </div>
-                        </div>
+
                         <h6>Manufacturing Details</h6>
                         <hr />
                         <div class="form-group row">
@@ -276,33 +154,76 @@
                     </section>
 
 
-                    <h3>Product Description and Images</h3>
+                    <h3>Product has variations</h3>
                     <hr>
                     <section>
-                        <h6>Product Images</h6>
+                        <h6>Product Images / Variation</h6>
                         <hr>
                         <div class="form-group row">
-                            <label for="seller_hsn" class="col-sm-3 col-form-label">Front View Image <span class="required">*</span></label>
-                            <div class="col-sm-6">
+                            <div class="col-sm-3">
+                                <label for="front_view_image" class="col-form-label">Front View Image <span class="required">*</span></label>
                                 <input type="file" name="front_view_image" class="dropify" required/>
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="seller_hsn" class="col-sm-3 col-form-label">Back View Image </label>
-                            <div class="col-sm-6">
-                                <input type="file" name="back_view_image" class="dropify" />
+                            <div class="col-sm-3">
+                                <label for="back_view_image" class="col-form-label">Back View Image </label>
+                                <input type="file" name="back_view_image" class="dropify" required/>
+                            </div>
+                            <div class="col-sm-3">
+                                <label for="side_view_image" class="col-form-label">Side View Image </label>
+                                <input type="file" name="side_view_image" class="dropify" required/>
+                            </div>
+                            <div class="col-sm-3">
+                                <label for="open_view_image" class="col-form-label">Open View Image </label>
+                                <input type="file" name="open_view_image" class="dropify" required/>
                             </div>
                         </div>
+
                         <div class="form-group row">
-                            <label for="seller_hsn" class="col-sm-3 col-form-label">Side View Image </label>
-                            <div class="col-sm-6">
-                                <input type="file" name="side_view_image" class="dropify" />
+                            <div class="col-sm-3">
+                                <label for="front_view_image" class="col-form-label">SKU <span class="required">*</span></label>
+                                <input type="text" name="sku"  class="form-control" required/>
+                            </div>
+                            <div class="col-sm-3">
+                                <label for="back_view_image" class="col-form-label">Price <span class="required">*</span></label>
+                                <input type="text" name="price"  class="form-control" required/>
+                            </div>
+                            <div class="col-sm-3">
+                                <label for="side_view_image" class="col-form-label">Your Selling Price <span class="required">*</span></label>
+                                <input type="text" name="selling_price"  class="form-control" required/>
+                            </div>
+                            <div class="col-sm-3">
+                                <label for="side_view_image" class="col-form-label">Quantity <span class="required">*</span></label>
+                                <input type="text" name="quantity"  class="form-control" required/>
                             </div>
                         </div>
+
+                        <div class="form-check form-check-flat form-check-primary">
+                            <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input"> Allow customer checkout when this product out of stock <i class="input-helper"></i> </label>
+                        </div>
+                        <hr />
+                        <h6>Packaging Details</h6>
+                        <hr />
                         <div class="form-group row">
-                            <label for="seller_hsn" class="col-sm-3 col-form-label">Open View Image </label>
                             <div class="col-sm-6">
-                                <input type="file" name="open_view_image" class="dropify" />
+                                <label for="front_view_image" class="col-form-label">Packaging Weight (Kg) <span class="required">*</span></label>
+                                <input type="text" name="quantity"  class="form-control" required/>
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="back_view_image" class="col-form-label">Packaging Length (cm) <span class="required">*</span></label>
+                                <input type="text" name="quantity"  class="form-control" required/>
+                            </div>
+
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-sm-6">
+                                <label for="side_view_image" class="col-form-label">Packaging Breadth (cm) <span class="required">*</span></label>
+                                <input type="text" name="quantity"  class="form-control" required/>
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="open_view_image" class="col-form-label">Packaging Height (cm) <span class="required">*</span></label>
+                                <input type="text" name="quantity"  class="form-control" required/>
                             </div>
                         </div>
 
@@ -418,13 +339,28 @@
 
 
 
-                  <h3>Additional Description (Optional)</h3>
+                  <h3>Search engine optimize</h3>
                   <section>
+
                     
-                    <div class="form-check">
-                      <label class="form-check-label">
-                        <input class="checkbox" type="checkbox"> I agree with the Terms and Conditions. </label>
+
+                    <div class="form-group">
+                        <label for="column_name">Search Keywords</label>
+                        <input name="search_keywords" id="tags" value="" />
                     </div>
+                    <div class="form-group">
+                        <label for="column_name">Meta Title</label>
+                        <input type="text" name="search_keywords" class="form-control" id="tags" value="" />
+                    </div>
+                    <div class="form-group">
+                        <label for="column_name">Meta Keywords</label>
+                        <textarea class="form-control" id="exampleTextarea1" rows="4"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="column_name">Meta Description</label>
+                        <textarea class="form-control" id="exampleTextarea1" rows="4"></textarea>
+                    </div>
+
                   </section>
                 </div>
               </form>
@@ -452,12 +388,16 @@
 
 <?php $__env->startPush('scripts'); ?>
     <script type="text/javascript">
+     CKEDITOR.replace( 'highlights-ckeditor' );
+     CKEDITOR.replace( 'description-ckeditor' );
+
         $(".alert").delay(2000).slideUp(200, function () {
             $(this).alert('close');
         });
 
         $(function() {
             $('#ice-cream').multiSelect();
+
             // validate signup form on keyup and submit
             $("#addsubcategoryitem").validate({
                 rules: {

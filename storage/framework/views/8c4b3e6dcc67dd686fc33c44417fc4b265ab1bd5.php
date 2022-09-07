@@ -22,7 +22,6 @@
     <!-- End plugin css for this page -->
 
 
-
       <!-- Plugin css for this page -->
       <link rel="stylesheet" href="<?php echo e(asset('adminpanel/assets/vendors/dropzone/dropzone.css')); ?>">
       <link rel="stylesheet" href="<?php echo e(asset('adminpanel/assets/vendors/font-awesome/css/font-awesome.min.css')); ?>">
@@ -48,16 +47,22 @@
 
 
 
+
+
     <!-- inject:css -->
     <!-- endinject -->
     <!-- Layout styles -->
     <link rel="stylesheet" href="<?php echo e(asset('adminpanel/assets/css/demo_1/style.css')); ?>">
-    <link rel="stylesheet" href="<?php echo e(asset('adminpanel/assets/css/demo_1/example-styles.css')); ?>">
     <!-- End layout styles -->
+
     <link rel="shortcut icon" type="image/x-icon" href="<?php echo e(asset('adminpanel/assets/images/favicon.ico')); ?>">
+
     <link rel="stylesheet" href="<?php echo e(asset('adminpanel/assets/vendors/datatables.net-bs4/dataTables.bootstrap4.css')); ?>">
 
-    <link rel="stylesheet" href="<?php echo e(asset('adminpanel/assets/vendors/dropify/dropify.min.css')); ?>">
+
+
+
+
 
 </head>
   <body>
@@ -68,7 +73,7 @@
         <ul class="nav">
           
           <li class="nav-item pt-3">
-            <a class="nav-link d-block" href="<?php echo e(url('/vendor/dashboard')); ?>">
+            <a class="nav-link d-block" href="<?php echo e(url('/admin/dashboard')); ?>">
               <img class="sidebar-brand-logo" src="<?php echo e(asset('adminpanel/assets/images/logo.png')); ?>"  alt="" width="100%" height="50px;">
               
               
@@ -77,16 +82,88 @@
           </li>
           
           <li class="nav-item">
-            <a class="nav-link" href="<?php echo e(url('/vendor/dashboard')); ?>">
+            <a class="nav-link" href="<?php echo e(url('/')); ?>">
               <i class="mdi mdi-view-dashboard menu-icon"></i>
               <span class="menu-title">Dashboard</span>
             </a>
           </li>
 
+          <li class="nav-item <?php if(Request::segment(2) == "category"): ?> active <?php elseif(Request::segment(2) == "sub-category"): ?>  active <?php elseif(Request::segment(2) == "sub-category-item"): ?> <?php endif; ?> ">
+            <a class="nav-link" data-bs-toggle="collapse" href="#menulist" aria-expanded="false" aria-controls="apps">
+              <i class="mdi mdi-menu menu-icon"></i>
+              <span class="menu-title">Menu</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="menulist">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="<?php echo e(url('/admin/category')); ?>">Category</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<?php echo e(url('/admin/sub-category')); ?>">Sub Category</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<?php echo e(url('/admin/sub-category-item')); ?>">Sub Category Item</a></li>
+              </ul>
+            </div>
+          </li>
+
           <li class="nav-item">
-            <a class="nav-link" href="<?php echo e(url('/vendor/products')); ?>">
+            <a class="nav-link" data-bs-toggle="collapse" href="#Attribute" aria-expanded="false" aria-controls="apps">
+              <i class="mdi mdi-layers menu-icon"></i>
+              <span class="menu-title">Attribute</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="Attribute">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="<?php echo e(url('/admin/attribute-category')); ?>">Attribute Category</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<?php echo e(url('/admin/attribute')); ?>">Attribute Field's</a></li>
+                
+                <li class="nav-item"> <a class="nav-link" href="<?php echo e(url('/admin/brands')); ?>">Brands</a></li>
+              </ul>
+            </div>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#HPS" aria-expanded="false" aria-controls="apps">
+              <i class="mdi mdi-menu menu-icon"></i>
+              <span class="menu-title">Home page settings</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="HPS">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="">Sliders</a></li>
+                <li class="nav-item"> <a class="nav-link" href="">Top Banner</a></li>
+                <li class="nav-item"> <a class="nav-link" href="">Large Banner</a></li>
+                <li class="nav-item"> <a class="nav-link" href="">Left Banner</a></li>
+                <li class="nav-item"> <a class="nav-link" href="">Bottom Banner</a></li>
+                <li class="nav-item"> <a class="nav-link" href="">Popup Banner</a></li>
+              </ul>
+            </div>
+          </li>
+
+
+          <li class="nav-item">
+            <a class="nav-link" href="<?php echo e(url('/')); ?>">
               <i class="mdi mdi-account-multiple-plus menu-icon"></i>
-              <span class="menu-title">Products</span>
+              <span class="menu-title">Vendors</span>
+            </a>
+          </li>
+
+
+          <li class="nav-item">
+            <a class="nav-link" href="<?php echo e(url('/')); ?>">
+              <i class="mdi mdi-account-multiple-outline menu-icon"></i>
+              <span class="menu-title">Customers</span>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="<?php echo e(url('/')); ?>">
+              <i class="mdi mdi-currency-inr menu-icon"></i>
+              <span class="menu-title">Payments</span>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="<?php echo e(url('/')); ?>">
+              <i class="mdi mdi-gift menu-icon"></i>
+              <span class="menu-title">Coupons</span>
             </a>
           </li>
 
@@ -100,23 +177,47 @@
           <li class="nav-item">
             <a class="nav-link" href="<?php echo e(url('/')); ?>">
               <i class="mdi mdi-keyboard-return menu-icon"></i>
-              <span class="menu-title">Return Orders</span>
+              <span class="menu-title">Return Conditions</span>
             </a>
           </li>
 
           <li class="nav-item">
             <a class="nav-link" href="<?php echo e(url('/')); ?>">
-              <i class="mdi mdi-currency-inr menu-icon"></i>
+              <i class="mdi mdi-credit-card menu-icon"></i>
               <span class="menu-title">Payout request</span>
             </a>
           </li>
 
           <li class="nav-item">
             <a class="nav-link" href="<?php echo e(url('/')); ?>">
-              <i class="mdi mdi-currency-inr menu-icon"></i>
-              <span class="menu-title">Shop settings</span>
+              <i class="mdi mdi-comment-question-outline menu-icon"></i>
+              <span class="menu-title">Help</span>
             </a>
           </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="<?php echo e(url('/')); ?>">
+              <i class="mdi mdi-bookmark-check menu-icon"></i>
+              <span class="menu-title">Subscribers</span>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#cmspage" aria-expanded="false" aria-controls="apps">
+              <i class="mdi mdi-menu menu-icon"></i>
+              <span class="menu-title">CMS Pages</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="cmspage">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="<?php echo e(url('/')); ?>">About</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<?php echo e(url('/')); ?>">Privacy policy</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<?php echo e(url('/')); ?>">Terms Conditions</a></li>
+              </ul>
+            </div>
+          </li>
+
+          
 
           <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#Setting" aria-expanded="false" aria-controls="apps">
@@ -287,7 +388,7 @@
     <!-- endinject -->
     <script src="<?php echo e(asset('adminpanel/assets/vendors/jquery-validation/jquery.validate.min.js')); ?>"></script>
     <script src="<?php echo e(asset('adminpanel/assets/vendors/bootstrap-maxlength/bootstrap-maxlength.min.js')); ?>"></script>
-    <script src="<?php echo e(asset('adminpanel/assets/vendors/jquery-steps/jquery.steps.min.js')); ?>"></script>
+
 
 
     <!-- Plugin js for this page -->
@@ -326,50 +427,42 @@
 
     <script src="<?php echo e(asset('adminpanel/assets/js/typeahead.js')); ?>"></script>
     <script src="<?php echo e(asset('adminpanel/assets/js/select2.js')); ?>"></script>
-    <script src="<?php echo e(asset('adminpanel/assets/js/wizard.js')); ?>"></script>
 
 
+    <!-- Plugin js for this page -->
+    <script src="<?php echo e(asset('adminpanel/assets/vendors/jquery-bar-rating/jquery.barrating.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('adminpanel/assets/vendors/jquery-asColor/jquery-asColor.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('adminpanel/assets/vendors/jquery-asGradient/jquery-asGradient.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('adminpanel/assets/vendors/jquery-asColorPicker/jquery-asColorPicker.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('adminpanel/assets/vendors/x-editable/bootstrap-editable.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('adminpanel/assets/vendors/moment/moment.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('adminpanel/assets/vendors/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.js')); ?>"></script>
+    <script src="<?php echo e(asset('adminpanel/assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('adminpanel/assets/vendors/dropify/dropify.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('adminpanel/assets/vendors/jquery-file-upload/jquery.uploadfile.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('adminpanel/assets/vendors/jquery-tags-input/jquery.tagsinput.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('adminpanel/assets/vendors/dropzone/dropzone.js')); ?>"></script>
+    <script src="<?php echo e(asset('adminpanel/assets/vendors/jquery.repeater/jquery.repeater.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('adminpanel/assets/vendors/inputmask/jquery.inputmask.bundle.js')); ?>"></script>
+    <!-- End plugin js for this page -->
 
-        <!-- Plugin js for this page -->
-        <script src="<?php echo e(asset('adminpanel/assets/vendors/jquery-bar-rating/jquery.barrating.min.js')); ?>"></script>
-        <script src="<?php echo e(asset('adminpanel/assets/vendors/jquery-asColor/jquery-asColor.min.js')); ?>"></script>
-        <script src="<?php echo e(asset('adminpanel/assets/vendors/jquery-asGradient/jquery-asGradient.min.js')); ?>"></script>
-        <script src="<?php echo e(asset('adminpanel/assets/vendors/jquery-asColorPicker/jquery-asColorPicker.min.js')); ?>"></script>
-        <script src="<?php echo e(asset('adminpanel/assets/vendors/x-editable/bootstrap-editable.min.js')); ?>"></script>
-        <script src="<?php echo e(asset('adminpanel/assets/vendors/moment/moment.min.js')); ?>"></script>
-        <script src="<?php echo e(asset('adminpanel/assets/vendors/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.js')); ?>"></script>
-        <script src="<?php echo e(asset('adminpanel/assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js')); ?>"></script>
-        <script src="<?php echo e(asset('adminpanel/assets/vendors/dropify/dropify.min.js')); ?>"></script>
-        <script src="<?php echo e(asset('adminpanel/assets/vendors/jquery-file-upload/jquery.uploadfile.min.js')); ?>"></script>
-        <script src="<?php echo e(asset('adminpanel/assets/vendors/jquery-tags-input/jquery.tagsinput.min.js')); ?>"></script>
-        <script src="<?php echo e(asset('adminpanel/assets/vendors/dropzone/dropzone.js')); ?>"></script>
-        <script src="<?php echo e(asset('adminpanel/assets/vendors/jquery.repeater/jquery.repeater.min.js')); ?>"></script>
-        <script src="<?php echo e(asset('adminpanel/assets/vendors/inputmask/jquery.inputmask.bundle.js')); ?>"></script>
-        <!-- End plugin js for this page -->
+    <!-- Custom js for this page -->
+    <script src="<?php echo e(asset('adminpanel/assets/js/formpickers.js')); ?>"></script>
+    <script src="<?php echo e(asset('adminpanel/assets/js/form-addons.js')); ?>"></script>
+    <script src="<?php echo e(asset('adminpanel/assets/js/x-editable.js')); ?>"></script>
+    <script src="<?php echo e(asset('adminpanel/assets/js/dropify.js')); ?>"></script>
+    <script src="<?php echo e(asset('adminpanel/assets/js/dropzone.js')); ?>"></script>
+    <script src="<?php echo e(asset('adminpanel/assets/js/jquery-file-upload.js')); ?>"></script>
+    <script src="<?php echo e(asset('adminpanel/assets/js/formpickers.js')); ?>"></script>
+    <script src="<?php echo e(asset('adminpanel/assets/js/form-repeater.js')); ?>"></script>
+    <script src="<?php echo e(asset('adminpanel/assets/js/inputmask.js')); ?>"></script>
+    <!-- End custom js for this page -->
 
-        <!-- Custom js for this page -->
-        <script src="<?php echo e(asset('adminpanel/assets/js/formpickers.js')); ?>"></script>
-        <script src="<?php echo e(asset('adminpanel/assets/js/form-addons.js')); ?>"></script>
-        <script src="<?php echo e(asset('adminpanel/assets/js/x-editable.js')); ?>"></script>
-        <script src="<?php echo e(asset('adminpanel/assets/js/dropify.js')); ?>"></script>
-        <script src="<?php echo e(asset('adminpanel/assets/js/dropzone.js')); ?>"></script>
-        <script src="<?php echo e(asset('adminpanel/assets/js/jquery-file-upload.js')); ?>"></script>
-        <script src="<?php echo e(asset('adminpanel/assets/js/formpickers.js')); ?>"></script>
-        <script src="<?php echo e(asset('adminpanel/assets/js/form-repeater.js')); ?>"></script>
-        <script src="<?php echo e(asset('adminpanel/assets/js/inputmask.js')); ?>"></script>
-        <!-- End custom js for this page -->
 
-        <script src="<?php echo e(asset('adminpanel/assets/js/jquery.multi-select.min.js')); ?>"></script>
-
-        <script src="<?php echo e(asset('adminpanel/assets/vendors/dropify/dropify.min.js')); ?>"></script>
-        <script src="<?php echo e(asset('adminpanel/assets/js/dropify.js')); ?>"></script>
-
-        <script src="//cdn.ckeditor.com/4.19.1/standard/ckeditor.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <?php echo $__env->yieldPushContent('scripts'); ?>
 
   </body>
 
 </html>
-<?php /**PATH E:\webdev\hemchhaya\resources\views/layouts/vendor.blade.php ENDPATH**/ ?>
+<?php /**PATH E:\webdev\hemchhaya\resources\views/layouts/admin.blade.php ENDPATH**/ ?>
