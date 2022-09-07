@@ -52,12 +52,12 @@
     <!-- endinject -->
     <!-- Layout styles -->
     <link rel="stylesheet" href="<?php echo e(asset('adminpanel/assets/css/demo_1/style.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('adminpanel/assets/css/demo_1/example-styles.css')); ?>">
     <!-- End layout styles -->
-
     <link rel="shortcut icon" type="image/x-icon" href="<?php echo e(asset('adminpanel/assets/images/favicon.ico')); ?>">
-
     <link rel="stylesheet" href="<?php echo e(asset('adminpanel/assets/vendors/datatables.net-bs4/dataTables.bootstrap4.css')); ?>">
 
+    <link rel="stylesheet" href="<?php echo e(asset('adminpanel/assets/vendors/dropify/dropify.min.css')); ?>">
 
 </head>
   <body>
@@ -358,6 +358,11 @@
         <script src="<?php echo e(asset('adminpanel/assets/js/form-repeater.js')); ?>"></script>
         <script src="<?php echo e(asset('adminpanel/assets/js/inputmask.js')); ?>"></script>
         <!-- End custom js for this page -->
+
+        <script src="<?php echo e(asset('adminpanel/assets/js/jquery.multi-select.min.js')); ?>"></script>
+
+        <script src="<?php echo e(asset('adminpanel/assets/vendors/dropify/dropify.min.js')); ?>"></script>
+        <script src="<?php echo e(asset('adminpanel/assets/js/dropify.js')); ?>"></script>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 

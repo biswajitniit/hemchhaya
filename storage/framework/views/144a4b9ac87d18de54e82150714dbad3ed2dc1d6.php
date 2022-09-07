@@ -279,8 +279,33 @@
                     <h3>Product Description and Images</h3>
                     <hr>
                     <section>
-                        <h3>Product Images</h3>
+                        <h6>Product Images</h6>
                         <hr>
+                        <div class="form-group row">
+                            <label for="seller_hsn" class="col-sm-3 col-form-label">Front View Image <span class="required">*</span></label>
+                            <div class="col-sm-6">
+                                <input type="file" name="front_view_image" class="dropify" required/>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="seller_hsn" class="col-sm-3 col-form-label">Back View Image </label>
+                            <div class="col-sm-6">
+                                <input type="file" name="back_view_image" class="dropify" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="seller_hsn" class="col-sm-3 col-form-label">Side View Image </label>
+                            <div class="col-sm-6">
+                                <input type="file" name="side_view_image" class="dropify" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="seller_hsn" class="col-sm-3 col-form-label">Open View Image </label>
+                            <div class="col-sm-6">
+                                <input type="file" name="open_view_image" class="dropify" />
+                            </div>
+                        </div>
+
 
 
                         <?php if(!empty(request()->catid) &&  !empty(request()->subcatid) && !empty(request()->subcatitemid)): ?>
@@ -292,6 +317,7 @@
 
                                 <h6><?php echo e($rowattributecat->attribute_category_name); ?></h6>
                                 <hr />
+
 
                                         <?php
                                         $getattribute = Getattributebyattributecategory($rowattributecat->id);
@@ -349,7 +375,16 @@
                                                 <div class="form-group row">
                                                     <label for="<?php echo e($rowattribute->column_slug); ?>" class="col-sm-3 col-form-label"><?php echo e($rowattribute->column_name); ?> <?php if($rowattribute->column_validation == 2): ?> <span class="required">*</span> <?php endif; ?></label>
                                                     <div class="col-sm-6">
-                                                        <input name="<?php echo e($rowattribute->column_slug); ?>" id="tags" value="<?php echo e($rowattribute->tags); ?>" />
+                                                        
+                                                        <?php
+                                                        $tags = explode(",", $rowattribute->tags);
+                                                        ?>
+                                                        <select id="ice-cream" name="ice-cream" multiple>
+                                                            <?php $__currentLoopData = $tags; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $rowtags): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                            <option value="<?php echo e($rowtags); ?>"><?php echo e($rowtags); ?></option>
+                                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
+                                                        </select>
                                                     </div>
                                                 </div>
                                                 <?php endif; ?>
@@ -359,13 +394,12 @@
                                                 <div class="form-group row">
                                                     <label for="<?php echo e($rowattribute->column_slug); ?>" class="col-sm-3 col-form-label"><?php echo e($rowattribute->column_name); ?> <?php if($rowattribute->column_validation == 2): ?> <span class="required">*</span> <?php endif; ?></label>
                                                     <div class="col-sm-6">
-                                                        <input name="<?php echo e($rowattribute->column_slug); ?>" id="tags" value="<?php echo e($rowattribute->tags); ?>" />
+
+
+
                                                     </div>
                                                 </div>
                                                 <?php endif; ?>
-
-
-
 
                                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                         <?php endif; ?>
@@ -376,6 +410,9 @@
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             <?php endif; ?>
                         <?php endif; ?>
+
+
+
 
                     </section>
 
@@ -420,6 +457,7 @@
         });
 
         $(function() {
+            $('#ice-cream').multiSelect();
             // validate signup form on keyup and submit
             $("#addsubcategoryitem").validate({
                 rules: {

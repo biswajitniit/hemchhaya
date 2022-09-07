@@ -283,9 +283,27 @@
                         <h6>Product Images</h6>
                         <hr>
                         <div class="form-group row">
-                            <label for="seller_hsn" class="col-sm-3 col-form-label">Image <span class="required">*</span></label>
+                            <label for="seller_hsn" class="col-sm-3 col-form-label">Front View Image <span class="required">*</span></label>
                             <div class="col-sm-6">
-                                <input type="text" class="form-control" id="seller_hsn" placeholder="" />
+                                <input type="file" name="front_view_image" class="dropify" required/>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="seller_hsn" class="col-sm-3 col-form-label">Back View Image </label>
+                            <div class="col-sm-6">
+                                <input type="file" name="back_view_image" class="dropify" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="seller_hsn" class="col-sm-3 col-form-label">Side View Image </label>
+                            <div class="col-sm-6">
+                                <input type="file" name="side_view_image" class="dropify" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="seller_hsn" class="col-sm-3 col-form-label">Open View Image </label>
+                            <div class="col-sm-6">
+                                <input type="file" name="open_view_image" class="dropify" />
                             </div>
                         </div>
 
@@ -300,6 +318,7 @@
 
                                 <h6>{{ $rowattributecat->attribute_category_name }}</h6>
                                 <hr />
+
 
                                         @php
                                         $getattribute = Getattributebyattributecategory($rowattributecat->id);
@@ -357,7 +376,16 @@
                                                 <div class="form-group row">
                                                     <label for="{{ $rowattribute->column_slug }}" class="col-sm-3 col-form-label">{{ $rowattribute->column_name }} @if($rowattribute->column_validation == 2) <span class="required">*</span> @endif</label>
                                                     <div class="col-sm-6">
-                                                        <input name="{{ $rowattribute->column_slug }}" id="tags" value="{{ $rowattribute->tags }}" />
+                                                        {{-- <input name="{{ $rowattribute->column_slug }}" id="tags" value="{{ $rowattribute->tags }}" /> --}}
+                                                        @php
+                                                        $tags = explode(",", $rowattribute->tags);
+                                                        @endphp
+                                                        <select id="ice-cream" name="ice-cream" multiple>
+                                                            @foreach ($tags as $rowtags)
+                                                            <option value="{{ $rowtags }}">{{ $rowtags }}</option>
+                                                            @endforeach
+
+                                                        </select>
                                                     </div>
                                                 </div>
                                                 @endif
@@ -367,13 +395,12 @@
                                                 <div class="form-group row">
                                                     <label for="{{ $rowattribute->column_slug }}" class="col-sm-3 col-form-label">{{ $rowattribute->column_name }} @if($rowattribute->column_validation == 2) <span class="required">*</span> @endif</label>
                                                     <div class="col-sm-6">
-                                                        <input name="{{ $rowattribute->column_slug }}" id="tags" value="{{ $rowattribute->tags }}" />
+
+
+
                                                     </div>
                                                 </div>
                                                 @endif
-
-
-
 
                                             @endforeach
                                         @endif
@@ -384,6 +411,9 @@
                                 @endforeach
                             @endif
                         @endif
+
+
+
 
                     </section>
 
@@ -428,6 +458,7 @@
         });
 
         $(function() {
+            $('#ice-cream').multiSelect();
             // validate signup form on keyup and submit
             $("#addsubcategoryitem").validate({
                 rules: {

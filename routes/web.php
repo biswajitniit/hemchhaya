@@ -130,7 +130,7 @@ Route::any('/admin/attributetrash/{attributeid}',[AttributeController::class, 'a
 Route::get('/admin/searchattribute', [AttributeController::class, 'searchattribute'])->name('admin.searchattribute');
 
 Route::any('/admin/getsubcategoryattribute', [AttributeController::class, 'ajax_sub_category_get_category_id'])->name('admin.getsubcategoryattribute');  // GET Subcategory LIST on attribute page
-Route::any('/admin/getsubcategoryattribute', [AttributeController::class, 'ajax_sub_category_get_category_id'])->name('admin.getsubcategoryattribute');  // GET Subcategory LIST on attribute page
+//Route::any('/admin/getsubcategoryattribute', [AttributeController::class, 'ajax_sub_category_get_category_id'])->name('admin.getsubcategoryattribute');  // GET Subcategory LIST on attribute page
 
 Route::any('/admin/getsubcategoryitemattribute', [AttributeController::class, 'ajax_sub_category_item_get_category_id'])->name('admin.getsubcategoryitemattribute');  // GET Subcategory Item LIST on attribute page
 Route::any('/admin/getattributecategory', [AttributeController::class, 'ajax_getattributecategory'])->name('admin.getattributecategory');
