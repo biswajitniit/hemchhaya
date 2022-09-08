@@ -1,13 +1,12 @@
-
 <?php $__env->startSection('title', 'Attribute list search'); ?>
 <?php $__env->startSection('content'); ?>
 
 <div class="main-panel">
     <div class="content-wrapper pb-0">
         <div class="page-header">
-            <h3 class="page-title">Search Attribute</h3>
+            <h3 class="page-title">Search attribute items</h3>
             <div class="header-right d-flex flex-wrap mt-2 mt-sm-0">
-                <button type="button" onclick="location.href='<?php echo e(route('admin.add-attribute')); ?>'" class="btn btn-primary mt-2 mt-sm-0 btn-icon-text"><i class="mdi mdi-plus-circle"></i> Add Attribute</button>
+                <button type="button" onclick="location.href='<?php echo e(route('admin.add-attribute')); ?>'" class="btn btn-primary mt-2 mt-sm-0 btn-icon-text"><i class="mdi mdi-plus-circle"></i> Add Attribute Items</button>
             </div>
         </div>
 
@@ -46,7 +45,7 @@
                                 <div class="col">
                                     <div class="form-group">
                                         <select name="attributecategory" class="attributecategory" style="width: 100%;">
-                                            <option value="">Select Attribute Category</option>
+                                            <option value="">Select Attribute</option>
                                         </select>
                                     </div>
                                 </div>
@@ -65,14 +64,14 @@
 
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Attribute category table</h4>
+                <h4 class="card-title">Attribute items table</h4>
                 <div class="row">
                     <div class="col-12">
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped mb-none" id="my-table">
                                 <thead>
                                     <tr class="bg-primary text-white">
-                                        <th>Attribute Category Name</th>
+                                        <th>Attribute Items Name</th>
                                         <th>Column Type</th>
                                         <th>Column Validation</th>
                                         <th>Status</th>

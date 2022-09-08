@@ -77,6 +77,10 @@ class AttributecategoryController extends Controller
 
         $response = array();
         if(count($employees) > 0){
+            $response[] = array(
+                "id"=>'',
+                "text"=>"Select Sub Category"
+            );
             foreach($employees as $employee){
             $response[] = array(
                     "id"=>$employee->id,
@@ -102,6 +106,10 @@ class AttributecategoryController extends Controller
 
         $response = array();
         if(count($employees) > 0){
+            $response[] = array(
+                "id"=>'',
+                "text"=>"Select Sub Category Item"
+            );
             foreach($employees as $employee){
             $response[] = array(
                     "id"=>$employee->id,

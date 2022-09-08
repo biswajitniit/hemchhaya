@@ -6,7 +6,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Attribute category search category / subcategory / subcategory item wise</title>
+    <title>Edit Variation</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="http://localhost:8000/adminpanel/assets/vendors/mdi/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="http://localhost:8000/adminpanel/assets/vendors/flag-icon-css/css/flag-icon.min.css">
@@ -38,40 +38,41 @@
         <div class="col-lg-12">
           <div class="card">
             <div class="card-body">
-              {{-- <h4 class="card-title">Complete form validation</h4> --}}
+              
 
-                @if($errors->any())
+                <?php if($errors->any()): ?>
                     <div class="alert alert-danger">
                         <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
+                            <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <li><?php echo e($error); ?></li>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </ul>
                     </div>
-                @endif
+                <?php endif; ?>
 
-                @if(session()->has('message'))
+                <?php if(session()->has('message')): ?>
                     <div class="alert alert-success">
-                        {{ session()->get('message') }}
+                        <?php echo e(session()->get('message')); ?>
+
                     </div>
-                @endif
+                <?php endif; ?>
 
 
 
-              <form class="cmxform" id="editattributecategory" method="post" action="{{ route('admin.edit-attribute-category-post') }}" name="editattributecategory">
-                @csrf
-                <input type="hidden" name="attributecategoryid" value="{{ $attributecategory->id }}">
+              <form class="cmxform" id="editvariation" method="post" action="<?php echo e(route('admin.edit-variation-post')); ?>" name="editvariation">
+                <?php echo csrf_field(); ?>
+                <input type="hidden" name="variationid" value="<?php echo e($variation->id); ?>">
                 <fieldset>
 
                     <div class="form-group">
                         <label for="category_id">Category Name</label>
                         <select name="category_id" class="js-example-basic-single" style="width:100%">
                             <option value="">Select Category</option>
-                            @if($category)
-                                @foreach ($category as $rowcategory)
-                                    <option value="{{ $rowcategory->id }}" @if($rowcategory->id == $attributecategory->category_id) selected="selected" @endif>{{ $rowcategory->category_name }}</option>
-                                @endforeach
-                            @endif
+                            <?php if($category): ?>
+                                <?php $__currentLoopData = $category; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $rowcategory): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <option value="<?php echo e($rowcategory->id); ?>" <?php if($rowcategory->id == $variation->category_id): ?> selected="selected" <?php endif; ?>><?php echo e($rowcategory->category_name); ?></option>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            <?php endif; ?>
                         </select>
                       </div>
 
@@ -80,10 +81,10 @@
                         <label for="sub_category_id">Sub Category</label>
                         <select name="sub_category_id" class="subcategory" style="width:100%;">
                             <option value="">Select Sub Category</option>
-                            @php $getcatid = GetSubcategoryBycatid($attributecategory->category_id); @endphp
-                            @foreach($getcatid as $rowsubcat)
-                            <option value="{{ $rowsubcat->id }}" @if($rowsubcat->id == $attributecategory->sub_category_id) selected="selected" @endif>{{ $rowsubcat->sub_category_name }}</option>
-                            @endforeach
+                            <?php $getcatid = GetSubcategoryBycatid($variation->category_id); ?>
+                            <?php $__currentLoopData = $getcatid; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $rowsubcat): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <option value="<?php echo e($rowsubcat->id); ?>" <?php if($rowsubcat->id == $variation->sub_category_id): ?> selected="selected" <?php endif; ?>><?php echo e($rowsubcat->sub_category_name); ?></option>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
                         </select>
                       </div>
@@ -92,30 +93,32 @@
                         <label for="sub_category_item_id">Sub Category Item</label>
                         <select name="sub_category_item_id" class="subcategory" style="width:100%;">
                             <option value="">Select Sub Category</option>
-                            @php $getsubcatitemid = GetSubcategoryitemBysubcatid($attributecategory->sub_category_id); @endphp
-                            @foreach($getsubcatitemid as $rowsubcatitem)
-                            <option value="{{ $rowsubcatitem->id }}" @if($rowsubcatitem->id == $attributecategory->sub_category_item_id) selected="selected" @endif>{{ $rowsubcatitem->sub_category_item_name }}</option>
-                            @endforeach
+                            <?php $getsubcatitemid = GetSubcategoryitemBysubcatid($variation->sub_category_id); ?>
+                            <?php $__currentLoopData = $getsubcatitemid; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $rowsubcatitem): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <option value="<?php echo e($rowsubcatitem->id); ?>" <?php if($rowsubcatitem->id == $variation->sub_category_item_id): ?> selected="selected" <?php endif; ?>><?php echo e($rowsubcatitem->sub_category_item_name); ?></option>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </select>
                       </div>
 
+
                       <div class="form-group">
-                        <label for="attribute_category_name">Attribute Name </label>
-                        <input id="attribute_category_name" class="form-control" name="attribute_category_name" type="text" value="{{ $attributecategory->attribute_category_name }}">
+                        <label for="variation_name">Variation Name </label>
+                        <input id="variation_name" class="form-control" name="variation_name" type="text"  value="<?php echo e($variation->variation_name); ?>">
                       </div>
+
 
                       <div class="form-group row">
                         <label class="col-sm-3 col-form-label">Status</label>
                         <div class="col-sm-4">
                           <div class="form-check">
                             <label class="form-check-label">
-                              <input type="radio" class="form-check-input" name="status" id="status1" value="1" @if($attributecategory->status == 1) checked @endif> Active </label>
+                              <input type="radio" class="form-check-input" name="status" id="status1" value="1" <?php if($variation->status == 1): ?> checked <?php endif; ?>> Active </label>
                           </div>
                         </div>
                         <div class="col-sm-5">
                           <div class="form-check">
                             <label class="form-check-label">
-                              <input type="radio" class="form-check-input" name="status" id="status2" value="2" @if($attributecategory->status == 2) checked @endif> InActive </label>
+                              <input type="radio" class="form-check-input" name="status" id="status2" value="2" <?php if($variation->status == 2): ?> checked <?php endif; ?>> InActive </label>
                           </div>
                         </div>
                       </div>
@@ -186,18 +189,18 @@
 
         $(function() {
             // validate signup form on keyup and submit
-            $("#editattributecategory").validate({
+            $("#editvariation").validate({
                 rules: {
                     category_id: "required",
                     sub_category_id: "required",
                     sub_category_item_id : "required",
-                    attribute_category_name : "required",
+                    variation_name : "required",
                 },
                 messages: {
                     category_id: "Please select category",
                     sub_category_id: "Please select sub category",
                     sub_category_item_id: "Please select sub category item",
-                    attribute_category_name: "Please enter attribute category name",
+                    variation_name: "Please enter attribute category name",
                 },
                 errorPlacement: function(label, element) {
                     label.addClass('mt-2 text-danger');
@@ -221,9 +224,9 @@
                 var catId = $(this).val();
                 if (catId) {
                     $.ajax({
-                        url: "{{route('admin.getsubcategoryonattributepage')}}",
+                        url: "<?php echo e(route('admin.getsubcategoryonattributepage')); ?>",
                         type: "POST",
-                        data:{categoryid:catId, _token: '{{csrf_token()}}'},
+                        data:{categoryid:catId, _token: '<?php echo e(csrf_token()); ?>'},
                         dataType: "json",
                         success: function (returndata) {
                             $('select[name="sub_category_id"]').empty();
@@ -241,9 +244,9 @@
                 var subcatId = $(this).val();
                 if (subcatId) {
                     $.ajax({
-                        url: "{{route('admin.getsubcategoryitemonattributepage')}}",
+                        url: "<?php echo e(route('admin.getsubcategoryitemonattributepage')); ?>",
                         type: "POST",
-                        data:{subcategoryid:subcatId, _token: '{{csrf_token()}}'},
+                        data:{subcategoryid:subcatId, _token: '<?php echo e(csrf_token()); ?>'},
                         dataType: "json",
                         success: function (returndata) {
                             $('select[name="sub_category_item_id"]').empty();
@@ -261,3 +264,4 @@
 </body>
 
 </html>
+<?php /**PATH E:\webdev\hemchhaya\resources\views/admin/variation/edit-variation.blade.php ENDPATH**/ ?>

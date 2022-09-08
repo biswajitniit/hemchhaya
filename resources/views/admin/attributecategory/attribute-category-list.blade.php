@@ -6,10 +6,10 @@
 <div class="main-panel">
     <div class="content-wrapper pb-0">
         <div class="page-header">
-            <h3 class="page-title">Search attribute category</h3>
+            <h3 class="page-title">Search attribute</h3>
             <div class="header-right d-flex flex-wrap mt-2 mt-sm-0">
                 <button type="button" onclick="location.href='{{ route('admin.add-attribute-category') }}'" class="btn btn-primary mt-2 mt-sm-0 btn-icon-text">
-                  <i class="mdi mdi-plus-circle"></i> Add Attribute Category</button>
+                  <i class="mdi mdi-plus-circle"></i> Add Attribute </button>
             </div>
         </div>
 

@@ -141,7 +141,7 @@ class AttributeController extends Controller
         if(count($employees) > 0){
             $response[] = array(
                 "id"=>'',
-                "text"=>"Select Attribute Category"
+                "text"=>"Select Attribute"
             );
             foreach($employees as $employee){
             $response[] = array(

@@ -162,6 +162,10 @@ class SubCategoryItemController extends Controller
 
         $response = array();
         if(count($employees) > 0){
+            $response[] = array(
+                "id"=>'',
+                "text"=>"Select Sub Category"
+            );
             foreach($employees as $employee){
             $response[] = array(
                     "id"=>$employee->id,

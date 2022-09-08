@@ -1,4 +1,3 @@
-
 <?php $__env->startSection('title', 'Add Attribute'); ?>
 <?php $__env->startSection('content'); ?>
 
@@ -6,11 +5,11 @@
 <div class="main-panel">
     <div class="content-wrapper">
       <div class="page-header">
-        <h3 class="page-title"> Add Attribute</h3>
+        <h3 class="page-title"> Add Attribute Items</h3>
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="<?php echo e(route('attribute')); ?>">Attributes</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Add Attributes</li>
+            <li class="breadcrumb-item"><a href="<?php echo e(route('attribute')); ?>">Attributes Items</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Add Attributes Items</li>
           </ol>
         </nav>
       </div>

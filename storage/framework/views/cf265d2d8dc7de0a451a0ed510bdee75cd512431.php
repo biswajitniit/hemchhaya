@@ -5,11 +5,11 @@
 <div class="main-panel">
     <div class="content-wrapper">
       <div class="page-header">
-        <h3 class="page-title"> Add Attribute Category</h3>
+        <h3 class="page-title"> Add Attribute</h3>
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="<?php echo e(route('attribute.category')); ?>">Attribute Category</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Add Attribute Category</li>
+            <li class="breadcrumb-item"><a href="<?php echo e(route('attribute.category')); ?>">Attribute</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Add Attribute</li>
           </ol>
         </nav>
       </div>
@@ -71,7 +71,7 @@
                       </div>
 
                       <div class="form-group">
-                        <label for="attribute_category_name">Attribute Category Name </label>
+                        <label for="attribute_category_name">Attribute Name </label>
                         <input id="attribute_category_name" class="form-control" name="attribute_category_name" type="text">
                       </div>
 

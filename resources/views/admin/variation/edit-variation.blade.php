@@ -6,7 +6,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Attribute category search category / subcategory / subcategory item wise</title>
+    <title>Edit Variation</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="http://localhost:8000/adminpanel/assets/vendors/mdi/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="http://localhost:8000/adminpanel/assets/vendors/flag-icon-css/css/flag-icon.min.css">
@@ -58,9 +58,9 @@
 
 
 
-              <form class="cmxform" id="editattributecategory" method="post" action="{{ route('admin.edit-attribute-category-post') }}" name="editattributecategory">
+              <form class="cmxform" id="editvariation" method="post" action="{{ route('admin.edit-variation-post') }}" name="editvariation">
                 @csrf
-                <input type="hidden" name="attributecategoryid" value="{{ $attributecategory->id }}">
+                <input type="hidden" name="variationid" value="{{ $variation->id }}">
                 <fieldset>
 
                     <div class="form-group">
@@ -69,7 +69,7 @@
                             <option value="">Select Category</option>
                             @if($category)
                                 @foreach ($category as $rowcategory)
-                                    <option value="{{ $rowcategory->id }}" @if($rowcategory->id == $attributecategory->category_id) selected="selected" @endif>{{ $rowcategory->category_name }}</option>
+                                    <option value="{{ $rowcategory->id }}" @if($rowcategory->id == $variation->category_id) selected="selected" @endif>{{ $rowcategory->category_name }}</option>
                                 @endforeach
                             @endif
                         </select>
@@ -80,9 +80,9 @@
                         <label for="sub_category_id">Sub Category</label>
                         <select name="sub_category_id" class="subcategory" style="width:100%;">
                             <option value="">Select Sub Category</option>
-                            @php $getcatid = GetSubcategoryBycatid($attributecategory->category_id); @endphp
+                            @php $getcatid = GetSubcategoryBycatid($variation->category_id); @endphp
                             @foreach($getcatid as $rowsubcat)
-                            <option value="{{ $rowsubcat->id }}" @if($rowsubcat->id == $attributecategory->sub_category_id) selected="selected" @endif>{{ $rowsubcat->sub_category_name }}</option>
+                            <option value="{{ $rowsubcat->id }}" @if($rowsubcat->id == $variation->sub_category_id) selected="selected" @endif>{{ $rowsubcat->sub_category_name }}</option>
                             @endforeach
 
                         </select>
@@ -92,30 +92,32 @@
                         <label for="sub_category_item_id">Sub Category Item</label>
                         <select name="sub_category_item_id" class="subcategory" style="width:100%;">
                             <option value="">Select Sub Category</option>
-                            @php $getsubcatitemid = GetSubcategoryitemBysubcatid($attributecategory->sub_category_id); @endphp
+                            @php $getsubcatitemid = GetSubcategoryitemBysubcatid($variation->sub_category_id); @endphp
                             @foreach($getsubcatitemid as $rowsubcatitem)
-                            <option value="{{ $rowsubcatitem->id }}" @if($rowsubcatitem->id == $attributecategory->sub_category_item_id) selected="selected" @endif>{{ $rowsubcatitem->sub_category_item_name }}</option>
+                            <option value="{{ $rowsubcatitem->id }}" @if($rowsubcatitem->id == $variation->sub_category_item_id) selected="selected" @endif>{{ $rowsubcatitem->sub_category_item_name }}</option>
                             @endforeach
                         </select>
                       </div>
 
+
                       <div class="form-group">
-                        <label for="attribute_category_name">Attribute Name </label>
-                        <input id="attribute_category_name" class="form-control" name="attribute_category_name" type="text" value="{{ $attributecategory->attribute_category_name }}">
+                        <label for="variation_name">Variation Name </label>
+                        <input id="variation_name" class="form-control" name="variation_name" type="text"  value="{{ $variation->variation_name }}">
                       </div>
+
 
                       <div class="form-group row">
                         <label class="col-sm-3 col-form-label">Status</label>
                         <div class="col-sm-4">
                           <div class="form-check">
                             <label class="form-check-label">
-                              <input type="radio" class="form-check-input" name="status" id="status1" value="1" @if($attributecategory->status == 1) checked @endif> Active </label>
+                              <input type="radio" class="form-check-input" name="status" id="status1" value="1" @if($variation->status == 1) checked @endif> Active </label>
                           </div>
                         </div>
                         <div class="col-sm-5">
                           <div class="form-check">
                             <label class="form-check-label">
-                              <input type="radio" class="form-check-input" name="status" id="status2" value="2" @if($attributecategory->status == 2) checked @endif> InActive </label>
+                              <input type="radio" class="form-check-input" name="status" id="status2" value="2" @if($variation->status == 2) checked @endif> InActive </label>
                           </div>
                         </div>
                       </div>
@@ -186,18 +188,18 @@
 
         $(function() {
             // validate signup form on keyup and submit
-            $("#editattributecategory").validate({
+            $("#editvariation").validate({
                 rules: {
                     category_id: "required",
                     sub_category_id: "required",
                     sub_category_item_id : "required",
-                    attribute_category_name : "required",
+                    variation_name : "required",
                 },
                 messages: {
                     category_id: "Please select category",
                     sub_category_id: "Please select sub category",
                     sub_category_item_id: "Please select sub category item",
-                    attribute_category_name: "Please enter attribute category name",
+                    variation_name: "Please enter attribute category name",
                 },
                 errorPlacement: function(label, element) {
                     label.addClass('mt-2 text-danger');

@@ -103,6 +103,21 @@
             </div>
           </li>
 
+
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#variations" aria-expanded="false" aria-controls="apps">
+              <i class="mdi mdi-white-balance-iridescent menu-icon"></i>
+              <span class="menu-title">Variations</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="variations">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="<?php echo e(url('/admin/variation')); ?>">Variations </a></li>
+                <li class="nav-item"> <a class="nav-link" href="<?php echo e(url('/admin/variation-items')); ?>">Variations Items</a></li>
+              </ul>
+            </div>
+          </li>
+
           <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#Attribute" aria-expanded="false" aria-controls="apps">
               <i class="mdi mdi-layers menu-icon"></i>
@@ -111,13 +126,21 @@
             </a>
             <div class="collapse" id="Attribute">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="<?php echo e(url('/admin/attribute-category')); ?>">Attribute Category</a></li>
-                <li class="nav-item"> <a class="nav-link" href="<?php echo e(url('/admin/attribute')); ?>">Attribute Field's</a></li>
-                
-                <li class="nav-item"> <a class="nav-link" href="<?php echo e(url('/admin/brands')); ?>">Brands</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<?php echo e(url('/admin/attribute-category')); ?>">Attribute</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<?php echo e(url('/admin/attribute')); ?>">Attribute Items</a></li>
               </ul>
             </div>
           </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="<?php echo e(url('/admin/brands')); ?>">
+              <i class="mdi mdi-xing menu-icon"></i>
+              <span class="menu-title">Brands</span>
+            </a>
+          </li>
+
+
+
 
           <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#HPS" aria-expanded="false" aria-controls="apps">

@@ -1,16 +1,16 @@
 @extends('layouts.admin')
-@section('title', 'Add Attribute Category')
+@section('title', 'Add Variation')
 @section('content')
 
 
 <div class="main-panel">
     <div class="content-wrapper">
       <div class="page-header">
-        <h3 class="page-title"> Add Attribute</h3>
+        <h3 class="page-title"> Add Variation</h3>
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ route('attribute.category') }}">Attribute</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Add Attribute</li>
+            <li class="breadcrumb-item"><a href="{{ route('admin.variation') }}">Variation</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Add Variation</li>
           </ol>
         </nav>
       </div>
@@ -19,7 +19,6 @@
         <div class="col-lg-12">
           <div class="card">
             <div class="card-body">
-              {{-- <h4 class="card-title">Complete form validation</h4> --}}
 
                 @if($errors->any())
                     <div class="alert alert-danger">
@@ -39,7 +38,7 @@
 
 
 
-              <form class="cmxform" id="addattributecategory" method="post" action="{{ route('admin.add-attribute-category-post-data') }}" name="addattributecategory">
+              <form class="cmxform" id="addvariation" method="post" action="{{ route('admin.add-variation-post-data') }}" name="addvariation">
                 @csrf
                 <fieldset>
 
@@ -66,13 +65,13 @@
                       <div class="form-group">
                         <label for="sub_category_item_id">Sub Category Item</label>
                         <select name="sub_category_item_id" class="subcategory" style="width:100%;">
-                            <option value="">Select Sub Category</option>
+                            <option value="">Select Sub Category Item</option>
                         </select>
                       </div>
 
                       <div class="form-group">
-                        <label for="attribute_category_name">Attribute Name </label>
-                        <input id="attribute_category_name" class="form-control" name="attribute_category_name" type="text">
+                        <label for="variation_name">Variation Name </label>
+                        <input id="variation_name" class="form-control" name="variation_name" type="text">
                       </div>
 
                       <div class="form-group row">

@@ -1,14 +1,14 @@
-<?php $__env->startSection('title', 'Attribute search category / subcategory / subcategory item wise'); ?>
+<?php $__env->startSection('title', 'Variationitems search category / subcategory / subcategory item wise'); ?>
 <?php $__env->startSection('content'); ?>
 
 
 <div class="main-panel">
     <div class="content-wrapper pb-0">
         <div class="page-header">
-            <h3 class="page-title">Search attribute items</h3>
+            <h3 class="page-title">Search variation items</h3>
             <div class="header-right d-flex flex-wrap mt-2 mt-sm-0">
-                <button type="button" onclick="location.href='<?php echo e(route('admin.add-attribute')); ?>'" class="btn btn-primary mt-2 mt-sm-0 btn-icon-text">
-                  <i class="mdi mdi-plus-circle"></i> Add Attribute Items </button>
+                <button type="button" onclick="location.href='<?php echo e(route('admin.add-variationitem')); ?>'" class="btn btn-primary mt-2 mt-sm-0 btn-icon-text">
+                  <i class="mdi mdi-plus-circle"></i> Add Variation Items </button>
             </div>
         </div>
 
@@ -16,7 +16,7 @@
         <div class="row">
             <div class="col-xl-12 stretch-card grid-margin">
                 <div class="card">
-                    <form action="<?php echo e(route('admin.searchattribute')); ?>" name="searchattribute" id="searchattribute" method="GET">
+                    <form action="<?php echo e(route('admin.searchvariationitemlist')); ?>" name="searchvariationitemlist" id="searchvariationitemlist" method="GET">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col">
@@ -46,8 +46,8 @@
 
                                 <div class="col">
                                     <div class="form-group">
-                                        <select name="attributecategory" class="attributecategory" style="width: 100%;">
-                                            <option value="">Select Attribute</option>
+                                        <select name="variation" class="variation" style="width: 100%;">
+                                            <option value="">Select Variation</option>
                                         </select>
                                     </div>
                                 </div>
@@ -86,7 +86,7 @@
 
     $(function() {
         // validate signup form on keyup and submit
-        $("#searchattribute").validate({
+        $("#searchvariationitem").validate({
             rules: {
                 category: "required",
                 subcategory: "required",
@@ -119,8 +119,8 @@
             if ($(".subcategoryitem").length) {
                 $(".subcategoryitem").select2();
             }
-            if ($(".attributecategory").length) {
-                $(".attributecategory").select2();
+            if ($(".variation").length) {
+                $(".variation").select2();
             }
     })(jQuery);
 
@@ -170,19 +170,19 @@
             //alert(subcatitemId); return false;
             if (subcatitemId) {
                 $.ajax({
-                    url: "<?php echo e(route('admin.getattributecategorysearch')); ?>",
+                    url: "<?php echo e(route('admin.getvariation')); ?>",
                     type: "POST",
                     data:{subcategoryitemid:subcatitemId, _token: '<?php echo e(csrf_token()); ?>'},
                     dataType: "json",
                     success: function (returndata) {
-                        $('select[name="attributecategory"]').empty();
+                        $('select[name="variation"]').empty();
                         $.each(returndata, function (key, value) {
-                            $('select[name="attributecategory"]').append('<option value=\'' +value.id+'\'>' + value.text + '</option>');
+                            $('select[name="variation"]').append('<option value=\'' +value.id+'\'>' + value.text + '</option>');
                         })
                     }
                 })
             } else {
-                $('select[name="attributecategory"]').empty();
+                $('select[name="variation"]').empty();
             }
         });
 
@@ -191,4 +191,4 @@
 <?php $__env->stopPush(); ?>
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('layouts.admin', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH E:\webdev\hemchhaya\resources\views/admin/attribute/attribute-list.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.admin', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH E:\webdev\hemchhaya\resources\views/admin/variationitems/variationitem-list.blade.php ENDPATH**/ ?>

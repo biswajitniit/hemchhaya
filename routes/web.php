@@ -7,6 +7,8 @@ use App\Http\Controllers\Auth\AdminLoginController;
 use App\Http\Controllers\Auth\VendorLoginController;
 use App\Http\Controllers\Admin\Category\CategoryController;
 use App\Http\Controllers\Admin\Dashboard\DashboardController;
+use App\Http\Controllers\Admin\Variations\VariationsController;
+use App\Http\Controllers\Admin\Variationitems\VariationitemsController;
 
 use App\Http\Controllers\Vendor\Dashboard\VendorDashboardController;
 use App\Http\Controllers\Admin\Subcategoryitem\SubCategoryItemController;
@@ -95,6 +97,38 @@ Route::post('/admin/edit-sub-category-item-post',[SubCategoryItemController::cla
 Route::any('/admin/subcategoryitemtrash/{subcategoryitemid}',[SubCategoryItemController::class, 'subcategoryitemtrash'])->name('admin.subcategoryitemtrash');
 
 Route::any('/admin/getsubcategory', [SubCategoryItemController::class, 'ajax_sub_category_get_category_id'])->name('admin.getsubcategory');  // GET Subcategory LIST
+
+
+// Admin Variation
+Route::get('/admin/variation', [VariationsController::class, 'variation_list'])->name('admin.variation');
+
+Route::get('/admin/add-variation',[VariationsController::class, 'add_variation'])->name('admin.add-variation');
+Route::post('/admin/add-variation-post-data',[VariationsController::class, 'add_variation_post_data'])->name('admin.add-variation-post-data');
+
+Route::get('/admin/edit-variation/{variationid}',[VariationsController::class, 'edit_variation'])->name('admin.edit-variation');
+Route::post('/admin/edit-variation-post',[VariationsController::class, 'edit_variation_post'])->name('admin.edit-variation-post');
+
+Route::any('/admin/variation-trash/{variationid}',[VariationsController::class, 'variation_trash'])->name('admin.variation-trash');
+
+Route::get('/admin/searchvariation', [VariationsController::class, 'searchvariation'])->name('admin.searchvariation');
+Route::any('/admin/searchvariationajax', [VariationsController::class, 'searchvariation_list_ajax'])->name('admin.searchvariationajax');
+
+
+// Admin Variation Items field's
+Route::get('/admin/variation-items', [VariationitemsController::class, 'variationitem_list'])->name('variation-items');
+
+Route::get('/searchvariationitemlist', [VariationitemsController::class, 'variationitemlistdata'])->name('admin.searchvariationitemlist');
+
+Route::get('/admin/add-variationitem',[VariationitemsController::class, 'add_variationitem'])->name('admin.add-variationitem');
+Route::post('/admin/add-variationitem-post-data',[VariationitemsController::class, 'add_variationitem_post_data'])->name('admin.add-variationitem-post-data');
+
+Route::any('/admin/edit-variationitem/{variationitemid}',[VariationitemsController::class, 'edit_variationitem'])->name('admin.edit-variationitem');
+Route::post('/admin/edit-variationitem-post',[VariationitemsController::class, 'edit_variationitem_post'])->name('admin.edit-variationitem-post');
+
+Route::any('/admin/variationitemtrash/{attributeid}',[VariationitemsController::class, 'variationitemtrash'])->name('admin.variationitemtrash');
+
+Route::post('/admin/getvariation', [VariationitemsController::class, 'ajax_getvariation'])->name('admin.getvariation');
+
 
 // Admin Attribute Category Heading
 Route::get('/admin/attribute-category', [AttributecategoryController::class, 'attribute_category_list'])->name('attribute.category');
