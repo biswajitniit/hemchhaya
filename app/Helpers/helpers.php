@@ -6,8 +6,8 @@ use App\Models\Subcategory;
 use App\Models\Subcategoryitem;
 use App\Models\Attribute;
 use App\Models\Attributecategory;
-
-
+use App\Models\Variationitems;
+use App\Models\Variations;
 if (! function_exists('GetSubcategoryBycatid')) {
     function GetSubcategoryBycatid($categoryid) {
        // DB::enableQueryLog(); // Enable query log
@@ -31,5 +31,10 @@ if (! function_exists('Getattributecategory')) {
 if (! function_exists('Getattributebyattributecategory')) {
     function Getattributebyattributecategory($attributecatid) {
        return Attribute::where('category_id',$attributecatid)->where('status','1')->get();
+    }
+}
+if (! function_exists('GetVariation')) {
+    function GetVariation($subcatitemid) {
+       return Variations::where('sub_category_item_id',$subcatitemid)->where('status','1')->get();
     }
 }

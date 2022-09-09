@@ -8,7 +8,7 @@
         <div class="page-header">
             <h3 class="page-title">Search Variation</h3>
             <div class="header-right d-flex flex-wrap mt-2 mt-sm-0">
-                <button type="button" onclick="location.href='<?php echo e(route('admin.add-variation')); ?>'" class="btn btn-primary mt-2 mt-sm-0 btn-icon-text">
+                <button type="button" onclick="location.href='<?php echo e(route('vendor.add-variation')); ?>'" class="btn btn-primary mt-2 mt-sm-0 btn-icon-text">
                   <i class="mdi mdi-plus-circle"></i> Add Variation </button>
             </div>
         </div>
@@ -18,7 +18,7 @@
             <div class="col-xl-12 stretch-card grid-margin">
                 <div class="card">
 
-                    <form action="<?php echo e(route('admin.searchvariation')); ?>" name="searchvariation" id="searchvariation" method="GET">
+                    <form action="<?php echo e(route('vendor.searchvariation')); ?>" name="searchvariation" id="searchvariation" method="GET">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col">
@@ -164,4 +164,4 @@
 <?php $__env->stopPush(); ?>
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('layouts.admin', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH E:\webdev\hemchhaya\resources\views/admin/variation/variation-list.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.vendor', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH E:\webdev\hemchhaya\resources\views/vendor/variation/variation-list.blade.php ENDPATH**/ ?>

@@ -25,6 +25,8 @@ class CreateVariationitemsTable extends Migration
             $table->foreign('variation_id')->references('id')->on('variations')->onDelete('cascade');
             $table->string('variation_item_name');
             $table->string('column_slug');
+			$table->string('color')->nullable();
+			$table->string('image')->nullable();
             $table->enum('status', ['1', '2'])->comment('1=Active,2=InActive');
             $table->timestamps();
             $table->softDeletes();

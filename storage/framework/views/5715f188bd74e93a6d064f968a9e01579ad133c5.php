@@ -1,16 +1,15 @@
-@extends('layouts.admin')
-@section('title', 'Add Attribute')
-@section('content')
+<?php $__env->startSection('title', 'Add variation item'); ?>
+<?php $__env->startSection('content'); ?>
 
 
 <div class="main-panel">
     <div class="content-wrapper">
       <div class="page-header">
-        <h3 class="page-title"> Add Attribute Items</h3>
+        <h3 class="page-title"> Add variation items</h3>
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ route('attribute') }}">Attributes Items</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Add Attributes Items</li>
+            <li class="breadcrumb-item"><a href="<?php echo e(route('variation-items')); ?>">variation items</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Add variation items</li>
           </ol>
         </nav>
       </div>
@@ -21,37 +20,38 @@
             <div class="card-body">
 
 
-                @if($errors->any())
+                <?php if($errors->any()): ?>
                     <div class="alert alert-danger">
                         <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
+                            <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <li><?php echo e($error); ?></li>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </ul>
                     </div>
-                @endif
+                <?php endif; ?>
 
-                @if(session()->has('message'))
+                <?php if(session()->has('message')): ?>
                     <div class="alert alert-success">
-                        {{ session()->get('message') }}
+                        <?php echo e(session()->get('message')); ?>
+
                     </div>
-                @endif
+                <?php endif; ?>
 
 
 
-                <form class="cmxform" id="addattribute" method="post" action="{{ route('admin.add-attribute-post-data') }}" name="addattribute">
-                    @csrf
+                <form class="cmxform" id="addvariationitem" method="post" action="<?php echo e(route('admin.add-variationitem-post-data')); ?>" name="addvariationitem">
+                    <?php echo csrf_field(); ?>
                     <fieldset>
 
                         <div class="form-group">
                             <label for="category_id">Category Name <span class="required">*</span></label>
                             <select name="category_id" class="js-example-basic-single" style="width:100%">
                                 <option value="">Select Category</option>
-                                @if($category)
-                                    @foreach ($category as $rowcategory)
-                                        <option value="{{ $rowcategory->id }}">{{ $rowcategory->category_name }}</option>
-                                    @endforeach
-                                @endif
+                                <?php if($category): ?>
+                                    <?php $__currentLoopData = $category; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $rowcategory): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <option value="<?php echo e($rowcategory->id); ?>"><?php echo e($rowcategory->category_name); ?></option>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                <?php endif; ?>
                             </select>
                         </div>
 
@@ -71,44 +71,35 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="attribute_cat_id">Attribute Category <span class="required">*</span></label>
-                            <select name="attribute_cat_id" class="attr_cat_id" style="width: 100%;">
-                                <option value="">Select attribute category</option>
+                            <label for="variation_id">Variation <span class="required">*</span></label>
+                            <select name="variation_id" class="variation_id" style="width: 100%;">
+                                <option value="">Select Variation</option>
                             </select>
                         </div>
 
-                        <div class="form-group">
-                            <label for="column_name">Column Name <span class="required">*</span></label>
-                            <input id="column_name" class="form-control" name="column_name" type="text" />
-                        </div>
 
                         <div class="form-group">
-                            <label for="column_type">Column Type <span class="required">*</span></label>
-                            <select name="column_type" class="js-example-basic-single" style="width: 100%;">
-                                <option value="">Select Column Type</option>
-                                <option value="1">TextBox</option>
-                                <option value="2">Password</option>
-                                <option value="3">Email</option>
-                                <option value="4">Dropdown</option>
-                                <option value="5">Multi Select Dropdown</option>
-                                <option value="6">Editor</option>
-                            </select>
+                            <label for="variation_item_name">Variation Item Name </label>
+                            <input id="variation_item_name" class="form-control" name="variation_item_name" type="text">
                         </div>
 
-                        <div class="form-group">
-                              <label for="column_name">Enter Multi Select Dropdown Value</label>
-                              <input name="tags" id="tags" value="" />
+
+
+                        <div class="col-lg-4 grid-margin grid-margin-lg-0">
+                            <div class="card-body">
+                              <h4 class="card-title">Color</h4>
+                              <p class="card-description">Click to select color</p>
+                              <input type='text' name="color" class="color-picker" value="" />
+                            </div>
                         </div>
 
-                        <div class="form-group">
-                            <label for="column_validation">Column Validation <span class="required">*</span></label>
-                            <select name="column_validation" class="js-example-basic-single" style="width: 100%;">
-                                <option value="">Select Column Validation</option>
-                                <option value="1">Optional</option>
-                                <option value="2">Required</option>
-                            </select>
-                        </div>
 
+                        <div class="form-group row">
+                            <div class="col-sm-3">
+                                <label for="image" class="col-form-label">Image </label>
+                                <input type="file" name="image" class="dropify" required/>
+                            </div>
+                        </div>
 
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Status <span class="required">*</span></label>
@@ -138,7 +129,7 @@
     <!-- partial:../../partials/_footer.html -->
     <footer class="footer">
         <div class="d-sm-flex justify-content-center justify-content-sm-between">
-            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © {{ date('Y') }} <a href="{{ url('/') }}" target="_blank">Salesanta</a>. All rights reserved.</span>
+            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © <?php echo e(date('Y')); ?> <a href="<?php echo e(url('/')); ?>" target="_blank">Salesanta</a>. All rights reserved.</span>
         </div>
     </footer>
     <!-- partial -->
@@ -149,7 +140,7 @@
 
 
 
-@push('scripts')
+<?php $__env->startPush('scripts'); ?>
     <script type="text/javascript">
         $(".alert").delay(2000).slideUp(200, function () {
             $(this).alert('close');
@@ -157,16 +148,20 @@
 
         $(function() {
             // validate signup form on keyup and submit
-            $("#addsubcategoryitem").validate({
+            $("#addvariationitem").validate({
                 rules: {
                     category_id: "required",
                     sub_category_id: "required",
                     sub_category_item_name : "required",
+                    variation_id : "required",
+                    variation_name : "required",
                 },
                 messages: {
                     category_id: "Please select category",
                     sub_category_id: "Please select sub category",
                     sub_category_item_name: "Please enter sub category item name",
+                    variation_id: "Please select variation",
+                    variation_name: "Please enter variation name",
                 },
                 errorPlacement: function(label, element) {
                     label.addClass('mt-2 text-danger');
@@ -186,8 +181,8 @@
             if ($(".subcategoryitem").length) {
                 $(".subcategoryitem").select2();
             }
-            if ($(".attr_cat_id").length) {
-                $(".attr_cat_id").select2();
+            if ($(".variation_id").length) {
+                $(".variation_id").select2();
             }
         })(jQuery);
 
@@ -197,9 +192,9 @@
                 var catId = $(this).val();
                 if (catId) {
                     $.ajax({
-                        url: "{{route('admin.getsubcategoryonattributepage')}}",
+                        url: "<?php echo e(route('admin.getsubcategoryonattributepage')); ?>",
                         type: "POST",
-                        data:{categoryid:catId, _token: '{{csrf_token()}}'},
+                        data:{categoryid:catId, _token: '<?php echo e(csrf_token()); ?>'},
                         dataType: "json",
                         success: function (returndata) {
                             $('select[name="sub_category_id"]').empty();
@@ -217,9 +212,9 @@
                 var subcatId = $(this).val();
                 if (subcatId) {
                     $.ajax({
-                        url: "{{route('admin.getsubcategoryitemonattributepage')}}",
+                        url: "<?php echo e(route('admin.getsubcategoryitemonattributepage')); ?>",
                         type: "POST",
-                        data:{subcategoryid:subcatId, _token: '{{csrf_token()}}'},
+                        data:{subcategoryid:subcatId, _token: '<?php echo e(csrf_token()); ?>'},
                         dataType: "json",
                         success: function (returndata) {
                             $('select[name="sub_category_item_id"]').empty();
@@ -238,24 +233,26 @@
                 //alert(subcatitemId); return false;
                 if (subcatitemId) {
                     $.ajax({
-                        url: "{{route('admin.getattributecategory')}}",
+                        url: "<?php echo e(route('admin.getvariationBysubcategoryitem')); ?>",
                         type: "POST",
-                        data:{subcategoryitemid:subcatitemId, _token: '{{csrf_token()}}'},
+                        data:{subcategoryitemid:subcatitemId, _token: '<?php echo e(csrf_token()); ?>'},
                         dataType: "json",
                         success: function (returndata) {
-                            $('select[name="attribute_cat_id"]').empty();
+                            $('select[name="variation_id"]').empty();
                             $.each(returndata, function (key, value) {
-                                $('select[name="attribute_cat_id"]').append('<option value=\'' +value.id+'\'>' + value.text + '</option>');
+                                $('select[name="variation_id"]').append('<option value=\'' +value.id+'\'>' + value.text + '</option>');
                             })
                         }
                     })
                 } else {
-                    $('select[name="attribute_cat_id"]').empty();
+                    $('select[name="variation_id"]').empty();
                 }
             });
 
         });
 
     </script>
-@endpush
-@endsection
+<?php $__env->stopPush(); ?>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.admin', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH E:\webdev\hemchhaya\resources\views/admin/variationitems/add-variationitem.blade.php ENDPATH**/ ?>

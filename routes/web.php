@@ -7,8 +7,8 @@ use App\Http\Controllers\Auth\AdminLoginController;
 use App\Http\Controllers\Auth\VendorLoginController;
 use App\Http\Controllers\Admin\Category\CategoryController;
 use App\Http\Controllers\Admin\Dashboard\DashboardController;
-use App\Http\Controllers\Admin\Variations\VariationsController;
-use App\Http\Controllers\Admin\Variationitems\VariationitemsController;
+use App\Http\Controllers\Vendor\Variations\VariationsController;
+use App\Http\Controllers\Vendor\Variationitems\VariationitemsController;
 
 use App\Http\Controllers\Vendor\Dashboard\VendorDashboardController;
 use App\Http\Controllers\Admin\Subcategoryitem\SubCategoryItemController;
@@ -99,35 +99,7 @@ Route::any('/admin/subcategoryitemtrash/{subcategoryitemid}',[SubCategoryItemCon
 Route::any('/admin/getsubcategory', [SubCategoryItemController::class, 'ajax_sub_category_get_category_id'])->name('admin.getsubcategory');  // GET Subcategory LIST
 
 
-// Admin Variation
-Route::get('/admin/variation', [VariationsController::class, 'variation_list'])->name('admin.variation');
 
-Route::get('/admin/add-variation',[VariationsController::class, 'add_variation'])->name('admin.add-variation');
-Route::post('/admin/add-variation-post-data',[VariationsController::class, 'add_variation_post_data'])->name('admin.add-variation-post-data');
-
-Route::get('/admin/edit-variation/{variationid}',[VariationsController::class, 'edit_variation'])->name('admin.edit-variation');
-Route::post('/admin/edit-variation-post',[VariationsController::class, 'edit_variation_post'])->name('admin.edit-variation-post');
-
-Route::any('/admin/variation-trash/{variationid}',[VariationsController::class, 'variation_trash'])->name('admin.variation-trash');
-
-Route::get('/admin/searchvariation', [VariationsController::class, 'searchvariation'])->name('admin.searchvariation');
-Route::any('/admin/searchvariationajax', [VariationsController::class, 'searchvariation_list_ajax'])->name('admin.searchvariationajax');
-
-
-// Admin Variation Items field's
-Route::get('/admin/variation-items', [VariationitemsController::class, 'variationitem_list'])->name('variation-items');
-
-Route::get('/searchvariationitemlist', [VariationitemsController::class, 'variationitemlistdata'])->name('admin.searchvariationitemlist');
-
-Route::get('/admin/add-variationitem',[VariationitemsController::class, 'add_variationitem'])->name('admin.add-variationitem');
-Route::post('/admin/add-variationitem-post-data',[VariationitemsController::class, 'add_variationitem_post_data'])->name('admin.add-variationitem-post-data');
-
-Route::any('/admin/edit-variationitem/{variationitemid}',[VariationitemsController::class, 'edit_variationitem'])->name('admin.edit-variationitem');
-Route::post('/admin/edit-variationitem-post',[VariationitemsController::class, 'edit_variationitem_post'])->name('admin.edit-variationitem-post');
-
-Route::any('/admin/variationitemtrash/{attributeid}',[VariationitemsController::class, 'variationitemtrash'])->name('admin.variationitemtrash');
-
-Route::post('/admin/getvariation', [VariationitemsController::class, 'ajax_getvariation'])->name('admin.getvariation');
 
 
 // Admin Attribute Category Heading
@@ -171,12 +143,71 @@ Route::any('/admin/getattributecategory', [AttributeController::class, 'ajax_get
 Route::any('/admin/getattributecategorysearch', [AttributeController::class, 'ajax_getattributecategorysearch'])->name('admin.getattributecategorysearch');
 
 
+
+
+
+
+
+
+
+
+
+
+
+
  Route::group(['middleware' => ['vendor']], function () {
     Route::get('/vendor', [VendorLoginController::class, 'index'])->name('vendor.login');
     Route::post('/vendor/login', [VendorLoginController::class, 'postvendorlogin'])->name('vendorLoginPost');
  });
  Route::get('/vendor/dashboard', [VendorDashboardController::class, 'dashboard'])->name('vendor/dashboard');
  Route::get('/vendor/logout', [VendorLogoutController::class, 'vendorlogout'])->name('/vendor/logout');
+
+
+
+
+// Vendor Variation
+Route::get('/vendor/variation', [VariationsController::class, 'variation_list'])->name('vendor.variation');
+
+Route::get('/vendor/add-variation',[VariationsController::class, 'add_variation'])->name('vendor.add-variation');
+Route::post('/vendor/add-variation-post-data',[VariationsController::class, 'add_variation_post_data'])->name('vendor.add-variation-post-data');
+
+Route::get('/vendor/edit-variation/{variationid}',[VariationsController::class, 'edit_variation'])->name('vendor.edit-variation');
+Route::post('/vendor/edit-variation-post',[VariationsController::class, 'edit_variation_post'])->name('vendor.edit-variation-post');
+
+Route::any('/vendor/variation-trash/{variationid}',[VariationsController::class, 'variation_trash'])->name('vendor.variation-trash');
+
+Route::get('/vendor/searchvariation', [VariationsController::class, 'searchvariation'])->name('vendor.searchvariation');
+Route::any('/vendor/searchvariationajax', [VariationsController::class, 'searchvariation_list_ajax'])->name('vendor.searchvariationajax');
+
+
+// Vendor Variation Items field's
+Route::get('/vendor/variation-items', [VariationitemsController::class, 'variationitem_list'])->name('variation-items');
+
+Route::get('/searchvariationitemlist', [VariationitemsController::class, 'variationitemlistdata'])->name('vendor.searchvariationitemlist');
+Route::get('/searchvariationitemlistajax', [VariationitemsController::class, 'searchvariationitemlist_list_ajax'])->name('searchvariationitemlistajax');
+
+
+Route::get('/vendor/add-variationitem',[VariationitemsController::class, 'add_variationitem'])->name('vendor.add-variationitem');
+Route::post('/vendor/add-variationitem-post-data',[VariationitemsController::class, 'add_variationitem_post_data'])->name('vendor.add-variationitem-post-data');
+
+Route::any('/vendor/edit-variationitem/{variationitemid}',[VariationitemsController::class, 'edit_variationitem'])->name('vendor.edit-variationitem');
+Route::post('/vendor/edit-variationitem-post',[VariationitemsController::class, 'edit_variationitem_post'])->name('vendor.edit-variationitem-post');
+
+Route::any('/vendor/variationitemtrash/{attributeid}',[VariationitemsController::class, 'variationitemtrash'])->name('vendor.variationitemtrash');
+
+Route::post('/vendor/getvariation', [VariationitemsController::class, 'ajax_getvariation'])->name('vendor.getvariation');
+Route::any('/vendor/getvariationBysubcategoryitem', [VariationitemsController::class, 'ajax_getvariationBysubcategoryitem'])->name('vendor.getvariationBysubcategoryitem');
+
+
+
+
+
+
+
+
+
+
+
 
 
  // Vendor Products

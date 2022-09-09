@@ -1,6 +1,6 @@
-
-<?php $__env->startSection('title', 'Add Variation'); ?>
-<?php $__env->startSection('content'); ?>
+@extends('layouts.vendor')
+@section('title', 'Add Variation')
+@section('content')
 
 
 <div class="main-panel">
@@ -9,7 +9,7 @@
         <h3 class="page-title"> Add Variation</h3>
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="<?php echo e(route('admin.variation')); ?>">Variation</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('vendor.variation') }}">Variation</a></li>
             <li class="breadcrumb-item active" aria-current="page">Add Variation</li>
           </ol>
         </nav>
@@ -20,38 +20,37 @@
           <div class="card">
             <div class="card-body">
 
-                <?php if($errors->any()): ?>
+                @if($errors->any())
                     <div class="alert alert-danger">
                         <ul>
-                            <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <li><?php echo e($error); ?></li>
-                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
                         </ul>
                     </div>
-                <?php endif; ?>
+                @endif
 
-                <?php if(session()->has('message')): ?>
+                @if(session()->has('message'))
                     <div class="alert alert-success">
-                        <?php echo e(session()->get('message')); ?>
-
+                        {{ session()->get('message') }}
                     </div>
-                <?php endif; ?>
+                @endif
 
 
 
-              <form class="cmxform" id="addvariation" method="post" action="<?php echo e(route('admin.add-variation-post-data')); ?>" name="addvariation">
-                <?php echo csrf_field(); ?>
+              <form class="cmxform" id="addvariation" method="post" action="{{ route('vendor.add-variation-post-data') }}" name="addvariation">
+                @csrf
                 <fieldset>
 
                     <div class="form-group">
                         <label for="category_id">Category Name</label>
                         <select name="category_id" class="js-example-basic-single" style="width:100%">
                             <option value="">Select Category</option>
-                            <?php if($category): ?>
-                                <?php $__currentLoopData = $category; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $rowcategory): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                    <option value="<?php echo e($rowcategory->id); ?>"><?php echo e($rowcategory->category_name); ?></option>
-                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                            <?php endif; ?>
+                            @if($category)
+                                @foreach ($category as $rowcategory)
+                                    <option value="{{ $rowcategory->id }}">{{ $rowcategory->category_name }}</option>
+                                @endforeach
+                            @endif
                         </select>
                       </div>
 
@@ -104,7 +103,7 @@
     <!-- partial:../../partials/_footer.html -->
     <footer class="footer">
         <div class="d-sm-flex justify-content-center justify-content-sm-between">
-            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © <?php echo e(date('Y')); ?> <a href="<?php echo e(url('/')); ?>" target="_blank">Hemchhaya</a>. All rights reserved.</span>
+            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © {{ date('Y') }} <a href="{{ url('/') }}" target="_blank">Hemchhaya</a>. All rights reserved.</span>
         </div>
     </footer>
     <!-- partial -->
@@ -115,7 +114,7 @@
 
 
 
-<?php $__env->startPush('scripts'); ?>
+@push('scripts')
     <script type="text/javascript">
         $(".alert").delay(2000).slideUp(200, function () {
             $(this).alert('close');
@@ -158,9 +157,9 @@
                 var catId = $(this).val();
                 if (catId) {
                     $.ajax({
-                        url: "<?php echo e(route('admin.getsubcategoryonattributepage')); ?>",
+                        url: "{{route('admin.getsubcategoryonattributepage')}}",
                         type: "POST",
-                        data:{categoryid:catId, _token: '<?php echo e(csrf_token()); ?>'},
+                        data:{categoryid:catId, _token: '{{csrf_token()}}'},
                         dataType: "json",
                         success: function (returndata) {
                             $('select[name="sub_category_id"]').empty();
@@ -178,9 +177,9 @@
                 var subcatId = $(this).val();
                 if (subcatId) {
                     $.ajax({
-                        url: "<?php echo e(route('admin.getsubcategoryitemonattributepage')); ?>",
+                        url: "{{route('admin.getsubcategoryitemonattributepage')}}",
                         type: "POST",
-                        data:{subcategoryid:subcatId, _token: '<?php echo e(csrf_token()); ?>'},
+                        data:{subcategoryid:subcatId, _token: '{{csrf_token()}}'},
                         dataType: "json",
                         success: function (returndata) {
                             $('select[name="sub_category_item_id"]').empty();
@@ -197,7 +196,5 @@
 
         });
     </script>
-<?php $__env->stopPush(); ?>
-<?php $__env->stopSection(); ?>
-
-<?php echo $__env->make('layouts.admin', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH E:\webdev\hemchhaya\resources\views/admin/variation/add-variation.blade.php ENDPATH**/ ?>
+@endpush
+@endsection

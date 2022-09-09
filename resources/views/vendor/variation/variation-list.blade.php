@@ -1,15 +1,15 @@
-@extends('layouts.admin')
-@section('title', 'Variationitems search category / subcategory / subcategory item wise')
+@extends('layouts.vendor')
+@section('title', 'Variation category search category / subcategory / subcategory item wise')
 @section('content')
 
 
 <div class="main-panel">
     <div class="content-wrapper pb-0">
         <div class="page-header">
-            <h3 class="page-title">Search variation items</h3>
+            <h3 class="page-title">Search Variation</h3>
             <div class="header-right d-flex flex-wrap mt-2 mt-sm-0">
-                <button type="button" onclick="location.href='{{ route('admin.add-variationitem') }}'" class="btn btn-primary mt-2 mt-sm-0 btn-icon-text">
-                  <i class="mdi mdi-plus-circle"></i> Add Variation Items </button>
+                <button type="button" onclick="location.href='{{ route('vendor.add-variation') }}'" class="btn btn-primary mt-2 mt-sm-0 btn-icon-text">
+                  <i class="mdi mdi-plus-circle"></i> Add Variation </button>
             </div>
         </div>
 
@@ -17,16 +17,19 @@
         <div class="row">
             <div class="col-xl-12 stretch-card grid-margin">
                 <div class="card">
-                    <form action="{{ route('admin.searchvariationitemlist') }}" name="searchvariationitemlist" id="searchvariationitemlist" method="GET">
+
+                    <form action="{{ route('vendor.searchvariation') }}" name="searchvariation" id="searchvariation" method="GET">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col">
                                     <div class="form-group">
                                         <select name="category" class="category" style="width: 100%;">
                                             <option value="">Select Category</option>
-                                            @if($category) @foreach ($category as $rowcategory)
-                                            <option value="{{ Crypt::encryptString($rowcategory->id) }}">{{ $rowcategory->category_name }}</option>
-                                            @endforeach @endif
+                                            @if($category)
+                                                @foreach ($category as $rowcategory)
+                                                    <option value="{{ Crypt::encryptString($rowcategory->id) }}">{{ $rowcategory->category_name }}</option>
+                                                @endforeach
+                                            @endif
                                         </select>
                                     </div>
                                 </div>
@@ -44,15 +47,6 @@
                                         </select>
                                     </div>
                                 </div>
-
-                                <div class="col">
-                                    <div class="form-group">
-                                        <select name="variation" class="variation" style="width: 100%;">
-                                            <option value="">Select Variation</option>
-                                        </select>
-                                    </div>
-                                </div>
-
                                 <div class="col">
                                     <div class="form-group">
                                         <input class="btn btn-primary btn-lg" type="submit" value="Search" />
@@ -61,6 +55,7 @@
                             </div>
                         </div>
                     </form>
+
                 </div>
             </div>
         </div>
@@ -69,8 +64,7 @@
     <!-- partial:../../partials/_footer.html -->
     <footer class="footer">
         <div class="d-sm-flex justify-content-center justify-content-sm-between">
-            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2021 <a href="https://www.bootstrapdash.com/" target="_blank">BootstrapDash</a>. All rights reserved.</span>
-            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with <i class="mdi mdi-heart text-danger"></i></span>
+            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © {{ date('Y') }} <a href="{{ url('/') }}" target="_blank">Hemchhaya</a>. All rights reserved.</span>
         </div>
     </footer>
     <!-- partial -->
@@ -87,7 +81,7 @@
 
     $(function() {
         // validate signup form on keyup and submit
-        $("#searchvariationitem").validate({
+        $("#searchvariation").validate({
             rules: {
                 category: "required",
                 subcategory: "required",
@@ -109,20 +103,17 @@
         });
     });
 
-
     (function($) {
-            if ($(".category").length) {
-                $(".category").select2();
-            }
-            if ($(".subcategory").length) {
-                $(".subcategory").select2();
-            }
-            if ($(".subcategoryitem").length) {
-                $(".subcategoryitem").select2();
-            }
-            if ($(".variation").length) {
-                $(".variation").select2();
-            }
+
+        if ($(".category").length) {
+            $(".category").select2();
+        }
+        if ($(".subcategory").length) {
+            $(".subcategory").select2();
+        }
+        if ($(".subcategoryitem").length) {
+            $(".subcategoryitem").select2();
+        }
     })(jQuery);
 
     $("document").ready(function () {
@@ -166,26 +157,7 @@
             }
         });
 
-        $('select[name="subcategoryitem"]').on('change', function () {
-            var subcatitemId = $(this).val();
-            //alert(subcatitemId); return false;
-            if (subcatitemId) {
-                $.ajax({
-                    url: "{{route('admin.getvariation')}}",
-                    type: "POST",
-                    data:{subcategoryitemid:subcatitemId, _token: '{{csrf_token()}}'},
-                    dataType: "json",
-                    success: function (returndata) {
-                        $('select[name="variation"]').empty();
-                        $.each(returndata, function (key, value) {
-                            $('select[name="variation"]').append('<option value=\'' +value.id+'\'>' + value.text + '</option>');
-                        })
-                    }
-                })
-            } else {
-                $('select[name="variation"]').empty();
-            }
-        });
+
 
     });
 </script>

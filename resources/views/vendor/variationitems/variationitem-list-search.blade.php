@@ -1,14 +1,13 @@
-@extends('layouts.admin')
-@section('title', 'Variation category search category / subcategory / subcategory item wise')
+@extends('layouts.vendor')
+@section('title', 'variation item list search')
 @section('content')
 
 <div class="main-panel">
     <div class="content-wrapper pb-0">
         <div class="page-header">
-            <h3 class="page-title">Search Variation</h3>
+            <h3 class="page-title">Search variation items</h3>
             <div class="header-right d-flex flex-wrap mt-2 mt-sm-0">
-                <button type="button" onclick="location.href='{{ route('admin.add-variation') }}'" class="btn btn-primary mt-2 mt-sm-0 btn-icon-text">
-                  <i class="mdi mdi-plus-circle"></i> Add Variation </button>
+                <button type="button" onclick="location.href='{{ route('vendor.add-variationitem') }}'" class="btn btn-primary mt-2 mt-sm-0 btn-icon-text"><i class="mdi mdi-plus-circle"></i> Add variation items</button>
             </div>
         </div>
 
@@ -16,7 +15,7 @@
         <div class="row">
             <div class="col-xl-12 stretch-card grid-margin">
                 <div class="card">
-                    <form action="{{ route('admin.searchvariation') }}" name="searchvariation" id="searchvariation" method="GET">
+                    <form action="{{ route('vendor.searchvariationitemlist') }}" name="searchvariationitemlist" id="searchvariationitemlist" method="GET">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col">
@@ -38,7 +37,8 @@
                                             @endphp
                                             @if($getsubcategorylistbycategory) @foreach ($getsubcategorylistbycategory as $rowsubcategory)
                                             <option value="{{ Crypt::encryptString($rowsubcategory->id) }}" @if($rowsubcategory->id == Crypt::decryptString(request()->subcategory)) selected @endif>{{ $rowsubcategory->sub_category_name }}</option>
-                                            @endforeach @endif
+                                            @endforeach @endif											
+											
                                         </select>
                                     </div>
                                 </div>
@@ -51,10 +51,27 @@
                                             @endphp
                                             @if($getsubcategoryitemlistbycategory) @foreach ($getsubcategoryitemlistbycategory as $rowsubcategoryitem)
                                             <option value="{{ Crypt::encryptString($rowsubcategoryitem->id) }}" @if($rowsubcategoryitem->id == Crypt::decryptString(request()->subcategoryitem)) selected @endif>{{ $rowsubcategoryitem->sub_category_item_name }}</option>
-                                            @endforeach @endif
+                                            @endforeach @endif											
+											
                                         </select>
                                     </div>
                                 </div>
+
+                                <div class="col">
+                                    <div class="form-group">
+                                        <select name="variation" class="variation" style="width: 100%;">
+                                            <option value="">Select Variation</option>
+                                            @php
+                                                $getvariation = GetVariation(Crypt::decryptString(request()->subcategoryitem));
+                                            @endphp
+                                            @if($getvariation) @foreach ($getvariation as $rowvariation)
+                                            <option value="{{ Crypt::encryptString($rowvariation->id) }}" @if($rowvariation->id == Crypt::decryptString(request()->variation)) selected @endif>{{ $rowvariation->variation_name }}</option>
+                                            @endforeach @endif												
+											
+                                        </select>
+                                    </div>
+                                </div>
+
                                 <div class="col">
                                     <div class="form-group">
                                         <input class="btn btn-primary btn-lg" type="submit" value="Search" />
@@ -69,16 +86,16 @@
 
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Variation table</h4>
+                <h4 class="card-title">Variation items table</h4>
                 <div class="row">
                     <div class="col-12">
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped mb-none" id="my-table">
                                 <thead>
-                                    <tr>
-                                        <th>Variation Name</th>
-                                        <th>Actions</th>
+                                    <tr class="bg-primary text-white">
+                                        <th>Variation Item Name</th>
                                         <th>Status</th>
+                                        <th>Actions</th>
                                     </tr>
                                 </thead>
                             </table>
@@ -88,7 +105,6 @@
             </div>
         </div>
 
-
         <div id="myModal" class="modal fade" role="dialog" >
             <div class="modal-dialog" style="width:700px;max-width:initial;height:500px;">
             <!-- Modal content-->
@@ -97,12 +113,12 @@
                     <div class="modal-body">
 
                     </div>
+                    {{-- <div class="modal-footer" style="width: 700px;z-index: -1;">
+                    <a href="javascript:void(0)" class="btn btn-danger" onclick="submit_or_refresh()">Close</a>
+                    </div> --}}
                 </div>
             </div>
         </div>
-
-
-
 
     </div>
     <!-- content-wrapper ends -->
@@ -148,16 +164,18 @@
         });
 
         (function($) {
-
-        if ($(".category").length) {
-            $(".category").select2();
-        }
-        if ($(".subcategory").length) {
-            $(".subcategory").select2();
-        }
-        if ($(".subcategoryitem").length) {
-            $(".subcategoryitem").select2();
-        }
+            if ($(".category").length) {
+                $(".category").select2();
+            }
+            if ($(".subcategory").length) {
+                $(".subcategory").select2();
+            }
+            if ($(".subcategoryitem").length) {
+                $(".subcategoryitem").select2();
+            }
+            if ($(".variation").length) {
+                $(".variation").select2();
+            }
         })(jQuery);
 
         $("document").ready(function () {
@@ -201,6 +219,26 @@
             }
         });
 
+        $('select[name="subcategoryitem"]').on('change', function () {
+            var subcatitemId = $(this).val();
+            //alert(subcatitemId); return false;
+            if (subcatitemId) {
+                $.ajax({
+                    url: "{{route('vendor.getvariation')}}",
+                    type: "POST",
+                    data:{subcategoryitemid:subcatitemId, _token: '{{csrf_token()}}'},
+                    dataType: "json",
+                    success: function (returndata) {
+                        $('select[name="variation"]').empty();
+                        $.each(returndata, function (key, value) {
+                            $('select[name="variation"]').append('<option value=\'' +value.id+'\'>' + value.text + '</option>');
+                        })
+                    }
+                })
+            } else {
+                $('select[name="variation"]').empty();
+            }
+        });
 
 
     });
@@ -225,12 +263,12 @@
                     "targets": 0
                 }],
                 "ajax": {
-                    data: ({categoryid:'{{Crypt::decryptString(request()->category)}}',subcategoryid:'{{Crypt::decryptString(request()->subcategory)}}',subcategoryitemid:'{{Crypt::decryptString(request()->subcategoryitem)}}',_token: '{{csrf_token()}}'}),
-                    url : "{{route('admin.searchvariationajax')}}",
+                    data: ({categoryid:'{{Crypt::decryptString(request()->category)}}',subcategoryid:'{{Crypt::decryptString(request()->subcategory)}}',subcategoryitemid:'{{Crypt::decryptString(request()->subcategoryitem)}}',variationid:'{{Crypt::decryptString(request()->variation)}}',_token: '{{csrf_token()}}'}),
+                    url : "{{url('/')}}/searchvariationitemlistajax",
                     type : 'GET',
                 },
                 columns: [
-                        {data: 'variation_name' },
+                        {data: 'variation_item_name' },
                         {
                             data: 'status',
                             render: function (data, type, row){
@@ -244,7 +282,7 @@
                        {
                             data: 'action',
                             render: function (data, type, row){
-                                return '<a href="<?php echo url("admin/edit-variation") ?>/'+data+'" onclick="geturldata(event)" title="Edit Variation"><i class="mdi mdi-table-edit"></i></a> | <a href="<?php echo url("/admin/variation-trash")?>/'+data+'" title="Trash Variation" onclick="confirmMsg(event)"><i class="mdi mdi-delete-forever"></i></a>';
+                                return '<a href="<?php echo url("vendor/add-variationitem")?>/'+data+'" title="Edit Variation Item"><i class="mdi mdi-table-edit"></i></a> | <a href="<?php echo url("vendor/variationitemtrash")?>/'+data+'" title="Trash Variation Item" onclick="return confirm("Are you sure?")"><i class="mdi mdi-delete-forever"></i></a> ';
                             },
                         },
 
@@ -252,22 +290,14 @@
             });
         });
 
-        function confirmMsg(e)
+        function confirmMsg()
         {
-            var answer = confirm("Are you sure you want to delete this record?")
+            var answer = confirm("Delete selected record?")
             if (answer){
                 return true;
             }
-            e.preventDefault();
+            return false;
         }
-
-        function geturldata(e){
-            //alert(e.currentTarget.href);
-			var result = '<iframe  width="660" height="500"  src="'+e.currentTarget.href+'" frameborder="0" marginheight="0" marginwidth="0">Loading&amp;#8230;</iframe>';
-			$("#myModal").modal('show');
-            $(".modal-body").html(result);
-			e.preventDefault();
-	    }
     </script>
 @endpush
 @endsection

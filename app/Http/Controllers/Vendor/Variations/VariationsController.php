@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Variations;
+namespace App\Http\Controllers\Vendor\Variations;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -15,7 +15,7 @@ class VariationsController extends Controller
 {
     public function __construct()
     {
-		$this->middleware('auth:admin');
+		$this->middleware('auth:vendor');
     }
     function slugify($text, string $divider = '-')
     {
@@ -51,7 +51,7 @@ class VariationsController extends Controller
      */
 	public function variation_list(Request $request){
         $category = Categorys::where('status','1')->orderBy('category_name')->get();
-		return view("admin.variation.variation-list",compact('category'));
+		return view("vendor.variation.variation-list",compact('category'));
 	}
 
     /**
@@ -61,7 +61,7 @@ class VariationsController extends Controller
      */
 	public function add_variation(Request $request){
         $category = Categorys::where('status','1')->orderBy('category_name')->get();
-		return view("admin.variation.add-variation",compact('category'));
+		return view("vendor.variation.add-variation",compact('category'));
 	}
   /**
      * Save attribute post data.
@@ -102,7 +102,7 @@ class VariationsController extends Controller
     public function edit_variation(Request $request, $variationid){
         $category = Categorys::where('status','1')->orderBy('category_name')->get();
         $variation = Variations::where('id',$variationid)->first();
-        return view('admin.variation.edit-variation',compact('category','variation'));
+        return view('vendor.variation.edit-variation',compact('category','variation'));
     }
 
     /**
@@ -156,7 +156,7 @@ class VariationsController extends Controller
      */
     public function searchvariation(Request $request){
         $category = Categorys::where('status','1')->orderBy('category_name')->get();
-		return view("admin.variation.variation-list-search",compact('category'));
+		return view("vendor.variation.variation-list-search",compact('category'));
     }
 
    /**
