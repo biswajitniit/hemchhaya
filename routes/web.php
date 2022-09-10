@@ -10,6 +10,8 @@ use App\Http\Controllers\Admin\Dashboard\DashboardController;
 use App\Http\Controllers\Vendor\Variations\VariationsController;
 use App\Http\Controllers\Vendor\Variationitems\VariationitemsController;
 
+use App\Http\Controllers\Vendor\CatController;
+
 use App\Http\Controllers\Vendor\Dashboard\VendorDashboardController;
 use App\Http\Controllers\Admin\Subcategoryitem\SubCategoryItemController;
 use App\Http\Controllers\Admin\Subcategory\SubCategoryController;
@@ -149,8 +151,11 @@ Route::any('/admin/getattributecategorysearch', [AttributeController::class, 'aj
 
 
 
-
-
+/**
+ *
+ * Vendor section start
+ *
+ */
 
 
 
@@ -161,6 +166,13 @@ Route::any('/admin/getattributecategorysearch', [AttributeController::class, 'aj
  });
  Route::get('/vendor/dashboard', [VendorDashboardController::class, 'dashboard'])->name('vendor/dashboard');
  Route::get('/vendor/logout', [VendorLogoutController::class, 'vendorlogout'])->name('/vendor/logout');
+
+
+ //GET ALL CATEGORY / SUB CATEGORY / SUB CATEGORY ITEM / VARIATION /VARIATION ITEM
+ Route::any('/vendor/getsubcategory', [CatController::class, 'ajax_get_sub_category'])->name('vendor.getsubcategory');  // GET Subcategory LIST
+ Route::any('/vendor/getsubcategoryitem', [CatController::class, 'ajax_getsubcategoryitem'])->name('vendor.getsubcategoryitem');  // GET Subcategory Item LIST
+ Route::any('/vendor/getsubcategorycpt', [CatController::class, 'ajax_getsubcategorycpt'])->name('vendor.getsubcategorycpt');  // GET Subcategory LIST
+ Route::any('/vendor/getsubcategoryitemcpt', [CatController::class, 'ajax_getsubcategoryitemcpt'])->name('vendor.getsubcategoryitemcpt');  // GET Subcategory Item LIST
 
 
 
@@ -193,7 +205,7 @@ Route::post('/vendor/add-variationitem-post-data',[VariationitemsController::cla
 Route::any('/vendor/edit-variationitem/{variationitemid}',[VariationitemsController::class, 'edit_variationitem'])->name('vendor.edit-variationitem');
 Route::post('/vendor/edit-variationitem-post',[VariationitemsController::class, 'edit_variationitem_post'])->name('vendor.edit-variationitem-post');
 
-Route::any('/vendor/variationitemtrash/{attributeid}',[VariationitemsController::class, 'variationitemtrash'])->name('vendor.variationitemtrash');
+Route::any('/vendor/variationitemtrash/{variationitemid}',[VariationitemsController::class, 'variationitemtrash'])->name('vendor.variationitemtrash');
 
 Route::post('/vendor/getvariation', [VariationitemsController::class, 'ajax_getvariation'])->name('vendor.getvariation');
 Route::any('/vendor/getvariationBysubcategoryitem', [VariationitemsController::class, 'ajax_getvariationBysubcategoryitem'])->name('vendor.getvariationBysubcategoryitem');
@@ -226,3 +238,10 @@ Route::any('/vendor/getvariationBysubcategoryitem', [VariationitemsController::c
 Route::any('/admin/get_sub_category_on_product_page', [ProductController::class, 'ajax_get_sub_category_on_product_page'])->name('admin.get_sub_category_on_product_page');  // GET Subcategory LIST
 Route::any('/admin/get_sub_category_item_on_product_page', [ProductController::class, 'ajax_get_sub_category_item_on_product_page'])->name('admin.get_sub_category_item_on_product_page');  // GET Subcategory item LIST
 Route::any('/admin/get_attributecat_with_attribute_on_product_page', [ProductController::class, 'ajax_get_attributecat_with_attribute_on_product_page'])->name('admin.get_attributecat_with_attribute_on_product_page');  // GET attribute LIST
+
+
+/**
+ *
+ * Vendor section end
+ *
+ */

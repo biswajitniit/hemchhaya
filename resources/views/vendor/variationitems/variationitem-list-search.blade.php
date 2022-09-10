@@ -37,8 +37,8 @@
                                             @endphp
                                             @if($getsubcategorylistbycategory) @foreach ($getsubcategorylistbycategory as $rowsubcategory)
                                             <option value="{{ Crypt::encryptString($rowsubcategory->id) }}" @if($rowsubcategory->id == Crypt::decryptString(request()->subcategory)) selected @endif>{{ $rowsubcategory->sub_category_name }}</option>
-                                            @endforeach @endif											
-											
+                                            @endforeach @endif
+
                                         </select>
                                     </div>
                                 </div>
@@ -51,8 +51,8 @@
                                             @endphp
                                             @if($getsubcategoryitemlistbycategory) @foreach ($getsubcategoryitemlistbycategory as $rowsubcategoryitem)
                                             <option value="{{ Crypt::encryptString($rowsubcategoryitem->id) }}" @if($rowsubcategoryitem->id == Crypt::decryptString(request()->subcategoryitem)) selected @endif>{{ $rowsubcategoryitem->sub_category_item_name }}</option>
-                                            @endforeach @endif											
-											
+                                            @endforeach @endif
+
                                         </select>
                                     </div>
                                 </div>
@@ -66,8 +66,8 @@
                                             @endphp
                                             @if($getvariation) @foreach ($getvariation as $rowvariation)
                                             <option value="{{ Crypt::encryptString($rowvariation->id) }}" @if($rowvariation->id == Crypt::decryptString(request()->variation)) selected @endif>{{ $rowvariation->variation_name }}</option>
-                                            @endforeach @endif												
-											
+                                            @endforeach @endif
+
                                         </select>
                                     </div>
                                 </div>
@@ -113,9 +113,6 @@
                     <div class="modal-body">
 
                     </div>
-                    {{-- <div class="modal-footer" style="width: 700px;z-index: -1;">
-                    <a href="javascript:void(0)" class="btn btn-danger" onclick="submit_or_refresh()">Close</a>
-                    </div> --}}
                 </div>
             </div>
         </div>
@@ -282,7 +279,7 @@
                        {
                             data: 'action',
                             render: function (data, type, row){
-                                return '<a href="<?php echo url("vendor/add-variationitem")?>/'+data+'" title="Edit Variation Item"><i class="mdi mdi-table-edit"></i></a> | <a href="<?php echo url("vendor/variationitemtrash")?>/'+data+'" title="Trash Variation Item" onclick="return confirm("Are you sure?")"><i class="mdi mdi-delete-forever"></i></a> ';
+                                return '<a href="<?php echo url("vendor/edit-variationitem")?>/'+data+'" onclick="geturldata(event)" title="Edit Variation Item"><i class="mdi mdi-table-edit"></i></a> | <a href="<?php echo url("vendor/variationitemtrash")?>/'+data+'" title="Trash Variation Item" onclick="return confirm("Are you sure?")"><i class="mdi mdi-delete-forever"></i></a> ';
                             },
                         },
 
@@ -298,6 +295,13 @@
             }
             return false;
         }
+        function geturldata(e){
+            //alert(e.currentTarget.href);
+			var result = '<iframe  width="660" height="500"  src="'+e.currentTarget.href+'" frameborder="0" marginheight="0" marginwidth="0">Loading&amp;#8230;</iframe>';
+			$("#myModal").modal('show');
+            $(".modal-body").html(result);
+			e.preventDefault();
+	    }
     </script>
 @endpush
 @endsection

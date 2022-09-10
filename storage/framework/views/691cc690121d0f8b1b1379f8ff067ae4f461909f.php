@@ -1,4 +1,3 @@
-
 <?php $__env->startSection('title', 'Add variation item'); ?>
 <?php $__env->startSection('content'); ?>
 
@@ -86,21 +85,21 @@
 
 
 
-                        <!--<div class="col-lg-4 grid-margin grid-margin-lg-0">
+                        <div class="col-lg-4 grid-margin grid-margin-lg-0">
                             <div class="card-body">
                               <h4 class="card-title">Color</h4>
                               <p class="card-description">Click to select color</p>
                               <input type='text' name="color" class="color-picker" value="" />
                             </div>
-                        </div>-->
+                        </div>
 
 
-                        <!--<div class="form-group row">
+                        <div class="form-group row">
                             <div class="col-sm-3">
                                 <label for="image" class="col-form-label">Image </label>
                                 <input type="file" name="image" class="dropify" required/>
                             </div>
-                        </div>-->
+                        </div>
 
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Status <span class="required">*</span></label>
@@ -193,7 +192,7 @@
                 var catId = $(this).val();
                 if (catId) {
                     $.ajax({
-                        url: "<?php echo e(route('admin.getsubcategoryonattributepage')); ?>",
+                        url: "<?php echo e(route('vendor.getsubcategorycpt')); ?>",
                         type: "POST",
                         data:{categoryid:catId, _token: '<?php echo e(csrf_token()); ?>'},
                         dataType: "json",
@@ -213,7 +212,7 @@
                 var subcatId = $(this).val();
                 if (subcatId) {
                     $.ajax({
-                        url: "<?php echo e(route('admin.getsubcategoryitemonattributepage')); ?>",
+                        url: "<?php echo e(route('vendor.getsubcategoryitemcpt')); ?>",
                         type: "POST",
                         data:{subcategoryid:subcatId, _token: '<?php echo e(csrf_token()); ?>'},
                         dataType: "json",

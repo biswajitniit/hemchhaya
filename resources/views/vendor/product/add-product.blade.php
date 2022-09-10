@@ -1,9 +1,6 @@
 @extends('layouts.vendor')
 @section('title', 'Add products')
 @section('content')
-
-
-
 <div class="main-panel">
     <div class="content-wrapper">
       <div class="page-header">
@@ -158,8 +155,35 @@
                     <h3>Product has variations</h3>
                     <hr>
                     <section>
-                        <h6>Product Images / Variation</h6>
+                        <h6>Product Variation / Images</h6>
                         <hr>
+                        @if (!empty(request()->catid) &&  !empty(request()->subcatid) && !empty(request()->subcatitemid))
+                            @php
+                            $getVariation = GetVariationlistonaddproduct(request()->catid,request()->subcatid,request()->subcatitemid);
+                            @endphp
+
+                            @if($getVariation)
+                                <div class="form-group row">
+                                    @foreach ($getVariation as $rowvariation)
+                                        <div class="col-sm-6">
+                                            <label for="front_view_image" class="col-form-label"> {{ $rowvariation->variation_name }}</label>
+                                            <select name="country_of_origin" class="country_of_origin" style="width: 100%;">
+                                               <option value="">Select One</option>
+                                               @php
+                                                $getVariationitem = GetVariationitemlistonaddproduct(request()->catid,request()->subcatid,request()->subcatitemid,$rowvariation->id);
+                                                @endphp
+                                                @if($getVariationitem)
+                                                    @foreach ($getVariationitem as $rowvariationitem)
+                                                        <option value="{{ $rowvariationitem->id }}">{{ $rowvariationitem->variation_item_name }}</option>
+                                                    @endforeach
+                                                @endif
+                                            </select>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            @endif
+                        @endif
+
                         <div class="form-group row">
                             <div class="col-sm-3">
                                 <label for="front_view_image" class="col-form-label">Front View Image <span class="required">*</span></label>
@@ -391,6 +415,7 @@
 
 
 @push('scripts')
+
     <script type="text/javascript">
      CKEDITOR.replace( 'highlights-ckeditor' );
      CKEDITOR.replace( 'description-ckeditor' );

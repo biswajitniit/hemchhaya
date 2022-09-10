@@ -38,3 +38,15 @@ if (! function_exists('GetVariation')) {
        return Variations::where('sub_category_item_id',$subcatitemid)->where('status','1')->get();
     }
 }
+
+if (! function_exists('GetVariationlistonaddproduct')) {
+    function GetVariationlistonaddproduct($catid,$subcatid,$subcatitemid) {
+       return Variations::where('category_id',$catid)->where('sub_category_id',$subcatid)->where('sub_category_item_id',$subcatitemid)->where('status','1')->get();
+    }
+}
+
+if (! function_exists('GetVariationitemlistonaddproduct')) {
+    function GetVariationitemlistonaddproduct($catid,$subcatid,$subcatitemid,$variationid) {
+       return Variationitems::where('category_id',$catid)->where('sub_category_id',$subcatid)->where('sub_category_item_id',$subcatitemid)->where('variation_id',$variationid)->where('status','1')->get();
+    }
+}

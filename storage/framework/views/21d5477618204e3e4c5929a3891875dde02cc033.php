@@ -1,4 +1,3 @@
-
 <?php $__env->startSection('title', 'Variation category search category / subcategory / subcategory item wise'); ?>
 <?php $__env->startSection('content'); ?>
 
@@ -161,11 +160,11 @@
         })(jQuery);
 
         $("document").ready(function () {
-        $('select[name="category"]').on('change', function () {
+            $('select[name="category"]').on('change', function () {
             var catId = $(this).val();
             if (catId) {
                 $.ajax({
-                    url: "<?php echo e(route('admin.getsubcategoryattribute')); ?>",
+                    url: "<?php echo e(route('vendor.getsubcategory')); ?>",
                     type: "POST",
                     data:{categoryid:catId, _token: '<?php echo e(csrf_token()); ?>'},
                     dataType: "json",
@@ -185,7 +184,7 @@
             var subcatId = $(this).val();
             if (subcatId) {
                 $.ajax({
-                    url: "<?php echo e(route('admin.getsubcategoryitemattribute')); ?>",
+                    url: "<?php echo e(route('vendor.getsubcategoryitem')); ?>",
                     type: "POST",
                     data:{subcategoryid:subcatId, _token: '<?php echo e(csrf_token()); ?>'},
                     dataType: "json",
@@ -200,6 +199,7 @@
                 $('select[name="subcategoryitem"]').empty();
             }
         });
+
 
 
 

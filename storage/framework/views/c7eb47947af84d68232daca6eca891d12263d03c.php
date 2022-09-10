@@ -7,7 +7,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title><?php echo $__env->yieldContent('title'); ?></title>
-    <!-- plugins:css -->
     <link rel="stylesheet" href="<?php echo e(asset('adminpanel/assets/vendors/mdi/css/materialdesignicons.min.css')); ?>">
     <link rel="stylesheet" href="<?php echo e(asset('adminpanel/assets/vendors/flag-icon-css/css/flag-icon.min.css')); ?>">
     <link rel="stylesheet" href="<?php echo e(asset('adminpanel/assets/vendors/css/vendor.bundle.base.css')); ?>">
@@ -20,7 +19,6 @@
     <link rel="stylesheet" href="<?php echo e(asset('adminpanel/assets/vendors/jquery-bar-rating/css-stars.css')); ?>">
     <link rel="stylesheet" href="<?php echo e(asset('adminpanel/assets/vendors/font-awesome/css/font-awesome.min.css')); ?>">
     <!-- End plugin css for this page -->
-
 
 
       <!-- Plugin css for this page -->
@@ -44,20 +42,15 @@
       <link rel="stylesheet" href="<?php echo e(asset('adminpanel/assets/vendors/jquery-file-upload/uploadfile.css')); ?>">
       <link rel="stylesheet" href="<?php echo e(asset('adminpanel/assets/vendors/jquery-tags-input/jquery.tagsinput.min.css')); ?>">
       <link rel="stylesheet" href="<?php echo e(asset('adminpanel/assets/vendors/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.min.css')); ?>">
-      <!-- End plugin css for this page -->
 
-
-
-    <!-- inject:css -->
-    <!-- endinject -->
     <!-- Layout styles -->
     <link rel="stylesheet" href="<?php echo e(asset('adminpanel/assets/css/demo_1/style.css')); ?>">
-    <link rel="stylesheet" href="<?php echo e(asset('adminpanel/assets/css/demo_1/example-styles.css')); ?>">
     <!-- End layout styles -->
+
     <link rel="shortcut icon" type="image/x-icon" href="<?php echo e(asset('adminpanel/assets/images/favicon.ico')); ?>">
+
     <link rel="stylesheet" href="<?php echo e(asset('adminpanel/assets/vendors/datatables.net-bs4/dataTables.bootstrap4.css')); ?>">
 
-    <link rel="stylesheet" href="<?php echo e(asset('adminpanel/assets/vendors/dropify/dropify.min.css')); ?>">
 
 </head>
   <body>

@@ -1,9 +1,5 @@
-
 <?php $__env->startSection('title', 'Add products'); ?>
 <?php $__env->startSection('content'); ?>
-
-
-
 <div class="main-panel">
     <div class="content-wrapper">
       <div class="page-header">
@@ -158,8 +154,35 @@
                     <h3>Product has variations</h3>
                     <hr>
                     <section>
-                        <h6>Product Images / Variation</h6>
+                        <h6>Product Variation / Images</h6>
                         <hr>
+                        <?php if(!empty(request()->catid) &&  !empty(request()->subcatid) && !empty(request()->subcatitemid)): ?>
+                            <?php
+                            $getVariation = GetVariationlistonaddproduct(request()->catid,request()->subcatid,request()->subcatitemid);
+                            ?>
+
+                            <?php if($getVariation): ?>
+                                <div class="form-group row">
+                                    <?php $__currentLoopData = $getVariation; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $rowvariation): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <div class="col-sm-6">
+                                            <label for="front_view_image" class="col-form-label"> <?php echo e($rowvariation->variation_name); ?></label>
+                                            <select name="country_of_origin" class="country_of_origin" style="width: 100%;">
+                                               <option value="">Select One</option>
+                                               <?php
+                                                $getVariationitem = GetVariationitemlistonaddproduct(request()->catid,request()->subcatid,request()->subcatitemid,$rowvariation->id);
+                                                ?>
+                                                <?php if($getVariationitem): ?>
+                                                    <?php $__currentLoopData = $getVariationitem; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $rowvariationitem): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                        <option value="<?php echo e($rowvariationitem->id); ?>"><?php echo e($rowvariationitem->variation_item_name); ?></option>
+                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                <?php endif; ?>
+                                            </select>
+                                        </div>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                </div>
+                            <?php endif; ?>
+                        <?php endif; ?>
+
                         <div class="form-group row">
                             <div class="col-sm-3">
                                 <label for="front_view_image" class="col-form-label">Front View Image <span class="required">*</span></label>
@@ -388,6 +411,7 @@
 
 
 <?php $__env->startPush('scripts'); ?>
+
     <script type="text/javascript">
      CKEDITOR.replace( 'highlights-ckeditor' );
      CKEDITOR.replace( 'description-ckeditor' );

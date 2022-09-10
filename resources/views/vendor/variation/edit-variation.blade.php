@@ -223,7 +223,7 @@
                 var catId = $(this).val();
                 if (catId) {
                     $.ajax({
-                        url: "{{route('admin.getsubcategoryonattributepage')}}",
+                        url: "{{route('vendor.getsubcategorycpt')}}",
                         type: "POST",
                         data:{categoryid:catId, _token: '{{csrf_token()}}'},
                         dataType: "json",
@@ -243,7 +243,7 @@
                 var subcatId = $(this).val();
                 if (subcatId) {
                     $.ajax({
-                        url: "{{route('admin.getsubcategoryitemonattributepage')}}",
+                        url: "{{route('vendor.getsubcategoryitemcpt')}}",
                         type: "POST",
                         data:{subcategoryid:subcatId, _token: '{{csrf_token()}}'},
                         dataType: "json",

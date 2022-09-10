@@ -174,7 +174,63 @@ class VariationitemsController extends Controller
     }
 
 
+    /**
+     * Edit variation item view page
+     *
+     * @return true or false
+     */
+    public function edit_variationitem(Request $request, $variationitemid){
+        $category = Categorys::where('status','1')->orderBy('category_name')->get();
+        $variationitem = Variationitems::where('id',$variationitemid)->first();
+        return view('vendor.variationitems.edit-variationitem',compact('category','variationitem'));
+    }
 
+
+   /**
+     * Edit variation item after post
+     *
+     * @return true or false
+     */
+    public function edit_variationitem_post(Request $request){
+
+        $this->validate($request, [
+            'category_id'           => 'required',
+            'sub_category_id'       => 'required',
+            'sub_category_item_id'  => 'required',
+            'variation_id'          => 'required',
+            'variation_item_name'   => 'required',
+        ],[
+            'category_id.required'           => 'Please select category',
+            'sub_category_id.required'       => 'Please select sub category',
+            'sub_category_item_id.required'  => 'Please select sub category item',
+            'variation_id.required'          => 'Please select variation',
+            'variation_item_name.required'   => 'Please enter variation item name',
+        ]);
+
+        $data = array(
+            'category_id'              => $request['category_id'],
+            'sub_category_id'          => $request['sub_category_id'],
+            'sub_category_item_id'     => $request['sub_category_item_id'],
+            'variation_id'             => $request['variation_id'],
+            'variation_item_name'      => $request['variation_item_name'],
+            'column_slug'              => $this->slugify($request['variation_item_name'],'-'),
+            'color'                    => $request['color'],
+            'status'                   => $request['status']
+        );
+
+        Variationitems::where('id', $request['variationitemid'])->update($data);
+        return redirect()->back()->with('message', 'Variation item updated successfully.');
+    }
+
+    /**
+     * Soft delets
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function attributetrash(Request $request, $attributeid){
+        Attribute::where('id',$attributeid)->delete();
+        return redirect()->back()->with('message', 'Attribute deleted successfully.');
+    }
 
 
    /**
@@ -182,20 +238,20 @@ class VariationitemsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function searchvariationitemlist_list_ajax(Request $request){ 
+    public function searchvariationitemlist_list_ajax(Request $request){
 		//DB::enableQueryLog();
 		//echo $request->categoryid; die;
         $query=Variationitems::where('category_id',$request->categoryid)->where('sub_category_id',$request->subcategoryid)->where('sub_category_item_id',$request->subcategoryitemid)->where('variation_id',$request->variationid)->orderby('created_at','desc')->get();
        //$quries = DB::getQueryLog();
 	   //dd($quries);die;
-	   
+
 	    $totalData =count($query);
         $totalFiltered = $totalData;  // when there is no search parameter then total number rows = total number filtered rows.
         return Datatables::of($query)
         ->addColumn('variation_item_name', function ($query) {
             return $query->variation_item_name;
         })
-        
+
         ->addColumn('status', function ($query) {
             if($query->status==1){
                 $mstatus='Active';

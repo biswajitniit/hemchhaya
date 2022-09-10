@@ -1,21 +1,60 @@
-@extends('layouts.admin')
-@section('title', 'Edit Attribute')
-@section('content')
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from www.bootstrapdash.com/demo/plus/jquery/template/demo_1/ by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 08 Aug 2022 10:53:43 GMT -->
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Edit Variation item</title>
+    <link rel="stylesheet" href="{{ asset('adminpanel/assets/vendors/mdi/css/materialdesignicons.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('adminpanel/assets/vendors/flag-icon-css/css/flag-icon.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('adminpanel/assets/vendors/css/vendor.bundle.base.css') }}">
+    <!-- endinject -->
+
+    <link rel="stylesheet" href="{{ asset('adminpanel/assets/vendors/select2/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('adminpanel/assets/vendors/select2-bootstrap-theme/select2-bootstrap.min.css') }}">
+
+    <!-- Plugin css for this page -->
+    <link rel="stylesheet" href="{{ asset('adminpanel/assets/vendors/jquery-bar-rating/css-stars.css') }}">
+    <link rel="stylesheet" href="{{ asset('adminpanel/assets/vendors/font-awesome/css/font-awesome.min.css') }}">
+    <!-- End plugin css for this page -->
 
 
-<div class="main-panel">
-    <div class="content-wrapper">
-      <div class="page-header">
-        <h3 class="page-title"> Edit Attribute</h3>
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ route('attribute') }}">Attributes</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Edit Attributes</li>
-          </ol>
-        </nav>
-      </div>
+      <!-- Plugin css for this page -->
+      <link rel="stylesheet" href="{{ asset('adminpanel/assets/vendors/dropzone/dropzone.css') }}">
+      <link rel="stylesheet" href="{{ asset('adminpanel/assets/vendors/font-awesome/css/font-awesome.min.css') }}">
+      <link rel="stylesheet" href="{{ asset('adminpanel/assets/vendors/jquery-bar-rating/bars-1to10.css') }}">
+      <link rel="stylesheet" href="{{ asset('adminpanel/assets/vendors/jquery-bar-rating/bars-horizontal.css') }}">
+      <link rel="stylesheet" href="{{ asset('adminpanel/assets/vendors/jquery-bar-rating/bars-movie.css') }}">
+      <link rel="stylesheet" href="{{ asset('adminpanel/assets/vendors/jquery-bar-rating/bars-pill.css') }}">
+      <link rel="stylesheet" href="{{ asset('adminpanel/assets/vendors/jquery-bar-rating/bars-reversed.css') }}">
+      <link rel="stylesheet" href="{{ asset('adminpanel/assets/vendors/jquery-bar-rating/bars-square.css') }}">
+      <link rel="stylesheet" href="{{ asset('adminpanel/assets/vendors/jquery-bar-rating/bootstrap-stars.css') }}">
+      <link rel="stylesheet" href="{{ asset('adminpanel/assets/vendors/jquery-bar-rating/css-stars.css') }}">
+      <link rel="stylesheet" href="{{ asset('adminpanel/assets/vendors/jquery-bar-rating/examples.css') }}">
+      <link rel="stylesheet" href="{{ asset('adminpanel/assets/vendors/jquery-bar-rating/fontawesome-stars-o.css') }}">
+      <link rel="stylesheet" href="{{ asset('adminpanel/assets/vendors/jquery-bar-rating/fontawesome-stars.css') }}">
+      <link rel="stylesheet" href="{{ asset('adminpanel/assets/vendors/jquery-asColorPicker/css/asColorPicker.min.css') }}">
+      <link rel="stylesheet" href="{{ asset('adminpanel/assets/vendors/x-editable/bootstrap-editable.css') }}">
+      <link rel="stylesheet" href="{{ asset('adminpanel/assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css') }}">
+      <link rel="stylesheet" href="{{ asset('adminpanel/assets/vendors/dropify/dropify.min.css') }}">
+      <link rel="stylesheet" href="{{ asset('adminpanel/assets/vendors/jquery-file-upload/uploadfile.css') }}">
+      <link rel="stylesheet" href="{{ asset('adminpanel/assets/vendors/jquery-tags-input/jquery.tagsinput.min.css') }}">
+      <link rel="stylesheet" href="{{ asset('adminpanel/assets/vendors/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.min.css') }}">
 
-      <div class="row">
+    <!-- Layout styles -->
+    <link rel="stylesheet" href="{{ asset('adminpanel/assets/css/demo_1/style.css') }}">
+    <!-- End layout styles -->
+
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('adminpanel/assets/images/favicon.ico') }}">
+
+    <link rel="stylesheet" href="{{ asset('adminpanel/assets/vendors/datatables.net-bs4/dataTables.bootstrap4.css') }}">
+
+</head>
+<body>
+
+    <div class="row">
         <div class="col-lg-12">
           <div class="card">
             <div class="card-body">
@@ -39,137 +78,305 @@
 
 
 
-              <form class="cmxform" id="editattribute" method="post" action="{{ route('admin.edit-attribute-post') }}" name="editattribute">
+              <form class="cmxform" id="editvariationitem" method="post" action="{{ route('vendor.edit-variationitem-post') }}" name="editvariationitem">
                 @csrf
-                <input type="hidden" name="attributeid" value="{{ $attribute->id }}">
+                <input type="hidden" name="variationitemid" value="{{ $variationitem->id }}">
                 <fieldset>
 
+                    <div class="form-group">
+                        <label for="category_id">Category Name</label>
+                        <select name="category_id" class="js-example-basic-single" style="width:100%">
+                            <option value="">Select Category</option>
+                            @if($category)
+                                @foreach ($category as $rowcategory)
+                                    <option value="{{ $rowcategory->id }}" @if($rowcategory->id == $variationitem->category_id) selected="selected" @endif>{{ $rowcategory->category_name }}</option>
+                                @endforeach
+                            @endif
+                        </select>
+                      </div>
+
+
+                      <div class="form-group">
+                        <label for="sub_category_id">Sub Category</label>
+                        <select name="sub_category_id" class="subcategory" style="width:100%;">
+                            <option value="">Select Sub Category</option>
+                            @php $getcatid = GetSubcategoryBycatid($variationitem->category_id); @endphp
+                            @foreach($getcatid as $rowsubcat)
+                            <option value="{{ $rowsubcat->id }}" @if($rowsubcat->id == $variationitem->sub_category_id) selected="selected" @endif>{{ $rowsubcat->sub_category_name }}</option>
+                            @endforeach
+
+                        </select>
+                      </div>
+
+                      <div class="form-group">
+                        <label for="sub_category_item_id">Sub Category Item</label>
+                        <select name="sub_category_item_id" class="subcategory" style="width:100%;">
+                            <option value="">Select Sub Category</option>
+                            @php $getsubcatitemid = GetSubcategoryitemBysubcatid($variationitem->sub_category_id); @endphp
+                            @foreach($getsubcatitemid as $rowsubcatitem)
+                            <option value="{{ $rowsubcatitem->id }}" @if($rowsubcatitem->id == $variationitem->sub_category_item_id) selected="selected" @endif>{{ $rowsubcatitem->sub_category_item_name }}</option>
+                            @endforeach
+                        </select>
+                      </div>
+
+                      <div class="form-group">
+                        <label for="variation_id">Variation <span class="required">*</span></label>
+                        <select name="variation_id" class="variation_id" style="width: 100%;">
+                            <option value="">Select Variation</option>
+
+                            @php
+                            $getvariation = GetVariation($variationitem->sub_category_id);
+                            @endphp
+                            @if($getvariation) @foreach ($getvariation as $rowvariation)
+                            <option value="{{ $rowvariation->id }}" @if($rowvariation->id == $variationitem->variation_id) selected @endif>{{ $rowvariation->variation_name }}</option>
+                            @endforeach @endif
+                        </select>
+                    </div>
 
                     <div class="form-group">
-                        <label for="column_name">Column Name </label>
-                        <input id="column_name" class="form-control" name="column_name" type="text" value="{{ $attribute->column_name }}">
+                        <label for="variation_item_name">Variation Item Name </label>
+                        <input id="variation_item_name" class="form-control" name="variation_item_name" value="{{ $variationitem->variation_item_name }}" type="text">
                     </div>
 
-                  <div class="form-group">
-                    <label for="column_type">Column Type</label>
-                    <select name="column_type" class="js-example-basic-single" style="width:100%">
-                        <option value="">Select Column Type</option>
-                        <option value="1" @if($attribute->id == 1) selected="selected" @endif>TextBox</option>
-                        <option value="2" @if($attribute->id == 2) selected="selected" @endif>Drop Down</option>
-                        <option value="3" @if($attribute->id == 3) selected="selected" @endif>Editor</option>
-                        <option value="4" @if($attribute->id == 4) selected="selected" @endif>Password</option>
-                        <option value="5" @if($attribute->id == 5) selected="selected" @endif>Email</option>
-                    </select>
-                  </div>
+                    <div class="col-lg-4 grid-margin grid-margin-lg-0">
+                        <div class="card-body">
+                          <h4 class="card-title">Color</h4>
+                          <p class="card-description">Click to select color</p>
+                          <input type='text' name="color" class="color-picker" value="{{ $variationitem->color }}" />
+                        </div>
+                    </div>
 
 
-                  <div class="form-group">
-                    <label for="column_validation">Column Validation</label>
-                    <select name="column_validation" class="js-example-basic-single" style="width:100%;">
-                        <option value="">Select Column Validation</option>
-                        <option value="1" @if($attribute->column_validation == 1) selected="selected" @endif>Optional</option>
-                        <option value="2" @if($attribute->column_validation == 2) selected="selected" @endif>Required</option>
-                    </select>
-                  </div>
+                    <div class="form-group row">
+                        <div class="col-sm-3">
+                            <label for="image" class="col-form-label">Image </label>
+                            <input type="file" name="image" class="dropify"/>
+                        </div>
+                    </div>
 
-                  <div class="form-group row">
-                    <label class="col-sm-3 col-form-label">Status</label>
-                    <div class="col-sm-4">
-                      <div class="form-check">
-                        <label class="form-check-label">
-                          <input type="radio" class="form-check-input" name="status" id="status1" value="1" @if($attribute->status == 1) checked @endif> Active </label>
+                      <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Status</label>
+                        <div class="col-sm-4">
+                          <div class="form-check">
+                            <label class="form-check-label">
+                              <input type="radio" class="form-check-input" name="status" id="status1" value="1" @if($variationitem->status == 1) checked @endif> Active </label>
+                          </div>
+                        </div>
+                        <div class="col-sm-5">
+                          <div class="form-check">
+                            <label class="form-check-label">
+                              <input type="radio" class="form-check-input" name="status" id="status2" value="2" @if($variationitem->status == 2) checked @endif> InActive </label>
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                    <div class="col-sm-5">
-                      <div class="form-check">
-                        <label class="form-check-label">
-                          <input type="radio" class="form-check-input" name="status" id="status2" value="2" @if($attribute->status == 2) checked @endif> InActive </label>
-                      </div>
-                    </div>
-                  </div>
 
 
-
-                  <input class="btn btn-primary" type="submit" value="Submit">
+                  <input class="btn btn-primary btn-lg" type="submit" value="Submit">
                 </fieldset>
               </form>
             </div>
           </div>
         </div>
-      </div>
     </div>
-    <!-- content-wrapper ends -->
-    <!-- partial:../../partials/_footer.html -->
-    <footer class="footer">
-        <div class="d-sm-flex justify-content-center justify-content-sm-between">
-            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © {{ date('Y') }} <a href="{{ url('/') }}" target="_blank">Hemchhaya</a>. All rights reserved.</span>
-        </div>
-    </footer>
-    <!-- partial -->
-  </div>
-  <!-- main-panel ends -->
 
 
 
 
+    <script src="{{ asset('adminpanel/assets/vendors/js/vendor.bundle.base.js') }}"></script>
+    <!-- endinject -->
+    <script src="{{ asset('adminpanel/assets/vendors/jquery-validation/jquery.validate.min.js') }}"></script>
+    <script src="{{ asset('adminpanel/assets/vendors/bootstrap-maxlength/bootstrap-maxlength.min.js') }}"></script>
+    <script src="{{ asset('adminpanel/assets/vendors/jquery-steps/jquery.steps.min.js') }}"></script>
 
-@push('scripts')
-    <script type="text/javascript">
-        $(".alert").delay(2000).slideUp(200, function () {
-            $(this).alert('close');
-        });
 
-        $(function() {
-            // validate signup form on keyup and submit
-            $("#addsubcategoryitem").validate({
-                rules: {
-                    category_id: "required",
-                    sub_category_id: "required",
-                    sub_category_item_name : "required",
-                },
-                messages: {
-                    category_id: "Please select category",
-                    sub_category_id: "Please select sub category",
-                    sub_category_item_name: "Please enter sub category item name",
-                },
-                errorPlacement: function(label, element) {
-                    label.addClass('mt-2 text-danger');
-                    label.insertAfter(element);
-                },
-                highlight: function(element, errorClass) {
-                    $(element).parent().addClass('has-danger')
-                    $(element).addClass('form-control-danger')
-                }
-            });
-        });
+    <!-- Plugin js for this page -->
+    <script src="{{ asset('adminpanel/assets/vendors/jquery-bar-rating/jquery.barrating.min.js') }}"></script>
+    <script src="{{ asset('adminpanel/assets/vendors/chart.js/Chart.min.js') }}"></script>
+    <script src="{{ asset('adminpanel/assets/vendors/flot/jquery.flot.js') }}"></script>
+    <script src="{{ asset('adminpanel/assets/vendors/flot/jquery.flot.resize.js') }}"></script>
+    <script src="{{ asset('adminpanel/assets/vendors/flot/jquery.flot.categories.js') }}"></script>
+    <script src="{{ asset('adminpanel/assets/vendors/flot/jquery.flot.fillbetween.js') }}"></script>
+    <script src="{{ asset('adminpanel/assets/vendors/flot/jquery.flot.stack.js') }}"></script>
+    <script src="{{ asset('adminpanel/assets/js/jquery.cookie.js') }}" type="text/javascript"></script>
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <script src="{{ asset('adminpanel/assets/js/off-canvas.js') }}"></script>
+    <script src="{{ asset('adminpanel/assets/js/hoverable-collapse.js') }}"></script>
+    <script src="{{ asset('adminpanel/assets/js/misc.js') }}"></script>
+    <script src="{{ asset('adminpanel/assets/js/settings.js') }}"></script>
+    <script src="{{ asset('adminpanel/assets/js/todolist.js') }}"></script>
+    <!-- endinject -->
+    <!-- Custom js for this page -->
+    <script src="{{ asset('adminpanel/assets/js/dashboard.js') }}"></script>
+    <!-- End custom js for this page -->
+    <script src="{{ asset('adminpanel/assets/js/data-table.js') }}"></script>
 
-        (function($) {
-            if ($(".subcategory").length) {
-                $(".subcategory").select2();
+    <!-- Plugin js for this page -->
+    <script src="{{ asset('adminpanel/assets/vendors/datatables.net/jquery.dataTables.js') }}"></script>
+    <script src="{{ asset('adminpanel/assets/vendors/datatables.net-bs4/dataTables.bootstrap4.js') }}"></script>
+    <!-- End plugin js for this page -->
+
+    <!-- Custom js for this page -->
+    {{-- <script src="{{ asset('adminpanel/assets/js/form-validation.js') }}"></script> --}}
+    <script src="{{ asset('adminpanel/assets/js/bt-maxLength.js') }}"></script>
+
+    <script src="{{ asset('adminpanel/assets/vendors/select2/select2.min.js') }}"></script>
+    <script src="{{ asset('adminpanel/assets/vendors/typeahead.js/typeahead.bundle.min.js') }}"></script>
+
+    <script src="{{ asset('adminpanel/assets/js/typeahead.js') }}"></script>
+    <script src="{{ asset('adminpanel/assets/js/select2.js') }}"></script>
+    <script src="{{ asset('adminpanel/assets/js/wizard.js') }}"></script>
+
+
+
+        <!-- Plugin js for this page -->
+        <script src="{{ asset('adminpanel/assets/vendors/jquery-bar-rating/jquery.barrating.min.js') }}"></script>
+        <script src="{{ asset('adminpanel/assets/vendors/jquery-asColor/jquery-asColor.min.js') }}"></script>
+        <script src="{{ asset('adminpanel/assets/vendors/jquery-asGradient/jquery-asGradient.min.js') }}"></script>
+        <script src="{{ asset('adminpanel/assets/vendors/jquery-asColorPicker/jquery-asColorPicker.min.js') }}"></script>
+        <script src="{{ asset('adminpanel/assets/vendors/x-editable/bootstrap-editable.min.js') }}"></script>
+        <script src="{{ asset('adminpanel/assets/vendors/moment/moment.min.js') }}"></script>
+        <script src="{{ asset('adminpanel/assets/vendors/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.js') }}"></script>
+        <script src="{{ asset('adminpanel/assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js') }}"></script>
+        <script src="{{ asset('adminpanel/assets/vendors/dropify/dropify.min.js') }}"></script>
+        <script src="{{ asset('adminpanel/assets/vendors/jquery-file-upload/jquery.uploadfile.min.js') }}"></script>
+        <script src="{{ asset('adminpanel/assets/vendors/jquery-tags-input/jquery.tagsinput.min.js') }}"></script>
+        <script src="{{ asset('adminpanel/assets/vendors/dropzone/dropzone.js') }}"></script>
+        <script src="{{ asset('adminpanel/assets/vendors/jquery.repeater/jquery.repeater.min.js') }}"></script>
+        <script src="{{ asset('adminpanel/assets/vendors/inputmask/jquery.inputmask.bundle.js') }}"></script>
+        <!-- End plugin js for this page -->
+
+        <!-- Custom js for this page -->
+        <script src="{{ asset('adminpanel/assets/js/formpickers.js') }}"></script>
+        <script src="{{ asset('adminpanel/assets/js/form-addons.js') }}"></script>
+        <script src="{{ asset('adminpanel/assets/js/x-editable.js') }}"></script>
+        <script src="{{ asset('adminpanel/assets/js/dropify.js') }}"></script>
+        <script src="{{ asset('adminpanel/assets/js/dropzone.js') }}"></script>
+        <script src="{{ asset('adminpanel/assets/js/jquery-file-upload.js') }}"></script>
+        <script src="{{ asset('adminpanel/assets/js/formpickers.js') }}"></script>
+        <script src="{{ asset('adminpanel/assets/js/form-repeater.js') }}"></script>
+        <script src="{{ asset('adminpanel/assets/js/inputmask.js') }}"></script>
+        <!-- End custom js for this page -->
+
+        <script src="{{ asset('adminpanel/assets/js/jquery.multi-select.min.js') }}"></script>
+
+        <script src="{{ asset('adminpanel/assets/vendors/dropify/dropify.min.js') }}"></script>
+        <script src="{{ asset('adminpanel/assets/js/dropify.js') }}"></script>
+
+        <script src="//cdn.ckeditor.com/4.19.1/standard/ckeditor.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+  <script type="text/javascript">
+    $(".alert").delay(2000).slideUp(200, function () {
+        $(this).alert('close');
+    });
+
+    $(function() {
+        // validate signup form on keyup and submit
+        $("#addvariationitem").validate({
+            rules: {
+                category_id: "required",
+                sub_category_id: "required",
+                sub_category_item_name : "required",
+                variation_id : "required",
+                variation_name : "required",
+            },
+            messages: {
+                category_id: "Please select category",
+                sub_category_id: "Please select sub category",
+                sub_category_item_name: "Please enter sub category item name",
+                variation_id: "Please select variation",
+                variation_name: "Please enter variation name",
+            },
+            errorPlacement: function(label, element) {
+                label.addClass('mt-2 text-danger');
+                label.insertAfter(element);
+            },
+            highlight: function(element, errorClass) {
+                $(element).parent().addClass('has-danger')
+                $(element).addClass('form-control-danger')
             }
-        })(jQuery);
-
-        $("document").ready(function () {
-            $('select[name="category_id"]').on('change', function () {
-                var catId = $(this).val();
-                if (catId) {
-                    $.ajax({
-                        url: "{{route('admin.getsubcategory')}}",
-                        type: "POST",
-                        data:{categoryid:catId, _token: '{{csrf_token()}}'},
-                        dataType: "json",
-                        success: function (returndata) {
-                            $('select[name="sub_category_id"]').empty();
-                            $.each(returndata, function (key, value) {
-                                $('select[name="sub_category_id"]').append('<option value=" ' + value.id + '">' + value.text + '</option>');
-                            })
-                        }
-                    })
-                } else {
-                    $('select[name="sub_category_id"]').empty();
-                }
-            });
         });
-    </script>
-@endpush
-@endsection
+    });
+
+    (function($) {
+        if ($(".subcategory").length) {
+            $(".subcategory").select2();
+        }
+        if ($(".subcategoryitem").length) {
+            $(".subcategoryitem").select2();
+        }
+        if ($(".variation_id").length) {
+            $(".variation_id").select2();
+        }
+    })(jQuery);
+
+
+    $("document").ready(function () {
+        $('select[name="category_id"]').on('change', function () {
+            var catId = $(this).val();
+            if (catId) {
+                $.ajax({
+                    url: "{{route('vendor.getsubcategorycpt')}}",
+                    type: "POST",
+                    data:{categoryid:catId, _token: '{{csrf_token()}}'},
+                    dataType: "json",
+                    success: function (returndata) {
+                        $('select[name="sub_category_id"]').empty();
+                        $.each(returndata, function (key, value) {
+                            $('select[name="sub_category_id"]').append('<option value=\'' +value.id+'\'>' + value.text + '</option>');
+                        })
+                    }
+                })
+            } else {
+                $('select[name="sub_category_id"]').empty();
+            }
+        });
+
+        $('select[name="sub_category_id"]').on('change', function () {
+            var subcatId = $(this).val();
+            if (subcatId) {
+                $.ajax({
+                    url: "{{route('vendor.getsubcategoryitemcpt')}}",
+                    type: "POST",
+                    data:{subcategoryid:subcatId, _token: '{{csrf_token()}}'},
+                    dataType: "json",
+                    success: function (returndata) {
+                        $('select[name="sub_category_item_id"]').empty();
+                        $.each(returndata, function (key, value) {
+                            $('select[name="sub_category_item_id"]').append('<option value=\'' +value.id+'\'>' + value.text + '</option>');
+                        })
+                    }
+                })
+            } else {
+                $('select[name="sub_category_item_id"]').empty();
+            }
+        });
+
+        $('select[name="sub_category_item_id"]').on('change', function () {
+            var subcatitemId = $(this).val();
+            //alert(subcatitemId); return false;
+            if (subcatitemId) {
+                $.ajax({
+                    url: "{{route('vendor.getvariationBysubcategoryitem')}}",
+                    type: "POST",
+                    data:{subcategoryitemid:subcatitemId, _token: '{{csrf_token()}}'},
+                    dataType: "json",
+                    success: function (returndata) {
+                        $('select[name="variation_id"]').empty();
+                        $.each(returndata, function (key, value) {
+                            $('select[name="variation_id"]').append('<option value=\'' +value.id+'\'>' + value.text + '</option>');
+                        })
+                    }
+                })
+            } else {
+                $('select[name="variation_id"]').empty();
+            }
+        });
+
+    });
+
+</script>
+</body>
+
+</html>

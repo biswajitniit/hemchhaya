@@ -1,4 +1,3 @@
-
 <?php $__env->startSection('title', 'variation item list search'); ?>
 <?php $__env->startSection('content'); ?>
 
@@ -37,8 +36,8 @@
                                             ?>
                                             <?php if($getsubcategorylistbycategory): ?> <?php $__currentLoopData = $getsubcategorylistbycategory; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $rowsubcategory): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                             <option value="<?php echo e(Crypt::encryptString($rowsubcategory->id)); ?>" <?php if($rowsubcategory->id == Crypt::decryptString(request()->subcategory)): ?> selected <?php endif; ?>><?php echo e($rowsubcategory->sub_category_name); ?></option>
-                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?> <?php endif; ?>											
-											
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?> <?php endif; ?>
+
                                         </select>
                                     </div>
                                 </div>
@@ -51,8 +50,8 @@
                                             ?>
                                             <?php if($getsubcategoryitemlistbycategory): ?> <?php $__currentLoopData = $getsubcategoryitemlistbycategory; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $rowsubcategoryitem): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                             <option value="<?php echo e(Crypt::encryptString($rowsubcategoryitem->id)); ?>" <?php if($rowsubcategoryitem->id == Crypt::decryptString(request()->subcategoryitem)): ?> selected <?php endif; ?>><?php echo e($rowsubcategoryitem->sub_category_item_name); ?></option>
-                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?> <?php endif; ?>											
-											
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?> <?php endif; ?>
+
                                         </select>
                                     </div>
                                 </div>
@@ -66,8 +65,8 @@
                                             ?>
                                             <?php if($getvariation): ?> <?php $__currentLoopData = $getvariation; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $rowvariation): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                             <option value="<?php echo e(Crypt::encryptString($rowvariation->id)); ?>" <?php if($rowvariation->id == Crypt::decryptString(request()->variation)): ?> selected <?php endif; ?>><?php echo e($rowvariation->variation_name); ?></option>
-                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?> <?php endif; ?>												
-											
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?> <?php endif; ?>
+
                                         </select>
                                     </div>
                                 </div>
@@ -113,7 +112,6 @@
                     <div class="modal-body">
 
                     </div>
-                    
                 </div>
             </div>
         </div>
@@ -280,7 +278,7 @@
                        {
                             data: 'action',
                             render: function (data, type, row){
-                                return '<a href="<?php echo url("vendor/add-variationitem")?>/'+data+'" title="Edit Variation Item"><i class="mdi mdi-table-edit"></i></a> | <a href="<?php echo url("vendor/variationitemtrash")?>/'+data+'" title="Trash Variation Item" onclick="return confirm("Are you sure?")"><i class="mdi mdi-delete-forever"></i></a> ';
+                                return '<a href="<?php echo url("vendor/edit-variationitem")?>/'+data+'" onclick="geturldata(event)" title="Edit Variation Item"><i class="mdi mdi-table-edit"></i></a> | <a href="<?php echo url("vendor/variationitemtrash")?>/'+data+'" title="Trash Variation Item" onclick="return confirm("Are you sure?")"><i class="mdi mdi-delete-forever"></i></a> ';
                             },
                         },
 
@@ -296,6 +294,13 @@
             }
             return false;
         }
+        function geturldata(e){
+            //alert(e.currentTarget.href);
+			var result = '<iframe  width="660" height="500"  src="'+e.currentTarget.href+'" frameborder="0" marginheight="0" marginwidth="0">Loading&amp;#8230;</iframe>';
+			$("#myModal").modal('show');
+            $(".modal-body").html(result);
+			e.preventDefault();
+	    }
     </script>
 <?php $__env->stopPush(); ?>
 <?php $__env->stopSection(); ?>

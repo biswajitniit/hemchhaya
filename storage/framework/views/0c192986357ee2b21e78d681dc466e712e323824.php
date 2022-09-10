@@ -1,4 +1,3 @@
-
 <?php $__env->startSection('title', 'Add Variation'); ?>
 <?php $__env->startSection('content'); ?>
 
@@ -158,7 +157,7 @@
                 var catId = $(this).val();
                 if (catId) {
                     $.ajax({
-                        url: "<?php echo e(route('admin.getsubcategoryonattributepage')); ?>",
+                        url: "<?php echo e(route('vendor.getsubcategorycpt')); ?>",
                         type: "POST",
                         data:{categoryid:catId, _token: '<?php echo e(csrf_token()); ?>'},
                         dataType: "json",
@@ -178,7 +177,7 @@
                 var subcatId = $(this).val();
                 if (subcatId) {
                     $.ajax({
-                        url: "<?php echo e(route('admin.getsubcategoryitemonattributepage')); ?>",
+                        url: "<?php echo e(route('vendor.getsubcategoryitemcpt')); ?>",
                         type: "POST",
                         data:{subcategoryid:subcatId, _token: '<?php echo e(csrf_token()); ?>'},
                         dataType: "json",
