@@ -4,7 +4,7 @@
 <div class="main-panel">
     <div class="content-wrapper">
       <div class="page-header">
-        <h3 class="page-title"> Product </h3>
+        <h3 class="page-title">Product</h3>
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="#">Products</a></li>
@@ -12,17 +12,37 @@
           </ol>
         </nav>
       </div>
+
       <div class="row">
-        <div class="col-12 grid-margin">
+        <div class="col-lg-12">
           <div class="card">
             <div class="card-body">
-              {{-- <h4 class="card-title">Add Product</h4> --}}
-              <form id="example-form" action="#" autocomplete="off">
-                <div>
-                  <h3>Categories</h3>
-                    <section>
-                        <h6>Categories Information</h6>
-                        <hr />
+
+                @if($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
+                @if(session()->has('message'))
+                    <div class="alert alert-success">
+                        {{ session()->get('message') }}
+                    </div>
+                @endif
+
+
+
+              <form class="cmxform" id="addproduct" method="post" action="{{ route('vendor.add-product-post-data') }}" name="addproduct" enctype="multipart/form-data">
+                @csrf
+                <fieldset>
+
+                    <h3>Categories</h3>
+                    <hr />
+
                         <div class="form-group row">
                             <label for="category_id" class="col-sm-3 col-form-label">Category name <span class="required">*</span></label>
                             <div class="col-sm-6">
@@ -72,35 +92,32 @@
                             </div>
                         </div>
 
-                    </section>
-
-
-                  <h3>Description</h3>
-                    <section>
-
+                    <hr />
+                    <h3>Description</h3>
+                    <hr />
                         <div class="form-group row">
-                            <label for="seller_brand_name" class="col-sm-3 col-form-label">Name <span class="required">*</span></label>
+                            <label for="name" class="col-sm-3 col-form-label">Name <span class="required">*</span></label>
                             <div class="col-sm-6">
-                                <input type="text" class="form-control" id="seller_brand_name" placeholder="" />
+                                <input type="text" name="name" class="form-control" id="name" placeholder="" />
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="seller_brand_name" class="col-sm-3 col-form-label">Brand <span class="required">*</span></label>
+                            <label for="brand" class="col-sm-3 col-form-label">Brand <span class="required">*</span></label>
                             <div class="col-sm-6">
-                                <input type="text" class="form-control" id="seller_brand_name" placeholder="" />
+                                <input type="text" name="brand" class="form-control" id="brand" placeholder="" />
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="seller_brand_name" class="col-sm-3 col-form-label">Highlights <span class="required">*</span></label>
+                            <label for="highlights" class="col-sm-3 col-form-label">Highlights <span class="required">*</span></label>
                             <div class="col-sm-9">
                                 <textarea name="highlights" id="highlights-ckeditor" rows="10" cols="80"/></textarea>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="seller_brand_name" class="col-sm-3 col-form-label">Description <span class="required">*</span></label>
+                            <label for="description" class="col-sm-3 col-form-label">Description <span class="required">*</span></label>
                             <div class="col-sm-9">
                                 <textarea name="description" id="description-ckeditor" rows="10" cols="80"/></textarea>
                             </div>
@@ -109,22 +126,22 @@
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Is featured?</label>
                             <div class="col-sm-4">
-                              <div class="form-check">
-                                <label class="form-check-label">
-                                  <input type="radio" class="form-check-input" name="status" id="status1" value="1" > Yes </label>
-                              </div>
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                    <input type="radio" class="form-check-input" name="is_featured" id="is_featured1" value="1" > Yes </label>
+                                </div>
                             </div>
                             <div class="col-sm-5">
-                              <div class="form-check">
-                                <label class="form-check-label">
-                                  <input type="radio" class="form-check-input" name="status" id="status2" value="2" checked> No </label>
-                              </div>
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                    <input type="radio" class="form-check-input" name="is_featured" id="is_featured2" value="2" checked> No </label>
+                                </div>
                             </div>
-                          </div>
+                        </div>
 
-
-                        <h6>Manufacturing Details</h6>
-                        <hr />
+                      <hr />
+                      <h6>Manufacturing Details</h6>
+                      <hr />
                         <div class="form-group row">
                             <label for="country_of_origin" class="col-sm-3 col-form-label">Country of Origin <span class="required">*</span></label>
                             <div class="col-sm-6">
@@ -135,120 +152,116 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="seller_hsn" class="col-sm-3 col-form-label">Manufacture Details <span class="required">*</span></label>
+                            <label for="manufacture_details" class="col-sm-3 col-form-label">Manufacture Details <span class="required">*</span></label>
                             <div class="col-sm-6">
-                                <input type="text" class="form-control" id="seller_hsn" placeholder="" />
+                                <input type="text" name="manufacture_details" class="form-control" id="manufacture_details" placeholder="" />
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="seller_hsn" class="col-sm-3 col-form-label">Packer Details <span class="required">*</span></label>
+                            <label for="packer_details" class="col-sm-3 col-form-label">Packer Details <span class="required">*</span></label>
                             <div class="col-sm-6">
-                                <input type="text" class="form-control" id="seller_hsn" placeholder="" />
+                                <input type="text" name="packer_details" class="form-control" id="packer_details" placeholder="" />
                             </div>
                         </div>
 
-
-
-                    </section>
-
-
+                    <hr />
                     <h3>Product has variations</h3>
-                    <hr>
-                    <section>
-                        <h6>Product Variation / Images</h6>
-                        <hr>
+                    <hr />
+
                         @if (!empty(request()->catid) &&  !empty(request()->subcatid) && !empty(request()->subcatitemid))
-                            @php
-                            $getVariation = GetVariationlistonaddproduct(request()->catid,request()->subcatid,request()->subcatitemid);
-                            @endphp
+                        @php
+                        $getVariation = GetVariationlistonaddproduct(request()->catid,request()->subcatid,request()->subcatitemid);
+                        @endphp
 
-                            @if($getVariation)
-                                <div class="form-group row">
-                                    @foreach ($getVariation as $rowvariation)
-                                        <div class="col-sm-6">
-                                            <label for="front_view_image" class="col-form-label"> {{ $rowvariation->variation_name }}</label>
-                                            <select name="country_of_origin" class="country_of_origin" style="width: 100%;">
-                                               <option value="">Select One</option>
-                                               @php
-                                                $getVariationitem = GetVariationitemlistonaddproduct(request()->catid,request()->subcatid,request()->subcatitemid,$rowvariation->id);
-                                                @endphp
-                                                @if($getVariationitem)
-                                                    @foreach ($getVariationitem as $rowvariationitem)
-                                                        <option value="{{ $rowvariationitem->id }}">{{ $rowvariationitem->variation_item_name }}</option>
-                                                    @endforeach
-                                                @endif
-                                            </select>
-                                        </div>
-                                    @endforeach
-                                </div>
-                            @endif
+                        @if($getVariation)
+                            <div class="form-group row">
+                                @foreach ($getVariation as $rowvariation)
+                                    <div class="col-sm-6">
+                                        <label for="front_view_image" class="col-form-label"> {{ $rowvariation->variation_name }}</label>
+                                        <select name="country_of_origin" class="country_of_origin" style="width: 100%;">
+                                        <option value="">Select One</option>
+                                        @php
+                                            $getVariationitem = GetVariationitemlistonaddproduct(request()->catid,request()->subcatid,request()->subcatitemid,$rowvariation->id);
+                                            @endphp
+                                            @if($getVariationitem)
+                                                @foreach ($getVariationitem as $rowvariationitem)
+                                                    <option value="{{ $rowvariationitem->id }}">{{ $rowvariationitem->variation_item_name }}</option>
+                                                @endforeach
+                                            @endif
+                                        </select>
+                                    </div>
+                                @endforeach
+                            </div>
                         @endif
+                    @endif
 
-                        <div class="form-group row">
-                            <div class="col-sm-3">
-                                <label for="front_view_image" class="col-form-label">Front View Image <span class="required">*</span></label>
-                                <input type="file" name="front_view_image" class="dropify" required/>
+                    <div class="form-group row">
+                        <div class="col-sm-3">
+                            <label for="front_view_image" class="col-form-label">Front View Image <span class="required">*</span></label>
+                            <input type="file" name="front_view_image" class="dropify" />
+                        </div>
+                        <div class="col-sm-3">
+                            <label for="back_view_image" class="col-form-label">Back View Image </label>
+                            <input type="file" name="back_view_image" class="dropify" />
+                        </div>
+                        <div class="col-sm-3">
+                            <label for="side_view_image" class="col-form-label">Side View Image </label>
+                            <input type="file" name="side_view_image" class="dropify" />
+                        </div>
+                        <div class="col-sm-3">
+                            <label for="open_view_image" class="col-form-label">Open View Image </label>
+                            <input type="file" name="open_view_image" class="dropify" />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-sm-3">
+                            <label for="sku" class="col-form-label">SKU <span class="required">*</span></label>
+                            <input type="text" name="sku"  class="form-control" />
+                        </div>
+                        <div class="col-sm-3">
+                            <label for="price" class="col-form-label">Price <span class="required">*</span></label>
+                            <input type="text" name="price"  class="form-control" />
+                        </div>
+                        <div class="col-sm-3">
+                            <label for="sale_price" class="col-form-label">Your Selling Price <span class="required">*</span></label>
+                            <input type="text" name="sale_price"  class="form-control" />
+                        </div>
+                        <div class="col-sm-3">
+                            <label for="quantity" class="col-form-label">Quantity <span class="required">*</span></label>
+                            <input type="text" name="quantity"  class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="form-check form-check-flat form-check-primary">
+                        <label class="form-check-label">
+                        <input type="checkbox" name="allow_customer_checkout_when_this_product_out_of_stock" value="1" class="form-check-input"> Allow customer checkout when this product out of stock <i class="input-helper"></i> </label>
+                    </div>
+
+                <hr />
+                <h6>Packaging Details</h6>
+                <hr />
+
+                <div class="form-group row">
+                            <div class="col-sm-6">
+                                <label for="weight" class="col-form-label">Packaging Weight (Kg) <span class="required">*</span></label>
+                                <input type="text" name="weight"  class="form-control" />
                             </div>
-                            <div class="col-sm-3">
-                                <label for="back_view_image" class="col-form-label">Back View Image </label>
-                                <input type="file" name="back_view_image" class="dropify" required/>
+                            <div class="col-sm-6">
+                                <label for="length" class="col-form-label">Packaging Length (cm) <span class="required">*</span></label>
+                                <input type="text" name="length"  class="form-control" />
                             </div>
-                            <div class="col-sm-3">
-                                <label for="side_view_image" class="col-form-label">Side View Image </label>
-                                <input type="file" name="side_view_image" class="dropify" required/>
-                            </div>
-                            <div class="col-sm-3">
-                                <label for="open_view_image" class="col-form-label">Open View Image </label>
-                                <input type="file" name="open_view_image" class="dropify" required/>
-                            </div>
+
                         </div>
 
                         <div class="form-group row">
-                            <div class="col-sm-3">
-                                <label for="front_view_image" class="col-form-label">SKU <span class="required">*</span></label>
-                                <input type="text" name="sku"  class="form-control" required/>
-                            </div>
-                            <div class="col-sm-3">
-                                <label for="back_view_image" class="col-form-label">Price <span class="required">*</span></label>
-                                <input type="text" name="price"  class="form-control" required/>
-                            </div>
-                            <div class="col-sm-3">
-                                <label for="side_view_image" class="col-form-label">Your Selling Price <span class="required">*</span></label>
-                                <input type="text" name="selling_price"  class="form-control" required/>
-                            </div>
-                            <div class="col-sm-3">
-                                <label for="side_view_image" class="col-form-label">Quantity <span class="required">*</span></label>
-                                <input type="text" name="quantity"  class="form-control" required/>
-                            </div>
-                        </div>
-
-                        <div class="form-check form-check-flat form-check-primary">
-                            <label class="form-check-label">
-                            <input type="checkbox" class="form-check-input"> Allow customer checkout when this product out of stock <i class="input-helper"></i> </label>
-                        </div>
-                        <hr />
-                        <h6>Packaging Details</h6>
-                        <hr />
-                        <div class="form-group row">
                             <div class="col-sm-6">
-                                <label for="front_view_image" class="col-form-label">Packaging Weight (Kg) <span class="required">*</span></label>
-                                <input type="text" name="quantity"  class="form-control" required/>
+                                <label for="breadth" class="col-form-label">Packaging Breadth (cm) <span class="required">*</span></label>
+                                <input type="text" name="breadth"  class="form-control" />
                             </div>
                             <div class="col-sm-6">
-                                <label for="back_view_image" class="col-form-label">Packaging Length (cm) <span class="required">*</span></label>
-                                <input type="text" name="quantity"  class="form-control" required/>
-                            </div>
-
-                        </div>
-
-                        <div class="form-group row">
-                            <div class="col-sm-6">
-                                <label for="side_view_image" class="col-form-label">Packaging Breadth (cm) <span class="required">*</span></label>
-                                <input type="text" name="quantity"  class="form-control" required/>
-                            </div>
-                            <div class="col-sm-6">
-                                <label for="open_view_image" class="col-form-label">Packaging Height (cm) <span class="required">*</span></label>
-                                <input type="text" name="quantity"  class="form-control" required/>
+                                <label for="height" class="col-form-label">Packaging Height (cm) <span class="required">*</span></label>
+                                <input type="text" name="height"  class="form-control" />
                             </div>
                         </div>
 
@@ -357,66 +370,55 @@
                             @endif
                         @endif
 
+                        <hr />
+                        <h3>Search engine optimize</h3>
+                        <hr />
+
+                        <div class="form-group">
+                            <label for="search_keywords">Search Keywords</label>
+                            <input name="search_keywords" id="tags" value="" />
+                        </div>
+                        <div class="form-group">
+                            <label for="meta_title">Meta Title</label>
+                            <input type="text" name="meta_title" class="form-control" id="tags" value="" />
+                        </div>
+                        <div class="form-group">
+                            <label for="meta_keywords">Meta Keywords</label>
+                            <textarea class="form-control" id="meta_keywords" rows="4"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="meta_description">Meta Description</label>
+                            <textarea class="form-control" id="meta_description" rows="4"></textarea>
+                        </div>
 
 
-
-                    </section>
-
-
-
-                  <h3>Search engine optimize</h3>
-                  <section>
-
-                    {{-- <div class="form-check">
-                      <label class="form-check-label">
-                        <input class="checkbox" type="checkbox"> I agree with the Terms and Conditions. </label>
-                    </div> --}}
-
-                    <div class="form-group">
-                        <label for="column_name">Search Keywords</label>
-                        <input name="search_keywords" id="tags" value="" />
-                    </div>
-                    <div class="form-group">
-                        <label for="column_name">Meta Title</label>
-                        <input type="text" name="search_keywords" class="form-control" id="tags" value="" />
-                    </div>
-                    <div class="form-group">
-                        <label for="column_name">Meta Keywords</label>
-                        <textarea class="form-control" id="exampleTextarea1" rows="4"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="column_name">Meta Description</label>
-                        <textarea class="form-control" id="exampleTextarea1" rows="4"></textarea>
-                    </div>
-
-                  </section>
-                </div>
+                        {{-- <img src="{{Storage::disk('s3')->url('https://salesanta-bucket-staging.s3.us-east-2.amazonaws.com/product/large//bZSaBkeylXjrZnxB3ZwnvYj32EgClMR2Zs9jjsTp.jpg') }}"> --}}
+                        <img src="{{Storage::disk('s3')->url('product/large/https://salesanta-bucket-staging.s3.us-east-2.amazonaws.com/product/large//bZSaBkeylXjrZnxB3ZwnvYj32EgClMR2Zs9jjsTp.jpg')}}">
+                  <input class="btn btn-primary btn-lg" type="submit" value="Submit">
+                </fieldset>
               </form>
             </div>
           </div>
         </div>
       </div>
-      <!--vertical wizard-->
-
     </div>
     <!-- content-wrapper ends -->
     <!-- partial:../../partials/_footer.html -->
     <footer class="footer">
-      <div class="d-sm-flex justify-content-center justify-content-sm-between">
-        <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2021 <a href="https://www.bootstrapdash.com/" target="_blank">BootstrapDash</a>. All rights reserved.</span>
-        <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with <i class="mdi mdi-heart text-danger"></i></span>
-      </div>
+        <div class="d-sm-flex justify-content-center justify-content-sm-between">
+            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © {{ date('Y') }} <a href="{{ url('/') }}" target="_blank">Hemchhaya</a>. All rights reserved.</span>
+        </div>
     </footer>
     <!-- partial -->
   </div>
-
-
-
-
+  <!-- main-panel ends -->
 
 @push('scripts')
 
     <script type="text/javascript">
+
+
+
      CKEDITOR.replace( 'highlights-ckeditor' );
      CKEDITOR.replace( 'description-ckeditor' );
 
@@ -428,7 +430,7 @@
             $('#ice-cream').multiSelect();
 
             // validate signup form on keyup and submit
-            $("#addsubcategoryitem").validate({
+            $("#addproduct").validate({
                 rules: {
                     category_id: "required",
                     sub_category_id: "required",
@@ -538,6 +540,11 @@
             });
 
         });
+
+
+
+
+
     </script>
 @endpush
 @endsection

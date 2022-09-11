@@ -1,3 +1,4 @@
+
 <?php $__env->startSection('title', 'Add variation item'); ?>
 <?php $__env->startSection('content'); ?>
 
