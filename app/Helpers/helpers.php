@@ -30,7 +30,7 @@ if (! function_exists('Getattributecategory')) {
 
 if (! function_exists('Getattributebyattributecategory')) {
     function Getattributebyattributecategory($attributecatid) {
-       return Attribute::where('category_id',$attributecatid)->where('status','1')->get();
+       return Attribute::where('attribute_category_id',$attributecatid)->where('status','1')->get();
     }
 }
 if (! function_exists('GetVariation')) {
