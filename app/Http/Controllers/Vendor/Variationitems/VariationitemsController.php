@@ -15,6 +15,7 @@ use App\Models\Variationitems;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Contracts\Encryption\DecryptException;
 use DB;
+use Illuminate\Support\Facades\Auth;
 class VariationitemsController extends Controller
 {
     public function __construct()
@@ -159,6 +160,7 @@ class VariationitemsController extends Controller
         ]);
 
     	$variationitems = new Variationitems();
+            $variationitems->vendor_id               = Auth::id();
             $variationitems->category_id             = $request['category_id'];
             $variationitems->sub_category_id         = $request['sub_category_id'];
             $variationitems->sub_category_item_id    = $request['sub_category_item_id'];

@@ -15,6 +15,8 @@ class CreateVariationsTable extends Migration
     {
         Schema::create('variations', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('vendor_id');
+            $table->foreign('vendor_id')->references('id')->on('vendors')->onDelete('cascade');
 
             $table->unsignedBigInteger('category_id');
             $table->foreign('category_id')->references('id')->on('categorys')->onDelete('cascade');

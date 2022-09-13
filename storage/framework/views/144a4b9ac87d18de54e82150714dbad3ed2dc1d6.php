@@ -177,8 +177,8 @@
                             <div class="form-group row">
                                 <?php $__currentLoopData = $getVariation; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $rowvariation): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <div class="col-sm-6">
-                                        <label for="front_view_image" class="col-form-label"> <?php echo e($rowvariation->variation_name); ?></label>
-                                        <select name="country_of_origin" class="country_of_origin" style="width: 100%;">
+                                        <label for="variation" class="col-form-label"> <?php echo e($rowvariation->variation_name); ?></label>
+                                        <select name="variation[]" class="variation" style="width: 100%;">
                                         <option value="">Select One</option>
                                         <?php
                                             $getVariationitem = GetVariationitemlistonaddproduct(request()->catid,request()->subcatid,request()->subcatitemid,$rowvariation->id);
@@ -289,7 +289,7 @@
                                                     <div class="form-group row">
                                                         <label for="<?php echo e($rowattribute->column_slug); ?>" class="col-sm-3 col-form-label"><?php echo e($rowattribute->column_name); ?> <?php if($rowattribute->column_validation == 2): ?> <span class="required">*</span> <?php endif; ?></label>
                                                         <div class="col-sm-6">
-                                                            <input type="text" class="form-control" id="<?php echo e($rowattribute->column_slug); ?>" placeholder="" <?php if($rowattribute->column_validation == 2): ?> required <?php endif; ?>/>
+                                                            <input type="text" name="<?php echo e($rowattribute->column_slug); ?>" class="form-control" id="<?php echo e($rowattribute->column_slug); ?>" placeholder="" <?php if($rowattribute->column_validation == 2): ?> required <?php endif; ?>/>
                                                         </div>
                                                     </div>
                                                 <?php endif; ?>
@@ -392,8 +392,6 @@
                         </div>
 
 
-                        
-                        <img src="<?php echo e(Storage::disk('s3')->url('product/large/https://salesanta-bucket-staging.s3.us-east-2.amazonaws.com/product/large//bZSaBkeylXjrZnxB3ZwnvYj32EgClMR2Zs9jjsTp.jpg')); ?>">
                   <input class="btn btn-primary btn-lg" type="submit" value="Submit">
                 </fieldset>
               </form>
@@ -474,6 +472,10 @@
             if ($(".country_of_origin").length) {
                 $(".country_of_origin").select2();
             }
+            if ($(".variation").length) {
+                $(".variation").select2();
+            }
+
 
         })(jQuery);
 

@@ -10,6 +10,7 @@ use App\Models\Subcategoryitem;
 use App\Models\Attributecategory;
 use App\Models\Variations;
 use DataTables;
+use Illuminate\Support\Facades\Auth;
 
 class VariationsController extends Controller
 {
@@ -83,11 +84,12 @@ class VariationsController extends Controller
         ]);
 
     	$variations = new Variations();
+            $variations->vendor_id               = Auth::id();
             $variations->category_id             = $request['category_id'];
             $variations->sub_category_id         = $request['sub_category_id'];
             $variations->sub_category_item_id    = $request['sub_category_item_id'];
             $variations->variation_name          = $request['variation_name'];
-            $variations->column_slug             = $this->slugify($request['variation_name'],'_');
+            $variations->column_slug             = $this->slugify($request['variation_name'],'-');
             $variations->status                  = $request['status'];
 		$variations->save();
 
@@ -129,7 +131,7 @@ class VariationsController extends Controller
             'sub_category_id'           => $request['sub_category_id'],
             'sub_category_item_id'      => $request['sub_category_item_id'],
             'variation_name'            => $request['variation_name'],
-            'column_slug'               => $this->slugify($request['variation_name'],'_'),
+            'column_slug'               => $this->slugify($request['variation_name'],'-'),
             'status'                    => $request['status']
         );
 

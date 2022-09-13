@@ -177,8 +177,8 @@
                             <div class="form-group row">
                                 @foreach ($getVariation as $rowvariation)
                                     <div class="col-sm-6">
-                                        <label for="front_view_image" class="col-form-label"> {{ $rowvariation->variation_name }}</label>
-                                        <select name="country_of_origin" class="country_of_origin" style="width: 100%;">
+                                        <label for="variation" class="col-form-label"> {{ $rowvariation->variation_name }}</label>
+                                        <select name="variation[]" class="variation" style="width: 100%;">
                                         <option value="">Select One</option>
                                         @php
                                             $getVariationitem = GetVariationitemlistonaddproduct(request()->catid,request()->subcatid,request()->subcatitemid,$rowvariation->id);
@@ -289,7 +289,7 @@
                                                     <div class="form-group row">
                                                         <label for="{{ $rowattribute->column_slug }}" class="col-sm-3 col-form-label">{{ $rowattribute->column_name }} @if($rowattribute->column_validation == 2) <span class="required">*</span> @endif</label>
                                                         <div class="col-sm-6">
-                                                            <input type="text" class="form-control" id="{{ $rowattribute->column_slug }}" placeholder="" @if($rowattribute->column_validation == 2) required @endif/>
+                                                            <input type="text" name="{{ $rowattribute->column_slug }}" class="form-control" id="{{ $rowattribute->column_slug }}" placeholder="" @if($rowattribute->column_validation == 2) required @endif/>
                                                         </div>
                                                     </div>
                                                 @endif
@@ -392,8 +392,6 @@
                         </div>
 
 
-                        {{-- <img src="{{Storage::disk('s3')->url('https://salesanta-bucket-staging.s3.us-east-2.amazonaws.com/product/large//bZSaBkeylXjrZnxB3ZwnvYj32EgClMR2Zs9jjsTp.jpg') }}"> --}}
-                        <img src="{{Storage::disk('s3')->url('product/large/https://salesanta-bucket-staging.s3.us-east-2.amazonaws.com/product/large//bZSaBkeylXjrZnxB3ZwnvYj32EgClMR2Zs9jjsTp.jpg')}}">
                   <input class="btn btn-primary btn-lg" type="submit" value="Submit">
                 </fieldset>
               </form>
@@ -474,6 +472,10 @@
             if ($(".country_of_origin").length) {
                 $(".country_of_origin").select2();
             }
+            if ($(".variation").length) {
+                $(".variation").select2();
+            }
+
 
         })(jQuery);
 

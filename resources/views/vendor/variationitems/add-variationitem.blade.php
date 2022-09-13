@@ -97,7 +97,7 @@
                         <div class="form-group row">
                             <div class="col-sm-3">
                                 <label for="image" class="col-form-label">Image </label>
-                                <input type="file" name="image" class="dropify" required/>
+                                <input type="file" name="image" class="dropify"/>
                             </div>
                         </div>
 
