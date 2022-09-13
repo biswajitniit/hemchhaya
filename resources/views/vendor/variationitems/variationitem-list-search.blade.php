@@ -1,31 +1,21 @@
-@extends('layouts.admin')
-@section('title', 'Attribute category search category / subcategory / subcategory item wise')
+@extends('layouts.vendor')
+@section('title', 'variation item list search')
 @section('content')
-
 
 <div class="main-panel">
     <div class="content-wrapper pb-0">
         <div class="page-header">
-            <h3 class="page-title">Search attribute</h3>
+            <h3 class="page-title">Search variation items</h3>
             <div class="header-right d-flex flex-wrap mt-2 mt-sm-0">
-                <button type="button" onclick="location.href='{{ route('admin.add-attribute-category') }}'" class="btn btn-primary mt-2 mt-sm-0 btn-icon-text">
-                  <i class="mdi mdi-plus-circle"></i> Add Attribute </button>
+                <button type="button" onclick="location.href='{{ route('vendor.add-variationitem') }}'" class="btn btn-primary mt-2 mt-sm-0 btn-icon-text"><i class="mdi mdi-plus-circle"></i> Add variation items</button>
             </div>
         </div>
-
-        @if(session()->has('message'))
-            <div class="alert alert-danger">
-                {{ session()->get('message') }}
-            </div>
-        @endif
-
-
 
         <!-- first row starts here -->
         <div class="row">
             <div class="col-xl-12 stretch-card grid-margin">
                 <div class="card">
-                    <form action="{{ route('admin.searchattributecategory') }}" name="searchattributecategory" id="searchattributecategory" method="GET">
+                    <form action="{{ route('vendor.searchvariationitemlist') }}" name="searchvariationitemlist" id="searchvariationitemlist" method="GET">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col">
@@ -43,11 +33,12 @@
                                         <select name="subcategory" class="subcategory" style="width: 100%;">
                                             <option value="">Select Sub Category</option>
                                             @php
-                                                $getsubcategorylistbycategory = GetSubcategoryBycatid(Crypt::decryptString(request()->category));
+                                            $getsubcategorylistbycategory = GetSubcategoryBycatid(Crypt::decryptString(request()->category));
                                             @endphp
                                             @if($getsubcategorylistbycategory) @foreach ($getsubcategorylistbycategory as $rowsubcategory)
                                             <option value="{{ Crypt::encryptString($rowsubcategory->id) }}" @if($rowsubcategory->id == Crypt::decryptString(request()->subcategory)) selected @endif>{{ $rowsubcategory->sub_category_name }}</option>
                                             @endforeach @endif
+
                                         </select>
                                     </div>
                                 </div>
@@ -65,6 +56,22 @@
                                         </select>
                                     </div>
                                 </div>
+
+                                <div class="col">
+                                    <div class="form-group">
+                                        <select name="variation" class="variation" style="width: 100%;">
+                                            <option value="">Select Variation</option>
+                                            @php
+                                                $getvariation = GetVariation(Crypt::decryptString(request()->subcategoryitem));
+                                            @endphp
+                                            @if($getvariation) @foreach ($getvariation as $rowvariation)
+                                            <option value="{{ Crypt::encryptString($rowvariation->id) }}" @if($rowvariation->id == Crypt::decryptString(request()->variation)) selected @endif>{{ $rowvariation->variation_name }}</option>
+                                            @endforeach @endif
+
+                                        </select>
+                                    </div>
+                                </div>
+
                                 <div class="col">
                                     <div class="form-group">
                                         <input class="btn btn-primary btn-lg" type="submit" value="Search" />
@@ -79,14 +86,14 @@
 
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Attribut's</h4>
+                <h4 class="card-title">Variation items table</h4>
                 <div class="row">
                     <div class="col-12">
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped mb-none" id="my-table">
                                 <thead>
                                     <tr class="bg-primary text-white">
-                                        <th>Attribute</th>
+                                        <th>Variation Item Name</th>
                                         <th>Status</th>
                                         <th>Actions</th>
                                     </tr>
@@ -106,18 +113,18 @@
                     <div class="modal-body">
 
                     </div>
-                    {{-- <div class="modal-footer" style="width: 700px;z-index: -1;">
-                    <a href="javascript:void(0)" class="btn btn-danger" onclick="submit_or_refresh()">Close</a>
-                    </div> --}}
                 </div>
             </div>
         </div>
+
     </div>
     <!-- content-wrapper ends -->
+
     <!-- partial:../../partials/_footer.html -->
     <footer class="footer">
         <div class="d-sm-flex justify-content-center justify-content-sm-between">
-            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © {{ date('Y') }} <a href="{{ url('/') }}" target="_blank">Hemchhaya</a>. All rights reserved.</span>
+            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2021 <a href="https://www.bootstrapdash.com/" target="_blank">BootstrapDash</a>. All rights reserved.</span>
+            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with <i class="mdi mdi-heart text-danger"></i></span>
         </div>
     </footer>
     <!-- partial -->
@@ -127,57 +134,48 @@
 
 
 
-
-
-
 @push('scripts')
-<script type="text/javascript">
-    $(".alert").delay(2000).slideUp(200, function () {
-        $(this).alert('close');
-    });
-
-    function submit_or_refresh(){
-        $('#myModal').modal('toggle');
-    }
-
-    $(function() {
-        // validate signup form on keyup and submit
-        $("#searchattributecategory").validate({
-            rules: {
-                category: "required",
-                subcategory: "required",
-                subcategoryitem : "required",
-            },
-            messages: {
-                category: "Please select category",
-                subcategory: "Please select sub category",
-                subcategoryitem: "Please select sub category item",
-            },
-            errorPlacement: function(label, element) {
-                label.addClass('mt-2 text-danger');
-                label.insertAfter(element);
-            },
-            highlight: function(element, errorClass) {
-                $(element).parent().addClass('has-danger')
-                $(element).addClass('form-control-danger')
-            }
+    <script type="text/javascript">
+        $(function() {
+            // validate signup form on keyup and submit
+            $("#searchattribute").validate({
+                rules: {
+                    category: "required",
+                    subcategory: "required",
+                    subcategoryitem : "required",
+                },
+                messages: {
+                    category: "Please select category",
+                    subcategory: "Please select sub category",
+                    subcategoryitem: "Please select sub category item",
+                },
+                errorPlacement: function(label, element) {
+                    label.addClass('mt-2 text-danger');
+                    label.insertAfter(element);
+                },
+                highlight: function(element, errorClass) {
+                    $(element).parent().addClass('has-danger')
+                    $(element).addClass('form-control-danger')
+                }
+            });
         });
-    });
 
-    (function($) {
+        (function($) {
+            if ($(".category").length) {
+                $(".category").select2();
+            }
+            if ($(".subcategory").length) {
+                $(".subcategory").select2();
+            }
+            if ($(".subcategoryitem").length) {
+                $(".subcategoryitem").select2();
+            }
+            if ($(".variation").length) {
+                $(".variation").select2();
+            }
+        })(jQuery);
 
-        if ($(".category").length) {
-            $(".category").select2();
-        }
-        if ($(".subcategory").length) {
-            $(".subcategory").select2();
-        }
-        if ($(".subcategoryitem").length) {
-            $(".subcategoryitem").select2();
-        }
-    })(jQuery);
-
-    $("document").ready(function () {
+        $("document").ready(function () {
         $('select[name="category"]').on('change', function () {
             var catId = $(this).val();
             if (catId) {
@@ -218,12 +216,38 @@
             }
         });
 
+        $('select[name="subcategoryitem"]').on('change', function () {
+            var subcatitemId = $(this).val();
+            //alert(subcatitemId); return false;
+            if (subcatitemId) {
+                $.ajax({
+                    url: "{{route('vendor.getvariation')}}",
+                    type: "POST",
+                    data:{subcategoryitemid:subcatitemId, _token: '{{csrf_token()}}'},
+                    dataType: "json",
+                    success: function (returndata) {
+                        $('select[name="variation"]').empty();
+                        $.each(returndata, function (key, value) {
+                            $('select[name="variation"]').append('<option value=\'' +value.id+'\'>' + value.text + '</option>');
+                        })
+                    }
+                })
+            } else {
+                $('select[name="variation"]').empty();
+            }
+        });
 
 
     });
 
 
-    $(document).ready(function(){
+
+        $(".alert").delay(2000).slideUp(200, function () {
+            $(this).alert('close');
+        });
+
+
+        $(document).ready(function(){
         // DataTable
             $('#my-table').DataTable({
                 processing: true,
@@ -236,12 +260,12 @@
                     "targets": 0
                 }],
                 "ajax": {
-                    data: ({categoryid:'{{Crypt::decryptString(request()->category)}}',subcategoryid:'{{Crypt::decryptString(request()->subcategory)}}',subcategoryitemid:'{{Crypt::decryptString(request()->subcategoryitem)}}',_token: '{{csrf_token()}}'}),
-                    url : "{{route('admin.attributecategorylistajax')}}",
+                    data: ({categoryid:'{{Crypt::decryptString(request()->category)}}',subcategoryid:'{{Crypt::decryptString(request()->subcategory)}}',subcategoryitemid:'{{Crypt::decryptString(request()->subcategoryitem)}}',variationid:'{{Crypt::decryptString(request()->variation)}}',_token: '{{csrf_token()}}'}),
+                    url : "{{url('/')}}/searchvariationitemlistajax",
                     type : 'GET',
                 },
                 columns: [
-                        {data: 'attribute_category_name' },
+                        {data: 'variation_item_name' },
                         {
                             data: 'status',
                             render: function (data, type, row){
@@ -255,7 +279,7 @@
                        {
                             data: 'action',
                             render: function (data, type, row){
-                                return '<a href="<?php echo url("admin/edit-attribute-category") ?>/'+data+'" onclick="geturldata(event)" title="Edit Attribute Category"><i class="mdi mdi-table-edit"></i></a> | <a href="<?php echo url("admin/attribute-category-trash")?>/'+data+'" title="Trash attribute category" onclick="confirmMsg(event)"><i class="mdi mdi-delete-forever"></i></a>';
+                                return '<a href="<?php echo url("vendor/edit-variationitem")?>/'+data+'" onclick="geturldata(event)" title="Edit Variation Item"><i class="mdi mdi-table-edit"></i></a> | <a href="<?php echo url("vendor/variationitemtrash")?>/'+data+'" title="Trash Variation Item" onclick="return confirm("Are you sure?")"><i class="mdi mdi-delete-forever"></i></a> ';
                             },
                         },
 
@@ -263,15 +287,14 @@
             });
         });
 
-        function confirmMsg(e)
+        function confirmMsg()
         {
-            var answer = confirm("Are you sure you want to delete this record?")
+            var answer = confirm("Delete selected record?")
             if (answer){
                 return true;
             }
-            e.preventDefault();
+            return false;
         }
-
         function geturldata(e){
             //alert(e.currentTarget.href);
 			var result = '<iframe  width="660" height="500"  src="'+e.currentTarget.href+'" frameborder="0" marginheight="0" marginwidth="0">Loading&amp;#8230;</iframe>';
@@ -279,7 +302,6 @@
             $(".modal-body").html(result);
 			e.preventDefault();
 	    }
-
-</script>
+    </script>
 @endpush
 @endsection

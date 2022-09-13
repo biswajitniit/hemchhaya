@@ -83,7 +83,7 @@
                 processing: true,
                 serverSide: true,
                 lengthMenu: [[100, 200, 300], [100, 200, 300]],
-                order: [[ 2, "asc" ]],
+                order: [[ 0, "asc" ]],
                 columnDefs: [{
                     "searchable": true,
                     "orderable": false,

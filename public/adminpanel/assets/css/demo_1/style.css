@@ -17805,7 +17805,8 @@ body.avgrund-active {
 
 /* Select2 */
 .select2-container--default .select2-results__option--highlighted[aria-selected] {
-  background: #0033c4; }
+  background: #c21d17;
+}
 
 .select2-container--default .select2-selection--single,
 .select2-container--default .select2-dropdown,

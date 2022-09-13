@@ -1,31 +1,22 @@
-@extends('layouts.admin')
-@section('title', 'Attribute category search category / subcategory / subcategory item wise')
+@extends('layouts.vendor')
+@section('title', 'Variation category search category / subcategory / subcategory item wise')
 @section('content')
-
 
 <div class="main-panel">
     <div class="content-wrapper pb-0">
         <div class="page-header">
-            <h3 class="page-title">Search attribute</h3>
+            <h3 class="page-title">Search Variation</h3>
             <div class="header-right d-flex flex-wrap mt-2 mt-sm-0">
-                <button type="button" onclick="location.href='{{ route('admin.add-attribute-category') }}'" class="btn btn-primary mt-2 mt-sm-0 btn-icon-text">
-                  <i class="mdi mdi-plus-circle"></i> Add Attribute </button>
+                <button type="button" onclick="location.href='{{ route('vendor.add-variation') }}'" class="btn btn-primary mt-2 mt-sm-0 btn-icon-text">
+                  <i class="mdi mdi-plus-circle"></i> Add Variation </button>
             </div>
         </div>
-
-        @if(session()->has('message'))
-            <div class="alert alert-danger">
-                {{ session()->get('message') }}
-            </div>
-        @endif
-
-
 
         <!-- first row starts here -->
         <div class="row">
             <div class="col-xl-12 stretch-card grid-margin">
                 <div class="card">
-                    <form action="{{ route('admin.searchattributecategory') }}" name="searchattributecategory" id="searchattributecategory" method="GET">
+                    <form action="{{ route('vendor.searchvariation') }}" name="searchvariation" id="searchvariation" method="GET">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col">
@@ -43,7 +34,7 @@
                                         <select name="subcategory" class="subcategory" style="width: 100%;">
                                             <option value="">Select Sub Category</option>
                                             @php
-                                                $getsubcategorylistbycategory = GetSubcategoryBycatid(Crypt::decryptString(request()->category));
+                                            $getsubcategorylistbycategory = GetSubcategoryBycatid(Crypt::decryptString(request()->category));
                                             @endphp
                                             @if($getsubcategorylistbycategory) @foreach ($getsubcategorylistbycategory as $rowsubcategory)
                                             <option value="{{ Crypt::encryptString($rowsubcategory->id) }}" @if($rowsubcategory->id == Crypt::decryptString(request()->subcategory)) selected @endif>{{ $rowsubcategory->sub_category_name }}</option>
@@ -61,7 +52,6 @@
                                             @if($getsubcategoryitemlistbycategory) @foreach ($getsubcategoryitemlistbycategory as $rowsubcategoryitem)
                                             <option value="{{ Crypt::encryptString($rowsubcategoryitem->id) }}" @if($rowsubcategoryitem->id == Crypt::decryptString(request()->subcategoryitem)) selected @endif>{{ $rowsubcategoryitem->sub_category_item_name }}</option>
                                             @endforeach @endif
-
                                         </select>
                                     </div>
                                 </div>
@@ -79,16 +69,16 @@
 
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Attribut's</h4>
+                <h4 class="card-title">Variation table</h4>
                 <div class="row">
                     <div class="col-12">
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped mb-none" id="my-table">
                                 <thead>
-                                    <tr class="bg-primary text-white">
-                                        <th>Attribute</th>
-                                        <th>Status</th>
+                                    <tr>
+                                        <th>Variation Name</th>
                                         <th>Actions</th>
+                                        <th>Status</th>
                                     </tr>
                                 </thead>
                             </table>
@@ -98,6 +88,7 @@
             </div>
         </div>
 
+
         <div id="myModal" class="modal fade" role="dialog" >
             <div class="modal-dialog" style="width:700px;max-width:initial;height:500px;">
             <!-- Modal content-->
@@ -106,18 +97,21 @@
                     <div class="modal-body">
 
                     </div>
-                    {{-- <div class="modal-footer" style="width: 700px;z-index: -1;">
-                    <a href="javascript:void(0)" class="btn btn-danger" onclick="submit_or_refresh()">Close</a>
-                    </div> --}}
                 </div>
             </div>
         </div>
+
+
+
+
     </div>
     <!-- content-wrapper ends -->
+
     <!-- partial:../../partials/_footer.html -->
     <footer class="footer">
         <div class="d-sm-flex justify-content-center justify-content-sm-between">
-            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © {{ date('Y') }} <a href="{{ url('/') }}" target="_blank">Hemchhaya</a>. All rights reserved.</span>
+            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2021 <a href="https://www.bootstrapdash.com/" target="_blank">BootstrapDash</a>. All rights reserved.</span>
+            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with <i class="mdi mdi-heart text-danger"></i></span>
         </div>
     </footer>
     <!-- partial -->
@@ -127,44 +121,33 @@
 
 
 
-
-
-
 @push('scripts')
-<script type="text/javascript">
-    $(".alert").delay(2000).slideUp(200, function () {
-        $(this).alert('close');
-    });
-
-    function submit_or_refresh(){
-        $('#myModal').modal('toggle');
-    }
-
-    $(function() {
-        // validate signup form on keyup and submit
-        $("#searchattributecategory").validate({
-            rules: {
-                category: "required",
-                subcategory: "required",
-                subcategoryitem : "required",
-            },
-            messages: {
-                category: "Please select category",
-                subcategory: "Please select sub category",
-                subcategoryitem: "Please select sub category item",
-            },
-            errorPlacement: function(label, element) {
-                label.addClass('mt-2 text-danger');
-                label.insertAfter(element);
-            },
-            highlight: function(element, errorClass) {
-                $(element).parent().addClass('has-danger')
-                $(element).addClass('form-control-danger')
-            }
+    <script type="text/javascript">
+        $(function() {
+            // validate signup form on keyup and submit
+            $("#searchattribute").validate({
+                rules: {
+                    category: "required",
+                    subcategory: "required",
+                    subcategoryitem : "required",
+                },
+                messages: {
+                    category: "Please select category",
+                    subcategory: "Please select sub category",
+                    subcategoryitem: "Please select sub category item",
+                },
+                errorPlacement: function(label, element) {
+                    label.addClass('mt-2 text-danger');
+                    label.insertAfter(element);
+                },
+                highlight: function(element, errorClass) {
+                    $(element).parent().addClass('has-danger')
+                    $(element).addClass('form-control-danger')
+                }
+            });
         });
-    });
 
-    (function($) {
+        (function($) {
 
         if ($(".category").length) {
             $(".category").select2();
@@ -175,14 +158,14 @@
         if ($(".subcategoryitem").length) {
             $(".subcategoryitem").select2();
         }
-    })(jQuery);
+        })(jQuery);
 
-    $("document").ready(function () {
-        $('select[name="category"]').on('change', function () {
+        $("document").ready(function () {
+            $('select[name="category"]').on('change', function () {
             var catId = $(this).val();
             if (catId) {
                 $.ajax({
-                    url: "{{route('admin.getsubcategoryattribute')}}",
+                    url: "{{route('vendor.getsubcategory')}}",
                     type: "POST",
                     data:{categoryid:catId, _token: '{{csrf_token()}}'},
                     dataType: "json",
@@ -202,7 +185,7 @@
             var subcatId = $(this).val();
             if (subcatId) {
                 $.ajax({
-                    url: "{{route('admin.getsubcategoryitemattribute')}}",
+                    url: "{{route('vendor.getsubcategoryitem')}}",
                     type: "POST",
                     data:{subcategoryid:subcatId, _token: '{{csrf_token()}}'},
                     dataType: "json",
@@ -220,10 +203,17 @@
 
 
 
+
     });
 
 
-    $(document).ready(function(){
+
+        $(".alert").delay(2000).slideUp(200, function () {
+            $(this).alert('close');
+        });
+
+
+        $(document).ready(function(){
         // DataTable
             $('#my-table').DataTable({
                 processing: true,
@@ -237,11 +227,11 @@
                 }],
                 "ajax": {
                     data: ({categoryid:'{{Crypt::decryptString(request()->category)}}',subcategoryid:'{{Crypt::decryptString(request()->subcategory)}}',subcategoryitemid:'{{Crypt::decryptString(request()->subcategoryitem)}}',_token: '{{csrf_token()}}'}),
-                    url : "{{route('admin.attributecategorylistajax')}}",
+                    url : "{{route('vendor.searchvariationajax')}}",
                     type : 'GET',
                 },
                 columns: [
-                        {data: 'attribute_category_name' },
+                        {data: 'variation_name' },
                         {
                             data: 'status',
                             render: function (data, type, row){
@@ -255,7 +245,7 @@
                        {
                             data: 'action',
                             render: function (data, type, row){
-                                return '<a href="<?php echo url("admin/edit-attribute-category") ?>/'+data+'" onclick="geturldata(event)" title="Edit Attribute Category"><i class="mdi mdi-table-edit"></i></a> | <a href="<?php echo url("admin/attribute-category-trash")?>/'+data+'" title="Trash attribute category" onclick="confirmMsg(event)"><i class="mdi mdi-delete-forever"></i></a>';
+                                return '<a href="<?php echo url("vendor/edit-variation") ?>/'+data+'" onclick="geturldata(event)" title="Edit Variation"><i class="mdi mdi-table-edit"></i></a> | <a href="<?php echo url("/vendor/variation-trash")?>/'+data+'" title="Trash Variation" onclick="confirmMsg(event)"><i class="mdi mdi-delete-forever"></i></a>';
                             },
                         },
 
@@ -279,7 +269,6 @@
             $(".modal-body").html(result);
 			e.preventDefault();
 	    }
-
-</script>
+    </script>
 @endpush
 @endsection

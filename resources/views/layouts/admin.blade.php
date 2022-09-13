@@ -149,13 +149,21 @@
             </a>
             <div class="collapse" id="Attribute">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/attribute-category') }}">Attribute Category</a></li>
-                <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/attribute') }}">Attribute Field's</a></li>
-                {{-- <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/attributes-field') }}">Attributes Field</a></li> --}}
-                <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/brands') }}">Brands</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/attribute-category') }}">Attribute</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/attribute') }}">Attribute Items</a></li>
               </ul>
             </div>
           </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url('/admin/brands') }}">
+              <i class="mdi mdi-xing menu-icon"></i>
+              <span class="menu-title">Brands</span>
+            </a>
+          </li>
+
+
+
 
           <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#HPS" aria-expanded="false" aria-controls="apps">
@@ -539,6 +547,8 @@
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
     @stack('scripts')
 
   </body>

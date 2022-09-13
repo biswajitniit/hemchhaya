@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- Mirrored from www.bootstrapdash.com/demo/plus/jquery/template/demo_1/ by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 08 Aug 2022 10:53:43 GMT -->
+
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>@yield('title')</title>
-    <!-- plugins:css -->
     <link rel="stylesheet" href="{{ asset('adminpanel/assets/vendors/mdi/css/materialdesignicons.min.css') }}">
     <link rel="stylesheet" href="{{ asset('adminpanel/assets/vendors/flag-icon-css/css/flag-icon.min.css') }}">
     <link rel="stylesheet" href="{{ asset('adminpanel/assets/vendors/css/vendor.bundle.base.css') }}">
@@ -20,7 +19,6 @@
     <link rel="stylesheet" href="{{ asset('adminpanel/assets/vendors/jquery-bar-rating/css-stars.css') }}">
     <link rel="stylesheet" href="{{ asset('adminpanel/assets/vendors/font-awesome/css/font-awesome.min.css') }}">
     <!-- End plugin css for this page -->
-
 
 
       <!-- Plugin css for this page -->
@@ -44,12 +42,7 @@
       <link rel="stylesheet" href="{{ asset('adminpanel/assets/vendors/jquery-file-upload/uploadfile.css') }}">
       <link rel="stylesheet" href="{{ asset('adminpanel/assets/vendors/jquery-tags-input/jquery.tagsinput.min.css') }}">
       <link rel="stylesheet" href="{{ asset('adminpanel/assets/vendors/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.min.css') }}">
-      <!-- End plugin css for this page -->
 
-
-
-    <!-- inject:css -->
-    <!-- endinject -->
     <!-- Layout styles -->
     <link rel="stylesheet" href="{{ asset('adminpanel/assets/css/demo_1/style.css') }}">
     <!-- End layout styles -->
@@ -120,6 +113,21 @@
               <span class="menu-title">Dashboard</span>
             </a>
           </li>
+
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#variations" aria-expanded="false" aria-controls="apps">
+              <i class="mdi mdi-white-balance-iridescent menu-icon"></i>
+              <span class="menu-title">Variations</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="variations">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="{{ url('/vendor/variation') }}">Variations </a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{ url('/vendor/variation-items') }}">Variations Items</a></li>
+              </ul>
+            </div>
+          </li>
+
 
           <li class="nav-item">
             <a class="nav-link" href="{{ url('/vendor/products') }}">
@@ -424,6 +432,12 @@
         <script src="{{ asset('adminpanel/assets/js/inputmask.js') }}"></script>
         <!-- End custom js for this page -->
 
+        <script src="{{ asset('adminpanel/assets/js/jquery.multi-select.min.js') }}"></script>
+
+        <script src="{{ asset('adminpanel/assets/vendors/dropify/dropify.min.js') }}"></script>
+        <script src="{{ asset('adminpanel/assets/js/dropify.js') }}"></script>
+
+        <script src="//cdn.ckeditor.com/4.19.1/standard/ckeditor.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
     @stack('scripts')

@@ -1,15 +1,15 @@
-@extends('layouts.admin')
-@section('title', 'Attribute category search category / subcategory / subcategory item wise')
+@extends('layouts.vendor')
+@section('title', 'Variation category search category / subcategory / subcategory item wise')
 @section('content')
 
 
 <div class="main-panel">
     <div class="content-wrapper pb-0">
         <div class="page-header">
-            <h3 class="page-title">Search attribute</h3>
+            <h3 class="page-title">Search Variation</h3>
             <div class="header-right d-flex flex-wrap mt-2 mt-sm-0">
-                <button type="button" onclick="location.href='{{ route('admin.add-attribute-category') }}'" class="btn btn-primary mt-2 mt-sm-0 btn-icon-text">
-                  <i class="mdi mdi-plus-circle"></i> Add Attribute </button>
+                <button type="button" onclick="location.href='{{ route('vendor.add-variation') }}'" class="btn btn-primary mt-2 mt-sm-0 btn-icon-text">
+                  <i class="mdi mdi-plus-circle"></i> Add Variation </button>
             </div>
         </div>
 
@@ -18,7 +18,7 @@
             <div class="col-xl-12 stretch-card grid-margin">
                 <div class="card">
 
-                    <form action="{{ route('admin.searchattributecategory') }}" name="searchattributecategory" id="searchattributecategory" method="GET">
+                    <form action="{{ route('vendor.searchvariation') }}" name="searchvariation" id="searchvariation" method="GET">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col">
@@ -81,7 +81,7 @@
 
     $(function() {
         // validate signup form on keyup and submit
-        $("#searchattributecategory").validate({
+        $("#searchvariation").validate({
             rules: {
                 category: "required",
                 subcategory: "required",
@@ -121,7 +121,7 @@
             var catId = $(this).val();
             if (catId) {
                 $.ajax({
-                    url: "{{route('admin.getsubcategoryattribute')}}",
+                    url: "{{route('vendor.getsubcategory')}}",
                     type: "POST",
                     data:{categoryid:catId, _token: '{{csrf_token()}}'},
                     dataType: "json",
@@ -141,7 +141,7 @@
             var subcatId = $(this).val();
             if (subcatId) {
                 $.ajax({
-                    url: "{{route('admin.getsubcategoryitemattribute')}}",
+                    url: "{{route('vendor.getsubcategoryitem')}}",
                     type: "POST",
                     data:{subcategoryid:subcatId, _token: '{{csrf_token()}}'},
                     dataType: "json",
