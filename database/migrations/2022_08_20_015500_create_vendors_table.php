@@ -21,6 +21,7 @@ class CreateVendorsTable extends Migration
             $table->tinyInteger('is_super');
             $table->string('remember_token');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -31,6 +32,9 @@ class CreateVendorsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('vendors');
+        //Schema::dropIfExists('vendors');
+        Schema::table('vendors', function (Blueprint $table) {
+            $table->dropSoftDeletes();
+        });
     }
 }

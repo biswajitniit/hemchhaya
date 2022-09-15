@@ -83,22 +83,21 @@ class ProductController extends Controller
 
     public function add_product_post_data(Request $request){
 
+        //echo "<pre>"; print_r($request->attribute); die;
 
-        echo "<pre>"; print_r($request->attribute); die;
+        $this->validate($request, [
+            'category_id'           => 'required',
+            'sub_category_id'       => 'required',
+            'sub_category_item_id'  => 'required',
+            'front_view_image'      => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:10000000000000000000000',
+        ],[
+            'category_id.required'           => 'Please select category',
+            'sub_category_id.required'       => 'Please select sub category',
+            'sub_category_item_id.required'  => 'Please select sub category item',
+            'front_view_image.required'      => 'Please add front view image',
+        ]);
 
-        // $this->validate($request, [
-        //     'category_id'           => 'required',
-        //     'sub_category_id'       => 'required',
-        //     'sub_category_item_id'  => 'required',
-        //     'front_view_image'      => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:10000000000000000000000',
-        // ],[
-        //     'category_id.required'           => 'Please select category',
-        //     'sub_category_id.required'       => 'Please select sub category',
-        //     'sub_category_item_id.required'  => 'Please select sub category item',
-        //     'front_view_image.required'      => 'Please add front view image',
-        // ]);
-
-        /*$file = $request->front_view_image;
+        $file = $request->front_view_image;
         $filename = time().'.'.$request->front_view_image->extension();
 
         $path = Storage::disk('s3')->put("product/large/" . $filename, $file, 'public');
@@ -147,10 +146,10 @@ class ProductController extends Controller
 
 		$product->save();
 
-        $productId = $product->id; */
+        $productId = $product->id;
 
         // SAVE DATA FROM Product_child_variation
-       /* if(!empty($request->variation)){
+        if(!empty($request->variation)){
             // SAVE CHILD PRODUCT
                 $productChild = new Product();
                 $productChild->vendor_id                                                             = Auth::id();
@@ -227,15 +226,30 @@ class ProductController extends Controller
                 }
             }
 
+        }
 
+           // save data from product_with_attributes
+        if(!empty($request->attribute)){
+            foreach($request->attribute as $productchild_attribute){
+                $datapwiattributr = new Product_with_attribute();
+                    $datapwiattributr->attribute_id               =   $productchild_attribute;
+                    $datapwiattributr->product_id                 =   $productChildId;
+                    $datapwiattributr->order                      =   0;
+                $datapwiattributr->save();
+            }
+        }
 
-        }*/
-
-
-
-
-
-
+        // save data from product_with_attributes
+        if(!empty($request->attributeitem)){
+            foreach($request->attributeitem as $key => $value){
+                // Save Data FROM product_with_attribute_items
+                $data_attribute_item = new Product_with_attribute_item();
+                    $data_attribute_item->product_id                 =   $productChildId;
+                    $data_attribute_item->attribute_item_id          =   $key;
+                    $data_attribute_item->attribute_item_value       =   $value;
+                $data_attribute_item->save();
+            }
+        }
 
         return redirect()->back()->with('message', 'Product added successfully.');
     }

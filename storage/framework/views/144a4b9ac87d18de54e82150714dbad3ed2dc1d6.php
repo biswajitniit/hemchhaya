@@ -273,7 +273,7 @@
                             ?>
                             <?php if($getattributecategory): ?>
                                 <?php $__currentLoopData = $getattributecategory; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $rowattributecat): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-
+                                <input type="hidden" name="attribute[]" value="<?php echo e($rowattributecat->id); ?>">
                                 <h6><?php echo e($rowattributecat->attribute_category_name); ?></h6>
                                 <hr />
 
@@ -289,30 +289,12 @@
                                                     <div class="form-group row">
                                                         <label for="<?php echo e($rowattribute->column_slug); ?>" class="col-sm-3 col-form-label"><?php echo e($rowattribute->column_name); ?> <?php if($rowattribute->column_validation == 2): ?> <span class="required">*</span> <?php endif; ?></label>
                                                         <div class="col-sm-6">
-                                                            <input type="text" name="attribute[<?php echo e($rowattribute->id); ?>]" class="form-control" id="<?php echo e($rowattribute->column_slug); ?>" placeholder="" <?php if($rowattribute->column_validation == 2): ?> required <?php endif; ?>/>
+                                                            <input type="text" name="attributeitem[<?php echo e($rowattribute->id); ?>]" class="form-control" id="<?php echo e($rowattribute->column_slug); ?>" placeholder="" <?php if($rowattribute->column_validation == 2): ?> required <?php endif; ?>/>
                                                         </div>
                                                     </div>
                                                 <?php endif; ?>
 
-                                                <?php if($rowattribute->column_type == 2): ?>
-                                                    <!-- For TextBox Password-->
-                                                    <div class="form-group row">
-                                                        <label for="<?php echo e($rowattribute->column_slug); ?>" class="col-sm-3 col-form-label"><?php echo e($rowattribute->column_name); ?> <?php if($rowattribute->column_validation == 2): ?> <span class="required">*</span> <?php endif; ?></label>
-                                                        <div class="col-sm-6">
-                                                            <input type="password" class="form-control" id="<?php echo e($rowattribute->column_slug); ?>" placeholder="" <?php if($rowattribute->column_validation == 2): ?> required <?php endif; ?>/>
-                                                        </div>
-                                                    </div>
-                                                <?php endif; ?>
 
-                                                <?php if($rowattribute->column_type == 3): ?>
-                                                <!-- For TextBox Email-->
-                                                <div class="form-group row">
-                                                    <label for="<?php echo e($rowattribute->column_slug); ?>" class="col-sm-3 col-form-label"><?php echo e($rowattribute->column_name); ?> <?php if($rowattribute->column_validation == 2): ?> <span class="required">*</span> <?php endif; ?></label>
-                                                    <div class="col-sm-6">
-                                                        <input type="email" class="form-control" id="<?php echo e($rowattribute->column_slug); ?>" placeholder="" <?php if($rowattribute->column_validation == 2): ?> required <?php endif; ?>/>
-                                                    </div>
-                                                </div>
-                                                <?php endif; ?>
 
                                                 <?php if($rowattribute->column_type == 4): ?>
                                                 <!-- For TextBox Dropdown-->
@@ -353,8 +335,6 @@
                                                 <div class="form-group row">
                                                     <label for="<?php echo e($rowattribute->column_slug); ?>" class="col-sm-3 col-form-label"><?php echo e($rowattribute->column_name); ?> <?php if($rowattribute->column_validation == 2): ?> <span class="required">*</span> <?php endif; ?></label>
                                                     <div class="col-sm-6">
-
-
 
                                                     </div>
                                                 </div>

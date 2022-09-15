@@ -273,7 +273,7 @@
                             @endphp
                             @if($getattributecategory)
                                 @foreach ($getattributecategory as $rowattributecat)
-
+                                <input type="hidden" name="attribute[]" value="{{ $rowattributecat->id }}">
                                 <h6>{{ $rowattributecat->attribute_category_name }}</h6>
                                 <hr />
 
@@ -289,30 +289,12 @@
                                                     <div class="form-group row">
                                                         <label for="{{ $rowattribute->column_slug }}" class="col-sm-3 col-form-label">{{ $rowattribute->column_name }} @if($rowattribute->column_validation == 2) <span class="required">*</span> @endif</label>
                                                         <div class="col-sm-6">
-                                                            <input type="text" name="attribute[{{$rowattribute->id}}]" class="form-control" id="{{ $rowattribute->column_slug }}" placeholder="" @if($rowattribute->column_validation == 2) required @endif/>
+                                                            <input type="text" name="attributeitem[{{$rowattribute->id}}]" class="form-control" id="{{ $rowattribute->column_slug }}" placeholder="" @if($rowattribute->column_validation == 2) required @endif/>
                                                         </div>
                                                     </div>
                                                 @endif
 
-                                                @if($rowattribute->column_type == 2)
-                                                    <!-- For TextBox Password-->
-                                                    <div class="form-group row">
-                                                        <label for="{{ $rowattribute->column_slug }}" class="col-sm-3 col-form-label">{{ $rowattribute->column_name }} @if($rowattribute->column_validation == 2) <span class="required">*</span> @endif</label>
-                                                        <div class="col-sm-6">
-                                                            <input type="password" class="form-control" id="{{ $rowattribute->column_slug }}" placeholder="" @if($rowattribute->column_validation == 2) required @endif/>
-                                                        </div>
-                                                    </div>
-                                                @endif
 
-                                                @if($rowattribute->column_type == 3)
-                                                <!-- For TextBox Email-->
-                                                <div class="form-group row">
-                                                    <label for="{{ $rowattribute->column_slug }}" class="col-sm-3 col-form-label">{{ $rowattribute->column_name }} @if($rowattribute->column_validation == 2) <span class="required">*</span> @endif</label>
-                                                    <div class="col-sm-6">
-                                                        <input type="email" class="form-control" id="{{ $rowattribute->column_slug }}" placeholder="" @if($rowattribute->column_validation == 2) required @endif/>
-                                                    </div>
-                                                </div>
-                                                @endif
 
                                                 @if($rowattribute->column_type == 4)
                                                 <!-- For TextBox Dropdown-->
@@ -353,8 +335,6 @@
                                                 <div class="form-group row">
                                                     <label for="{{ $rowattribute->column_slug }}" class="col-sm-3 col-form-label">{{ $rowattribute->column_name }} @if($rowattribute->column_validation == 2) <span class="required">*</span> @endif</label>
                                                     <div class="col-sm-6">
-
-
 
                                                     </div>
                                                 </div>
