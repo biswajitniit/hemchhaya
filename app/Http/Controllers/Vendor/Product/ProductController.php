@@ -83,19 +83,22 @@ class ProductController extends Controller
 
     public function add_product_post_data(Request $request){
 
-        $this->validate($request, [
-            'category_id'           => 'required',
-            'sub_category_id'       => 'required',
-            'sub_category_item_id'  => 'required',
-            'front_view_image'      => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:10000000000000000000000',
-        ],[
-            'category_id.required'           => 'Please select category',
-            'sub_category_id.required'       => 'Please select sub category',
-            'sub_category_item_id.required'  => 'Please select sub category item',
-            'front_view_image.required'      => 'Please add front view image',
-        ]);
 
-        $file = $request->front_view_image;
+        echo "<pre>"; print_r($request->attribute); die;
+
+        // $this->validate($request, [
+        //     'category_id'           => 'required',
+        //     'sub_category_id'       => 'required',
+        //     'sub_category_item_id'  => 'required',
+        //     'front_view_image'      => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:10000000000000000000000',
+        // ],[
+        //     'category_id.required'           => 'Please select category',
+        //     'sub_category_id.required'       => 'Please select sub category',
+        //     'sub_category_item_id.required'  => 'Please select sub category item',
+        //     'front_view_image.required'      => 'Please add front view image',
+        // ]);
+
+        /*$file = $request->front_view_image;
         $filename = time().'.'.$request->front_view_image->extension();
 
         $path = Storage::disk('s3')->put("product/large/" . $filename, $file, 'public');
@@ -107,7 +110,7 @@ class ProductController extends Controller
             $product->sub_category_id                                                       = $request['sub_category_id'];
             $product->sub_category_item_id                                                  = $request['sub_category_item_id'];
 
-            $product->product_name_slug                                                     = $this->slugify($request['product_name_slug'],'-');
+            $product->product_name_slug                                                     = $this->slugify($request['name'],'-');
             $product->brand                                                                 = 1;
             $product->name                                                                  = $request['name'];
             $product->highlights                                                            = $request['highlights'];
@@ -144,12 +147,12 @@ class ProductController extends Controller
 
 		$product->save();
 
-        $productId = $product->id;
+        $productId = $product->id; */
 
         // SAVE DATA FROM Product_child_variation
-        if(!empty($request->variation)){
+       /* if(!empty($request->variation)){
             // SAVE CHILD PRODUCT
-            $productChild = new Product();
+                $productChild = new Product();
                 $productChild->vendor_id                                                             = Auth::id();
                 $productChild->category_id                                                           = $request['category_id'];
                 $productChild->sub_category_id                                                       = $request['sub_category_id'];
@@ -226,7 +229,9 @@ class ProductController extends Controller
 
 
 
-        }
+        }*/
+
+
 
 
 

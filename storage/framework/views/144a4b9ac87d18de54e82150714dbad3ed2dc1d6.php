@@ -1,6 +1,5 @@
-@extends('layouts.vendor')
-@section('title', 'Add products')
-@section('content')
+<?php $__env->startSection('title', 'Add products'); ?>
+<?php $__env->startSection('content'); ?>
 <div class="main-panel">
     <div class="content-wrapper">
       <div class="page-header">
@@ -18,26 +17,27 @@
           <div class="card">
             <div class="card-body">
 
-                @if($errors->any())
+                <?php if($errors->any()): ?>
                     <div class="alert alert-danger">
                         <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
+                            <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <li><?php echo e($error); ?></li>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </ul>
                     </div>
-                @endif
+                <?php endif; ?>
 
-                @if(session()->has('message'))
+                <?php if(session()->has('message')): ?>
                     <div class="alert alert-success">
-                        {{ session()->get('message') }}
+                        <?php echo e(session()->get('message')); ?>
+
                     </div>
-                @endif
+                <?php endif; ?>
 
 
 
-              <form class="cmxform" id="addproduct" method="post" action="{{ route('vendor.add-product-post-data') }}" name="addproduct" enctype="multipart/form-data">
-                @csrf
+              <form class="cmxform" id="addproduct" method="post" action="<?php echo e(route('vendor.add-product-post-data')); ?>" name="addproduct" enctype="multipart/form-data">
+                <?php echo csrf_field(); ?>
                 <fieldset>
 
                     <h3>Categories</h3>
@@ -48,11 +48,11 @@
                             <div class="col-sm-6">
                                 <select name="category_id" class="category_id" style="width:100%">
                                     <option value="">Select category</option>
-                                    @if($category)
-                                        @foreach ($category as $rowcategory)
-                                            <option value="{{ $rowcategory->id }}" @if(request()->catid == $rowcategory->id) selected @endif>{{ $rowcategory->category_name }}</option>
-                                        @endforeach
-                                    @endif
+                                    <?php if($category): ?>
+                                        <?php $__currentLoopData = $category; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $rowcategory): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <option value="<?php echo e($rowcategory->id); ?>" <?php if(request()->catid == $rowcategory->id): ?> selected <?php endif; ?>><?php echo e($rowcategory->category_name); ?></option>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                    <?php endif; ?>
                                 </select>
                             </div>
                         </div>
@@ -62,14 +62,14 @@
                             <div class="col-sm-6">
                                 <select name="sub_category_id" class="subcategory" style="width: 100%;">
                                     <option value="">Select sub category</option>
-                                    @if(request()->subcatid)
-                                        @php
+                                    <?php if(request()->subcatid): ?>
+                                        <?php
                                         $getsubcategorylistbycategory = GetSubcategoryBycatid(request()->catid);
-                                        @endphp
-                                        @foreach ($getsubcategorylistbycategory as $rowsubcategory)
-                                            <option value="{{ $rowsubcategory->id }}" @if($rowsubcategory->id == request()->subcatid) selected @endif>{{ $rowsubcategory->sub_category_name }}</option>
-                                        @endforeach
-                                    @endif
+                                        ?>
+                                        <?php $__currentLoopData = $getsubcategorylistbycategory; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $rowsubcategory): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <option value="<?php echo e($rowsubcategory->id); ?>" <?php if($rowsubcategory->id == request()->subcatid): ?> selected <?php endif; ?>><?php echo e($rowsubcategory->sub_category_name); ?></option>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                    <?php endif; ?>
                                 </select>
                             </div>
                         </div>
@@ -79,14 +79,14 @@
                             <div class="col-sm-6">
                                 <select name="sub_category_item_id" class="subcategoryitem" style="width: 100%;">
                                     <option value="">Select sub category item</option>
-                                    @if(request()->subcatitemid)
-                                        @php
+                                    <?php if(request()->subcatitemid): ?>
+                                        <?php
                                         $getsubcategoryitemlistbycategory = GetSubcategoryitemBysubcatid(request()->subcatid);
-                                        @endphp
-                                        @foreach ($getsubcategoryitemlistbycategory as $rowsubcategoryitem)
-                                            <option value="{{ $rowsubcategoryitem->id }}" @if($rowsubcategoryitem->id == request()->subcatitemid) selected @endif>{{ $rowsubcategoryitem->sub_category_item_name }}</option>
-                                        @endforeach
-                                    @endif
+                                        ?>
+                                        <?php $__currentLoopData = $getsubcategoryitemlistbycategory; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $rowsubcategoryitem): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <option value="<?php echo e($rowsubcategoryitem->id); ?>" <?php if($rowsubcategoryitem->id == request()->subcatitemid): ?> selected <?php endif; ?>><?php echo e($rowsubcategoryitem->sub_category_item_name); ?></option>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                    <?php endif; ?>
 
                                 </select>
                             </div>
@@ -168,32 +168,32 @@
                     <h3>Product has variations</h3>
                     <hr />
 
-                        @if (!empty(request()->catid) &&  !empty(request()->subcatid) && !empty(request()->subcatitemid))
-                        @php
+                        <?php if(!empty(request()->catid) &&  !empty(request()->subcatid) && !empty(request()->subcatitemid)): ?>
+                        <?php
                         $getVariation = GetVariationlistonaddproduct(request()->catid,request()->subcatid,request()->subcatitemid);
-                        @endphp
+                        ?>
 
-                        @if($getVariation)
+                        <?php if($getVariation): ?>
                             <div class="form-group row">
-                                @foreach ($getVariation as $rowvariation)
+                                <?php $__currentLoopData = $getVariation; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $rowvariation): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <div class="col-sm-6">
-                                        <label for="variation" class="col-form-label"> {{ $rowvariation->variation_name }}</label>
+                                        <label for="variation" class="col-form-label"> <?php echo e($rowvariation->variation_name); ?></label>
                                         <select name="variation[]" class="variation" style="width: 100%;">
                                         <option value="">Select One</option>
-                                        @php
+                                        <?php
                                             $getVariationitem = GetVariationitemlistonaddproduct(request()->catid,request()->subcatid,request()->subcatitemid,$rowvariation->id);
-                                            @endphp
-                                            @if($getVariationitem)
-                                                @foreach ($getVariationitem as $rowvariationitem)
-                                                    <option value="{{ $rowvariationitem->id }}">{{ $rowvariationitem->variation_item_name }}</option>
-                                                @endforeach
-                                            @endif
+                                            ?>
+                                            <?php if($getVariationitem): ?>
+                                                <?php $__currentLoopData = $getVariationitem; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $rowvariationitem): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                    <option value="<?php echo e($rowvariationitem->id); ?>"><?php echo e($rowvariationitem->variation_item_name); ?></option>
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                            <?php endif; ?>
                                         </select>
                                     </div>
-                                @endforeach
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </div>
-                        @endif
-                    @endif
+                        <?php endif; ?>
+                    <?php endif; ?>
 
                     <div class="form-group row">
                         <div class="col-sm-3">
@@ -267,59 +267,59 @@
 
 
 
-                        @if (!empty(request()->catid) &&  !empty(request()->subcatid) && !empty(request()->subcatitemid))
-                            @php
+                        <?php if(!empty(request()->catid) &&  !empty(request()->subcatid) && !empty(request()->subcatitemid)): ?>
+                            <?php
                                 $getattributecategory = Getattributecategory(request()->catid,request()->subcatid,request()->subcatitemid);
-                            @endphp
-                            @if($getattributecategory)
-                                @foreach ($getattributecategory as $rowattributecat)
+                            ?>
+                            <?php if($getattributecategory): ?>
+                                <?php $__currentLoopData = $getattributecategory; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $rowattributecat): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 
-                                <h6>{{ $rowattributecat->attribute_category_name }}</h6>
+                                <h6><?php echo e($rowattributecat->attribute_category_name); ?></h6>
                                 <hr />
 
 
-                                        @php
+                                        <?php
                                         $getattribute = Getattributebyattributecategory($rowattributecat->id);
-                                        @endphp
-                                        @if($getattribute)
-                                            @foreach ($getattribute as $rowattribute)
+                                        ?>
+                                        <?php if($getattribute): ?>
+                                            <?php $__currentLoopData = $getattribute; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $rowattribute): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 
-                                                @if($rowattribute->column_type == 1)
+                                                <?php if($rowattribute->column_type == 1): ?>
                                                     <!-- For TextBox -->
                                                     <div class="form-group row">
-                                                        <label for="{{ $rowattribute->column_slug }}" class="col-sm-3 col-form-label">{{ $rowattribute->column_name }} @if($rowattribute->column_validation == 2) <span class="required">*</span> @endif</label>
+                                                        <label for="<?php echo e($rowattribute->column_slug); ?>" class="col-sm-3 col-form-label"><?php echo e($rowattribute->column_name); ?> <?php if($rowattribute->column_validation == 2): ?> <span class="required">*</span> <?php endif; ?></label>
                                                         <div class="col-sm-6">
-                                                            <input type="text" name="attribute[{{$rowattribute->id}}]" class="form-control" id="{{ $rowattribute->column_slug }}" placeholder="" @if($rowattribute->column_validation == 2) required @endif/>
+                                                            <input type="text" name="attribute[<?php echo e($rowattribute->id); ?>]" class="form-control" id="<?php echo e($rowattribute->column_slug); ?>" placeholder="" <?php if($rowattribute->column_validation == 2): ?> required <?php endif; ?>/>
                                                         </div>
                                                     </div>
-                                                @endif
+                                                <?php endif; ?>
 
-                                                @if($rowattribute->column_type == 2)
+                                                <?php if($rowattribute->column_type == 2): ?>
                                                     <!-- For TextBox Password-->
                                                     <div class="form-group row">
-                                                        <label for="{{ $rowattribute->column_slug }}" class="col-sm-3 col-form-label">{{ $rowattribute->column_name }} @if($rowattribute->column_validation == 2) <span class="required">*</span> @endif</label>
+                                                        <label for="<?php echo e($rowattribute->column_slug); ?>" class="col-sm-3 col-form-label"><?php echo e($rowattribute->column_name); ?> <?php if($rowattribute->column_validation == 2): ?> <span class="required">*</span> <?php endif; ?></label>
                                                         <div class="col-sm-6">
-                                                            <input type="password" class="form-control" id="{{ $rowattribute->column_slug }}" placeholder="" @if($rowattribute->column_validation == 2) required @endif/>
+                                                            <input type="password" class="form-control" id="<?php echo e($rowattribute->column_slug); ?>" placeholder="" <?php if($rowattribute->column_validation == 2): ?> required <?php endif; ?>/>
                                                         </div>
                                                     </div>
-                                                @endif
+                                                <?php endif; ?>
 
-                                                @if($rowattribute->column_type == 3)
+                                                <?php if($rowattribute->column_type == 3): ?>
                                                 <!-- For TextBox Email-->
                                                 <div class="form-group row">
-                                                    <label for="{{ $rowattribute->column_slug }}" class="col-sm-3 col-form-label">{{ $rowattribute->column_name }} @if($rowattribute->column_validation == 2) <span class="required">*</span> @endif</label>
+                                                    <label for="<?php echo e($rowattribute->column_slug); ?>" class="col-sm-3 col-form-label"><?php echo e($rowattribute->column_name); ?> <?php if($rowattribute->column_validation == 2): ?> <span class="required">*</span> <?php endif; ?></label>
                                                     <div class="col-sm-6">
-                                                        <input type="email" class="form-control" id="{{ $rowattribute->column_slug }}" placeholder="" @if($rowattribute->column_validation == 2) required @endif/>
+                                                        <input type="email" class="form-control" id="<?php echo e($rowattribute->column_slug); ?>" placeholder="" <?php if($rowattribute->column_validation == 2): ?> required <?php endif; ?>/>
                                                     </div>
                                                 </div>
-                                                @endif
+                                                <?php endif; ?>
 
-                                                @if($rowattribute->column_type == 4)
+                                                <?php if($rowattribute->column_type == 4): ?>
                                                 <!-- For TextBox Dropdown-->
                                                 <div class="form-group row">
-                                                    <label for="{{ $rowattribute->column_slug }}" class="col-sm-3 col-form-label">{{ $rowattribute->column_name }} @if($rowattribute->column_validation == 2) <span class="required">*</span> @endif</label>
+                                                    <label for="<?php echo e($rowattribute->column_slug); ?>" class="col-sm-3 col-form-label"><?php echo e($rowattribute->column_name); ?> <?php if($rowattribute->column_validation == 2): ?> <span class="required">*</span> <?php endif; ?></label>
                                                     <div class="col-sm-6">
-                                                        <select name="{{ $rowattribute->column_slug }}" id="{{ $rowattribute->column_slug }}"  style="width: 100%;" @if($rowattribute->column_validation == 2) required @endif>
+                                                        <select name="<?php echo e($rowattribute->column_slug); ?>" id="<?php echo e($rowattribute->column_slug); ?>"  style="width: 100%;" <?php if($rowattribute->column_validation == 2): ?> required <?php endif; ?>>
                                                             <option value="">Select Column Validation</option>
                                                             <option value="1">Optional</option>
                                                             <option value="2">Required</option>
@@ -327,48 +327,48 @@
 
                                                     </div>
                                                 </div>
-                                                @endif
+                                                <?php endif; ?>
 
-                                                @if($rowattribute->column_type == 5)
+                                                <?php if($rowattribute->column_type == 5): ?>
                                                 <!-- For Tags-->
                                                 <div class="form-group row">
-                                                    <label for="{{ $rowattribute->column_slug }}" class="col-sm-3 col-form-label">{{ $rowattribute->column_name }} @if($rowattribute->column_validation == 2) <span class="required">*</span> @endif</label>
+                                                    <label for="<?php echo e($rowattribute->column_slug); ?>" class="col-sm-3 col-form-label"><?php echo e($rowattribute->column_name); ?> <?php if($rowattribute->column_validation == 2): ?> <span class="required">*</span> <?php endif; ?></label>
                                                     <div class="col-sm-6">
-                                                        {{-- <input name="{{ $rowattribute->column_slug }}" id="tags" value="{{ $rowattribute->tags }}" /> --}}
-                                                        @php
+                                                        
+                                                        <?php
                                                         $tags = explode(",", $rowattribute->tags);
-                                                        @endphp
+                                                        ?>
                                                         <select id="ice-cream" name="ice-cream" multiple>
-                                                            @foreach ($tags as $rowtags)
-                                                            <option value="{{ $rowtags }}">{{ $rowtags }}</option>
-                                                            @endforeach
+                                                            <?php $__currentLoopData = $tags; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $rowtags): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                            <option value="<?php echo e($rowtags); ?>"><?php echo e($rowtags); ?></option>
+                                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
                                                         </select>
                                                     </div>
                                                 </div>
-                                                @endif
+                                                <?php endif; ?>
 
-                                                @if($rowattribute->column_type == 6)
+                                                <?php if($rowattribute->column_type == 6): ?>
                                                 <!-- For Tags-->
                                                 <div class="form-group row">
-                                                    <label for="{{ $rowattribute->column_slug }}" class="col-sm-3 col-form-label">{{ $rowattribute->column_name }} @if($rowattribute->column_validation == 2) <span class="required">*</span> @endif</label>
+                                                    <label for="<?php echo e($rowattribute->column_slug); ?>" class="col-sm-3 col-form-label"><?php echo e($rowattribute->column_name); ?> <?php if($rowattribute->column_validation == 2): ?> <span class="required">*</span> <?php endif; ?></label>
                                                     <div class="col-sm-6">
 
 
 
                                                     </div>
                                                 </div>
-                                                @endif
+                                                <?php endif; ?>
 
-                                            @endforeach
-                                        @endif
-
-
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                        <?php endif; ?>
 
 
-                                @endforeach
-                            @endif
-                        @endif
+
+
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            <?php endif; ?>
+                        <?php endif; ?>
 
                         <hr />
                         <h3>Search engine optimize</h3>
@@ -404,14 +404,14 @@
     <!-- partial:../../partials/_footer.html -->
     <footer class="footer">
         <div class="d-sm-flex justify-content-center justify-content-sm-between">
-            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © {{ date('Y') }} <a href="{{ url('/') }}" target="_blank">Hemchhaya</a>. All rights reserved.</span>
+            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © <?php echo e(date('Y')); ?> <a href="<?php echo e(url('/')); ?>" target="_blank">Hemchhaya</a>. All rights reserved.</span>
         </div>
     </footer>
     <!-- partial -->
   </div>
   <!-- main-panel ends -->
 
-@push('scripts')
+<?php $__env->startPush('scripts'); ?>
 
     <script type="text/javascript">
 
@@ -484,9 +484,9 @@
                 var catId = $(this).val();
                 if (catId) {
                     $.ajax({
-                        url: "{{route('admin.get_sub_category_on_product_page')}}",
+                        url: "<?php echo e(route('admin.get_sub_category_on_product_page')); ?>",
                         type: "POST",
-                        data:{categoryid:catId, _token: '{{csrf_token()}}'},
+                        data:{categoryid:catId, _token: '<?php echo e(csrf_token()); ?>'},
                         dataType: "json",
                         success: function (returndata) {
                             $('select[name="sub_category_id"]').empty();
@@ -504,9 +504,9 @@
                 var subcatId = $(this).val();
                 if (subcatId) {
                     $.ajax({
-                        url: "{{route('admin.get_sub_category_item_on_product_page')}}",
+                        url: "<?php echo e(route('admin.get_sub_category_item_on_product_page')); ?>",
                         type: "POST",
-                        data:{subcategoryid:subcatId, _token: '{{csrf_token()}}'},
+                        data:{subcategoryid:subcatId, _token: '<?php echo e(csrf_token()); ?>'},
                         dataType: "json",
                         success: function (returndata) {
                             $('select[name="sub_category_item_id"]').empty();
@@ -527,9 +527,9 @@
 
                 location.href = '<?php echo url('/'); ?>/vendor/add-product?catid='+catId+'&subcatid='+subcatId+'&subcatitemid='+subcatitemId+'';
                 // $.ajax({
-                //     url: "{{route('admin.get_attributecat_with_attribute_on_product_page')}}",
+                //     url: "<?php echo e(route('admin.get_attributecat_with_attribute_on_product_page')); ?>",
                 //     type: "POST",
-                //     data:{categoryid:catId,subcategoryid:subcatId,subcategoryitemid:subcatitemId, _token: '{{csrf_token()}}'},
+                //     data:{categoryid:catId,subcategoryid:subcatId,subcategoryitemid:subcatitemId, _token: '<?php echo e(csrf_token()); ?>'},
                 //     dataType: "json",
                 //     success: function (returndata) {
 
@@ -548,5 +548,7 @@
 
 
     </script>
-@endpush
-@endsection
+<?php $__env->stopPush(); ?>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.vendor', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH E:\webdev\hemchhaya\resources\views/vendor/product/add-product.blade.php ENDPATH**/ ?>
