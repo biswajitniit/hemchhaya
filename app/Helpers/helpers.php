@@ -50,3 +50,22 @@ if (! function_exists('GetVariationitemlistonaddproduct')) {
        return Variationitems::where('category_id',$catid)->where('sub_category_id',$subcatid)->where('sub_category_item_id',$subcatitemid)->where('variation_id',$variationid)->where('status','1')->get();
     }
 }
+if (! function_exists('Get_Category_List_Menu')) {
+    function Get_Category_List_Menu() {
+       return Categorys::where('status','1')->get();
+    }
+}
+
+if (! function_exists('Get_Sub_Category_List_Menu')) {
+    function Get_Sub_Category_List_Menu($categoryid) {
+        return Subcategory::where('category_id',$categoryid)->where('status', '1')->orderBy('sub_category_sort_no')->get();
+    }
+}
+
+if (! function_exists('Get_Sub_Category_Item_List_Menu')) {
+    function Get_Sub_Category_Item_List_Menu($subcategoryid) {
+       return Subcategoryitem::where('status', '1')->where('sub_category_id',$subcategoryid)->orderBy('sub_category_item_name')->get();
+    }
+}
+
+

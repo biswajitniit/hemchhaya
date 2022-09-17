@@ -16,6 +16,8 @@ class CreateCategorysTable extends Migration
         Schema::create('categorys', function (Blueprint $table) {
             $table->id();
             $table->string('category_name')->unique();
+            $table->string('category_font_icon_class')->nullable($value = true);
+            $table->string('category_image')->nullable($value = true);
             $table->bigInteger('category_sort_no')->nullable($value = true);
             $table->enum('menu_dropdown', ['1', '2'])->comment('1=Yes,2=No');
             $table->enum('menu_show_div_type', ['1', '2'])->comment('1=dropdown,2=megamenu');

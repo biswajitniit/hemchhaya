@@ -119,7 +119,7 @@ class SubCategoryController extends Controller
      */
     public function subcategorylistdata(Request $request){
 
-        $query=Subcategory::with('categorys')->orderby('created_at','desc')->get();
+        $query=Subcategory::with('categorys')->orderby('id')->get();
         $totalData =count($query);
         $totalFiltered = $totalData;  // when there is no search parameter then total number rows = total number filtered rows.
         return Datatables::of($query)

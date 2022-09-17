@@ -126,13 +126,13 @@
             </a>
           </li>
 
-          <li class="nav-item @if(Request::segment(2) == "category") active @elseif (Request::segment(2) == "sub-category")  active @elseif(Request::segment(2) == "sub-category-item") @endif ">
-            <a class="nav-link" data-bs-toggle="collapse" href="#menulist" aria-expanded="false" aria-controls="apps">
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#category" aria-expanded="false" aria-controls="apps">
               <i class="mdi mdi-menu menu-icon"></i>
               <span class="menu-title">Menu</span>
               <i class="menu-arrow"></i>
             </a>
-            <div class="collapse" id="menulist">
+            <div class="collapse" id="category">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/category') }}">Category</a></li>
                 <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/sub-category') }}">Sub Category</a></li>
@@ -149,8 +149,8 @@
             </a>
             <div class="collapse" id="Attribute">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/attribute-category') }}">Attribute</a></li>
-                <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/attribute') }}">Attribute Items</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/attribute') }}">Attribute</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/attribute-items') }}">Attribute Items</a></li>
               </ul>
             </div>
           </li>

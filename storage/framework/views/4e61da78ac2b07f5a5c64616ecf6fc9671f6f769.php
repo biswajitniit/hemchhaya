@@ -1,38 +1,29 @@
-@extends('layouts.admin')
-@section('title', 'Category Listing')
-@section('content')
+<?php $__env->startSection('title', 'Category Listing'); ?>
+<?php $__env->startSection('content'); ?>
 
 
 
 <div class="main-panel">
     <div class="content-wrapper">
-      {{--<div class="page-header">
-        <h3 class="page-title"> Category table </h3>
-         <nav aria-label="breadcrumb">
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">Tables</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Data table</li>
-          </ol>
-        </nav>
-      </div>--}}
+      
 
       <div class="page-header flex-wrap">
         <div class="header-left">
-          {{-- <button class="btn btn-primary mb-2 mb-md-0 me-2">Create new document</button>
-          <button class="btn btn-outline-primary bg-white mb-2 mb-md-0">Import documents</button> --}}
+          
         </div>
         <div class="header-right d-flex flex-wrap mt-2 mt-sm-0">
 
-          <button type="button" onclick="location.href='{{ route('admin.add-category') }}'" class="btn btn-primary mt-2 mt-sm-0 btn-icon-text">
+          <button type="button" onclick="location.href='<?php echo e(route('admin.add-category')); ?>'" class="btn btn-primary mt-2 mt-sm-0 btn-icon-text">
             <i class="mdi mdi-plus-circle"></i> Add Category </button>
         </div>
       </div>
 
-      @if(session()->has('message'))
+      <?php if(session()->has('message')): ?>
             <div class="alert alert-danger">
-                {{ session()->get('message') }}
+                <?php echo e(session()->get('message')); ?>
+
             </div>
-      @endif
+      <?php endif; ?>
 
 
       <div class="card">
@@ -41,7 +32,7 @@
           <div class="row">
             <div class="col-12">
               <div class="table-responsive">
-                {{-- <table id="order_listing" class="table order_listing"> --}}
+                
                 <table class="table table-bordered table-striped mb-none" id="my-table">
                   <thead>
                     <tr class="bg-primary text-white">
@@ -66,14 +57,14 @@
     <!-- partial:../../partials/_footer.html -->
     <footer class="footer">
         <div class="d-sm-flex justify-content-center justify-content-sm-between">
-            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © {{ date('Y') }} <a href="{{ url('/') }}" target="_blank">Hemchhaya</a>. All rights reserved.</span>
+            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © <?php echo e(date('Y')); ?> <a href="<?php echo e(url('/')); ?>" target="_blank">Hemchhaya</a>. All rights reserved.</span>
         </div>
     </footer>
     <!-- partial -->
   </div>
   <!-- main-panel ends -->
 
-@push('scripts')
+<?php $__env->startPush('scripts'); ?>
     <script type="text/javascript">
         $(".alert").delay(2000).slideUp(200, function () {
             $(this).alert('close');
@@ -93,8 +84,8 @@
                     "targets": 0
                 }],
                 "ajax": {
-                    data: ({_token: '{{csrf_token()}}'}),
-                    url : "{{url('/')}}/categorylist",
+                    data: ({_token: '<?php echo e(csrf_token()); ?>'}),
+                    url : "<?php echo e(url('/')); ?>/categorylist",
                     type : 'GET',
                 },
                 columns: [
@@ -133,5 +124,7 @@
             return false;
         }
     </script>
-@endpush
-@endsection
+<?php $__env->stopPush(); ?>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.admin', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH E:\webdev\hemchhaya\resources\views/admin/category/category-list.blade.php ENDPATH**/ ?>

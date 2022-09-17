@@ -210,160 +210,40 @@
                                     <div class="header-category d-none d-lg-block">
                                         <a href="#" class="cat-toggle"><i class="fas fa-bars"></i>ALL Categories<i class="fas fa-angle-down"></i></a>
                                         <ul class="category-menu">
-                                            <li class="menu-item-has-children"><a href="shop.html"><i class="flaticon-groceries"></i> Grocery & Frozen</a>
-                                                <ul class="megamenu">
-                                                    <li class="sub-column-item"><a href="shop.html">Grocery & Frozen</a>
-                                                        <ul>
-                                                            <li><a href="shop.html">Organic Broccoli</a></li>
-                                                            <li><a href="shop.html">Walnuts Max</a></li>
-                                                            <li><a href="shop.html">Mat Orange</a></li>
-                                                            <li><a href="shop.html">France Potato</a></li>
-                                                        </ul>
-                                                    </li>
-                                                    <li class="sub-column-item"><a href="shop.html">Organic Fresh Fruits</a>
-                                                        <ul>
-                                                            <li><a href="shop.html">Watermelon</a></li>
-                                                            <li><a href="shop.html">Black Grapes</a></li>
-                                                            <li><a href="shop.html">Grassland Dairy</a></li>
-                                                            <li><a href="shop.html">Organic Broccoli</a></li>
-                                                        </ul>
-                                                    </li>
-                                                    <li class="sub-column-item"><a href="shop.html">Fresh Bread & Bakery</a>
-                                                        <ul>
-                                                            <li><a href="shop.html">Grassland Dairy</a></li>
-                                                            <li><a href="shop.html">Walnuts Max</a></li>
-                                                            <li><a href="shop.html">Powders Dairy</a></li>
-                                                            <li><a href="shop.html">Ice cream</a></li>
-                                                        </ul>
-                                                    </li>
-                                                    <li class="sub-column-item"><a href="shop.html">Organic Fresh Meat</a>
-                                                        <ul>
-                                                            <li><a href="shop.html">Fresh Butter</a></li>
-                                                            <li><a href="shop.html">Orange Sliced</a></li>
-                                                            <li><a href="shop.html">Carrots Group</a></li>
-                                                            <li><a href="shop.html">Poultry Farm</a></li>
-                                                        </ul>
-                                                    </li>
-                                                    <li class="sub-column-item"><a href="shop.html">Organic Dried Fruit</a>
-                                                        <ul>
-                                                            <li><a href="shop.html">Fresh Nuts</a></li>
-                                                            <li><a href="shop.html">France Potato</a></li>
-                                                            <li><a href="shop.html">Green Chilies</a></li>
-                                                            <li><a href="shop.html">Organic Broccoli</a></li>
-                                                        </ul>
-                                                    </li>
-                                                    <li class="sub-column-item"><a href="shop.html">Organic Other Foods</a>
-                                                        <ul>
-                                                            <li class="mega-menu-banner"><a href="shop.html"><img src="<?php echo e(asset('frontend/img/images/megamenu_banner.jpg')); ?>" alt=""></a></li>
-                                                        </ul>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="shop.html"><i class="flaticon-cherry"></i> Fresh Fruits</a></li>
-                                            <li><a href="shop.html"><i class="flaticon-fish"></i> Fresh Fish</a></li>
-                                            <li class="menu-item-has-children"><a href="shop.html"><i class="flaticon-hazelnut"></i> Fresh Nuts</a>
-                                                <ul class="megamenu">
-                                                    <li class="sub-column-item"><a href="shop.html">Grocery & Frozen</a>
-                                                        <ul>
-                                                            <li><a href="shop.html">Organic Broccoli</a></li>
-                                                            <li><a href="shop.html">Walnuts Max</a></li>
-                                                            <li><a href="shop.html">Mat Orange</a></li>
-                                                            <li><a href="shop.html">France Potato</a></li>
-                                                        </ul>
-                                                    </li>
-                                                    <li class="sub-column-item"><a href="shop.html">Organic Fresh Fruits</a>
-                                                        <ul>
-                                                            <li><a href="shop.html">Watermelon</a></li>
-                                                            <li><a href="shop.html">Black Grapes</a></li>
-                                                            <li><a href="shop.html">Grassland Dairy</a></li>
-                                                            <li><a href="shop.html">Organic Broccoli</a></li>
-                                                        </ul>
-                                                    </li>
-                                                    <li class="sub-column-item"><a href="shop.html">Fresh Bread & Bakery</a>
-                                                        <ul>
-                                                            <li><a href="shop.html">Grassland Dairy</a></li>
-                                                            <li><a href="shop.html">Walnuts Max</a></li>
-                                                            <li><a href="shop.html">Powders Dairy</a></li>
-                                                            <li><a href="shop.html">Ice cream</a></li>
-                                                        </ul>
-                                                    </li>
-                                                    <li class="sub-column-item"><a href="shop.html">Organic Fresh Meat</a>
-                                                        <ul>
-                                                            <li><a href="shop.html">Fresh Butter</a></li>
-                                                            <li><a href="shop.html">Orange Sliced</a></li>
-                                                            <li><a href="shop.html">Carrots Group</a></li>
-                                                            <li><a href="shop.html">Poultry Farm</a></li>
-                                                        </ul>
-                                                    </li>
-                                                    <li class="sub-column-item"><a href="shop.html">Organic Dried Fruit</a>
-                                                        <ul>
-                                                            <li><a href="shop.html">Fresh Nuts</a></li>
-                                                            <li><a href="shop.html">France Potato</a></li>
-                                                            <li><a href="shop.html">Green Chilies</a></li>
-                                                            <li><a href="shop.html">Organic Broccoli</a></li>
-                                                        </ul>
-                                                    </li>
-                                                    <li class="sub-column-item"><a href="shop.html">Organic Other Foods</a>
-                                                        <ul>
-                                                            <li class="mega-menu-banner"><a href="shop.html"><img src="<?php echo e(asset('frontend/img/images/megamenu_banner02.jpg')); ?>" alt=""></a></li>
-                                                        </ul>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="shop.html"><i class="flaticon-meat"></i> Fresh Meat</a></li>
-                                            <li class="menu-item-has-children"><a href="shop.html"><i class="flaticon-cupcake"></i> Bread & Bakery</a>
-                                                <ul class="megamenu">
-                                                    <li class="sub-column-item"><a href="shop.html">Grocery & Frozen</a>
-                                                        <ul>
-                                                            <li><a href="shop.html">Organic Broccoli</a></li>
-                                                            <li><a href="shop.html">Walnuts Max</a></li>
-                                                            <li><a href="shop.html">Mat Orange</a></li>
-                                                            <li><a href="shop.html">France Potato</a></li>
-                                                        </ul>
-                                                    </li>
-
-                                                    <li class="sub-column-item"><a href="shop.html">Organic Fresh Fruits</a>
-                                                        <ul>
-                                                            <li><a href="shop.html">Watermelon</a></li>
-                                                            <li><a href="shop.html">Black Grapes</a></li>
-                                                            <li><a href="shop.html">Grassland Dairy</a></li>
-                                                            <li><a href="shop.html">Organic Broccoli</a></li>
-                                                        </ul>
-                                                    </li>
-                                                    <li class="sub-column-item"><a href="shop.html">Fresh Bread & Bakery</a>
-                                                        <ul>
-                                                            <li><a href="shop.html">Grassland Dairy</a></li>
-                                                            <li><a href="shop.html">Walnuts Max</a></li>
-                                                            <li><a href="shop.html">Powders Dairy</a></li>
-                                                            <li><a href="shop.html">Ice cream</a></li>
-                                                        </ul>
-                                                    </li>
-                                                    <li class="sub-column-item"><a href="shop.html">Organic Fresh Meat</a>
-                                                        <ul>
-                                                            <li><a href="shop.html">Fresh Butter</a></li>
-                                                            <li><a href="shop.html">Orange Sliced</a></li>
-                                                            <li><a href="shop.html">Carrots Group</a></li>
-                                                            <li><a href="shop.html">Poultry Farm</a></li>
-                                                        </ul>
-                                                    </li>
-                                                    <li class="sub-column-item"><a href="shop.html">Organic Dried Fruit</a>
-                                                        <ul>
-                                                            <li><a href="shop.html">Fresh Nuts</a></li>
-                                                            <li><a href="shop.html">France Potato</a></li>
-                                                            <li><a href="shop.html">Green Chilies</a></li>
-                                                            <li><a href="shop.html">Organic Broccoli</a></li>
-                                                        </ul>
-                                                    </li>
-                                                    <li class="sub-column-item"><a href="shop.html">Organic Other Foods</a>
-                                                        <ul>
-                                                            <li class="mega-menu-banner"><a href="shop.html"><img src="<?php echo e(asset('frontend/img/images/megamenu_banner.jpg')); ?>" alt=""></a></li>
-                                                        </ul>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="shop.html"><i class="flaticon-broccoli"></i> Vegetable</a></li>
-                                            <li><a href="shop.html"><i class="flaticon-pop-corn-1"></i> Popcorn</a></li>
-                                            <li><a href="shop.html"><i class="flaticon-nut"></i> Dried Fruit</a></li>
+                                            <?php
+                                                $getCategory = Get_Category_List_Menu();
+                                            ?>
+                                            <?php if($getCategory): ?>
+                                                <?php $__currentLoopData = $getCategory; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $rowcategory): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                    <?php if($rowcategory->menu_dropdown): ?> <!-- // FOR MENU DROP DOWN -->
+                                                        <li class="menu-item-has-children"><a href="<?php echo e(url('/')); ?>"><i class="flaticon-groceries"></i> <?php echo e($rowcategory->category_name); ?></a>
+                                                            <ul class="megamenu">
+                                                                <?php
+                                                                  $getSubCategory = Get_Sub_Category_List_Menu($rowcategory->id);
+                                                                ?>
+                                                                <?php if($getSubCategory): ?>
+                                                                    <?php $__currentLoopData = $getSubCategory; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $rowsubcategory): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                                        <li class="sub-column-item"><a href="<?php echo e(url('/')); ?>"><?php echo e($rowsubcategory->sub_category_name); ?></a>
+                                                                            <ul>
+                                                                                <?php
+                                                                                    $getSubCategoryItem = Get_Sub_Category_Item_List_Menu($rowsubcategory->id);
+                                                                                ?>
+                                                                                <?php if($getSubCategoryItem): ?>
+                                                                                    <?php $__currentLoopData = $getSubCategoryItem; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $rowsubcategoryitem): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                                                        <li><a href="<?php echo e(url('/')); ?>"><?php echo e($rowsubcategoryitem->sub_category_item_name); ?></a></li>
+                                                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                                                <?php endif; ?>
+                                                                            </ul>
+                                                                        </li>
+                                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                                <?php endif; ?>
+                                                            </ul>
+                                                        </li>
+                                                    <?php else: ?> <!-- // FOR MENU SINGLE -->
+                                                        <li><a href="<?php echo e(url('/')); ?>"><i class="flaticon-broccoli"></i> <?php echo e($rowcategory->category_name); ?> </a></li>
+                                                    <?php endif; ?>
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                            <?php endif; ?>
                                         </ul>
                                     </div>
                                     <div class="navbar-wrap main-menu d-none d-lg-flex">
@@ -380,7 +260,7 @@
                                             <!-- <li><a href="contact.html">contacts</a></li> -->
                                         </ul>
                                     </div>
-                                    <!-- <div class="header-super-store d-none d-xl-block d-lg-none d-md-block">
+                                    <div class="header-super-store d-none d-xl-block d-lg-none d-md-block">
                                         <div class="dropdown">
                                             <button class="dropdown-toggle" type="button" id="dropdownMenuButton4" data-toggle="dropdown" aria-haspopup="true"
                                                 aria-expanded="false"><i class="flaticon-shop"></i> Super Store</button>
@@ -390,7 +270,7 @@
                                                 <a class="dropdown-item" href="shop.html">Super Store 03</a>
                                             </div>
                                         </div>
-                                    </div> -->
+                                    </div>
                                 </nav>
                             </div>
                             <!-- Mobile Menu  -->
