@@ -248,19 +248,20 @@
                                     </div>
                                     <div class="navbar-wrap main-menu d-none d-lg-flex">
                                         <ul class="navigation">
-                                            <li class="active"><a href="index.html">Home</a></li>
-                                            <!-- <li><a href="about-us.html">About Us</a></li> -->
-                                            <li><a href="shop.html">Fruits & Vegetables</a></li>
-                                            <li><a href="shop-right-sidebar.html">Grocery & Staples</a></li>
-                                            <li><a href="shop.html">Fruits</a></li>
-                                            <li><a href="shop-right-sidebar.html">Staples</a></li>
-                                            <li><a href="shop.html">Fruits & Vegetables</a></li>
-                                            <li><a href="shop.html">Vegetables</a></li>
 
-                                            <!-- <li><a href="contact.html">contacts</a></li> -->
+                                            <li class="active"><a href="{{ url('/') }}">Home</a></li>
+                                            @php
+                                            $menuheadershow = Get_active_menu_show_in_header();
+                                            @endphp
+                                            @if ($menuheadershow)
+                                                @foreach ($menuheadershow as $rowactivemenu)
+                                                    <li><a href="{{ route('home.category-wise-landing-page',['catname='.create_slug($rowactivemenu->category_name).'&catid='.Crypt::encryptString($rowactivemenu->id)]) }}">{{ $rowactivemenu->category_name }}</a></li>
+                                                @endforeach
+                                            @endif
+
                                         </ul>
                                     </div>
-                                    <div class="header-super-store d-none d-xl-block d-lg-none d-md-block">
+                                    {{-- <div class="header-super-store d-none d-xl-block d-lg-none d-md-block">
                                         <div class="dropdown">
                                             <button class="dropdown-toggle" type="button" id="dropdownMenuButton4" data-toggle="dropdown" aria-haspopup="true"
                                                 aria-expanded="false"><i class="flaticon-shop"></i> Super Store</button>
@@ -270,7 +271,7 @@
                                                 <a class="dropdown-item" href="shop.html">Super Store 03</a>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                 </nav>
                             </div>
                             <!-- Mobile Menu  -->

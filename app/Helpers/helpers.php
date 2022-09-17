@@ -8,6 +8,14 @@ use App\Models\Attribute;
 use App\Models\Attributecategory;
 use App\Models\Variationitems;
 use App\Models\Variations;
+
+if (! function_exists('create_slug')) {
+    function create_slug($string) {
+		  $slug=preg_replace('/[^A-Za-z0-9-]+/', '-', $string);
+		  return strtolower($slug);
+    }
+}
+
 if (! function_exists('GetSubcategoryBycatid')) {
     function GetSubcategoryBycatid($categoryid) {
        // DB::enableQueryLog(); // Enable query log
@@ -68,4 +76,10 @@ if (! function_exists('Get_Sub_Category_Item_List_Menu')) {
     }
 }
 
+
+if (! function_exists('Get_active_menu_show_in_header')) {
+    function Get_active_menu_show_in_header() {
+       return Categorys::where('menu_show_in_header','1')->where('status','1')->get();
+    }
+}
 

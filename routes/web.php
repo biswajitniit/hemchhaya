@@ -19,6 +19,7 @@ use App\Http\Controllers\Admin\Attributecategory\AttributecategoryController;
 use App\Http\Controllers\Admin\Attribute\AttributeController;
 use App\Http\Controllers\Vendor\Product\ProductController;
 use App\Http\Controllers\Admin\LogoutController;
+use App\Http\Controllers\HomeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -243,5 +244,20 @@ Route::any('/admin/get_attributecat_with_attribute_on_product_page', [ProductCon
 /**
  *
  * Vendor section end
+ *
+ */
+Route::get('/category-wise-landing-page',[HomeController::class, 'category_wise_landing_page'])->name('home.category-wise-landing-page');
+Route::get('/sub-category-wise-page',[HomeController::class, 'sub_category_wise_page'])->name('home.sub-category-wise-page');
+
+ /**
+ *
+ * Frontend section start
+ *
+ */
+
+
+  /**
+ *
+ * Frontend section end
  *
  */
