@@ -42,7 +42,7 @@ class AttributecategoryController extends Controller
 
       return $text;
     }
-/**
+    /**
      * Show the admin attribute category subcategory list.
      *
      * @return \Illuminate\Http\Response
@@ -130,7 +130,7 @@ class AttributecategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-	public function attribute_category_list(Request $request){
+	public function attribute_list(Request $request){
         $category = Categorys::where('status','1')->orderBy('category_name')->get();
 		return view("admin.attributecategory.attribute-category-list",compact('category'));
 	}
@@ -139,7 +139,7 @@ class AttributecategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-	public function add_attribute_category(Request $request){
+	public function add_attribute(Request $request){
         $category = Categorys::where('status','1')->orderBy('category_name')->get();
 		return view("admin.attributecategory.add-attribute-category",compact('category'));
 	}
@@ -148,7 +148,7 @@ class AttributecategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function add_attribute_category_post_data(Request $request){
+    public function add_attribute_post_data(Request $request){
         $this->validate($request, [
             'category_id' => 'required',
             'sub_category_id' => 'required',
@@ -170,7 +170,7 @@ class AttributecategoryController extends Controller
             $attributecategory->status                  = $request['status'];
 		$attributecategory->save();
 
-        return redirect()->back()->with('message', 'Attribute category added successfully.');
+        return redirect()->back()->with('message', 'Attribute added successfully.');
     }
 
     /**
@@ -178,7 +178,7 @@ class AttributecategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit_attribute_category(Request $request, $attributecatid){
+    public function edit_attribute(Request $request, $attributecatid){
         $category = Categorys::where('status','1')->orderBy('category_name')->get();
         $attributecategory = Attributecategory::where('id',$attributecatid)->first();
         return view('admin.attributecategory.edit-attribute-category',compact('category','attributecategory'));
@@ -189,7 +189,7 @@ class AttributecategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
     */
-    public function edit_attribute_category_post(Request $request){
+    public function edit_attribute_post(Request $request){
         $this->validate($request, [
             'category_id' => 'required',
             'sub_category_id' => 'required',
@@ -213,7 +213,7 @@ class AttributecategoryController extends Controller
 
         Attributecategory::where('id', $request['attributecategoryid'])->update($data);
 
-        return redirect()->back()->with('message', 'Attribute category updated successfully.');
+        return redirect()->back()->with('message', 'Attribute updated successfully.');
     }
 
     /**
@@ -231,7 +231,7 @@ class AttributecategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function attribute_category_trash(Request $request, $attributecatid){
+    public function attribute_trash(Request $request, $attributecatid){
         Attributecategory::where('id',$attributecatid)->delete();
         return redirect()->back()->with('message', 'Record deleted successfully.');
     }

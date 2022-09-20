@@ -118,7 +118,7 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="<?php echo e(url('/admin/brands')); ?>">
+            <a class="nav-link" href="<?php echo e(url('/admin/brand')); ?>">
               <i class="mdi mdi-xing menu-icon"></i>
               <span class="menu-title">Brands</span>
             </a>

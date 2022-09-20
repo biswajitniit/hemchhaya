@@ -175,7 +175,7 @@ class AttributeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-	public function attribute_list(Request $request){
+	public function attribute_items_list(Request $request){
         $category = Categorys::where('status','1')->orderBy('category_name')->get();
 		return view("admin.attribute.attribute-list",compact('category'));
 	}
@@ -185,7 +185,7 @@ class AttributeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-	public function add_attribute(Request $request){
+	public function add_attribute_items(Request $request){
         $category = Categorys::where('status','1')->orderBy('category_name')->get();
 		return view("admin.attribute.add-attribute",compact('category'));
 	}
@@ -195,7 +195,7 @@ class AttributeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function add_attribute_post_data(Request $request){
+    public function add_attribute_items_post_data(Request $request){
         //echo "<pre>"; print_r($_POST); die;
         $this->validate($request, [
             'category_id'           => 'required',
@@ -227,7 +227,7 @@ class AttributeController extends Controller
             $attribute->status                  = $request['status'];
 		$attribute->save();
 
-        return redirect()->back()->with('message', 'Attribute added successfully.');
+        return redirect()->back()->with('message', 'Attribute items added successfully.');
     }
 
 
@@ -236,7 +236,7 @@ class AttributeController extends Controller
      *
      * @return true or false
      */
-    public function edit_attribute(Request $request, $attributeid){
+    public function edit_attribute_items(Request $request, $attributeid){
         $attribute = Attribute::where('id',$attributeid)->first();
         return view('admin.attribute.edit-attribute',compact('attribute'));
     }
@@ -246,7 +246,7 @@ class AttributeController extends Controller
      *
      * @return true or false
      */
-    public function edit_attribute_post(Request $request){
+    public function edit_attribute_items_post(Request $request){
 
         $this->validate($request, [
             'column_name' => 'required',
@@ -267,7 +267,7 @@ class AttributeController extends Controller
 
         Attribute::where('id', $request['attributeid'])->update($data);
 
-        return redirect()->back()->with('message', 'Attribute updated successfully.');
+        return redirect()->back()->with('message', 'Attribute items updated successfully.');
 
     }
 
@@ -278,7 +278,7 @@ class AttributeController extends Controller
      */
     public function attributetrash(Request $request, $attributeid){
         Attribute::where('id',$attributeid)->delete();
-        return redirect()->back()->with('message', 'Attribute deleted successfully.');
+        return redirect()->back()->with('message', 'Attribute items deleted successfully.');
     }
 
    /**

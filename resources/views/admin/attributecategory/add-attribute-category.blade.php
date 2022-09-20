@@ -39,7 +39,7 @@
 
 
 
-              <form class="cmxform" id="addattributecategory" method="post" action="{{ route('admin.add-attribute-category-post-data') }}" name="addattributecategory">
+              <form class="cmxform" id="addattributecategory" method="post" action="{{ route('admin.add-attribute-post-data') }}" name="addattributecategory">
                 @csrf
                 <fieldset>
 

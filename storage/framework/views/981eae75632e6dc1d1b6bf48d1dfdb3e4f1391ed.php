@@ -1,13 +1,13 @@
-@extends('layouts.admin')
-@section('title', 'Attribute list search')
-@section('content')
+
+<?php $__env->startSection('title', 'variation item list search'); ?>
+<?php $__env->startSection('content'); ?>
 
 <div class="main-panel">
     <div class="content-wrapper pb-0">
         <div class="page-header">
-            <h3 class="page-title">Search attribute items</h3>
+            <h3 class="page-title">Search variation items</h3>
             <div class="header-right d-flex flex-wrap mt-2 mt-sm-0">
-                <button type="button" onclick="location.href='{{ route('admin.add-attribute') }}'" class="btn btn-primary mt-2 mt-sm-0 btn-icon-text"><i class="mdi mdi-plus-circle"></i> Add Attribute Items</button>
+                <button type="button" onclick="location.href='<?php echo e(route('vendor.add-variationitem')); ?>'" class="btn btn-primary mt-2 mt-sm-0 btn-icon-text"><i class="mdi mdi-plus-circle"></i> Add variation items</button>
             </div>
         </div>
 
@@ -15,16 +15,16 @@
         <div class="row">
             <div class="col-xl-12 stretch-card grid-margin">
                 <div class="card">
-                    <form action="{{ route('admin.searchattribute') }}" name="searchattribute" id="searchattribute" method="GET">
+                    <form action="<?php echo e(route('vendor.searchvariationitemlist')); ?>" name="searchvariationitemlist" id="searchvariationitemlist" method="GET">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col">
                                     <div class="form-group">
                                         <select name="category" class="category" style="width: 100%;">
                                             <option value="">Select Category</option>
-                                            @if($category) @foreach ($category as $rowcategory)
-                                            <option value="{{ Crypt::encryptString($rowcategory->id) }}">{{ $rowcategory->category_name }}</option>
-                                            @endforeach @endif
+                                            <?php if($category): ?> <?php $__currentLoopData = $category; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $rowcategory): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <option value="<?php echo e(Crypt::encryptString($rowcategory->id)); ?>" <?php if($rowcategory->id == Crypt::decryptString(request()->category)): ?> selected <?php endif; ?>><?php echo e($rowcategory->category_name); ?></option>
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?> <?php endif; ?>
                                         </select>
                                     </div>
                                 </div>
@@ -32,6 +32,13 @@
                                     <div class="form-group">
                                         <select name="subcategory" class="subcategory" style="width: 100%;">
                                             <option value="">Select Sub Category</option>
+                                            <?php
+                                            $getsubcategorylistbycategory = GetSubcategoryBycatid(Crypt::decryptString(request()->category));
+                                            ?>
+                                            <?php if($getsubcategorylistbycategory): ?> <?php $__currentLoopData = $getsubcategorylistbycategory; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $rowsubcategory): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <option value="<?php echo e(Crypt::encryptString($rowsubcategory->id)); ?>" <?php if($rowsubcategory->id == Crypt::decryptString(request()->subcategory)): ?> selected <?php endif; ?>><?php echo e($rowsubcategory->sub_category_name); ?></option>
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?> <?php endif; ?>
+
                                         </select>
                                     </div>
                                 </div>
@@ -39,14 +46,28 @@
                                     <div class="form-group">
                                         <select name="subcategoryitem" class="subcategoryitem" style="width: 100%;">
                                             <option value="">Select Sub Category Item</option>
+                                            <?php
+                                                $getsubcategoryitemlistbycategory = GetSubcategoryitemBysubcatid(Crypt::decryptString(request()->subcategory));
+                                            ?>
+                                            <?php if($getsubcategoryitemlistbycategory): ?> <?php $__currentLoopData = $getsubcategoryitemlistbycategory; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $rowsubcategoryitem): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <option value="<?php echo e(Crypt::encryptString($rowsubcategoryitem->id)); ?>" <?php if($rowsubcategoryitem->id == Crypt::decryptString(request()->subcategoryitem)): ?> selected <?php endif; ?>><?php echo e($rowsubcategoryitem->sub_category_item_name); ?></option>
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?> <?php endif; ?>
+
                                         </select>
                                     </div>
                                 </div>
 
                                 <div class="col">
                                     <div class="form-group">
-                                        <select name="attributecategory" class="attributecategory" style="width: 100%;">
-                                            <option value="">Select Attribute</option>
+                                        <select name="variation" class="variation" style="width: 100%;">
+                                            <option value="">Select Variation</option>
+                                            <?php
+                                                $getvariation = GetVariation(Crypt::decryptString(request()->subcategoryitem));
+                                            ?>
+                                            <?php if($getvariation): ?> <?php $__currentLoopData = $getvariation; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $rowvariation): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <option value="<?php echo e(Crypt::encryptString($rowvariation->id)); ?>" <?php if($rowvariation->id == Crypt::decryptString(request()->variation)): ?> selected <?php endif; ?>><?php echo e($rowvariation->variation_name); ?></option>
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?> <?php endif; ?>
+
                                         </select>
                                     </div>
                                 </div>
@@ -65,16 +86,14 @@
 
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Attribute items table</h4>
+                <h4 class="card-title">Variation items table</h4>
                 <div class="row">
                     <div class="col-12">
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped mb-none" id="my-table">
                                 <thead>
                                     <tr class="bg-primary text-white">
-                                        <th>Attribute Items Name</th>
-                                        <th>Column Type</th>
-                                        <th>Column Validation</th>
+                                        <th>Variation Item Name</th>
                                         <th>Status</th>
                                         <th>Actions</th>
                                     </tr>
@@ -94,9 +113,6 @@
                     <div class="modal-body">
 
                     </div>
-                    {{-- <div class="modal-footer" style="width: 700px;z-index: -1;">
-                    <a href="javascript:void(0)" class="btn btn-danger" onclick="submit_or_refresh()">Close</a>
-                    </div> --}}
                 </div>
             </div>
         </div>
@@ -118,7 +134,7 @@
 
 
 
-@push('scripts')
+<?php $__env->startPush('scripts'); ?>
     <script type="text/javascript">
         $(function() {
             // validate signup form on keyup and submit
@@ -154,8 +170,8 @@
             if ($(".subcategoryitem").length) {
                 $(".subcategoryitem").select2();
             }
-            if ($(".attributecategory").length) {
-                $(".attributecategory").select2();
+            if ($(".variation").length) {
+                $(".variation").select2();
             }
         })(jQuery);
 
@@ -164,9 +180,9 @@
             var catId = $(this).val();
             if (catId) {
                 $.ajax({
-                    url: "{{route('admin.getsubcategoryattribute')}}",
+                    url: "<?php echo e(route('admin.getsubcategoryattribute')); ?>",
                     type: "POST",
-                    data:{categoryid:catId, _token: '{{csrf_token()}}'},
+                    data:{categoryid:catId, _token: '<?php echo e(csrf_token()); ?>'},
                     dataType: "json",
                     success: function (returndata) {
                         $('select[name="subcategory"]').empty();
@@ -184,9 +200,9 @@
             var subcatId = $(this).val();
             if (subcatId) {
                 $.ajax({
-                    url: "{{route('admin.getsubcategoryitemattribute')}}",
+                    url: "<?php echo e(route('admin.getsubcategoryitemattribute')); ?>",
                     type: "POST",
-                    data:{subcategoryid:subcatId, _token: '{{csrf_token()}}'},
+                    data:{subcategoryid:subcatId, _token: '<?php echo e(csrf_token()); ?>'},
                     dataType: "json",
                     success: function (returndata) {
                         $('select[name="subcategoryitem"]').empty();
@@ -205,19 +221,19 @@
             //alert(subcatitemId); return false;
             if (subcatitemId) {
                 $.ajax({
-                    url: "{{route('admin.getattributecategorysearch')}}",
+                    url: "<?php echo e(route('vendor.getvariation')); ?>",
                     type: "POST",
-                    data:{subcategoryitemid:subcatitemId, _token: '{{csrf_token()}}'},
+                    data:{subcategoryitemid:subcatitemId, _token: '<?php echo e(csrf_token()); ?>'},
                     dataType: "json",
                     success: function (returndata) {
-                        $('select[name="attributecategory"]').empty();
+                        $('select[name="variation"]').empty();
                         $.each(returndata, function (key, value) {
-                            $('select[name="attributecategory"]').append('<option value=\'' +value.id+'\'>' + value.text + '</option>');
+                            $('select[name="variation"]').append('<option value=\'' +value.id+'\'>' + value.text + '</option>');
                         })
                     }
                 })
             } else {
-                $('select[name="attributecategory"]').empty();
+                $('select[name="variation"]').empty();
             }
         });
 
@@ -237,21 +253,19 @@
                 processing: true,
                 serverSide: true,
                 lengthMenu: [[100, 200, 300], [100, 200, 300]],
-                order: [[ 2, "asc" ]],
+                order: [[ 0, "asc" ]],
                 columnDefs: [{
                     "searchable": true,
                     "orderable": false,
                     "targets": 0
                 }],
                 "ajax": {
-                    data: ({categoryid:'{{Crypt::decryptString(request()->category)}}',subcategoryid:'{{Crypt::decryptString(request()->subcategory)}}',subcategoryitemid:'{{Crypt::decryptString(request()->subcategoryitem)}}',attributecategoryid:'{{Crypt::decryptString(request()->attributecategory)}}',_token: '{{csrf_token()}}'}),
-                    url : "{{url('/')}}/attributelist",
+                    data: ({categoryid:'<?php echo e(Crypt::decryptString(request()->category)); ?>',subcategoryid:'<?php echo e(Crypt::decryptString(request()->subcategory)); ?>',subcategoryitemid:'<?php echo e(Crypt::decryptString(request()->subcategoryitem)); ?>',variationid:'<?php echo e(Crypt::decryptString(request()->variation)); ?>',_token: '<?php echo e(csrf_token()); ?>'}),
+                    url : "<?php echo e(url('/')); ?>/searchvariationitemlistajax",
                     type : 'GET',
                 },
                 columns: [
-                        {data: 'column_name' },
-                        {data: 'column_type'},
-                        {data: 'column_validation'},
+                        {data: 'variation_item_name' },
                         {
                             data: 'status',
                             render: function (data, type, row){
@@ -265,7 +279,7 @@
                        {
                             data: 'action',
                             render: function (data, type, row){
-                                return '<a href="<?php echo url("admin/edit-attribute-items")?>/'+data+'" title="Edit Attribute"><i class="mdi mdi-table-edit"></i></a> | <a href="<?php echo url("admin/attribute-items-trash")?>/'+data+'" title="Trash Attribute" onclick="return confirm("Are you sure?")"><i class="mdi mdi-delete-forever"></i></a> ';
+                                return '<a href="<?php echo url("vendor/edit-variationitem")?>/'+data+'" onclick="geturldata(event)" title="Edit Variation Item"><i class="mdi mdi-table-edit"></i></a> | <a href="<?php echo url("vendor/variationitemtrash")?>/'+data+'" title="Trash Variation Item" onclick="return confirm("Are you sure?")"><i class="mdi mdi-delete-forever"></i></a> ';
                             },
                         },
 
@@ -281,6 +295,15 @@
             }
             return false;
         }
+        function geturldata(e){
+            //alert(e.currentTarget.href);
+			var result = '<iframe  width="660" height="500"  src="'+e.currentTarget.href+'" frameborder="0" marginheight="0" marginwidth="0">Loading&amp;#8230;</iframe>';
+			$("#myModal").modal('show');
+            $(".modal-body").html(result);
+			e.preventDefault();
+	    }
     </script>
-@endpush
-@endsection
+<?php $__env->stopPush(); ?>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.vendor', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH E:\webdev\hemchhaya\resources\views/vendor/variationitems/variationitem-list-search.blade.php ENDPATH**/ ?>

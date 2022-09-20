@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title', 'Attribute category search category / subcategory / subcategory item wise')
+@section('title', 'Attribute search category / subcategory / subcategory item wise')
 @section('content')
 
 
@@ -8,7 +8,7 @@
         <div class="page-header">
             <h3 class="page-title">Search attribute</h3>
             <div class="header-right d-flex flex-wrap mt-2 mt-sm-0">
-                <button type="button" onclick="location.href='{{ route('admin.add-attribute-category') }}'" class="btn btn-primary mt-2 mt-sm-0 btn-icon-text">
+                <button type="button" onclick="location.href='{{ route('admin.add-attribute') }}'" class="btn btn-primary mt-2 mt-sm-0 btn-icon-text">
                   <i class="mdi mdi-plus-circle"></i> Add Attribute </button>
             </div>
         </div>

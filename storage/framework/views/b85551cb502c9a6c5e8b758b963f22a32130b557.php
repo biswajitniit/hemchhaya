@@ -102,7 +102,7 @@
                     <div class="row align-items-center">
                         <div class="col-xl-2 col-lg-3 d-none d-lg-block">
                             <div class="logo">
-                                <a href="index.html"><img src="<?php echo e(asset('frontend/img/logo/logo.png')); ?>" alt="Logo"></a>
+                                <a href="<?php echo e(url('/')); ?>"><img src="<?php echo e(asset('frontend/img/logo/logo.png')); ?>" alt="Logo"></a>
                             </div>
                         </div>
                         <div class="col-xl-10 col-lg-9">

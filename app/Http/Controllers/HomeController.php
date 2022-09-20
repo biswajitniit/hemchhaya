@@ -3,11 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Models\Categorys;
+
 use App\Models\Subcategory;
 use App\Models\Subcategoryitem;
+
+use App\Models\Product;
+use App\Models\Product_child_variation;
+use App\Models\Product_child_variation_item;
+use App\Models\Product_with_variation;
+use App\Models\Product_with_variation_item;
+use App\Models\Product_with_attribute;
+use App\Models\Product_with_attribute_item;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Contracts\Encryption\DecryptException;
+
 class HomeController extends Controller
 {
     /**
@@ -48,7 +59,10 @@ class HomeController extends Controller
     public function sub_category_wise_page(Request $request){
         $subcategory = Subcategory::where('id',Crypt::decryptString($request->subcatid))->where('status','1')->first();
         $subcategoryitem = Subcategoryitem::where('sub_category_id',Crypt::decryptString($request->subcatid))->where('status','1')->get();
-        return view('sub-category-wise-page',compact('subcategory','subcategoryitem'));
+        //GET ALL PRODUCT FOR THIS SUB CATEGORY WISE
+        $product = Product::with('categorys','subcategory','subcategoryitem','vendors','productchildveriation','productchildveriationitem','productwithvariation','productwithvariationitem','productwithattribute','productwithattributeitem')->where('is_variation','0')->get();
+        //dd($productall); die;
+        return view('sub-category-wise-page',compact('subcategory','subcategoryitem','product'));
     }
 
 

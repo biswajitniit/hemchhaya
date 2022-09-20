@@ -1,16 +1,16 @@
-@extends('layouts.vendor')
-@section('title', 'Add Variation')
+@extends('layouts.admin')
+@section('title', 'Add Brand')
 @section('content')
 
 
 <div class="main-panel">
     <div class="content-wrapper">
       <div class="page-header">
-        <h3 class="page-title"> Add Variation</h3>
+        <h3 class="page-title"> Add Brand</h3>
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ route('vendor.variation') }}">Variation</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Add Variation</li>
+            <li class="breadcrumb-item"><a href="{{ route('admin.brand') }}">Brands</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Add Brand</li>
           </ol>
         </nav>
       </div>
@@ -38,61 +38,62 @@
 
 
 
-              <form id="addvariation" method="post" action="{{ route('vendor.add-variation-post-data') }}" name="addvariation">
+              <form class="cmxform" id="addbrand" method="post" action="{{ route('admin.add-brand-post-data') }}" name="addbrand" enctype="multipart/form-data">
                 @csrf
                 <fieldset>
+                    <div class="form-group">
+                        <label for="category_id">Category Name <span class="required">*</span></label>
+                        <select name="category_id" class="js-example-basic-single" style="width: 100%;">
+                            <option value="">Select Category</option>
+                            @if($category) @foreach ($category as $rowcategory)
+                            <option value="{{ $rowcategory->id }}">{{ $rowcategory->category_name }}</option>
+                            @endforeach @endif
+                        </select>
+                    </div>
 
                     <div class="form-group">
-                        <label for="category_id">Category Name</label>
-                        <select name="category_id" class="js-example-basic-single" style="width:100%">
-                            <option value="">Select Category</option>
-                            @if($category)
-                                @foreach ($category as $rowcategory)
-                                    <option value="{{ $rowcategory->id }}">{{ $rowcategory->category_name }}</option>
-                                @endforeach
-                            @endif
-                        </select>
-                      </div>
-
-
-                      <div class="form-group">
-                        <label for="sub_category_id">Sub Category</label>
-                        <select name="sub_category_id" class="subcategory" style="width:100%;">
+                        <label for="sub_category_id">Sub Category <span class="required">*</span></label>
+                        <select name="sub_category_id" class="subcategory" style="width: 100%;">
                             <option value="">Select Sub Category</option>
                         </select>
-                      </div>
+                    </div>
 
-                      <div class="form-group">
-                        <label for="sub_category_item_id">Sub Category Item</label>
-                        <select name="sub_category_item_id" class="subcategory" style="width:100%;">
+                    <div class="form-group">
+                        <label for="sub_category_item_id">Sub Category Item <span class="required">*</span></label>
+                        <select name="sub_category_item_id" class="subcategory" style="width: 100%;">
                             <option value="">Select Sub Category Item</option>
                         </select>
-                      </div>
+                    </div>
 
-                      <div class="form-group">
-                        <label for="variation_name">Variation Name </label>
-                        <input id="variation_name" class="form-control" name="variation_name" type="text">
-                      </div>
+                    <div class="form-group">
+                        <label for="brand_name">Brand Name <span class="required">*</span></label>
+                        <input id="brand_name" class="form-control" name="brand_name" type="text" />
+                    </div>
 
-                      <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">Status</label>
+                    <div class="form-group row">
+                        <div class="col-sm-3">
+                            <label for="brand_image" class="col-form-label">Image </label>
+                            <input type="file" name="brand_image" class="dropify" />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Status <span class="required">*</span></label>
                         <div class="col-sm-4">
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input type="radio" class="form-check-input" name="status" id="status1" value="1" checked> Active </label>
-                          </div>
+                            <div class="form-check">
+                                <label class="form-check-label"> <input type="radio" class="form-check-input" name="status" id="status1" value="1" checked /> Active </label>
+                            </div>
                         </div>
                         <div class="col-sm-5">
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input type="radio" class="form-check-input" name="status" id="status2" value="2"> InActive </label>
-                          </div>
+                            <div class="form-check">
+                                <label class="form-check-label"> <input type="radio" class="form-check-input" name="status" id="status2" value="2" /> InActive </label>
+                            </div>
                         </div>
-                      </div>
+                    </div>
 
-
-                  <input class="btn btn-primary btn-lg" type="submit" value="Submit">
+                    <input class="btn btn-primary btn-lg" type="submit" value="Submit" />
                 </fieldset>
+
               </form>
             </div>
           </div>
@@ -122,18 +123,18 @@
 
         $(function() {
             // validate signup form on keyup and submit
-            $("#addvariation").validate({
+            $("#addsubcategoryitem").validate({
                 rules: {
                     category_id: "required",
                     sub_category_id: "required",
                     sub_category_item_id : "required",
-                    variation_name : "required",
+                    attribute_category_name : "required",
                 },
                 messages: {
                     category_id: "Please select category",
                     sub_category_id: "Please select sub category",
                     sub_category_item_id: "Please select sub category item",
-                    variation_name: "Please enter variation name",
+                    attribute_category_name: "Please enter attribute category name",
                 },
                 errorPlacement: function(label, element) {
                     label.addClass('mt-2 text-danger');
@@ -157,7 +158,7 @@
                 var catId = $(this).val();
                 if (catId) {
                     $.ajax({
-                        url: "{{route('vendor.getsubcategorycpt')}}",
+                        url: "{{route('admin.getsubcategoryonattributepage')}}",
                         type: "POST",
                         data:{categoryid:catId, _token: '{{csrf_token()}}'},
                         dataType: "json",
@@ -177,7 +178,7 @@
                 var subcatId = $(this).val();
                 if (subcatId) {
                     $.ajax({
-                        url: "{{route('vendor.getsubcategoryitemcpt')}}",
+                        url: "{{route('admin.getsubcategoryitemonattributepage')}}",
                         type: "POST",
                         data:{subcategoryid:subcatId, _token: '{{csrf_token()}}'},
                         dataType: "json",

@@ -1,15 +1,15 @@
-@extends('layouts.admin')
-@section('title', 'Attribute search category / subcategory / subcategory item wise')
-@section('content')
+
+<?php $__env->startSection('title', 'Variation category search category / subcategory / subcategory item wise'); ?>
+<?php $__env->startSection('content'); ?>
 
 
 <div class="main-panel">
     <div class="content-wrapper pb-0">
         <div class="page-header">
-            <h3 class="page-title">Search attribute items</h3>
+            <h3 class="page-title">Search Variation</h3>
             <div class="header-right d-flex flex-wrap mt-2 mt-sm-0">
-                <button type="button" onclick="location.href='{{ route('admin.add-attribute-items') }}'" class="btn btn-primary mt-2 mt-sm-0 btn-icon-text">
-                  <i class="mdi mdi-plus-circle"></i> Add Attribute Items </button>
+                <button type="button" onclick="location.href='<?php echo e(route('vendor.add-variation')); ?>'" class="btn btn-primary mt-2 mt-sm-0 btn-icon-text">
+                  <i class="mdi mdi-plus-circle"></i> Add Variation </button>
             </div>
         </div>
 
@@ -17,16 +17,19 @@
         <div class="row">
             <div class="col-xl-12 stretch-card grid-margin">
                 <div class="card">
-                    <form action="{{ route('admin.searchattribute') }}" name="searchattribute" id="searchattribute" method="GET">
+
+                    <form action="<?php echo e(route('vendor.searchvariation')); ?>" name="searchvariation" id="searchvariation" method="GET">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col">
                                     <div class="form-group">
                                         <select name="category" class="category" style="width: 100%;">
                                             <option value="">Select Category</option>
-                                            @if($category) @foreach ($category as $rowcategory)
-                                            <option value="{{ Crypt::encryptString($rowcategory->id) }}">{{ $rowcategory->category_name }}</option>
-                                            @endforeach @endif
+                                            <?php if($category): ?>
+                                                <?php $__currentLoopData = $category; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $rowcategory): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                    <option value="<?php echo e(Crypt::encryptString($rowcategory->id)); ?>"><?php echo e($rowcategory->category_name); ?></option>
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                            <?php endif; ?>
                                         </select>
                                     </div>
                                 </div>
@@ -44,15 +47,6 @@
                                         </select>
                                     </div>
                                 </div>
-
-                                <div class="col">
-                                    <div class="form-group">
-                                        <select name="attributecategory" class="attributecategory" style="width: 100%;">
-                                            <option value="">Select Attribute</option>
-                                        </select>
-                                    </div>
-                                </div>
-
                                 <div class="col">
                                     <div class="form-group">
                                         <input class="btn btn-primary btn-lg" type="submit" value="Search" />
@@ -61,6 +55,7 @@
                             </div>
                         </div>
                     </form>
+
                 </div>
             </div>
         </div>
@@ -69,8 +64,7 @@
     <!-- partial:../../partials/_footer.html -->
     <footer class="footer">
         <div class="d-sm-flex justify-content-center justify-content-sm-between">
-            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2021 <a href="https://www.bootstrapdash.com/" target="_blank">BootstrapDash</a>. All rights reserved.</span>
-            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with <i class="mdi mdi-heart text-danger"></i></span>
+            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © <?php echo e(date('Y')); ?> <a href="<?php echo e(url('/')); ?>" target="_blank">Hemchhaya</a>. All rights reserved.</span>
         </div>
     </footer>
     <!-- partial -->
@@ -79,7 +73,7 @@
 
 
 
-@push('scripts')
+<?php $__env->startPush('scripts'); ?>
 <script type="text/javascript">
     $(".alert").delay(2000).slideUp(200, function () {
         $(this).alert('close');
@@ -87,7 +81,7 @@
 
     $(function() {
         // validate signup form on keyup and submit
-        $("#searchattribute").validate({
+        $("#searchvariation").validate({
             rules: {
                 category: "required",
                 subcategory: "required",
@@ -109,20 +103,17 @@
         });
     });
 
-
     (function($) {
-            if ($(".category").length) {
-                $(".category").select2();
-            }
-            if ($(".subcategory").length) {
-                $(".subcategory").select2();
-            }
-            if ($(".subcategoryitem").length) {
-                $(".subcategoryitem").select2();
-            }
-            if ($(".attributecategory").length) {
-                $(".attributecategory").select2();
-            }
+
+        if ($(".category").length) {
+            $(".category").select2();
+        }
+        if ($(".subcategory").length) {
+            $(".subcategory").select2();
+        }
+        if ($(".subcategoryitem").length) {
+            $(".subcategoryitem").select2();
+        }
     })(jQuery);
 
     $("document").ready(function () {
@@ -130,9 +121,9 @@
             var catId = $(this).val();
             if (catId) {
                 $.ajax({
-                    url: "{{route('admin.getsubcategoryattribute')}}",
+                    url: "<?php echo e(route('vendor.getsubcategory')); ?>",
                     type: "POST",
-                    data:{categoryid:catId, _token: '{{csrf_token()}}'},
+                    data:{categoryid:catId, _token: '<?php echo e(csrf_token()); ?>'},
                     dataType: "json",
                     success: function (returndata) {
                         $('select[name="subcategory"]').empty();
@@ -150,9 +141,9 @@
             var subcatId = $(this).val();
             if (subcatId) {
                 $.ajax({
-                    url: "{{route('admin.getsubcategoryitemattribute')}}",
+                    url: "<?php echo e(route('vendor.getsubcategoryitem')); ?>",
                     type: "POST",
-                    data:{subcategoryid:subcatId, _token: '{{csrf_token()}}'},
+                    data:{subcategoryid:subcatId, _token: '<?php echo e(csrf_token()); ?>'},
                     dataType: "json",
                     success: function (returndata) {
                         $('select[name="subcategoryitem"]').empty();
@@ -166,28 +157,11 @@
             }
         });
 
-        $('select[name="subcategoryitem"]').on('change', function () {
-            var subcatitemId = $(this).val();
-            //alert(subcatitemId); return false;
-            if (subcatitemId) {
-                $.ajax({
-                    url: "{{route('admin.getattributecategorysearch')}}",
-                    type: "POST",
-                    data:{subcategoryitemid:subcatitemId, _token: '{{csrf_token()}}'},
-                    dataType: "json",
-                    success: function (returndata) {
-                        $('select[name="attributecategory"]').empty();
-                        $.each(returndata, function (key, value) {
-                            $('select[name="attributecategory"]').append('<option value=\'' +value.id+'\'>' + value.text + '</option>');
-                        })
-                    }
-                })
-            } else {
-                $('select[name="attributecategory"]').empty();
-            }
-        });
+
 
     });
 </script>
-@endpush
-@endsection
+<?php $__env->stopPush(); ?>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.vendor', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH E:\webdev\hemchhaya\resources\views/vendor/variation/variation-list.blade.php ENDPATH**/ ?>

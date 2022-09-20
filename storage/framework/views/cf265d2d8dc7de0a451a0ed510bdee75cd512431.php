@@ -1,16 +1,15 @@
-@extends('layouts.vendor')
-@section('title', 'Add Variation')
-@section('content')
+<?php $__env->startSection('title', 'Add Attribute Category'); ?>
+<?php $__env->startSection('content'); ?>
 
 
 <div class="main-panel">
     <div class="content-wrapper">
       <div class="page-header">
-        <h3 class="page-title"> Add Variation</h3>
+        <h3 class="page-title"> Add Attribute</h3>
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ route('vendor.variation') }}">Variation</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Add Variation</li>
+            <li class="breadcrumb-item"><a href="<?php echo e(route('attribute.category')); ?>">Attribute</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Add Attribute</li>
           </ol>
         </nav>
       </div>
@@ -19,38 +18,40 @@
         <div class="col-lg-12">
           <div class="card">
             <div class="card-body">
+              
 
-                @if($errors->any())
+                <?php if($errors->any()): ?>
                     <div class="alert alert-danger">
                         <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
+                            <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <li><?php echo e($error); ?></li>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </ul>
                     </div>
-                @endif
+                <?php endif; ?>
 
-                @if(session()->has('message'))
+                <?php if(session()->has('message')): ?>
                     <div class="alert alert-success">
-                        {{ session()->get('message') }}
+                        <?php echo e(session()->get('message')); ?>
+
                     </div>
-                @endif
+                <?php endif; ?>
 
 
 
-              <form id="addvariation" method="post" action="{{ route('vendor.add-variation-post-data') }}" name="addvariation">
-                @csrf
+              <form class="cmxform" id="addattributecategory" method="post" action="<?php echo e(route('admin.add-attribute-post-data')); ?>" name="addattributecategory">
+                <?php echo csrf_field(); ?>
                 <fieldset>
 
                     <div class="form-group">
                         <label for="category_id">Category Name</label>
                         <select name="category_id" class="js-example-basic-single" style="width:100%">
                             <option value="">Select Category</option>
-                            @if($category)
-                                @foreach ($category as $rowcategory)
-                                    <option value="{{ $rowcategory->id }}">{{ $rowcategory->category_name }}</option>
-                                @endforeach
-                            @endif
+                            <?php if($category): ?>
+                                <?php $__currentLoopData = $category; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $rowcategory): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <option value="<?php echo e($rowcategory->id); ?>"><?php echo e($rowcategory->category_name); ?></option>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            <?php endif; ?>
                         </select>
                       </div>
 
@@ -65,13 +66,13 @@
                       <div class="form-group">
                         <label for="sub_category_item_id">Sub Category Item</label>
                         <select name="sub_category_item_id" class="subcategory" style="width:100%;">
-                            <option value="">Select Sub Category Item</option>
+                            <option value="">Select Sub Category</option>
                         </select>
                       </div>
 
                       <div class="form-group">
-                        <label for="variation_name">Variation Name </label>
-                        <input id="variation_name" class="form-control" name="variation_name" type="text">
+                        <label for="attribute_category_name">Attribute Name </label>
+                        <input id="attribute_category_name" class="form-control" name="attribute_category_name" type="text">
                       </div>
 
                       <div class="form-group row">
@@ -103,7 +104,7 @@
     <!-- partial:../../partials/_footer.html -->
     <footer class="footer">
         <div class="d-sm-flex justify-content-center justify-content-sm-between">
-            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © {{ date('Y') }} <a href="{{ url('/') }}" target="_blank">Hemchhaya</a>. All rights reserved.</span>
+            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © <?php echo e(date('Y')); ?> <a href="<?php echo e(url('/')); ?>" target="_blank">Hemchhaya</a>. All rights reserved.</span>
         </div>
     </footer>
     <!-- partial -->
@@ -114,7 +115,7 @@
 
 
 
-@push('scripts')
+<?php $__env->startPush('scripts'); ?>
     <script type="text/javascript">
         $(".alert").delay(2000).slideUp(200, function () {
             $(this).alert('close');
@@ -122,18 +123,18 @@
 
         $(function() {
             // validate signup form on keyup and submit
-            $("#addvariation").validate({
+            $("#addsubcategoryitem").validate({
                 rules: {
                     category_id: "required",
                     sub_category_id: "required",
                     sub_category_item_id : "required",
-                    variation_name : "required",
+                    attribute_category_name : "required",
                 },
                 messages: {
                     category_id: "Please select category",
                     sub_category_id: "Please select sub category",
                     sub_category_item_id: "Please select sub category item",
-                    variation_name: "Please enter variation name",
+                    attribute_category_name: "Please enter attribute category name",
                 },
                 errorPlacement: function(label, element) {
                     label.addClass('mt-2 text-danger');
@@ -157,9 +158,9 @@
                 var catId = $(this).val();
                 if (catId) {
                     $.ajax({
-                        url: "{{route('vendor.getsubcategorycpt')}}",
+                        url: "<?php echo e(route('admin.getsubcategoryonattributepage')); ?>",
                         type: "POST",
-                        data:{categoryid:catId, _token: '{{csrf_token()}}'},
+                        data:{categoryid:catId, _token: '<?php echo e(csrf_token()); ?>'},
                         dataType: "json",
                         success: function (returndata) {
                             $('select[name="sub_category_id"]').empty();
@@ -177,9 +178,9 @@
                 var subcatId = $(this).val();
                 if (subcatId) {
                     $.ajax({
-                        url: "{{route('vendor.getsubcategoryitemcpt')}}",
+                        url: "<?php echo e(route('admin.getsubcategoryitemonattributepage')); ?>",
                         type: "POST",
-                        data:{subcategoryid:subcatId, _token: '{{csrf_token()}}'},
+                        data:{subcategoryid:subcatId, _token: '<?php echo e(csrf_token()); ?>'},
                         dataType: "json",
                         success: function (returndata) {
                             $('select[name="sub_category_item_id"]').empty();
@@ -196,5 +197,7 @@
 
         });
     </script>
-@endpush
-@endsection
+<?php $__env->stopPush(); ?>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.admin', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH E:\webdev\hemchhaya\resources\views/admin/attributecategory/add-attribute-category.blade.php ENDPATH**/ ?>

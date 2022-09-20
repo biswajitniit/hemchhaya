@@ -19,7 +19,10 @@ use App\Http\Controllers\Admin\Attributecategory\AttributecategoryController;
 use App\Http\Controllers\Admin\Attribute\AttributeController;
 use App\Http\Controllers\Vendor\Product\ProductController;
 use App\Http\Controllers\Admin\LogoutController;
+
+use App\Http\Controllers\Admin\Brand\BrandController;
 use App\Http\Controllers\HomeController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,9 +34,7 @@ use App\Http\Controllers\HomeController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 Route::get('/clear-cache', function() {
     Artisan::call('config:clear');
     Artisan::call('cache:clear');
@@ -42,7 +43,11 @@ Route::get('/clear-cache', function() {
 
 Auth::routes();
 
-//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+/**
+ *
+ * Admin section start
+ *
+ */
 
 Route::group(['middleware' => ['admin']], function () {
     Route::get('/admin', [AdminLoginController::class, 'index'])->name('admin.login');
@@ -106,15 +111,16 @@ Route::any('/admin/getsubcategory', [SubCategoryItemController::class, 'ajax_sub
 
 
 // Admin Attribute Category Heading
-Route::get('/admin/attribute-category', [AttributecategoryController::class, 'attribute_category_list'])->name('attribute.category');
+Route::get('/admin/attribute', [AttributecategoryController::class, 'attribute_list'])->name('attribute.category');
 
-Route::get('/admin/add-attribute-category',[AttributecategoryController::class, 'add_attribute_category'])->name('admin.add-attribute-category');
-Route::post('/admin/add-attribute-category-post-data',[AttributecategoryController::class, 'add_attribute_category_post_data'])->name('admin.add-attribute-category-post-data');
+Route::get('/admin/add-attribute',[AttributecategoryController::class, 'add_attribute'])->name('admin.add-attribute');
+Route::post('/admin/add-attribute-post-data',[AttributecategoryController::class, 'add_attribute_post_data'])->name('admin.add-attribute-post-data');
 
-Route::get('/admin/edit-attribute-category/{attributecatid}',[AttributecategoryController::class, 'edit_attribute_category'])->name('admin.edit-attribute-category');
-Route::post('/admin/edit-attribute-category-post',[AttributecategoryController::class, 'edit_attribute_category_post'])->name('admin.edit-attribute-category-post');
+Route::get('/admin/edit-attribute/{attributecatid}',[AttributecategoryController::class, 'edit_attribute'])->name('admin.edit-attribute');
+Route::post('/admin/edit-attribute-post',[AttributecategoryController::class, 'edit_attribute_post'])->name('admin.edit-attribute-post');
 
-Route::any('/admin/attribute-category-trash/{attributecatid}',[AttributecategoryController::class, 'attribute_category_trash'])->name('admin.attribute-category-trash');
+Route::any('/admin/attribute-trash/{attributecatid}',[AttributecategoryController::class, 'attribute_trash'])->name('admin.attribute-trash');
+
 
 Route::get('/admin/searchattributecategory', [AttributecategoryController::class, 'searchattributecategory'])->name('admin.searchattributecategory');
 Route::any('/admin/attributecategorylistajax', [AttributecategoryController::class, 'ajax_get_list_attribute_category_by_cat_subcat_subcatitem_wise'])->name('admin.attributecategorylistajax');  // GET Subcategory LIST on attribute page
@@ -124,17 +130,17 @@ Route::any('/admin/getsubcategoryitemonattributepage', [AttributecategoryControl
 
 
 // Admin Attribute field's
-Route::get('/admin/attribute', [AttributeController::class, 'attribute_list'])->name('attribute');
+Route::get('/admin/attribute-items', [AttributeController::class, 'attribute_items_list'])->name('attribute-items');
 
 Route::get('/attributelist', [AttributeController::class, 'attributelistdata'])->name('attributelist');
 
-Route::get('/admin/add-attribute',[AttributeController::class, 'add_attribute'])->name('admin.add-attribute');
-Route::post('/admin/add-attribute-post-data',[AttributeController::class, 'add_attribute_post_data'])->name('admin.add-attribute-post-data');
+Route::get('/admin/add-attribute-items',[AttributeController::class, 'add_attribute_items'])->name('admin.add-attribute-items');
+Route::post('/admin/add-attribute-items-post-data',[AttributeController::class, 'add_attribute_items_post_data'])->name('admin.add-attribute-items-post-data');
 
-Route::any('/admin/edit-attribute/{attributeid}',[AttributeController::class, 'edit_attribute'])->name('admin.edit-attribute');
-Route::post('/admin/edit-attribute-post',[AttributeController::class, 'edit_attribute_post'])->name('admin.edit-attribute-post');
+Route::any('/admin/edit-attribute-items/{attributeid}',[AttributeController::class, 'edit_attribute_items'])->name('admin.edit-attribute-items');
+Route::post('/admin/edit-attribute-items-post',[AttributeController::class, 'edit_attribute_items_post'])->name('admin.edit-attribute-items-post');
 
-Route::any('/admin/attributetrash/{attributeid}',[AttributeController::class, 'attributetrash'])->name('admin.attributetrash');
+Route::any('/admin/attribute-items-trash/{attributeid}',[AttributeController::class, 'attributeitemstrash'])->name('admin.attribute-item-trash');
 
 Route::get('/admin/searchattribute', [AttributeController::class, 'searchattribute'])->name('admin.searchattribute');
 
@@ -147,6 +153,26 @@ Route::any('/admin/getattributecategorysearch', [AttributeController::class, 'aj
 
 
 
+// Admin Brand
+Route::get('/admin/brand', [BrandController::class, 'brand_list'])->name('admin.brand');
+
+Route::get('/admin/add-brand',[BrandController::class, 'add_brand'])->name('admin.add-brand');
+Route::post('/admin/add-brand-post-data',[BrandController::class, 'add_brand_post_data'])->name('admin.add-brand-post-data');
+
+Route::get('/admin/edit-brand/{brandid}',[BrandController::class, 'edit_brand'])->name('admin.edit-brand');
+Route::post('/admin/edit-brand-post',[BrandController::class, 'edit_brand_post'])->name('admin.edit-brand-post');
+
+Route::any('/admin/brand-trash/{brandid}',[BrandController::class, 'brand_trash'])->name('admin.brand-trash');
+
+Route::any('/admin/brand-list-search', [BrandController::class, 'brand_list_search'])->name('admin.brand-list-search');
+Route::any('/admin/search-brand-list-datatable', [BrandController::class, 'ajax_search_brand_list_datatable'])->name('admin.search-brand-list-datatable');
+
+
+/**
+ *
+ * Admin section End
+ *
+ */
 
 
 
@@ -157,8 +183,6 @@ Route::any('/admin/getattributecategorysearch', [AttributeController::class, 'aj
  * Vendor section start
  *
  */
-
-
 
 
  Route::group(['middleware' => ['vendor']], function () {
@@ -212,17 +236,6 @@ Route::post('/vendor/getvariation', [VariationitemsController::class, 'ajax_getv
 Route::any('/vendor/getvariationBysubcategoryitem', [VariationitemsController::class, 'ajax_getvariationBysubcategoryitem'])->name('vendor.getvariationBysubcategoryitem');
 
 
-
-
-
-
-
-
-
-
-
-
-
  // Vendor Products
  Route::get('/vendor/products', [ProductController::class, 'product_list'])->name('products');
 
@@ -246,14 +259,19 @@ Route::any('/admin/get_attributecat_with_attribute_on_product_page', [ProductCon
  * Vendor section end
  *
  */
-Route::get('/category-wise-landing-page',[HomeController::class, 'category_wise_landing_page'])->name('home.category-wise-landing-page');
-Route::get('/sub-category-wise-page',[HomeController::class, 'sub_category_wise_page'])->name('home.sub-category-wise-page');
+
+
 
  /**
  *
  * Frontend section start
  *
  */
+    Route::get('/', function () {
+        return view('welcome');
+    });
+    Route::get('/category-wise-landing-page',[HomeController::class, 'category_wise_landing_page'])->name('home.category-wise-landing-page');
+    Route::get('/sub-category-wise-page',[HomeController::class, 'sub_category_wise_page'])->name('home.sub-category-wise-page');
 
 
   /**

@@ -102,7 +102,7 @@
                     <div class="row align-items-center">
                         <div class="col-xl-2 col-lg-3 d-none d-lg-block">
                             <div class="logo">
-                                <a href="index.html"><img src="{{ asset('frontend/img/logo/logo.png') }}" alt="Logo"></a>
+                                <a href="{{ url('/') }}"><img src="{{ asset('frontend/img/logo/logo.png') }}" alt="Logo"></a>
                             </div>
                         </div>
                         <div class="col-xl-10 col-lg-9">

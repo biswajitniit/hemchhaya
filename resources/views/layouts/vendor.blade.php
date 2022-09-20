@@ -7,38 +7,55 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>@yield('title')</title>
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('adminpanel/assets/images/favicon.ico') }}">
+    <!-- plugins:css -->
     <link rel="stylesheet" href="{{ asset('adminpanel/assets/vendors/mdi/css/materialdesignicons.min.css') }}">
-    {{-- <link rel="stylesheet" href="{{ asset('adminpanel/assets/vendors/flag-icon-css/css/flag-icon.min.css') }}"> --}}
+    <link rel="stylesheet" href="{{ asset('adminpanel/assets/vendors/flag-icon-css/css/flag-icon.min.css') }}">
     <link rel="stylesheet" href="{{ asset('adminpanel/assets/vendors/css/vendor.bundle.base.css') }}">
+    <!-- endinject -->
 
-      <link rel="stylesheet" href="{{ asset('adminpanel/assets/vendors/select2/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('adminpanel/assets/vendors/select2/select2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('adminpanel/assets/vendors/select2-bootstrap-theme/select2-bootstrap.min.css') }}">
 
-    {{-- <link rel="stylesheet" href="{{ asset('adminpanel/assets/vendors/jquery-bar-rating/css-stars.css') }}"> --}}
-    <link rel="stylesheet" href="{{ asset('adminpanel/assets/vendors/font-awesome/css/font-awesome.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('adminpanel/assets/vendors/dropzone/dropzone.css') }}">
-     {{-- <link rel="stylesheet" href="{{ asset('adminpanel/assets/vendors/jquery-bar-rating/bars-1to10.css') }}"> --}}
-    {{-- {{--<link rel="stylesheet" href="{{ asset('adminpanel/assets/vendors/jquery-bar-rating/bars-horizontal.css') }}">
-    <link rel="stylesheet" href="{{ asset('adminpanel/assets/vendors/jquery-bar-rating/bars-movie.css') }}">
-    <link rel="stylesheet" href="{{ asset('adminpanel/assets/vendors/jquery-bar-rating/bars-pill.css') }}">
-    <link rel="stylesheet" href="{{ asset('adminpanel/assets/vendors/jquery-bar-rating/bars-reversed.css') }}">
-    <link rel="stylesheet" href="{{ asset('adminpanel/assets/vendors/jquery-bar-rating/bars-square.css') }}">
-    <link rel="stylesheet" href="{{ asset('adminpanel/assets/vendors/jquery-bar-rating/bootstrap-stars.css') }}">
+    <!-- Plugin css for this page -->
     <link rel="stylesheet" href="{{ asset('adminpanel/assets/vendors/jquery-bar-rating/css-stars.css') }}">
-    <link rel="stylesheet" href="{{ asset('adminpanel/assets/vendors/jquery-bar-rating/examples.css') }}">
-    <link rel="stylesheet" href="{{ asset('adminpanel/assets/vendors/jquery-bar-rating/fontawesome-stars-o.css') }}">
-    <link rel="stylesheet" href="{{ asset('adminpanel/assets/vendors/jquery-bar-rating/fontawesome-stars.css') }}"> --}}
-    <link rel="stylesheet" href="{{ asset('adminpanel/assets/vendors/jquery-asColorPicker/css/asColorPicker.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('adminpanel/assets/vendors/x-editable/bootstrap-editable.css') }}">
-    <link rel="stylesheet" href="{{ asset('adminpanel/assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('adminpanel/assets/vendors/dropify/dropify.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('adminpanel/assets/vendors/jquery-file-upload/uploadfile.css') }}">
-    <link rel="stylesheet" href="{{ asset('adminpanel/assets/vendors/jquery-tags-input/jquery.tagsinput.min.css') }}">
-    {{-- <link rel="stylesheet" href="{{ asset('adminpanel/assets/vendors/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.min.css') }}"> --}}
+    <link rel="stylesheet" href="{{ asset('adminpanel/assets/vendors/font-awesome/css/font-awesome.min.css') }}">
+    <!-- End plugin css for this page -->
 
 
+      <!-- Plugin css for this page -->
+      <link rel="stylesheet" href="{{ asset('adminpanel/assets/vendors/dropzone/dropzone.css') }}">
+      <link rel="stylesheet" href="{{ asset('adminpanel/assets/vendors/font-awesome/css/font-awesome.min.css') }}">
+      <link rel="stylesheet" href="{{ asset('adminpanel/assets/vendors/jquery-bar-rating/bars-1to10.css') }}">
+      <link rel="stylesheet" href="{{ asset('adminpanel/assets/vendors/jquery-bar-rating/bars-horizontal.css') }}">
+      <link rel="stylesheet" href="{{ asset('adminpanel/assets/vendors/jquery-bar-rating/bars-movie.css') }}">
+      <link rel="stylesheet" href="{{ asset('adminpanel/assets/vendors/jquery-bar-rating/bars-pill.css') }}">
+      <link rel="stylesheet" href="{{ asset('adminpanel/assets/vendors/jquery-bar-rating/bars-reversed.css') }}">
+      <link rel="stylesheet" href="{{ asset('adminpanel/assets/vendors/jquery-bar-rating/bars-square.css') }}">
+      <link rel="stylesheet" href="{{ asset('adminpanel/assets/vendors/jquery-bar-rating/bootstrap-stars.css') }}">
+      <link rel="stylesheet" href="{{ asset('adminpanel/assets/vendors/jquery-bar-rating/css-stars.css') }}">
+      <link rel="stylesheet" href="{{ asset('adminpanel/assets/vendors/jquery-bar-rating/examples.css') }}">
+      <link rel="stylesheet" href="{{ asset('adminpanel/assets/vendors/jquery-bar-rating/fontawesome-stars-o.css') }}">
+      <link rel="stylesheet" href="{{ asset('adminpanel/assets/vendors/jquery-bar-rating/fontawesome-stars.css') }}">
+      <link rel="stylesheet" href="{{ asset('adminpanel/assets/vendors/jquery-asColorPicker/css/asColorPicker.min.css') }}">
+      <link rel="stylesheet" href="{{ asset('adminpanel/assets/vendors/x-editable/bootstrap-editable.css') }}">
+      <link rel="stylesheet" href="{{ asset('adminpanel/assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css') }}">
+      <link rel="stylesheet" href="{{ asset('adminpanel/assets/vendors/dropify/dropify.min.css') }}">
+      <link rel="stylesheet" href="{{ asset('adminpanel/assets/vendors/jquery-file-upload/uploadfile.css') }}">
+      <link rel="stylesheet" href="{{ asset('adminpanel/assets/vendors/jquery-tags-input/jquery.tagsinput.min.css') }}">
+      <link rel="stylesheet" href="{{ asset('adminpanel/assets/vendors/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.min.css') }}">
+      <!-- End plugin css for this page -->
+
+
+
+
+
+    <!-- inject:css -->
+    <!-- endinject -->
+    <!-- Layout styles -->
     <link rel="stylesheet" href="{{ asset('adminpanel/assets/css/demo_1/style.css') }}">
+    <!-- End layout styles -->
+
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('adminpanel/assets/images/favicon.ico') }}">
 
     <link rel="stylesheet" href="{{ asset('adminpanel/assets/vendors/datatables.net-bs4/dataTables.bootstrap4.css') }}">
 
@@ -298,12 +315,15 @@
         <!-- page-body-wrapper ends -->
       </div>
       <!-- container-scroller -->
-<script src="{{ asset('adminpanel/assets/vendors/js/vendor.bundle.base.js') }}"></script>
-
+    <!-- plugins:js -->
+    <script src="{{ asset('adminpanel/assets/vendors/js/vendor.bundle.base.js') }}"></script>
+    <!-- endinject -->
     <script src="{{ asset('adminpanel/assets/vendors/jquery-validation/jquery.validate.min.js') }}"></script>
     <script src="{{ asset('adminpanel/assets/vendors/bootstrap-maxlength/bootstrap-maxlength.min.js') }}"></script>
-    <script src="{{ asset('adminpanel/assets/vendors/jquery-steps/jquery.steps.min.js') }}"></script>
 
+
+
+    <!-- Plugin js for this page -->
     <script src="{{ asset('adminpanel/assets/vendors/jquery-bar-rating/jquery.barrating.min.js') }}"></script>
     <script src="{{ asset('adminpanel/assets/vendors/chart.js/Chart.min.js') }}"></script>
     <script src="{{ asset('adminpanel/assets/vendors/flot/jquery.flot.js') }}"></script>
@@ -312,22 +332,26 @@
     <script src="{{ asset('adminpanel/assets/vendors/flot/jquery.flot.fillbetween.js') }}"></script>
     <script src="{{ asset('adminpanel/assets/vendors/flot/jquery.flot.stack.js') }}"></script>
     <script src="{{ asset('adminpanel/assets/js/jquery.cookie.js') }}" type="text/javascript"></script>
-
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
     <script src="{{ asset('adminpanel/assets/js/off-canvas.js') }}"></script>
     <script src="{{ asset('adminpanel/assets/js/hoverable-collapse.js') }}"></script>
     <script src="{{ asset('adminpanel/assets/js/misc.js') }}"></script>
     <script src="{{ asset('adminpanel/assets/js/settings.js') }}"></script>
     <script src="{{ asset('adminpanel/assets/js/todolist.js') }}"></script>
-
+    <!-- endinject -->
+    <!-- Custom js for this page -->
     <script src="{{ asset('adminpanel/assets/js/dashboard.js') }}"></script>
-
+    <!-- End custom js for this page -->
     <script src="{{ asset('adminpanel/assets/js/data-table.js') }}"></script>
 
-
+    <!-- Plugin js for this page -->
     <script src="{{ asset('adminpanel/assets/vendors/datatables.net/jquery.dataTables.js') }}"></script>
     <script src="{{ asset('adminpanel/assets/vendors/datatables.net-bs4/dataTables.bootstrap4.js') }}"></script>
+    <!-- End plugin js for this page -->
 
-
+    <!-- Custom js for this page -->
+    {{-- <script src="{{ asset('adminpanel/assets/js/form-validation.js') }}"></script> --}}
     <script src="{{ asset('adminpanel/assets/js/bt-maxLength.js') }}"></script>
 
     <script src="{{ asset('adminpanel/assets/vendors/select2/select2.min.js') }}"></script>
@@ -335,8 +359,9 @@
 
     <script src="{{ asset('adminpanel/assets/js/typeahead.js') }}"></script>
     <script src="{{ asset('adminpanel/assets/js/select2.js') }}"></script>
-    <script src="{{ asset('adminpanel/assets/js/wizard.js') }}"></script>
 
+
+    <!-- Plugin js for this page -->
     <script src="{{ asset('adminpanel/assets/vendors/jquery-bar-rating/jquery.barrating.min.js') }}"></script>
     <script src="{{ asset('adminpanel/assets/vendors/jquery-asColor/jquery-asColor.min.js') }}"></script>
     <script src="{{ asset('adminpanel/assets/vendors/jquery-asGradient/jquery-asGradient.min.js') }}"></script>
@@ -351,7 +376,9 @@
     <script src="{{ asset('adminpanel/assets/vendors/dropzone/dropzone.js') }}"></script>
     <script src="{{ asset('adminpanel/assets/vendors/jquery.repeater/jquery.repeater.min.js') }}"></script>
     <script src="{{ asset('adminpanel/assets/vendors/inputmask/jquery.inputmask.bundle.js') }}"></script>
+    <!-- End plugin js for this page -->
 
+    <!-- Custom js for this page -->
     <script src="{{ asset('adminpanel/assets/js/formpickers.js') }}"></script>
     <script src="{{ asset('adminpanel/assets/js/form-addons.js') }}"></script>
     <script src="{{ asset('adminpanel/assets/js/x-editable.js') }}"></script>
@@ -361,17 +388,14 @@
     <script src="{{ asset('adminpanel/assets/js/formpickers.js') }}"></script>
     <script src="{{ asset('adminpanel/assets/js/form-repeater.js') }}"></script>
     <script src="{{ asset('adminpanel/assets/js/inputmask.js') }}"></script>
+    <!-- End custom js for this page -->
 
-    <script src="{{ asset('adminpanel/assets/js/jquery.multi-select.min.js') }}"></script>
-
-    <script src="{{ asset('adminpanel/assets/vendors/dropify/dropify.min.js') }}"></script>
-    <script src="{{ asset('adminpanel/assets/js/dropify.js') }}"></script>
 
     <script src="//cdn.ckeditor.com/4.19.1/standard/ckeditor.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
 
-     <script src="{{ asset('adminpanel/assets/js/form-validation.js') }}"></script>
+
 
    @stack('scripts')
   </body>

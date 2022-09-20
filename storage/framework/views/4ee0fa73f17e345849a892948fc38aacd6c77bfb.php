@@ -1,13 +1,12 @@
-@extends('layouts.admin')
-@section('title', 'Attribute list search')
-@section('content')
+<?php $__env->startSection('title', 'Attribute list search'); ?>
+<?php $__env->startSection('content'); ?>
 
 <div class="main-panel">
     <div class="content-wrapper pb-0">
         <div class="page-header">
             <h3 class="page-title">Search attribute items</h3>
             <div class="header-right d-flex flex-wrap mt-2 mt-sm-0">
-                <button type="button" onclick="location.href='{{ route('admin.add-attribute') }}'" class="btn btn-primary mt-2 mt-sm-0 btn-icon-text"><i class="mdi mdi-plus-circle"></i> Add Attribute Items</button>
+                <button type="button" onclick="location.href='<?php echo e(route('admin.add-attribute')); ?>'" class="btn btn-primary mt-2 mt-sm-0 btn-icon-text"><i class="mdi mdi-plus-circle"></i> Add Attribute Items</button>
             </div>
         </div>
 
@@ -15,16 +14,16 @@
         <div class="row">
             <div class="col-xl-12 stretch-card grid-margin">
                 <div class="card">
-                    <form action="{{ route('admin.searchattribute') }}" name="searchattribute" id="searchattribute" method="GET">
+                    <form action="<?php echo e(route('admin.searchattribute')); ?>" name="searchattribute" id="searchattribute" method="GET">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col">
                                     <div class="form-group">
                                         <select name="category" class="category" style="width: 100%;">
                                             <option value="">Select Category</option>
-                                            @if($category) @foreach ($category as $rowcategory)
-                                            <option value="{{ Crypt::encryptString($rowcategory->id) }}">{{ $rowcategory->category_name }}</option>
-                                            @endforeach @endif
+                                            <?php if($category): ?> <?php $__currentLoopData = $category; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $rowcategory): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <option value="<?php echo e(Crypt::encryptString($rowcategory->id)); ?>"><?php echo e($rowcategory->category_name); ?></option>
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?> <?php endif; ?>
                                         </select>
                                     </div>
                                 </div>
@@ -94,9 +93,7 @@
                     <div class="modal-body">
 
                     </div>
-                    {{-- <div class="modal-footer" style="width: 700px;z-index: -1;">
-                    <a href="javascript:void(0)" class="btn btn-danger" onclick="submit_or_refresh()">Close</a>
-                    </div> --}}
+                    
                 </div>
             </div>
         </div>
@@ -118,7 +115,7 @@
 
 
 
-@push('scripts')
+<?php $__env->startPush('scripts'); ?>
     <script type="text/javascript">
         $(function() {
             // validate signup form on keyup and submit
@@ -164,9 +161,9 @@
             var catId = $(this).val();
             if (catId) {
                 $.ajax({
-                    url: "{{route('admin.getsubcategoryattribute')}}",
+                    url: "<?php echo e(route('admin.getsubcategoryattribute')); ?>",
                     type: "POST",
-                    data:{categoryid:catId, _token: '{{csrf_token()}}'},
+                    data:{categoryid:catId, _token: '<?php echo e(csrf_token()); ?>'},
                     dataType: "json",
                     success: function (returndata) {
                         $('select[name="subcategory"]').empty();
@@ -184,9 +181,9 @@
             var subcatId = $(this).val();
             if (subcatId) {
                 $.ajax({
-                    url: "{{route('admin.getsubcategoryitemattribute')}}",
+                    url: "<?php echo e(route('admin.getsubcategoryitemattribute')); ?>",
                     type: "POST",
-                    data:{subcategoryid:subcatId, _token: '{{csrf_token()}}'},
+                    data:{subcategoryid:subcatId, _token: '<?php echo e(csrf_token()); ?>'},
                     dataType: "json",
                     success: function (returndata) {
                         $('select[name="subcategoryitem"]').empty();
@@ -205,9 +202,9 @@
             //alert(subcatitemId); return false;
             if (subcatitemId) {
                 $.ajax({
-                    url: "{{route('admin.getattributecategorysearch')}}",
+                    url: "<?php echo e(route('admin.getattributecategorysearch')); ?>",
                     type: "POST",
-                    data:{subcategoryitemid:subcatitemId, _token: '{{csrf_token()}}'},
+                    data:{subcategoryitemid:subcatitemId, _token: '<?php echo e(csrf_token()); ?>'},
                     dataType: "json",
                     success: function (returndata) {
                         $('select[name="attributecategory"]').empty();
@@ -244,8 +241,8 @@
                     "targets": 0
                 }],
                 "ajax": {
-                    data: ({categoryid:'{{Crypt::decryptString(request()->category)}}',subcategoryid:'{{Crypt::decryptString(request()->subcategory)}}',subcategoryitemid:'{{Crypt::decryptString(request()->subcategoryitem)}}',attributecategoryid:'{{Crypt::decryptString(request()->attributecategory)}}',_token: '{{csrf_token()}}'}),
-                    url : "{{url('/')}}/attributelist",
+                    data: ({categoryid:'<?php echo e(Crypt::decryptString(request()->category)); ?>',subcategoryid:'<?php echo e(Crypt::decryptString(request()->subcategory)); ?>',subcategoryitemid:'<?php echo e(Crypt::decryptString(request()->subcategoryitem)); ?>',attributecategoryid:'<?php echo e(Crypt::decryptString(request()->attributecategory)); ?>',_token: '<?php echo e(csrf_token()); ?>'}),
+                    url : "<?php echo e(url('/')); ?>/attributelist",
                     type : 'GET',
                 },
                 columns: [
@@ -282,5 +279,7 @@
             return false;
         }
     </script>
-@endpush
-@endsection
+<?php $__env->stopPush(); ?>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.admin', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH E:\webdev\hemchhaya\resources\views/admin/attribute/attribute-list-search.blade.php ENDPATH**/ ?>

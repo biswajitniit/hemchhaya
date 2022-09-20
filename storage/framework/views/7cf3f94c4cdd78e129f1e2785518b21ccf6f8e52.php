@@ -38,10 +38,10 @@
                             </div>
                             <div class="shop-cat-list">
                                 <ul>
-
+                                    <li><a href="#">All<span>+</span></a></li>
                                     <?php if($subcategoryitem): ?>
                                         <?php $__currentLoopData = $subcategoryitem; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                        <li><a href="shop.html"><?php echo e($row->sub_category_item_name); ?></a></li>
+                                        <li><a href="shop.html"><?php echo e($row->sub_category_item_name); ?><span>+</span></a></li>
                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     <?php endif; ?>
 
@@ -68,7 +68,7 @@
                                 <ul>
                                     <li>
                                         <div class="sidebar-product-thumb">
-                                            <a href="shop-details.html"><img src="img/product/sidebar_product01.jpg" alt=""></a>
+                                            <a href="shop-details.html"><img src="<?php echo e(asset('frontend/img/product/sidebar_product01.jpg')); ?>" alt=""></a>
                                         </div>
                                         <div class="sidebar-product-content">
                                             <div class="rating">
@@ -84,7 +84,7 @@
                                     </li>
                                     <li>
                                         <div class="sidebar-product-thumb">
-                                            <a href="shop-details.html"><img src="img/product/sidebar_product02.jpg" alt=""></a>
+                                            <a href="shop-details.html"><img src="<?php echo e(asset('frontend/img/product/sidebar_product02.jpg')); ?>" alt=""></a>
                                         </div>
                                         <div class="sidebar-product-content">
                                             <div class="rating">
@@ -100,7 +100,7 @@
                                     </li>
                                     <li>
                                         <div class="sidebar-product-thumb">
-                                            <a href="shop-details.html"><img src="img/product/sidebar_product03.jpg" alt=""></a>
+                                            <a href="shop-details.html"><img src="<?php echo e(asset('frontend/img/product/sidebar_product03.jpg')); ?>" alt=""></a>
                                         </div>
                                         <div class="sidebar-product-content">
                                             <div class="rating">
@@ -132,7 +132,7 @@
                         </div>
                         <div class="widget">
                             <div class="shop-widget-banner text-center">
-                                <a href="shop.html"><img src="img/product/sidebar_shop_ad.jpg" alt=""></a>
+                                <a href="shop.html"><img src="<?php echo e(asset('frontend/img/product/sidebar_shop_ad.jpg')); ?>" alt=""></a>
                             </div>
                         </div>
                     </aside>
@@ -160,11 +160,10 @@
                                 <div class="shop-top-right">
                                     <form action="#">
                                         <select name="select">
-                                            <option value="">Sort by newness</option>
-                                            <option>Free Shipping</option>
-                                            <option>Best Match</option>
-                                            <option>Newest Item</option>
-                                            <option>Size A - Z</option>
+                                            <option value="popularity">Popularity</option>
+                                            <option value="price-low-to-high">Price -- Low to High</option>
+                                            <option value="price-high-to-low">Price -- High to Low</option>
+                                            <option value="discount">Discount</option>
                                         </select>
                                     </form>
                                 </div>
@@ -173,330 +172,46 @@
                     </div>
                     <div class="shop-products-wrap">
                         <div class="row justify-content-center">
-                            <div class="col-xl-3 col-md-4 col-sm-6">
-                                <div class="sp-product-item">
-                                    <div class="sp-product-thumb">
-                                        <span class="batch">New</span>
-                                        <a href="shop-details.html"><img src="img/product/sp_products09.png" alt=""></a>
-                                    </div>
-                                    <div class="sp-product-content">
-                                        <div class="rating">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                        </div>
-                                        <h6 class="title"><a href="shop-details.html">Uncle Orange Bens Ready Pice</a></h6>
-                                        <span class="product-status">IN Stock</span>
-                                        <div class="sp-cart-wrap">
-                                            <form action="#">
-                                                <div class="cart-plus-minus">
-                                                    <input type="text" value="1">
+
+                            <?php if($product): ?>
+                                <?php $__currentLoopData = $product; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $rowproduct): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <div class="col-xl-3 col-md-4 col-sm-6">
+                                        <div class="sp-product-item">
+                                            <div class="sp-product-thumb">
+                                                <span class="batch">New</span>
+                                                <a href="<?php echo e(url('/')); ?>"><img src="<?php echo e($rowproduct->front_view_image); ?>" alt=""></a>
+                                            </div>
+                                            <div class="sp-product-content">
+                                                <div class="rating">
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
                                                 </div>
-                                            </form>
-                                        </div>
-                                        <p><i class="fas fa-rupee-sign"></i>1.50 - 1 kg</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-md-4 col-sm-6">
-                                <div class="sp-product-item">
-                                    <div class="sp-product-thumb">
-                                        <span class="batch discount">25%</span>
-                                        <a href="shop-details.html"><img src="img/product/sp_products02.png" alt=""></a>
-                                    </div>
-                                    <div class="sp-product-content">
-                                        <div class="rating">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                        </div>
-                                        <h6 class="title"><a href="shop-details.html">Dannon Max Vanla Ice Cream</a></h6>
-                                        <span class="product-status">IN Stock</span>
-                                        <div class="sp-cart-wrap">
-                                            <form action="#">
-                                                <div class="cart-plus-minus">
-                                                    <input type="text" value="1">
+                                                <h6 class="title"><a href="<?php echo e(url('/')); ?>"><?php echo e($rowproduct->name); ?></a></h6>
+                                                <span class="product-status">IN Stock</span>
+                                                <div class="sp-cart-wrap">
+                                                    <form action="#">
+                                                        <div class="cart-plus-minus">
+                                                            <input type="text" value="1">
+                                                        </div>
+                                                    </form>
                                                 </div>
-                                            </form>
+                                                <p><i class="fas fa-rupee-sign"></i>1.50 - 1 kg</p>
+                                            </div>
                                         </div>
-                                        <p><i class="fas fa-rupee-sign"></i>1.50 - 1 lt</p>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-md-4 col-sm-6">
-                                <div class="sp-product-item">
-                                    <div class="sp-product-thumb">
-                                        <span class="batch discount">25%</span>
-                                        <a href="shop-details.html"><img src="img/product/sp_products10.png" alt=""></a>
-                                    </div>
-                                    <div class="sp-product-content">
-                                        <div class="rating">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                        </div>
-                                        <h6 class="title"><a href="shop-details.html">Walnuts Max Vanla Greek Pice</a></h6>
-                                        <span class="product-status">IN Stock</span>
-                                        <div class="sp-cart-wrap">
-                                            <form action="#">
-                                                <div class="cart-plus-minus">
-                                                    <input type="text" value="1">
-                                                </div>
-                                            </form>
-                                        </div>
-                                        <p><i class="fas fa-rupee-sign"></i>1.50 - 1 kg</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-md-4 col-sm-6">
-                                <div class="sp-product-item">
-                                    <div class="sp-product-thumb">
-                                        <span class="batch">New</span>
-                                        <a href="shop-details.html"><img src="img/product/sp_products04.png" alt=""></a>
-                                    </div>
-                                    <div class="sp-product-content">
-                                        <div class="rating">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                        </div>
-                                        <h6 class="title"><a href="shop-details.html">Uncle Bens Vanla Ready Pice</a></h6>
-                                        <span class="product-status">IN Stock</span>
-                                        <div class="sp-cart-wrap">
-                                            <form action="#">
-                                                <div class="cart-plus-minus">
-                                                    <input type="text" value="1">
-                                                </div>
-                                            </form>
-                                        </div>
-                                        <p><i class="fas fa-rupee-sign"></i>1.50 - 1 kg</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-md-4 col-sm-6">
-                                <div class="sp-product-item">
-                                    <div class="sp-product-thumb">
-                                        <span class="batch discount">25%</span>
-                                        <a href="shop-details.html"><img src="img/product/sp_products11.png" alt=""></a>
-                                    </div>
-                                    <div class="sp-product-content">
-                                        <div class="rating">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                        </div>
-                                        <h6 class="title"><a href="shop-details.html">Capsicum Vanla Ben Ready Pice</a></h6>
-                                        <span class="product-status">IN Stock</span>
-                                        <div class="sp-cart-wrap">
-                                            <form action="#">
-                                                <div class="cart-plus-minus">
-                                                    <input type="text" value="1">
-                                                </div>
-                                            </form>
-                                        </div>
-                                        <p><i class="fas fa-rupee-sign"></i>1.50 - 1 kg</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-md-4 col-sm-6">
-                                <div class="sp-product-item">
-                                    <div class="sp-product-thumb">
-                                        <span class="batch">New</span>
-                                        <a href="shop-details.html"><img src="img/product/sp_products06.png" alt=""></a>
-                                    </div>
-                                    <div class="sp-product-content">
-                                        <div class="rating">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                        </div>
-                                        <h6 class="title"><a href="shop-details.html">Potato Max Vanla Greek Pice</a></h6>
-                                        <span class="product-status">IN Stock</span>
-                                        <div class="sp-cart-wrap">
-                                            <form action="#">
-                                                <div class="cart-plus-minus">
-                                                    <input type="text" value="1">
-                                                </div>
-                                            </form>
-                                        </div>
-                                        <p><i class="fas fa-rupee-sign"></i>1.99 - 1 kg</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-md-4 col-sm-6">
-                                <div class="sp-product-item">
-                                    <div class="sp-product-thumb">
-                                        <span class="batch discount">25%</span>
-                                        <a href="shop-details.html"><img src="img/product/sp_products03.png" alt=""></a>
-                                    </div>
-                                    <div class="sp-product-content">
-                                        <div class="rating">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                        </div>
-                                        <h6 class="title"><a href="shop-details.html">Walnuts Max Vanla Greek Pice</a></h6>
-                                        <span class="product-status">IN Stock</span>
-                                        <div class="sp-cart-wrap">
-                                            <form action="#">
-                                                <div class="cart-plus-minus">
-                                                    <input type="text" value="1">
-                                                </div>
-                                            </form>
-                                        </div>
-                                        <p><i class="fas fa-rupee-sign"></i>1.50 - 1 kg</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-md-4 col-sm-6">
-                                <div class="sp-product-item">
-                                    <div class="sp-product-thumb">
-                                        <span class="batch">New</span>
-                                        <a href="shop-details.html"><img src="img/product/sp_products12.png" alt=""></a>
-                                    </div>
-                                    <div class="sp-product-content">
-                                        <div class="rating">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                        </div>
-                                        <h6 class="title"><a href="shop-details.html">Strawberry Vanla Ready Pice</a></h6>
-                                        <span class="product-status">IN Stock</span>
-                                        <div class="sp-cart-wrap">
-                                            <form action="#">
-                                                <div class="cart-plus-minus">
-                                                    <input type="text" value="1">
-                                                </div>
-                                            </form>
-                                        </div>
-                                        <p><i class="fas fa-rupee-sign"></i>1.50 - 1 kg</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-md-4 col-sm-6">
-                                <div class="sp-product-item">
-                                    <div class="sp-product-thumb">
-                                        <span class="batch discount">25%</span>
-                                        <a href="shop-details.html"><img src="img/product/sp_products01.png" alt=""></a>
-                                    </div>
-                                    <div class="sp-product-content">
-                                        <div class="rating">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                        </div>
-                                        <h6 class="title"><a href="shop-details.html">Uncle Bens Vanla Ready Pice</a></h6>
-                                        <span class="product-status">IN Stock</span>
-                                        <div class="sp-cart-wrap">
-                                            <form action="#">
-                                                <div class="cart-plus-minus">
-                                                    <input type="text" value="1">
-                                                </div>
-                                            </form>
-                                        </div>
-                                        <p><i class="fas fa-rupee-sign"></i>1.50 - 1 kg</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-md-4 col-sm-6">
-                                <div class="sp-product-item">
-                                    <div class="sp-product-thumb">
-                                        <span class="batch discount">25%</span>
-                                        <a href="shop-details.html"><img src="img/product/sp_products15.png" alt=""></a>
-                                    </div>
-                                    <div class="sp-product-content">
-                                        <div class="rating">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                        </div>
-                                        <h6 class="title"><a href="shop-details.html">Broccoli Bens Vanla Ready Pice</a></h6>
-                                        <span class="product-status">IN Stock</span>
-                                        <div class="sp-cart-wrap">
-                                            <form action="#">
-                                                <div class="cart-plus-minus">
-                                                    <input type="text" value="1">
-                                                </div>
-                                            </form>
-                                        </div>
-                                        <p><i class="fas fa-rupee-sign"></i>1.50 - 1 kg</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-md-4 col-sm-6">
-                                <div class="sp-product-item">
-                                    <div class="sp-product-thumb">
-                                        <span class="batch">New</span>
-                                        <a href="shop-details.html"><img src="img/product/sp_products13.png" alt=""></a>
-                                    </div>
-                                    <div class="sp-product-content">
-                                        <div class="rating">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                        </div>
-                                        <h6 class="title"><a href="shop-details.html">Aubergine Bens Ready Pice</a></h6>
-                                        <span class="product-status">IN Stock</span>
-                                        <div class="sp-cart-wrap">
-                                            <form action="#">
-                                                <div class="cart-plus-minus">
-                                                    <input type="text" value="1">
-                                                </div>
-                                            </form>
-                                        </div>
-                                        <p><i class="fas fa-rupee-sign"></i>1.50 - 1 kg</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-md-4 col-sm-6">
-                                <div class="sp-product-item">
-                                    <div class="sp-product-thumb">
-                                        <span class="batch discount">25%</span>
-                                        <a href="shop-details.html"><img src="img/product/sp_products14.png" alt=""></a>
-                                    </div>
-                                    <div class="sp-product-content">
-                                        <div class="rating">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                        </div>
-                                        <h6 class="title"><a href="shop-details.html">Onion Bens Vanla Ready Pice</a></h6>
-                                        <span class="product-status">IN Stock</span>
-                                        <div class="sp-cart-wrap">
-                                            <form action="#">
-                                                <div class="cart-plus-minus">
-                                                    <input type="text" value="1">
-                                                </div>
-                                            </form>
-                                        </div>
-                                        <p><i class="fas fa-rupee-sign"></i>1.50 - 1 kg</p>
-                                    </div>
-                                </div>
-                            </div>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            <?php endif; ?>
+
+
+
+
+
+
+
+
                         </div>
                     </div>
                     <div class="pagination-wrap">
