@@ -65,6 +65,20 @@ class HomeController extends Controller
         return view('sub-category-wise-page',compact('subcategory','subcategoryitem','product'));
     }
 
+    /**
+     * View product details
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function view_product_details(Request $request){
+        $category = Categorys::where('id',Crypt::decryptString($request->cid))->first();
+        $subcategory = Subcategory::where('id',Crypt::decryptString($request->scid))->first();
+        $subcategoryitem = Subcategoryitem::where('id',Crypt::decryptString($request->scitemid))->first();
+        //GET PRODUCT Details
+        $product = Product::with('categorys','subcategory','subcategoryitem','vendors','productchildveriation','productchildveriationitem','productwithvariation','productwithvariationitem','productwithattribute','productwithattributeitem')->where('id',Crypt::decryptString($request->pid))->first();
+        return view('view-product-details',compact('category','subcategory','subcategoryitem','product'));
+    }
+
 
 
 }

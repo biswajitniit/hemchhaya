@@ -272,6 +272,7 @@ Route::any('/admin/get_attributecat_with_attribute_on_product_page', [ProductCon
     });
     Route::get('/category-wise-landing-page',[HomeController::class, 'category_wise_landing_page'])->name('home.category-wise-landing-page');
     Route::get('/sub-category-wise-page',[HomeController::class, 'sub_category_wise_page'])->name('home.sub-category-wise-page');
+    Route::get('/view-product-details',[HomeController::class, 'view_product_details'])->name('home.view-product-details');
 
 
   /**

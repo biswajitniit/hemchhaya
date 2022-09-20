@@ -180,7 +180,7 @@
                                         <div class="sp-product-item">
                                             <div class="sp-product-thumb">
                                                 <span class="batch">New</span>
-                                                <a href="{{ url('/') }}"><img src="{{ $rowproduct->front_view_image }}" alt=""></a>
+                                                <a href="{{ url('/view-product-details?pid='.Crypt::encryptString($rowproduct->id).'&cid='.Crypt::encryptString($rowproduct->category_id).'&scid='.Crypt::encryptString($rowproduct->sub_category_id).'&scitemid='.Crypt::encryptString($rowproduct->sub_category_item_id)) }}"><img src="{{ $rowproduct->front_view_image }}" alt=""></a>
                                             </div>
                                             <div class="sp-product-content">
                                                 <div class="rating">
@@ -190,7 +190,7 @@
                                                     <i class="fas fa-star"></i>
                                                     <i class="fas fa-star"></i>
                                                 </div>
-                                                <h6 class="title"><a href="{{ url('/') }}">{{ $rowproduct->name }}</a></h6>
+                                                <h6 class="title"><a href="{{ url('/view-product-details?pid='.Crypt::encryptString($rowproduct->id).'&cid='.Crypt::encryptString($rowproduct->category_id).'&scid='.Crypt::encryptString($rowproduct->sub_category_id).'&scitemid='.Crypt::encryptString($rowproduct->sub_category_item_id)) }}">{{ $rowproduct->name }}</a></h6>
                                                 <span class="product-status">IN Stock</span>
                                                 <div class="sp-cart-wrap">
                                                     <form action="#">
@@ -199,7 +199,7 @@
                                                         </div>
                                                     </form>
                                                 </div>
-                                                <p><i class="fas fa-rupee-sign"></i>1.50 - 1 kg</p>
+                                                <p><i class="fas fa-rupee-sign"></i>{{ number_format($rowproduct->sale_price,2) }} - {{ Get_Variation_item_Name($rowproduct->Productwithvariationitem->variation_item_id) }}</p>
                                             </div>
                                         </div>
                                     </div>

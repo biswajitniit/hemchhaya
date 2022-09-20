@@ -6,6 +6,7 @@ use App\Models\Subcategory;
 use App\Models\Subcategoryitem;
 use App\Models\Attribute;
 use App\Models\Attributecategory;
+use App\Models\Brand;
 use App\Models\Variationitems;
 use App\Models\Variations;
 
@@ -83,3 +84,14 @@ if (! function_exists('Get_active_menu_show_in_header')) {
     }
 }
 
+if (! function_exists('Get_Variation_item_Name')) {
+    function Get_Variation_item_Name($id) {
+       return Variationitems::where('id',$id)->first()->variation_item_name;
+    }
+}
+
+if (! function_exists('GetProductBrand')) {
+    function GetProductBrand($bid) {
+       return Brand::where('id',$bid)->first()->brand_name;
+    }
+}

@@ -58,21 +58,26 @@ class Product extends Model
         return $this->belongsTo(Vendor::class,'vendor_id');
      }
      public function Productchildveriation(){
-        return $this->belongsTo(Product_child_variation::class,'parent_product_id');
+        return $this->hasOne(Product_child_variation::class,'parent_product_id');
      }
      public function Productchildveriationitem(){
-        return $this->belongsTo(Product_child_variation_item::class,'product_child_variation_id');
+        return $this->hasOne(Product_child_variation_item::class,'product_child_variation_id');
      }
-     public function productwithvariation(){
-        return $this->belongsTo(Product_with_variation::class,'product_id');
+     public function Productwithvariation(){
+        return $this->hasOne(Product_with_variation::class,'product_id');
      }
-     public function productwithvariationitem(){
-        return $this->belongsTo(Product_with_variation_item::class,'product_id');
+     public function Productwithvariationitem(){
+        return $this->hasOne(Product_with_variation_item::class,'product_id');
      }
-     public function productwithattribute(){
-        return $this->belongsTo(Product_with_attribute::class,'product_id');
+     public function Productwithattribute(){
+        return $this->hasOne(Product_with_attribute::class,'product_id');
      }
-     public function productwithattributeitem(){
-        return $this->belongsTo(Product_with_attribute_item::class,'product_id');
+     public function Productwithattributeitem(){
+        return $this->hasOne(Product_with_attribute_item::class,'product_id');
      }
+
+    //  public function Productvariationitem(){
+    //     return $this->hasOne(Variationitems::class,'id');
+    //  }
+
 }
