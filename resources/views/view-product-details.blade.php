@@ -94,10 +94,45 @@
                                     <h2 class="price"><i class="fas fa-rupee-sign"></i>{{ number_format($product->sale_price,2) }}</h2>
                                     <h5 class="stock-status">- IN Stock {{ $product->quantity }} Items</h5>
                                 </div>
-                                <?php echo $product->highlights ?>
-                                <div class="shop-details-list">
-                                   <?php echo $product->highlights ?>
+
+                                <div class="row pt-4 pb-4">
+
+
+                                        @foreach ($variation as $rowvariation)
+                                            @if($rowvariation->id == $product->productwithvariation->variation_id)
+                                                <div class="col-6">
+                                                    <p> {{ $rowvariation->variation_name }} </p>
+                                                    <ul class="swatch-quantity">
+
+                                                        @if(@variationitem)
+                                                            @foreach ($variationitem as $rowvariationitem)
+                                                                @if($rowvariationitem->id == $product->productwithvariationitem->variation_item_id)
+                                                                    <li class="active"><a href="#">{{ $rowvariationitem->variation_item_name }}</a></li>
+                                                                @endif
+                                                                @endforeach
+                                                        @endif
+
+                                                    </ul>
+                                                </div>
+                                            @endif
+                                        @endforeach
+
+
+
+
                                 </div>
+
+
+
+
+
+                                <?php //echo $product->highlights ?>
+                                <div class="shop-details-list">
+                                   <?php //echo $product->highlights ?>
+                                </div>
+
+
+
                                 <div class="shop-perched-info">
                                     <div class="sd-cart-wrap">
                                         <form action="#">
@@ -109,30 +144,36 @@
                                     <a href="#" class="btn">add to cart</a>
                                 </div>
 
+
                                 <div class="shop-details-bottom">
-                                    <h5 class="title"><a href="#"> Specifications</a></h5>
-                                    <ul>
+                                    @if($productatwithattribute)
+                                        @foreach ($productatwithattribute as $rowproductattribute)
+                                        <h5 class="title"><a href="#"> {{ Get_Attribute_Name($rowproductattribute->attribute_id) }}</a></h5>
+                                            <ul>
 
-                                        <li>
-                                            <span>Tag : </span>
-                                            <a href="#">ICE Cream</a>
-                                        </li>
+                                                @if ($productatwithattributeitem)
+                                                    @foreach ($productatwithattributeitem as $rowproductatwithattributeitem)
+                                                        @if($rowproductatwithattributeitem->attribute_id == $rowproductattribute->id)
+                                                            <li>
+                                                                <span> {{ Get_attribute_item_name($rowproductatwithattributeitem->attribute_item_id) }} : </span>
+                                                                <a href="#">{{ $rowproductatwithattributeitem->attribute_item_value }}</a>
+                                                            </li>
+                                                        @endif
+                                                    @endforeach
+                                                @endif
+
+                                            </ul>
+                                        @endforeach
+                                    @endif
 
 
-                                        {{-- <li>
-                                            <span>CATEGORIES :</span>
-                                            <a href="#">women's,</a>
-                                            <a href="#">bikini,</a>
-                                            <a href="#">tops for,</a>
-                                            <a href="#">large bust</a>
-                                        </li> --}}
-                                    </ul>
                                 </div>
+
 
 
                                 <div class="shop-details-bottom">
                                     <h5 class="title"><a href="#"><i class="far fa-heart"></i> Add To Wishlist</a></h5>
-                                    <ul>
+                                    {{-- <ul>
                                         <li>
                                             <span>Tag : </span>
                                             <a href="#">ICE Cream</a>
@@ -144,7 +185,7 @@
                                             <a href="#">tops for,</a>
                                             <a href="#">large bust</a>
                                         </li>
-                                    </ul>
+                                    </ul> --}}
                                 </div>
                             </div>
                         </div>
@@ -157,10 +198,10 @@
                                         <a class="nav-link active" id="details-tab" data-toggle="tab" href="#details" role="tab"
                                             aria-controls="details" aria-selected="true">Product Details</a>
                                     </li>
-                                    <li class="nav-item">
+                                    {{-- <li class="nav-item">
                                         <a class="nav-link" id="val-tab" data-toggle="tab" href="#val" role="tab" aria-controls="val"
                                             aria-selected="false">Viewers Also Like</a>
-                                    </li>
+                                    </li> --}}
                                     <li class="nav-item">
                                         <a class="nav-link" id="review-tab" data-toggle="tab" href="#review" role="tab"
                                             aria-controls="review" aria-selected="false">Product Reviews</a>
@@ -169,30 +210,16 @@
                                 <div class="tab-content" id="myTabContentTwo">
                                     <div class="tab-pane fade show active" id="details" role="tabpanel" aria-labelledby="details-tab">
                                         <div class="product-desc-content">
-                                            <h4 class="title">Product Details</h4>
+
                                             <div class="row">
-                                                <div class="col-xl-3 col-md-5">
-                                                    <div class="product-desc-img">
-                                                        <img src="img/product/desc_img.jpg" alt="">
-                                                    </div>
-                                                </div>
-                                                <div class="col-xl-9 col-md-7">
-                                                    <h5 class="small-title">100% Natural Vitamin</h5>
-                                                    <p>Cramond Leopard & Pythong Print Anorak Jacket In Beige but also the leap into electronic typesetting, remaining Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                                                    <ul class="product-desc-list">
-                                                        <li>65% poly, 35% rayon</li>
-                                                        <li>Hand wash cold</li>
-                                                        <li>Partially lined</li>
-                                                        <li>Hidden front button closure with keyhole accents</li>
-                                                        <li>Button cuff sleeves</li>
-                                                        <li>Lightweight semi-sheer fabrication</li>
-                                                        <li>Made in USA</li>
-                                                    </ul>
+
+                                                <div class="col-xl-12 col-md-7">
+                                                    <?php echo $product->description ?>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="tab-pane fade" id="val" role="tabpanel" aria-labelledby="val-tab">
+                                    {{-- <div class="tab-pane fade" id="val" role="tabpanel" aria-labelledby="val-tab">
                                         <div class="product-desc-content">
                                             <h4 class="title">Product Details</h4>
                                             <div class="row">
@@ -218,30 +245,13 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                     <div class="tab-pane fade" id="review" role="tabpanel" aria-labelledby="review-tab">
                                         <div class="product-desc-content">
                                             <h4 class="title">Product Details</h4>
                                             <div class="row">
-                                                <div class="col-xl-3 col-md-5">
-                                                    <div class="product-desc-img">
-                                                        <img src="img/product/desc_img.jpg" alt="">
-                                                    </div>
-                                                </div>
-                                                <div class="col-xl-9 col-md-7">
-                                                    <h5 class="small-title">100% Natural Vitamin</h5>
-                                                    <p>Cramond Leopard & Pythong Print Anorak Jacket In Beige but also the leap into electronic typesetting, remaining Lorem
-                                                    Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy
-                                                    text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                                                    <ul class="product-desc-list">
-                                                        <li>65% poly, 35% rayon</li>
-                                                        <li>Hand wash cold</li>
-                                                        <li>Partially lined</li>
-                                                        <li>Hidden front button closure with keyhole accents</li>
-                                                        <li>Button cuff sleeves</li>
-                                                        <li>Lightweight semi-sheer fabrication</li>
-                                                        <li>Made in USA</li>
-                                                    </ul>
+                                                <div class="col-xl-12 col-md-5">
+
                                                 </div>
                                             </div>
                                         </div>

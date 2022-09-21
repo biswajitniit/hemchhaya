@@ -14,7 +14,8 @@ use App\Models\Product_with_variation;
 use App\Models\Product_with_variation_item;
 use App\Models\Product_with_attribute;
 use App\Models\Product_with_attribute_item;
-
+use App\Models\Variationitems;
+use App\Models\Variations;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Contracts\Encryption\DecryptException;
@@ -74,9 +75,15 @@ class HomeController extends Controller
         $category = Categorys::where('id',Crypt::decryptString($request->cid))->first();
         $subcategory = Subcategory::where('id',Crypt::decryptString($request->scid))->first();
         $subcategoryitem = Subcategoryitem::where('id',Crypt::decryptString($request->scitemid))->first();
+        $variation = Variations::where('status','1')->get();
+        $variationitem = Variationitems::where('status','1')->get();
+
+        $productatwithattribute = Product_with_attribute::where('product_id',Crypt::decryptString($request->pid))->get();
+        $productatwithattributeitem = Product_with_attribute_item::where('product_id',Crypt::decryptString($request->pid))->get();
+
         //GET PRODUCT Details
         $product = Product::with('categorys','subcategory','subcategoryitem','vendors','productchildveriation','productchildveriationitem','productwithvariation','productwithvariationitem','productwithattribute','productwithattributeitem')->where('id',Crypt::decryptString($request->pid))->first();
-        return view('view-product-details',compact('category','subcategory','subcategoryitem','product'));
+        return view('view-product-details',compact('category','subcategory','subcategoryitem','product','variation','variationitem','productatwithattribute','productatwithattributeitem'));
     }
 
 

@@ -23,6 +23,7 @@ use App\Models\Product_with_attribute_item;
 use App\Models\Variationitems;
 use App\Models\Variations;
 use Illuminate\Support\Facades\Auth;
+use Embed;
 
 class ProductController extends Controller
 {
@@ -72,6 +73,16 @@ class ProductController extends Controller
 	}
 
     /**
+     * Show the vendor add product category view page.
+     *
+     * @return \Illuminate\Http\Response
+     */
+	public function add_product_category(Request $request){
+        $category = Categorys::where('status','1')->orderBy('category_name')->get();
+       return view("vendor.product.add-product-category",compact('category'));
+   }
+
+    /**
      * Show the vendor add product view page.
      *
      * @return \Illuminate\Http\Response
@@ -85,23 +96,34 @@ class ProductController extends Controller
 
         //echo "<pre>"; print_r($request->attribute); die;
 
-        $this->validate($request, [
-            'category_id'           => 'required',
-            'sub_category_id'       => 'required',
-            'sub_category_item_id'  => 'required',
-            'front_view_image'      => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:10000000000000000000000',
-        ],[
-            'category_id.required'           => 'Please select category',
-            'sub_category_id.required'       => 'Please select sub category',
-            'sub_category_item_id.required'  => 'Please select sub category item',
-            'front_view_image.required'      => 'Please add front view image',
-        ]);
+        // $this->validate($request, [
+        //     'front_view_image'      => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:10000000000000000000000',
+        // ],[
+        //     'front_view_image.required'      => 'Please add front view image',
+        // ]);
 
-        $file = $request->front_view_image;
-        $filename = time().'.'.$request->front_view_image->extension();
+        $embed = Embed::make('http://youtu.be/uifYHNyH-jA')->parseUrl();
+        if ($embed) {
+            // Set width of the embed.
+            $embed->setAttribute(['width' => 600]);
 
-        $path = Storage::disk('s3')->put("product/large/" . $filename, $file, 'public');
-        $path = Storage::disk('s3')->url($path);
+            // Print html: '<iframe width="600" height="338" src="//www.youtube.com/embed/uifYHNyH-jA" frameborder="0" allowfullscreen></iframe>'.
+            // Height will be set automatically based on provider width/height ratio.
+            // Height could be set explicitly via setAttr() method.
+            echo $embed->getHtml();
+        }
+        die;
+
+        if($request->front_view_image){
+            $file = $request->front_view_image;
+            $filename = time().'.'.$request->front_view_image->extension();
+
+            $path = Storage::disk('s3')->put("product/large/" . $filename, $file, 'public');
+            $path = Storage::disk('s3')->url($path);
+        }else{
+
+        }
+
 
     	$product = new Product();
             $product->vendor_id                                                             = Auth::id();

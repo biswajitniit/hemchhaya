@@ -84,6 +84,13 @@ if (! function_exists('Get_active_menu_show_in_header')) {
     }
 }
 
+
+if (! function_exists('GetAllActiveBrandList')) {
+    function GetAllActiveBrandList($catid,$subcatid,$subcatitemid) {
+       return Brand::where('category_id',$catid)->where('sub_category_id',$subcatid)->where('sub_category_item_id',$subcatitemid)->where('status','1')->get();
+    }
+}
+
 if (! function_exists('Get_Variation_item_Name')) {
     function Get_Variation_item_Name($id) {
        return Variationitems::where('id',$id)->first()->variation_item_name;
@@ -93,5 +100,17 @@ if (! function_exists('Get_Variation_item_Name')) {
 if (! function_exists('GetProductBrand')) {
     function GetProductBrand($bid) {
        return Brand::where('id',$bid)->first()->brand_name;
+    }
+}
+
+if (! function_exists('Get_Attribute_Name')) {
+    function Get_Attribute_Name($attributeid) {
+       return Attributecategory::where('id',$attributeid)->first()->attribute_category_name;
+    }
+}
+
+if (! function_exists('Get_attribute_item_name')) {
+    function Get_attribute_item_name($attributeitemid) {
+       return Attribute::where('id',$attributeitemid)->first()->column_name;
     }
 }

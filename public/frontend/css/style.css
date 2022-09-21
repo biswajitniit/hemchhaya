@@ -3475,9 +3475,12 @@ label {
 .shop-details-bottom ul li {
 	display: block;
 	margin-bottom: 10px;
-	text-transform: uppercase;
+	/* text-transform: uppercase; */
 	color: #696868;
 	font-size: 13px;
+}
+.shop-details-bottom span {
+	font-weight: 700;
 }
 .shop-details-bottom ul li a {
 	color: #898989;
@@ -5402,5 +5405,24 @@ label {
     }
 }
 
-
-
+ul.swatch-quantity {
+    margin-top: -10px;
+}
+.swatch-quantity li {
+    border: 1px dotted #cdcdcd;
+    float: left;
+    margin-right: 4px;
+    padding: 4px;
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+.swatch-quantity li a{
+    color: #333;
+}
+.swatch-quantity li.active {
+    border: 1px dotted #6104f7;
+}
+.swatch-quantity li a small {
+    display: grid;
+    width: 100%;
+}

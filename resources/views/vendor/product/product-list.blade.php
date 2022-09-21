@@ -22,7 +22,7 @@
           <button class="btn btn-outline-primary bg-white mb-2 mb-md-0">Import documents</button> --}}
         </div>
         <div class="header-right d-flex flex-wrap mt-2 mt-sm-0">
-          <button type="button" onclick="location.href='{{ route('vendor.add-product') }}'" class="btn btn-primary mt-2 mt-sm-0 btn-icon-text">
+          <button type="button" onclick="location.href='{{ route('vendor.add-product-category') }}'" class="btn btn-primary mt-2 mt-sm-0 btn-icon-text">
             <i class="mdi mdi-plus-circle"></i> Add Product</button>
         </div>
       </div>

@@ -16,6 +16,7 @@ class CreateProductWithAttributeItemsTable extends Migration
         Schema::create('product_with_attribute_items', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('product_id');
+			$table->unsignedBigInteger('attribute_id');
             $table->unsignedBigInteger('attribute_item_id');
             $table->foreign('attribute_item_id')->references('id')->on('attributes')->onDelete('cascade');
             $table->longText('attribute_item_value')->nullable();

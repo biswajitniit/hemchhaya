@@ -1,5 +1,5 @@
 @extends('layouts.vendor')
-@section('title', 'Add products')
+@section('title', 'Add Product Categories')
 @section('content')
 <div class="main-panel">
     <div class="content-wrapper">
@@ -7,7 +7,8 @@
         <h3 class="page-title">Product</h3>
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">Products</a></li>
+            <li class="breadcrumb-item"><a href="{{ url('/vendor/products') }}">Products</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('vendor.add-product-category') }}">Change Categories</a></li>
             <li class="breadcrumb-item active" aria-current="page">Add Products</li>
           </ol>
         </nav>
@@ -38,61 +39,12 @@
 
               <form class="cmxform" id="addproduct" method="post" action="{{ route('vendor.add-product-post-data') }}" name="addproduct" enctype="multipart/form-data">
                 @csrf
+                <input type="hidden" name="category_id" value="{{ request()->catid }}">
+                <input type="hidden" name="sub_category_id" value="{{ request()->subcatid }}">
+                <input type="hidden" name="sub_category_item_id" value="{{ request()->subcatitemid }}">
                 <fieldset>
 
-                    <h3>Categories</h3>
-                    <hr />
 
-                        <div class="form-group row">
-                            <label for="category_id" class="col-sm-3 col-form-label">Category name <span class="required">*</span></label>
-                            <div class="col-sm-6">
-                                <select name="category_id" class="category_id" style="width:100%">
-                                    <option value="">Select category</option>
-                                    @if($category)
-                                        @foreach ($category as $rowcategory)
-                                            <option value="{{ $rowcategory->id }}" @if(request()->catid == $rowcategory->id) selected @endif>{{ $rowcategory->category_name }}</option>
-                                        @endforeach
-                                    @endif
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="sub_category_id" class="col-sm-3 col-form-label">Sub category <span class="required">*</span></label>
-                            <div class="col-sm-6">
-                                <select name="sub_category_id" class="subcategory" style="width: 100%;">
-                                    <option value="">Select sub category</option>
-                                    @if(request()->subcatid)
-                                        @php
-                                        $getsubcategorylistbycategory = GetSubcategoryBycatid(request()->catid);
-                                        @endphp
-                                        @foreach ($getsubcategorylistbycategory as $rowsubcategory)
-                                            <option value="{{ $rowsubcategory->id }}" @if($rowsubcategory->id == request()->subcatid) selected @endif>{{ $rowsubcategory->sub_category_name }}</option>
-                                        @endforeach
-                                    @endif
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="sub_category_item_id" class="col-sm-3 col-form-label">Sub category item <span class="required">*</span></label>
-                            <div class="col-sm-6">
-                                <select name="sub_category_item_id" class="subcategoryitem" style="width: 100%;">
-                                    <option value="">Select sub category item</option>
-                                    @if(request()->subcatitemid)
-                                        @php
-                                        $getsubcategoryitemlistbycategory = GetSubcategoryitemBysubcatid(request()->subcatid);
-                                        @endphp
-                                        @foreach ($getsubcategoryitemlistbycategory as $rowsubcategoryitem)
-                                            <option value="{{ $rowsubcategoryitem->id }}" @if($rowsubcategoryitem->id == request()->subcatitemid) selected @endif>{{ $rowsubcategoryitem->sub_category_item_name }}</option>
-                                        @endforeach
-                                    @endif
-
-                                </select>
-                            </div>
-                        </div>
-
-                    <hr />
                     <h3>Description</h3>
                     <hr />
                         <div class="form-group row">
@@ -105,7 +57,24 @@
                         <div class="form-group row">
                             <label for="brand" class="col-sm-3 col-form-label">Brand <span class="required">*</span></label>
                             <div class="col-sm-6">
-                                <input type="text" name="brand" class="form-control" id="brand" placeholder="" />
+
+                                @if (!empty(request()->catid) &&  !empty(request()->subcatid) && !empty(request()->subcatitemid))
+                                    @php
+                                    $getBrand = GetAllActiveBrandList(request()->catid,request()->subcatid,request()->subcatitemid);
+                                    @endphp
+
+                                    <select name="brand" class="brand" style="width: 100%;">
+                                        <option value="">Select Brand</option>
+                                        @if($getBrand)
+                                            @foreach ($getBrand as $rowbrand)
+                                            <option value="{{ $rowbrand->id }}">{{ $rowbrand->brand_name }}</option>
+                                            @endforeach
+                                        @endif
+                                    </select>
+
+                                @endif
+
+
                             </div>
                         </div>
 
@@ -431,15 +400,19 @@
         });
 
         (function($) {
-            if ($(".category_id").length) {
-                $(".category_id").select2();
+            // if ($(".category_id").length) {
+            //     $(".category_id").select2();
+            // }
+            // if ($(".subcategory").length) {
+            //     $(".subcategory").select2();
+            // }
+            // if ($(".subcategoryitem").length) {
+            //     $(".subcategoryitem").select2();
+            // }
+            if ($(".brand").length) {
+                $(".brand").select2();
             }
-            if ($(".subcategory").length) {
-                $(".subcategory").select2();
-            }
-            if ($(".subcategoryitem").length) {
-                $(".subcategoryitem").select2();
-            }
+
             if ($(".procurement_type").length) {
                 $(".procurement_type").select2();
             }
@@ -455,6 +428,7 @@
             if ($(".variation").length) {
                 $(".variation").select2();
             }
+
 
 
         })(jQuery);

@@ -240,7 +240,7 @@ Route::any('/vendor/getvariationBysubcategoryitem', [VariationitemsController::c
  Route::get('/vendor/products', [ProductController::class, 'product_list'])->name('products');
 
 // Route::get('/productlist', [ProductController::class, 'productdata'])->name('productlist');
-
+ Route::get('/vendor/add-product-category',[ProductController::class, 'add_product_category'])->name('vendor.add-product-category');
  Route::get('/vendor/add-product',[ProductController::class, 'add_product'])->name('vendor.add-product');
  Route::post('/vendor/add-product-post-data',[ProductController::class, 'add_product_post_data'])->name('vendor.add-product-post-data');
 

@@ -1,5 +1,4 @@
-
-<?php $__env->startSection('title', 'Add products'); ?>
+<?php $__env->startSection('title', 'Add Product Categories'); ?>
 <?php $__env->startSection('content'); ?>
 <div class="main-panel">
     <div class="content-wrapper">
@@ -7,7 +6,8 @@
         <h3 class="page-title">Product</h3>
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">Products</a></li>
+            <li class="breadcrumb-item"><a href="<?php echo e(url('/vendor/products')); ?>">Products</a></li>
+            <li class="breadcrumb-item"><a href="<?php echo e(route('vendor.add-product-category')); ?>">Change Categories</a></li>
             <li class="breadcrumb-item active" aria-current="page">Add Products</li>
           </ol>
         </nav>
@@ -39,61 +39,12 @@
 
               <form class="cmxform" id="addproduct" method="post" action="<?php echo e(route('vendor.add-product-post-data')); ?>" name="addproduct" enctype="multipart/form-data">
                 <?php echo csrf_field(); ?>
+                <input type="hidden" name="category_id" value="<?php echo e(request()->catid); ?>">
+                <input type="hidden" name="sub_category_id" value="<?php echo e(request()->subcatid); ?>">
+                <input type="hidden" name="sub_category_item_id" value="<?php echo e(request()->subcatitemid); ?>">
                 <fieldset>
 
-                    <h3>Categories</h3>
-                    <hr />
 
-                        <div class="form-group row">
-                            <label for="category_id" class="col-sm-3 col-form-label">Category name <span class="required">*</span></label>
-                            <div class="col-sm-6">
-                                <select name="category_id" class="category_id" style="width:100%">
-                                    <option value="">Select category</option>
-                                    <?php if($category): ?>
-                                        <?php $__currentLoopData = $category; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $rowcategory): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                            <option value="<?php echo e($rowcategory->id); ?>" <?php if(request()->catid == $rowcategory->id): ?> selected <?php endif; ?>><?php echo e($rowcategory->category_name); ?></option>
-                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                    <?php endif; ?>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="sub_category_id" class="col-sm-3 col-form-label">Sub category <span class="required">*</span></label>
-                            <div class="col-sm-6">
-                                <select name="sub_category_id" class="subcategory" style="width: 100%;">
-                                    <option value="">Select sub category</option>
-                                    <?php if(request()->subcatid): ?>
-                                        <?php
-                                        $getsubcategorylistbycategory = GetSubcategoryBycatid(request()->catid);
-                                        ?>
-                                        <?php $__currentLoopData = $getsubcategorylistbycategory; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $rowsubcategory): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                            <option value="<?php echo e($rowsubcategory->id); ?>" <?php if($rowsubcategory->id == request()->subcatid): ?> selected <?php endif; ?>><?php echo e($rowsubcategory->sub_category_name); ?></option>
-                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                    <?php endif; ?>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="sub_category_item_id" class="col-sm-3 col-form-label">Sub category item <span class="required">*</span></label>
-                            <div class="col-sm-6">
-                                <select name="sub_category_item_id" class="subcategoryitem" style="width: 100%;">
-                                    <option value="">Select sub category item</option>
-                                    <?php if(request()->subcatitemid): ?>
-                                        <?php
-                                        $getsubcategoryitemlistbycategory = GetSubcategoryitemBysubcatid(request()->subcatid);
-                                        ?>
-                                        <?php $__currentLoopData = $getsubcategoryitemlistbycategory; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $rowsubcategoryitem): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                            <option value="<?php echo e($rowsubcategoryitem->id); ?>" <?php if($rowsubcategoryitem->id == request()->subcatitemid): ?> selected <?php endif; ?>><?php echo e($rowsubcategoryitem->sub_category_item_name); ?></option>
-                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                    <?php endif; ?>
-
-                                </select>
-                            </div>
-                        </div>
-
-                    <hr />
                     <h3>Description</h3>
                     <hr />
                         <div class="form-group row">
@@ -106,7 +57,24 @@
                         <div class="form-group row">
                             <label for="brand" class="col-sm-3 col-form-label">Brand <span class="required">*</span></label>
                             <div class="col-sm-6">
-                                <input type="text" name="brand" class="form-control" id="brand" placeholder="" />
+
+                                <?php if(!empty(request()->catid) &&  !empty(request()->subcatid) && !empty(request()->subcatitemid)): ?>
+                                    <?php
+                                    $getBrand = GetAllActiveBrandList(request()->catid,request()->subcatid,request()->subcatitemid);
+                                    ?>
+
+                                    <select name="brand" class="brand" style="width: 100%;">
+                                        <option value="">Select Brand</option>
+                                        <?php if($getBrand): ?>
+                                            <?php $__currentLoopData = $getBrand; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $rowbrand): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <option value="<?php echo e($rowbrand->id); ?>"><?php echo e($rowbrand->brand_name); ?></option>
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                        <?php endif; ?>
+                                    </select>
+
+                                <?php endif; ?>
+
+
                             </div>
                         </div>
 
@@ -432,15 +400,19 @@
         });
 
         (function($) {
-            if ($(".category_id").length) {
-                $(".category_id").select2();
+            // if ($(".category_id").length) {
+            //     $(".category_id").select2();
+            // }
+            // if ($(".subcategory").length) {
+            //     $(".subcategory").select2();
+            // }
+            // if ($(".subcategoryitem").length) {
+            //     $(".subcategoryitem").select2();
+            // }
+            if ($(".brand").length) {
+                $(".brand").select2();
             }
-            if ($(".subcategory").length) {
-                $(".subcategory").select2();
-            }
-            if ($(".subcategoryitem").length) {
-                $(".subcategoryitem").select2();
-            }
+
             if ($(".procurement_type").length) {
                 $(".procurement_type").select2();
             }
@@ -456,6 +428,7 @@
             if ($(".variation").length) {
                 $(".variation").select2();
             }
+
 
 
         })(jQuery);

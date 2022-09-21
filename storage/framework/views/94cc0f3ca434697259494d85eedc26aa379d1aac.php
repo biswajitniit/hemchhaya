@@ -1,3 +1,4 @@
+
 <?php $__env->startSection('title', 'Brand Search'); ?>
 <?php $__env->startSection('content'); ?>
 
