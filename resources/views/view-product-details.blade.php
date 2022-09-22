@@ -110,7 +110,7 @@
                                                     <p> {{ $rowvariation->variation_name }} </p>
                                                     <ul class="swatch-quantity">
 
-                                                        @if(@variationitem)
+                                                        @if($variationitem)
                                                             @foreach ($variationitem as $rowvariationitem)
                                                                 @if($rowvariationitem->id == $product->productwithvariationitem->variation_item_id)
                                                                     <li class="active"><a href="#">{{ $rowvariationitem->variation_item_name }}</a></li>
