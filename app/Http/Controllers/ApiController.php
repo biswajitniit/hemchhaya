@@ -6,6 +6,11 @@ use Illuminate\Http\Request;
 use App\Models\Categorys;
 use App\Models\Subcategoryitem;
 use App\Models\Product;
+use App\Models\Subcategory;
+use App\Models\Variations;
+use App\Models\Variationitems;
+use App\Models\Product_with_attribute;
+use App\Models\Product_with_attribute_item;
 
 class ApiController extends Controller
 {
@@ -74,6 +79,30 @@ class ApiController extends Controller
         }
         $p->where('status', 1);
         $products = $p->get();
+        return response()->json($products, 200);
+    }
+
+    public function view_product_details(Request $request){
+        $product_id = $request->product_id;
+        $product = Product::with('categorys','subcategory','subcategoryitem','vendors','productchildveriation','productchildveriationitem','productwithvariation','productwithvariationitem','productwithattribute','productwithattributeitem')->where('id',$product_id)->first();
+        $category = Categorys::where('id', $product->category_id)->first();
+        $subcategory = Subcategory::where('id', $product->sub_category_id)->first();
+        $subcategoryitem = Subcategoryitem::where('id',$product->sub_category_id)->first();
+        $variation = Variations::where('status','1')->get();
+        $variationitem = Variationitems::where('status','1')->get();
+        $productatwithattribute = Product_with_attribute::where('product_id',$product_id)->get();
+        $productatwithattributeitem = Product_with_attribute_item::where('product_id',$product_id)->get();
+        //GET PRODUCT Details
+        $products = array(
+            'product' => $product,
+            'category' => $category,
+            'subcategory' => $subcategory,
+            'subcategoryitem' => $subcategoryitem,
+            'variation' => $variation,
+            'variationitem' => $variationitem,
+            'productatwithattribute' => $productatwithattribute,
+            'productatwithattributeitem' => $productatwithattributeitem
+        );
         return response()->json($products, 200);
     }
 }
