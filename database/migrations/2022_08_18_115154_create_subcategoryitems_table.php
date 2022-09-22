@@ -20,6 +20,7 @@ class CreateSubcategoryitemsTable extends Migration
             $table->unsignedBigInteger('sub_category_id');
             $table->foreign('sub_category_id')->references('id')->on('subcategories')->onDelete('cascade');
             $table->string('sub_category_item_name');
+            $table->string('sub_category_item_image')->nullable($value = true);
             $table->enum('status', ['1', '2'])->comment('1=Active,2=InActive');
             $table->timestamps();
             $table->softDeletes();

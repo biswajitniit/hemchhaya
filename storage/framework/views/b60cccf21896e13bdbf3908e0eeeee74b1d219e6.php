@@ -1,16 +1,16 @@
-@extends('layouts.admin')
-@section('title', 'Edit Attribute')
-@section('content')
+
+<?php $__env->startSection('title', 'Add Sub Category Item'); ?>
+<?php $__env->startSection('content'); ?>
 
 
 <div class="main-panel">
     <div class="content-wrapper">
       <div class="page-header">
-        <h3 class="page-title"> Edit Attribute</h3>
+        <h3 class="page-title"> Add Sub Category Item</h3>
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ route('attribute') }}">Attributes</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Edit Attributes</li>
+            <li class="breadcrumb-item"><a href="<?php echo e(route('admin.subcategoryitem')); ?>">Sub Category Items</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Add Sub Category Item</li>
           </ol>
         </nav>
       </div>
@@ -19,72 +19,70 @@
         <div class="col-lg-12">
           <div class="card">
             <div class="card-body">
-              {{-- <h4 class="card-title">Complete form validation</h4> --}}
+              
 
-                @if($errors->any())
+                <?php if($errors->any()): ?>
                     <div class="alert alert-danger">
                         <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
+                            <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <li><?php echo e($error); ?></li>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </ul>
                     </div>
-                @endif
+                <?php endif; ?>
 
-                @if(session()->has('message'))
+                <?php if(session()->has('message')): ?>
                     <div class="alert alert-success">
-                        {{ session()->get('message') }}
+                        <?php echo e(session()->get('message')); ?>
+
                     </div>
-                @endif
+                <?php endif; ?>
 
 
 
-              <form class="cmxform" id="editattribute" method="post" action="{{ route('admin.edit-attribute-items-post') }}" name="editattribute">
-                @csrf
-                <input type="hidden" name="attributeid" value="{{ $attribute->id }}">
+              <form class="cmxform" id="addsubcategoryitem" method="post" action="<?php echo e(route('admin.add-sub-category-item-post-data')); ?>" name="addsubcategoryitem">
+                <?php echo csrf_field(); ?>
                 <fieldset>
 
-
-                    <div class="form-group">
-                        <label for="column_name">Column Name </label>
-                        <input id="column_name" class="form-control" name="column_name" type="text" value="{{ $attribute->column_name }}">
-                    </div>
-
                   <div class="form-group">
-                    <label for="column_type">Column Type</label>
-                    <select name="column_type" class="js-example-basic-single" style="width:100%">
-                        <option value="">Select Column Type</option>
-                        <option value="1" @if($attribute->id == 1) selected="selected" @endif>TextBox</option>
-                        <option value="4" @if($attribute->id == 2) selected="selected" @endif>Dropdown</option>
-                        <option value="5" @if($attribute->id == 3) selected="selected" @endif>Multi Select Dropdown</option>
-                        <option value="6" @if($attribute->id == 3) selected="selected" @endif>Editor</option>
-                        {{-- <option value="4" @if($attribute->id == 4) selected="selected" @endif>Password</option>
-                        <option value="5" @if($attribute->id == 5) selected="selected" @endif>Email</option> --}}
+                    <label for="category_id">Category Name</label>
+                    <select name="category_id" class="js-example-basic-single" style="width:100%">
+                        <option value="">Select Category</option>
+                        <?php if($category): ?>
+                            <?php $__currentLoopData = $category; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $rowcategory): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <option value="<?php echo e($rowcategory->id); ?>"><?php echo e($rowcategory->category_name); ?></option>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                        <?php endif; ?>
                     </select>
                   </div>
 
 
                   <div class="form-group">
-                    <label for="column_validation">Column Validation</label>
-                    <select name="column_validation" class="js-example-basic-single" style="width:100%;">
-                        <option value="">Select Column Validation</option>
-                        <option value="1" @if($attribute->column_validation == 1) selected="selected" @endif>Optional</option>
-                        <option value="2" @if($attribute->column_validation == 2) selected="selected" @endif>Required</option>
+                    <label for="sub_category_id">Sub Category</label>
+                    <select name="sub_category_id" class="subcategory" style="width:100%;">
+                        <option value="">Select Sub Category</option>
                     </select>
                   </div>
+
+                  <div class="form-group">
+                    <label for="sub_category_item_name">Sub Category Name </label>
+                    <input id="sub_category_item_name" class="form-control" name="sub_category_item_name" type="text">
+                  </div>
+
+
 
                   <div class="form-group row">
                     <label class="col-sm-3 col-form-label">Status</label>
                     <div class="col-sm-4">
                       <div class="form-check">
                         <label class="form-check-label">
-                          <input type="radio" class="form-check-input" name="status" id="status1" value="1" @if($attribute->status == 1) checked @endif> Active </label>
+                          <input type="radio" class="form-check-input" name="status" id="status1" value="1" checked> Active </label>
                       </div>
                     </div>
                     <div class="col-sm-5">
                       <div class="form-check">
                         <label class="form-check-label">
-                          <input type="radio" class="form-check-input" name="status" id="status2" value="2" @if($attribute->status == 2) checked @endif> InActive </label>
+                          <input type="radio" class="form-check-input" name="status" id="status2" value="2"> InActive </label>
                       </div>
                     </div>
                   </div>
@@ -103,7 +101,7 @@
     <!-- partial:../../partials/_footer.html -->
     <footer class="footer">
         <div class="d-sm-flex justify-content-center justify-content-sm-between">
-            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © {{ date('Y') }} <a href="{{ url('/') }}" target="_blank">Hemchhaya</a>. All rights reserved.</span>
+            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © <?php echo e(date('Y')); ?> <a href="<?php echo e(url('/')); ?>" target="_blank">Hemchhaya</a>. All rights reserved.</span>
         </div>
     </footer>
     <!-- partial -->
@@ -114,7 +112,7 @@
 
 
 
-@push('scripts')
+<?php $__env->startPush('scripts'); ?>
     <script type="text/javascript">
         $(".alert").delay(2000).slideUp(200, function () {
             $(this).alert('close');
@@ -155,9 +153,9 @@
                 var catId = $(this).val();
                 if (catId) {
                     $.ajax({
-                        url: "{{route('admin.getsubcategory')}}",
+                        url: "<?php echo e(route('admin.getsubcategory')); ?>",
                         type: "POST",
-                        data:{categoryid:catId, _token: '{{csrf_token()}}'},
+                        data:{categoryid:catId, _token: '<?php echo e(csrf_token()); ?>'},
                         dataType: "json",
                         success: function (returndata) {
                             $('select[name="sub_category_id"]').empty();
@@ -172,5 +170,7 @@
             });
         });
     </script>
-@endpush
-@endsection
+<?php $__env->stopPush(); ?>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.admin', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH E:\webdev\hemchhaya\resources\views/admin/subcategoryitem/add-sub-category-item.blade.php ENDPATH**/ ?>

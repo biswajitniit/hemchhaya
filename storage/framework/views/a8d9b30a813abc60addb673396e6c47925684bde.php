@@ -1,4 +1,3 @@
-
 <?php $__env->startSection('title', 'Add Attribute Items'); ?>
 <?php $__env->startSection('content'); ?>
 
@@ -88,8 +87,7 @@
                             <select name="column_type" class="js-example-basic-single" style="width: 100%;">
                                 <option value="">Select Column Type</option>
                                 <option value="1">TextBox</option>
-                                <option value="2">Password</option>
-                                <option value="3">Email</option>
+                                
                                 <option value="4">Dropdown</option>
                                 <option value="5">Multi Select Dropdown</option>
                                 <option value="6">Editor</option>

@@ -1,4 +1,4 @@
-<?php $__env->startSection('title', 'Add Product Categories'); ?>
+<?php $__env->startSection('title', 'Add product summary'); ?>
 <?php $__env->startSection('content'); ?>
 <div class="main-panel">
     <div class="content-wrapper">
@@ -206,6 +206,22 @@
                         <label class="form-check-label">
                         <input type="checkbox" name="allow_customer_checkout_when_this_product_out_of_stock" value="1" class="form-check-input"> Allow customer checkout when this product out of stock <i class="input-helper"></i> </label>
                     </div>
+
+                    <div class="form-group row">
+                        <label for="video_link" class="col-sm-3 col-form-label">Youtube Video Link </label>
+                        <div class="col-sm-6">
+                            <input type="text" name="video_link" class="form-control" id="video_link" placeholder="" />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="product_pdf" class="col-sm-3 col-form-label">Product Pdf</label>
+                        <div class="col-sm-6">
+                            <input type="file" name="product_pdf" class="form-control" id="product_pdf" placeholder="" />
+                        </div>
+                    </div>
+
+
 
                 <hr />
                 <h6>Packaging Details</h6>

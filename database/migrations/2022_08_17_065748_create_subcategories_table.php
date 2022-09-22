@@ -18,6 +18,7 @@ class CreateSubcategoriesTable extends Migration
             $table->unsignedBigInteger('category_id');
             $table->foreign('category_id')->references('id')->on('categorys')->onDelete('cascade');
             $table->string('sub_category_name');
+            $table->string('sub_category_image')->nullable($value = true);
             $table->bigInteger('sub_category_sort_no')->nullable($value = true);
             $table->enum('menu_dropdown', ['1', '2'])->comment('1=Yes,2=No');
             $table->enum('menu_show_sub_item', ['1', '2'])->comment('1=Show,2=Not Show');

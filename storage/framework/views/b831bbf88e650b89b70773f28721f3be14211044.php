@@ -35,17 +35,18 @@
                             <div class="shop-details-flex-wrap">
                                 <div class="shop-details-nav-wrap">
                                     <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                        <li class="nav-item" role="presentation">
+                                        <li class="nav-item sp-product-thumb" role="presentation">
                                             <a class="nav-link active" id="item-one-tab" data-toggle="tab" href="#item-one" role="tab" aria-controls="item-one" aria-selected="true"><img src="<?php echo e($product->front_view_image); ?>" alt=""></a>
                                         </li>
-                                        <li class="nav-item" role="presentation">
+                                        <li class="nav-item sp-product-thumb" role="presentation">
                                             <a class="nav-link" id="item-two-tab" data-toggle="tab" href="#item-two" role="tab" aria-controls="item-two" aria-selected="false"><img src="<?php echo e($product->back_view_image); ?>" alt=""></a>
                                         </li>
-                                        <li class="nav-item" role="presentation">
+                                        <li class="nav-item sp-product-thumb" role="presentation">
                                             <a class="nav-link" id="item-three-tab" data-toggle="tab" href="#item-three" role="tab" aria-controls="item-three" aria-selected="false"><img src="<?php echo e($product->side_view_image); ?>" alt=""></a>
                                         </li>
-                                        <li class="nav-item" role="presentation">
-                                            <a class="nav-link" id="item-three-tab" data-toggle="tab" href="#item-three" role="tab" aria-controls="item-three" aria-selected="false"><img src="<?php echo e($product->open_view_image); ?>" alt=""></a>
+                                        <li class="nav-item sp-product-thumb" role="presentation">
+                                        <li class="nav-item " role="presentation">
+                                            <a class="nav-link" id="item-four-tab" data-toggle="tab" href="#item-four" role="tab" aria-controls="item-four" aria-selected="false"><img src="<?php echo e($product->open_view_image); ?>" alt=""></a>
                                         </li>
                                     </ul>
                                 </div>
@@ -58,12 +59,17 @@
                                         </div>
                                         <div class="tab-pane fade" id="item-two" role="tabpanel" aria-labelledby="item-two-tab">
                                             <div class="shop-details-img">
-                                                <img src="img/product/shop_details_img02.jpg" alt="">
+                                                <img src="<?php echo e($product->back_view_image); ?>" alt="">
                                             </div>
                                         </div>
                                         <div class="tab-pane fade" id="item-three" role="tabpanel" aria-labelledby="item-three-tab">
                                             <div class="shop-details-img">
-                                                <img src="img/product/shop_details_img03.jpg" alt="">
+                                                <img src="<?php echo e($product->side_view_image); ?>" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="item-four" role="tabpanel" aria-labelledby="item-four-tab">
+                                            <div class="shop-details-img">
+                                                <img src="<?php echo e($product->open_view_image); ?>" alt="">
                                             </div>
                                         </div>
                                     </div>

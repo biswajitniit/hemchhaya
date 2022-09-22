@@ -25,6 +25,7 @@ use App\Models\Variations;
 use Illuminate\Support\Facades\Auth;
 use Embed;
 
+
 class ProductController extends Controller
 {
     public function __construct()
@@ -92,37 +93,103 @@ class ProductController extends Controller
 		return view("vendor.product.add-product",compact('category'));
 	}
 
+    /**
+     * Get the attribute id
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function Get_attribute_category_id($id){
+        return Attribute::where('id',$id)->first()->attribute_category_id;
+    }
+
+    /**
+     * Add products post data
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function add_product_post_data(Request $request){
 
         //echo "<pre>"; print_r($request->attribute); die;
 
-        // $this->validate($request, [
-        //     'front_view_image'      => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:10000000000000000000000',
-        // ],[
-        //     'front_view_image.required'      => 'Please add front view image',
-        // ]);
+        $this->validate($request, [
+            'front_view_image'      => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:10000000000000000000000',
+        ],[
+            'front_view_image.required'      => 'Please add front view image',
+        ]);
 
-        $embed = Embed::make('http://youtu.be/uifYHNyH-jA')->parseUrl();
-        if ($embed) {
-            // Set width of the embed.
-            $embed->setAttribute(['width' => 600]);
 
-            // Print html: '<iframe width="600" height="338" src="//www.youtube.com/embed/uifYHNyH-jA" frameborder="0" allowfullscreen></iframe>'.
-            // Height will be set automatically based on provider width/height ratio.
-            // Height could be set explicitly via setAttr() method.
-            echo $embed->getHtml();
-        }
-        die;
+
+
 
         if($request->front_view_image){
-            $file = $request->front_view_image;
-            $filename = time().'.'.$request->front_view_image->extension();
+            $file_front_view_image = $request->front_view_image;
+            $filename_front_view_image = time().'.'.$request->front_view_image->extension();
 
-            $path = Storage::disk('s3')->put("product/large/" . $filename, $file, 'public');
-            $path = Storage::disk('s3')->url($path);
+            $path_front_view_image = Storage::disk('s3')->put("product/large/" . $filename_front_view_image, $file_front_view_image, 'public');
+            $path_front_view_image = Storage::disk('s3')->url($path_front_view_image);
         }else{
-
+            $filename_front_view_image = '';
+            $path_front_view_image = '';
         }
+
+        if($request->back_view_image){
+            $file_back_view_image = $request->back_view_image;
+            $filename_back_view_image = time().'.'.$request->back_view_image->extension();
+
+            $path_back_view_image = Storage::disk('s3')->put("product/large/" . $filename_back_view_image, $file_back_view_image, 'public');
+            $path_back_view_image = Storage::disk('s3')->url($path_back_view_image);
+        }else{
+            $filename_back_view_image ='';
+            $path_back_view_image = '';
+        }
+
+        if($request->side_view_image){
+            $file_side_view_image = $request->side_view_image;
+            $filename_side_view_image = time().'.'.$request->side_view_image->extension();
+
+            $path_side_view_image = Storage::disk('s3')->put("product/large/" . $filename_side_view_image, $file_side_view_image, 'public');
+            $path_side_view_image = Storage::disk('s3')->url($path_side_view_image);
+        }else{
+            $path_side_view_image = '';
+        }
+
+        if($request->open_view_image){
+            $file_open_view_image = $request->open_view_image;
+            $filename_open_view_image = time().'.'.$request->open_view_image->extension();
+
+            $path_open_view_image = Storage::disk('s3')->put("product/large/" . $filename_open_view_image, $file_open_view_image, 'public');
+            $path_open_view_image = Storage::disk('s3')->url($path_open_view_image);
+        }else{
+            $path_open_view_image = '';
+        }
+
+        if($request->video_link){
+            $embed = Embed::make($request->video_link)->parseUrl();
+            if ($embed) {
+                // Set width of the embed.
+                $embed->setAttribute(['width' => 600]);
+
+                // Print html: '<iframe width="600" height="338" src="//www.youtube.com/embed/uifYHNyH-jA" frameborder="0" allowfullscreen></iframe>'.
+                // Height will be set automatically based on provider width/height ratio.
+                // Height could be set explicitly via setAttr() method.
+                //echo $embed->getHtml();
+                $videolink = $embed->getHtml();
+            }
+        }else{
+            $videolink = "";
+        }
+
+        if($request->product_pdf){
+            $file_product_pdf = $request->product_pdf;
+            $filename_product_pdf = time().'.'.$request->product_pdf->extension();
+
+            $path_product_pdf = Storage::disk('s3')->put("product/pdf/" . $filename_product_pdf, $file_product_pdf, 'public');
+            $path_product_pdf = Storage::disk('s3')->url($path_product_pdf);
+        }else{
+            $filename_product_pdf = '';
+            $path_product_pdf = "";
+        }
+
 
 
     	$product = new Product();
@@ -137,10 +204,20 @@ class ProductController extends Controller
             $product->highlights                                                            = $request['highlights'];
             $product->description                                                           = $request['description'];
 
-            $product->front_view_image                                                      = $path;
-            $product->back_view_image                                                       = $request['back_view_image'];
-            $product->side_view_image                                                       = $request['side_view_image'];
-            $product->open_view_image                                                       = $request['open_view_image'];
+            $product->front_view_image_name                                                 = $filename_front_view_image;
+            $product->back_view_image_name                                                  = $filename_back_view_image;
+            $product->side_view_image_name                                                  = $filename_side_view_image;
+            $product->open_view_image_name                                                  = $filename_open_view_image;
+
+            $product->front_view_image                                                      = $path_front_view_image;
+            $product->back_view_image                                                       = $path_back_view_image;
+            $product->side_view_image                                                       = $path_side_view_image;
+            $product->open_view_image                                                       = $path_open_view_image;
+
+            $product->video_link                                                            = $videolink;
+
+            $product->product_pdf_name                                                      = $filename_product_pdf;
+            $product->product_pdf                                                           = $path_product_pdf;
 
             $product->sku                                                                   = $request['sku'];
             $product->price                                                                 = $request['price'];
@@ -183,10 +260,20 @@ class ProductController extends Controller
                 $productChild->brand                                                                 = 1;
                 $productChild->name                                                                  = $request['name'];
 
-                $productChild->front_view_image                                                      = $path;
-                $productChild->back_view_image                                                       = $request['back_view_image'];
-                $productChild->side_view_image                                                       = $request['side_view_image'];
-                $productChild->open_view_image                                                       = $request['open_view_image'];
+                $productChild->front_view_image_name                                                 = $filename_front_view_image;
+                $productChild->back_view_image_name                                                  = $filename_back_view_image;
+                $productChild->side_view_image_name                                                  = $filename_side_view_image;
+                $productChild->open_view_image_name                                                  = $filename_open_view_image;
+
+                $productChild->front_view_image                                                      = $path_front_view_image;
+                $productChild->back_view_image                                                       = $path_back_view_image;
+                $productChild->side_view_image                                                       = $path_side_view_image;
+                $productChild->open_view_image                                                       = $path_open_view_image;
+
+                $productChild->video_link                                                            = $videolink;
+
+                $productChild->product_pdf_name                                                      = $filename_product_pdf;
+                $productChild->product_pdf                                                           = $path_product_pdf;
 
                 $productChild->sku                                                                   = $request['sku'];
                 $productChild->price                                                                 = $request['price'];
@@ -267,6 +354,7 @@ class ProductController extends Controller
                 // Save Data FROM product_with_attribute_items
                 $data_attribute_item = new Product_with_attribute_item();
                     $data_attribute_item->product_id                 =   $productChildId;
+                    $data_attribute_item->attribute_id               =   $this->Get_attribute_category_id($key);
                     $data_attribute_item->attribute_item_id          =   $key;
                     $data_attribute_item->attribute_item_value       =   $value;
                 $data_attribute_item->save();
