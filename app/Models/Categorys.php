@@ -13,4 +13,11 @@ class Categorys extends Model
     protected $fillable = [
         'category_name','category_sort_no','menu_dropdown','menu_show_div_type','menu_show_in_header','status',
      ];
+
+
+     public function subcategories()
+     {
+         return $this->hasMany(Subcategory::class, 'category_id', 'id');
+     }
+
 }

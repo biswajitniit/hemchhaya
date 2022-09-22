@@ -19,6 +19,8 @@ Route::post('register', [UserAuthController::class, 'register']);
 Route::post('login', [UserAuthController::class, 'login']);
 
 Route::get('getactegories', [ApiController::class, 'get_categories'])->name('allcategories');
+Route::get('getproducts', [ApiController::class, 'get_product'])->name('getproducts');
+
 // Route::group(['middleware' => 'auth:api'], function(){
 //     Route::post('user-details', [UserController::class, 'userDetails']);
 // });
