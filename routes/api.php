@@ -20,6 +20,8 @@ Route::post('login', [UserAuthController::class, 'login']);
 
 Route::get('getactegories', [ApiController::class, 'get_categories'])->name('allcategories');
 Route::get('getproducts', [ApiController::class, 'get_product'])->name('getproducts');
+Route::get('getproductdetails', [ApiController::class, 'view_product_details'])->name('getproductsdetails');
+
 
 // Route::group(['middleware' => 'auth:api'], function(){
 //     Route::post('user-details', [UserController::class, 'userDetails']);
