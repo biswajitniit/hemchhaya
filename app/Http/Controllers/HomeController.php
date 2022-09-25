@@ -19,6 +19,8 @@ use App\Models\Variations;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Contracts\Encryption\DecryptException;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class HomeController extends Controller
 {
@@ -41,6 +43,49 @@ class HomeController extends Controller
     {
         return view('home');
     }
+
+    /**
+     * user registration page
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function registration()
+    {
+        return view('registration');
+    }
+
+    /**
+     * save user post data
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+    */
+    public function save_user(Request $request){
+        $this->validate($request, [
+			'name'                          => 'required',
+			'email'                         => 'required|unique:users|max:191',
+			'phone'                         => 'required',
+			'password'                      => 'required',
+			'confirmpassword'               => 'required',
+        ],[
+            'name.required' => 'Please your name',
+            'email.required' => 'Please enter your email',
+            'phone.required' => 'Please enter your phone',
+            'password.required' => 'Please enter your password',
+            'confirmpassword.required' => 'Please enter your confirm password',
+        ]);
+
+        $user = new User();
+            $user->name                   = $request['name'];
+            $user->email                  = $request['email'];
+            $user->phone                  = $request['phone'];
+            $user->password               = Hash::make($request['password']);
+            $user->status                 = '1';
+        $user->save();
+
+        return redirect()->back()->with('message', 'Thanks for signing up. Welcome to our salesanta. We are happy to have you on board.');
+
+    }
+
 
     /**
      * Open Landing Page On Category WIse

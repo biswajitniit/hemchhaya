@@ -2096,8 +2096,20 @@ label {
     z-index: 1;
     line-height: 1;
 }
+.profile .sp-product-item {
+    border: 1px solid #eee;
+}
+.profile .sp-product-item .sp-product-thumb .batch {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    min-width: 30px;
+}
 .sp-product-thumb .batch.discount {
     background: var(--color-secondary);
+}
+.sp-product-thumb .batch a{
+    color:#FFF;
 }
 .sp-product-content {
     padding: 25px 40px 25px;
@@ -3299,6 +3311,14 @@ label {
 .shop-details-nav-wrap .nav-tabs .nav-link img {
     max-width: 100%;
 }
+.shop-details-nav-wrap .nav-tabs .nav-link img {
+    height: 90px;
+    object-fit: scale-down;
+    width: 100%;
+    background: #f6f7f9;
+    padding: 10px;
+    border: 1px solid #ddd;
+}
 .shop-details-nav-wrap .nav-tabs {
     border-bottom: none;
 }
@@ -3321,6 +3341,14 @@ label {
 }
 .shop-details-img img {
     max-width: 100%;
+}
+.shop-details-img img {
+    height: 420px;
+    object-fit: scale-down;
+    width: 100%;
+    background: #f6f7f9;
+    padding: 10px;
+    border: 1px solid #ddd;
 }
 .shop-details-content {
     margin-left: -10px;
@@ -5425,4 +5453,191 @@ ul.swatch-quantity {
 .swatch-quantity li a small {
     display: grid;
     width: 100%;
+}
+.login_ .sub-title {
+    font-family: var(--font-family-body);
+    text-align: center;
+}
+.login_ p {
+    text-align: right;
+    margin: 0;
+    padding: 0;
+    line-height: 3;
+}
+.login_ hr {
+    border-bottom: 1px solid #eceff8;
+    border-top: 0 none;
+    margin: 20px 0 5px;
+    padding: 0;
+}
+.login_ .style_b {
+    border: 1px solid #eee;
+    padding: 30px;
+}
+.spec_{
+    border:1px solid #ddd;
+    padding: 10px;
+}
+.spec_ h4{
+    padding: 10px ;
+    font-weight: 600;
+    margin-bottom: 0px;
+}
+.spec_ h6{
+    border-top:1px solid #ddd;
+    border-bottom:1px solid #ddd;
+    padding: 10px ;
+    font-weight: 600;
+    color: #6e6c6c;
+}
+
+._78xt5Y {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 100px;
+    bottom: 0;
+    z-index: 2;
+    -webkit-align-self: flex-start;
+    -ms-flex-item-align: start;
+    align-self: flex-start;
+}
+
+/* Profile container */
+.profile {
+	margin: 20px 0;
+  }
+  
+  /* Profile sidebar */
+  .profile-sidebar {
+	
+	background: #f1f1f1;
+  }
+  .profile-userpic {
+    text-align: center;
+}
+.profile-userpic img {
+    float: none;
+    margin: 0 auto;
+    width: 50%;
+    height: 50%;
+    -webkit-border-radius: 50% !important;
+    -moz-border-radius: 50% !important;
+    border-radius: 50% !important;
+    border: 5px solid #FFF;
+}
+  
+  .profile-usertitle {
+	text-align: center;
+	margin-top: 20px;
+  }
+  
+  .profile-usertitle-name {
+	color: #5a7391;
+	font-size: 16px;
+	font-weight: 600;
+	margin-bottom: 7px;
+  }
+  
+  .profile-usertitle-job {
+	text-transform: uppercase;
+	color: #5b9bd1;
+	font-size: 12px;
+	font-weight: 600;
+	margin-bottom: 15px;
+  }
+  
+  .profile-userbuttons {
+	text-align: center;
+	margin-top: 10px;
+  }
+  
+  .profile-userbuttons .btn {
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 6px 15px;
+    letter-spacing: 2px;
+}
+.profile-userbuttons .btn:last-child {
+	margin-right: 0px;
+}
+  
+  .profile-usermenu ul li {
+    border-bottom: 1px solid #d00f05;
+    width: 100%;
+	line-height: 2;
+	padding: 0;
+}
+  .profile-usermenu ul li:last-child {
+	border-bottom: none;
+  }
+  
+  .profile-usermenu ul li a {
+    color: #d00f05;
+    font-size: 14px;
+    font-weight: 400;
+    width: 100%;
+    line-height: 3.5;
+    padding-left: 10px;
+    display: block;
+}
+  
+  .profile-usermenu ul li a i {
+	margin-right: 8px;
+	font-size: 14px;
+  }
+  
+  .profile-usermenu ul li a:hover {
+	background-color: #fafcfd;
+	color: #000;
+  }
+  
+  .profile-usermenu ul li.active {
+	border-bottom: none;
+  }
+  
+.profile-usermenu ul li.active a {
+    color: #ffffff;
+    background-color: #d00f05;
+    border-left: 4px solid #910b04;
+}
+  
+  /* Profile Content */
+  .profile-content {
+    padding: 20px;
+    background: #fafcff;
+    min-height: 460px;
+}
+.profile-content h4 {
+    font-size: 18px;
+    line-height: 26px;
+    color: #3278bd;
+    font-weight: 400;
+}
+.profile-content h6{
+	font-weight: 400;
+}
+.profile-content .table td, .profile-content .table th {
+    padding: .75rem;
+    vertical-align: middle;
+    border-top: 1px solid #dee2e6;
+	text-align: center;
+	font-size: 14px;
+}
+.profile-content thead {
+    background: #f44336;
+	color: #FFF;
+	font-size: 16px;
+	font-family: "Frank Ruhl Libre", serif;
+}
+._ordH .table td, ._ordH .table th {
+    padding: 1rem;
+    vertical-align: middle;
+    border-top: 1px solid #8fd19e;
+	text-align: left !important;
+	font-size: 16px;
+	font-family: "Frank Ruhl Libre", serif;
+}
+._ordH .table td:first-child{
+	font-weight: 700;
 }

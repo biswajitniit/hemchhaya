@@ -426,7 +426,7 @@
 
 
         <!-- JS here -->
-        <script data-cfasync="false" src="../../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+        
         <script src="<?php echo e(asset('frontend/js/vendor/jquery-3.6.0.min.js')); ?>"></script>
         <script src="<?php echo e(asset('frontend/js/bootstrap.min.js')); ?>"></script>
         <script src="<?php echo e(asset('frontend/js/isotope.pkgd.min.js')); ?>"></script>
@@ -444,4 +444,4 @@
         <?php echo $__env->yieldPushContent('frontend-scripts'); ?>
     </body>
 </html>
-<?php /**PATH D:\xampp\htdocs\hemchhaya\resources\views/layouts/app.blade.php ENDPATH**/ ?>
+<?php /**PATH E:\webdev\hemchhaya\resources\views/layouts/app.blade.php ENDPATH**/ ?>

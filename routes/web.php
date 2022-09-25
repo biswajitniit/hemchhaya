@@ -22,6 +22,9 @@ use App\Http\Controllers\Admin\LogoutController;
 
 use App\Http\Controllers\Admin\Brand\BrandController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Dashboard\UserdashboardController;
+use App\Http\Controllers\Dashboard\UserlogoutController;
 
 /*
 |--------------------------------------------------------------------------
@@ -270,6 +273,21 @@ Route::any('/admin/get_attributecat_with_attribute_on_product_page', [ProductCon
     Route::get('/', function () {
         return view('welcome');
     });
+
+    //user login
+    Route::get('/login', [LoginController::class,'login'])->name('login');
+    Route::post('/user/loginpost', [LoginController::class,'loginpost'])->name('user.loginpost');
+    Route::get('/user/logout', [UserlogoutController::class,'userlogout'])->name('user.logout');
+
+
+    Route::get('/user/registration', [HomeController::class,'registration'])->name('user.registration');
+    Route::post('/user/save-user', [HomeController::class,'save_user'])->name('user.save-user');
+
+    Route::get('/user/dashboard', [UserdashboardController::class,'user_dashboard'])->name('user.dashboard');
+
+
+    Route::get('/category-wise-landing-page',[HomeController::class, 'category_wise_landing_page'])->name('home.category-wise-landing-page');
+
     Route::get('/category-wise-landing-page',[HomeController::class, 'category_wise_landing_page'])->name('home.category-wise-landing-page');
     Route::get('/sub-category-wise-page',[HomeController::class, 'sub_category_wise_page'])->name('home.sub-category-wise-page');
     Route::get('/view-product-details',[HomeController::class, 'view_product_details'])->name('home.view-product-details');

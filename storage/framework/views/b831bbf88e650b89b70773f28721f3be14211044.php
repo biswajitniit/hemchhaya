@@ -1,6 +1,5 @@
-@extends('layouts.app')
-@section('title', 'Salesanta | SUb category wise page')
-@section('content')
+<?php $__env->startSection('title', 'Salesanta | SUb category wise page'); ?>
+<?php $__env->startSection('content'); ?>
 
 
 
@@ -35,13 +34,13 @@
                         <div class="shop-details-nav-wrap">
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item" role="presentation">
-                                    <a class="nav-link active" id="item-one-tab" data-toggle="tab" href="#item-one" role="tab" aria-controls="item-one" aria-selected="true"><img src="{{ $product->front_view_image }}" alt="" /></a>
+                                    <a class="nav-link active" id="item-one-tab" data-toggle="tab" href="#item-one" role="tab" aria-controls="item-one" aria-selected="true"><img src="<?php echo e($product->front_view_image); ?>" alt="" /></a>
                                 </li>
                                 <li class="nav-item" role="presentation">
-                                    <a class="nav-link" id="item-two-tab" data-toggle="tab" href="#item-two" role="tab" aria-controls="item-two" aria-selected="false"><img src="{{ $product->back_view_image }}" alt="" /></a>
+                                    <a class="nav-link" id="item-two-tab" data-toggle="tab" href="#item-two" role="tab" aria-controls="item-two" aria-selected="false"><img src="<?php echo e($product->back_view_image); ?>" alt="" /></a>
                                 </li>
                                 <li class="nav-item" role="presentation">
-                                    <a class="nav-link" id="item-three-tab" data-toggle="tab" href="#item-three" role="tab" aria-controls="item-three" aria-selected="false"><img src="{{ asset('frontend/img/product/sd_nav_img03.jpg') }}" alt="" /></a>
+                                    <a class="nav-link" id="item-three-tab" data-toggle="tab" href="#item-three" role="tab" aria-controls="item-three" aria-selected="false"><img src="<?php echo e(asset('frontend/img/product/sd_nav_img03.jpg')); ?>" alt="" /></a>
                                 </li>
                             </ul>
                         </div>
@@ -49,17 +48,17 @@
                             <div class="tab-content" id="myTabContent">
                                 <div class="tab-pane fade show active" id="item-one" role="tabpanel" aria-labelledby="item-one-tab">
                                     <div class="shop-details-img">
-                                        <img src="{{ $product->front_view_image }}" alt="" />
+                                        <img src="<?php echo e($product->front_view_image); ?>" alt="" />
                                     </div>
                                 </div>
                                 <div class="tab-pane fade" id="item-two" role="tabpanel" aria-labelledby="item-two-tab">
                                     <div class="shop-details-img">
-                                        <img src="{{ $product->back_view_image }}" alt="" />
+                                        <img src="<?php echo e($product->back_view_image); ?>" alt="" />
                                     </div>
                                 </div>
                                 <div class="tab-pane fade" id="item-three" role="tabpanel" aria-labelledby="item-three-tab">
                                     <div class="shop-details-img">
-                                        <img src="{{ asset('frontend/img/product/shop_details_img03.jpg') }}" alt="" />
+                                        <img src="<?php echo e(asset('frontend/img/product/shop_details_img03.jpg')); ?>" alt="" />
                                     </div>
                                 </div>
                             </div>
@@ -527,8 +526,10 @@
 
 
 
-@push('frontend-scripts')
+<?php $__env->startPush('frontend-scripts'); ?>
 
-@endpush
+<?php $__env->stopPush(); ?>
 
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH E:\webdev\hemchhaya\resources\views/view-product-details.blade.php ENDPATH**/ ?>

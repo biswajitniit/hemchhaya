@@ -1,6 +1,5 @@
-@extends('layouts.app')
-@section('title', 'Salesanta | Homepage')
-@section('content')
+<?php $__env->startSection('title', 'Salesanta | Homepage'); ?>
+<?php $__env->startSection('content'); ?>
 
 
 
@@ -8,12 +7,12 @@
         <main>
 
             <!-- slider-area -->
-            <section class="slider-area" data-background="{{ asset('frontend/img/bg/slider_area_bg.jpg') }}">
+            <section class="slider-area" data-background="<?php echo e(asset('frontend/img/bg/slider_area_bg.jpg')); ?>">
                 <div class="container custom-container">
                     <div class="row">
                         <div class="col-12">
                             <div class="slider-active">
-                                <div class="single-slider slider-bg" data-background="{{ asset('frontend/img/slider/slider_bg01.jpg') }}">
+                                <div class="single-slider slider-bg" data-background="<?php echo e(asset('frontend/img/slider/slider_bg01.jpg')); ?>">
                                     <div class="slider-content">
                                         <h5 class="sub-title" data-animation="fadeInUp" data-delay=".2s">top deal !</h5>
                                         <h2 class="title" data-animation="fadeInUp" data-delay=".4s">organic food</h2>
@@ -21,7 +20,7 @@
                                         <a href="shop.html" class="btn rounded-btn" data-animation="fadeInUp" data-delay=".8s">Shop Now</a>
                                     </div>
                                 </div>
-                                <div class="single-slider slider-bg" data-background="{{ asset('frontend/img/slider/slider_bg01.jpg') }}">
+                                <div class="single-slider slider-bg" data-background="<?php echo e(asset('frontend/img/slider/slider_bg01.jpg')); ?>">
                                     <div class="slider-content">
                                         <h5 class="sub-title" data-animation="fadeInUp" data-delay=".2s">Real simple !</h5>
                                         <h2 class="title" data-animation="fadeInUp" data-delay=".4s">Time Grocery</h2>
@@ -29,7 +28,7 @@
                                         <a href="shop.html" class="btn rounded-btn" data-animation="fadeInUp" data-delay=".8s">Shop Now</a>
                                     </div>
                                 </div>
-                                <div class="single-slider slider-bg" data-background="{{ asset('frontend/img/slider/slider_bg01.jpg') }}">
+                                <div class="single-slider slider-bg" data-background="<?php echo e(asset('frontend/img/slider/slider_bg01.jpg')); ?>">
                                     <div class="slider-content">
                                         <h5 class="sub-title" data-animation="fadeInUp" data-delay=".2s">top deal !</h5>
                                         <h2 class="title" data-animation="fadeInUp" data-delay=".4s">organic food</h2>
@@ -39,19 +38,7 @@
                                 </div>
                             </div>
                         </div>
-                        {{-- <div class="col-3">
-                            <div class="slider-banner-img mb-20">
-                                <a href="shop.html"><img src="{{ asset('frontend/img/slider/slider_banner01.jpg') }}" alt=""></a>
-                            </div>
-                            <div class="slider-banner-img">
-                                <a href="shop.html"><img src="{{ asset('frontend/img/slider/slider_banner02.jpg') }}" alt=""></a>
-                            </div>
-                        </div>
-                        <div class="col-3">
-                            <div class="slider-banner-img">
-                                <a href="shop.html"><img src="{{ asset('frontend/img/slider/slider_banner03.jpg') }}" alt=""></a>
-                            </div>
-                        </div> --}}
+                        
                     </div>
                 </div>
 
@@ -63,7 +50,7 @@
                                 <div class="category-item active">
                                     <a href="shop.html" class="category-link"></a>
                                     <div class="category-thumb">
-                                        <img src="{{ asset('frontend/img/product/category_img01.png') }}" alt="">
+                                        <img src="<?php echo e(asset('frontend/img/product/category_img01.png')); ?>" alt="">
                                     </div>
                                     <div class="category-content">
                                         <h6 class="title">Juice & Drinks</h6>
@@ -74,7 +61,7 @@
                                 <div class="category-item">
                                     <a href="shop.html" class="category-link"></a>
                                     <div class="category-thumb">
-                                        <img src="{{ asset('frontend/img/product/category_img02.png') }}" alt="">
+                                        <img src="<?php echo e(asset('frontend/img/product/category_img02.png')); ?>" alt="">
                                     </div>
                                     <div class="category-content">
                                         <h6 class="title">Vegetables</h6>
@@ -85,7 +72,7 @@
                                 <div class="category-item">
                                     <a href="shop.html" class="category-link"></a>
                                     <div class="category-thumb">
-                                        <img src="{{ asset('frontend/img/product/category_img03.png') }}" alt="">
+                                        <img src="<?php echo e(asset('frontend/img/product/category_img03.png')); ?>" alt="">
                                     </div>
                                     <div class="category-content">
                                         <h6 class="title">Fresh Nuts</h6>
@@ -96,7 +83,7 @@
                                 <div class="category-item">
                                     <a href="shop.html" class="category-link"></a>
                                     <div class="category-thumb">
-                                        <img src="{{ asset('frontend/img/product/category_img04.png') }}" alt="">
+                                        <img src="<?php echo e(asset('frontend/img/product/category_img04.png')); ?>" alt="">
                                     </div>
                                     <div class="category-content">
                                         <h6 class="title">Cleaning</h6>
@@ -107,7 +94,7 @@
                                 <div class="category-item">
                                     <a href="shop.html" class="category-link"></a>
                                     <div class="category-thumb">
-                                        <img src="{{ asset('frontend/img/product/category_img05.png') }}" alt="">
+                                        <img src="<?php echo e(asset('frontend/img/product/category_img05.png')); ?>" alt="">
                                     </div>
                                     <div class="category-content">
                                         <h6 class="title">fresh meat</h6>
@@ -118,7 +105,7 @@
                                 <div class="category-item">
                                     <a href="shop.html" class="category-link"></a>
                                     <div class="category-thumb">
-                                        <img src="{{ asset('frontend/img/product/category_img06.png') }}" alt="">
+                                        <img src="<?php echo e(asset('frontend/img/product/category_img06.png')); ?>" alt="">
                                     </div>
                                     <div class="category-content">
                                         <h6 class="title">Powders</h6>
@@ -140,7 +127,7 @@
                         <div class="col-xl-4 col-lg-6 col-md-8">
                             <div class="discount-item mb-20">
                                 <div class="discount-thumb">
-                                    <img src="{{ asset('frontend/img/product/discount_img01.jpg') }}" alt="">
+                                    <img src="<?php echo e(asset('frontend/img/product/discount_img01.jpg')); ?>" alt="">
                                 </div>
                                 <div class="discount-content">
                                     <span>healthy food</span>
@@ -152,7 +139,7 @@
                         <div class="col-xl-4 col-lg-6 col-md-8">
                             <div class="discount-item mb-20">
                                 <div class="discount-thumb">
-                                    <img src="{{ asset('frontend/img/product/discount_img02.jpg') }}" alt="">
+                                    <img src="<?php echo e(asset('frontend/img/product/discount_img02.jpg')); ?>" alt="">
                                 </div>
                                 <div class="discount-content">
                                     <span>healthy food</span>
@@ -164,7 +151,7 @@
                         <div class="col-xl-4 col-lg-6 col-md-8">
                             <div class="discount-item style-two mb-20">
                                 <div class="discount-thumb">
-                                    <img src="{{ asset('frontend/img/product/discount_img03.jpg') }}" alt="">
+                                    <img src="<?php echo e(asset('frontend/img/product/discount_img03.jpg')); ?>" alt="">
                                 </div>
                                 <div class="discount-content">
                                     <span>healthy food</span>
@@ -196,7 +183,7 @@
                         <div class="col-xl-3">
                             <div class="best-deal-item">
                                 <div class="best-deal-thumb">
-                                    <a href="shop-details.html"><img src="{{ asset('frontend/img/product/best_deal_product01.png') }}" alt=""></a>
+                                    <a href="shop-details.html"><img src="<?php echo e(asset('frontend/img/product/best_deal_product01.png')); ?>" alt=""></a>
                                 </div>
                                 <div class="best-deal-content">
                                     <div class="main-content">
@@ -217,7 +204,7 @@
                         <div class="col-xl-3">
                             <div class="best-deal-item">
                                 <div class="best-deal-thumb">
-                                    <a href="shop-details.html"><img src="{{ asset('frontend/img/product/best_deal_product02.png') }}" alt=""></a>
+                                    <a href="shop-details.html"><img src="<?php echo e(asset('frontend/img/product/best_deal_product02.png')); ?>" alt=""></a>
                                 </div>
                                 <div class="best-deal-content">
                                     <div class="main-content">
@@ -238,7 +225,7 @@
                         <div class="col-xl-3">
                             <div class="best-deal-item">
                                 <div class="best-deal-thumb">
-                                    <a href="shop-details.html"><img src="{{ asset('frontend/img/product/best_deal_product03.png') }}" alt=""></a>
+                                    <a href="shop-details.html"><img src="<?php echo e(asset('frontend/img/product/best_deal_product03.png')); ?>" alt=""></a>
                                 </div>
                                 <div class="best-deal-content">
                                     <div class="main-content">
@@ -259,7 +246,7 @@
                         <div class="col-xl-3">
                             <div class="best-deal-item">
                                 <div class="best-deal-thumb">
-                                    <a href="shop-details.html"><img src="{{ asset('frontend/img/product/best_deal_product04.png') }}" alt=""></a>
+                                    <a href="shop-details.html"><img src="<?php echo e(asset('frontend/img/product/best_deal_product04.png')); ?>" alt=""></a>
                                 </div>
                                 <div class="best-deal-content">
                                     <div class="main-content">
@@ -280,7 +267,7 @@
                         <div class="col-xl-3">
                             <div class="best-deal-item">
                                 <div class="best-deal-thumb">
-                                    <a href="shop-details.html"><img src="{{ asset('frontend/img/product/best_deal_product05.png') }}" alt=""></a>
+                                    <a href="shop-details.html"><img src="<?php echo e(asset('frontend/img/product/best_deal_product05.png')); ?>" alt=""></a>
                                 </div>
                                 <div class="best-deal-content">
                                     <div class="main-content">
@@ -324,7 +311,7 @@
                             <div class="col-3 d-none d-lg-block">
                                 <div class="special-products-add">
                                     <div class="sp-add-thumb">
-                                        <img src="{{ asset('frontend/img/product/special_products_add.jpg') }}" alt="">
+                                        <img src="<?php echo e(asset('frontend/img/product/special_products_add.jpg')); ?>" alt="">
                                     </div>
                                     <div class="sp-add-content">
                                         <span class="sub-title">healthy food</span>
@@ -340,7 +327,7 @@
                                         <div class="sp-product-item mb-20">
                                             <div class="sp-product-thumb">
                                                 <span class="batch">New</span>
-                                                <a href="shop-details.html"><img src="{{ asset('frontend/img/product/sp_products01.png') }}" alt=""></a>
+                                                <a href="shop-details.html"><img src="<?php echo e(asset('frontend/img/product/sp_products01.png')); ?>" alt=""></a>
                                             </div>
                                             <div class="sp-product-content">
                                                 <div class="rating">
@@ -367,7 +354,7 @@
                                         <div class="sp-product-item mb-20">
                                             <div class="sp-product-thumb">
                                                 <span class="batch discount">15%</span>
-                                                <a href="shop-details.html"><img src="{{ asset('frontend/img/product/sp_products02.png') }}" alt=""></a>
+                                                <a href="shop-details.html"><img src="<?php echo e(asset('frontend/img/product/sp_products02.png')); ?>" alt=""></a>
                                             </div>
                                             <div class="sp-product-content">
                                                 <div class="rating">
@@ -394,7 +381,7 @@
                                         <div class="sp-product-item mb-20">
                                             <div class="sp-product-thumb">
                                                 <span class="batch discount">25%</span>
-                                                <a href="shop-details.html"><img src="{{ asset('frontend/img/product/sp_products03.png') }}" alt=""></a>
+                                                <a href="shop-details.html"><img src="<?php echo e(asset('frontend/img/product/sp_products03.png')); ?>" alt=""></a>
                                             </div>
                                             <div class="sp-product-content">
                                                 <div class="rating">
@@ -421,7 +408,7 @@
                                         <div class="sp-product-item mb-20">
                                             <div class="sp-product-thumb">
                                                 <span class="batch">new</span>
-                                                <a href="shop-details.html"><img src="{{ asset('frontend/img/product/sp_products04.png') }}" alt=""></a>
+                                                <a href="shop-details.html"><img src="<?php echo e(asset('frontend/img/product/sp_products04.png')); ?>" alt=""></a>
                                             </div>
                                             <div class="sp-product-content">
                                                 <div class="rating">
@@ -448,7 +435,7 @@
                                         <div class="sp-product-item mb-20">
                                             <div class="sp-product-thumb">
                                                 <span class="batch discount">25%</span>
-                                                <a href="shop-details.html"><img src="{{ asset('frontend/img/product/sp_products05.png') }}" alt=""></a>
+                                                <a href="shop-details.html"><img src="<?php echo e(asset('frontend/img/product/sp_products05.png')); ?>" alt=""></a>
                                             </div>
                                             <div class="sp-product-content">
                                                 <div class="rating">
@@ -475,7 +462,7 @@
                                         <div class="sp-product-item mb-20">
                                             <div class="sp-product-thumb">
                                                 <span class="batch">new</span>
-                                                <a href="shop-details.html"><img src="{{ asset('frontend/img/product/sp_products06.png') }}" alt=""></a>
+                                                <a href="shop-details.html"><img src="<?php echo e(asset('frontend/img/product/sp_products06.png')); ?>" alt=""></a>
                                             </div>
                                             <div class="sp-product-content">
                                                 <div class="rating">
@@ -502,7 +489,7 @@
                                         <div class="sp-product-item mb-20">
                                             <div class="sp-product-thumb">
                                                 <span class="batch discount">10%</span>
-                                                <a href="shop-details.html"><img src="{{ asset('frontend/img/product/sp_products07.png') }}" alt=""></a>
+                                                <a href="shop-details.html"><img src="<?php echo e(asset('frontend/img/product/sp_products07.png')); ?>" alt=""></a>
                                             </div>
                                             <div class="sp-product-content">
                                                 <div class="rating">
@@ -529,7 +516,7 @@
                                         <div class="sp-product-item mb-20">
                                             <div class="sp-product-thumb">
                                                 <span class="batch discount">10%</span>
-                                                <a href="shop-details.html"><img src="{{ asset('frontend/img/product/sp_products08.png') }}" alt=""></a>
+                                                <a href="shop-details.html"><img src="<?php echo e(asset('frontend/img/product/sp_products08.png')); ?>" alt=""></a>
                                             </div>
                                             <div class="sp-product-content">
                                                 <div class="rating">
@@ -584,7 +571,7 @@
                                 <div class="sp-product-item mb-20">
                                     <div class="sp-product-thumb">
                                         <span class="batch">New</span>
-                                        <a href="shop-details.html"><img src="{{ asset('frontend/img/product/sp_products09.png') }}" alt=""></a>
+                                        <a href="shop-details.html"><img src="<?php echo e(asset('frontend/img/product/sp_products09.png')); ?>" alt=""></a>
                                     </div>
                                     <div class="sp-product-content">
                                         <div class="rating">
@@ -611,7 +598,7 @@
                                 <div class="sp-product-item mb-20">
                                     <div class="sp-product-thumb">
                                         <span class="batch discount">15%</span>
-                                        <a href="shop-details.html"><img src="{{ asset('frontend/img/product/sp_products02.png') }}" alt=""></a>
+                                        <a href="shop-details.html"><img src="<?php echo e(asset('frontend/img/product/sp_products02.png')); ?>" alt=""></a>
                                     </div>
                                     <div class="sp-product-content">
                                         <div class="rating">
@@ -638,7 +625,7 @@
                                 <div class="sp-product-item mb-20">
                                     <div class="sp-product-thumb">
                                         <span class="batch discount">25%</span>
-                                        <a href="shop-details.html"><img src="{{ asset('frontend/img/product/sp_products03.png') }}" alt=""></a>
+                                        <a href="shop-details.html"><img src="<?php echo e(asset('frontend/img/product/sp_products03.png')); ?>" alt=""></a>
                                     </div>
                                     <div class="sp-product-content">
                                         <div class="rating">
@@ -665,7 +652,7 @@
                                 <div class="sp-product-item mb-20">
                                     <div class="sp-product-thumb">
                                         <span class="batch">new</span>
-                                        <a href="shop-details.html"><img src="{{ asset('frontend/img/product/sp_products04.png') }}" alt=""></a>
+                                        <a href="shop-details.html"><img src="<?php echo e(asset('frontend/img/product/sp_products04.png')); ?>" alt=""></a>
                                     </div>
                                     <div class="sp-product-content">
                                         <div class="rating">
@@ -692,7 +679,7 @@
                                 <div class="sp-product-item mb-20">
                                     <div class="sp-product-thumb">
                                         <span class="batch discount">25%</span>
-                                        <a href="shop-details.html"><img src="{{ asset('frontend/img/product/sp_products05.png') }}" alt=""></a>
+                                        <a href="shop-details.html"><img src="<?php echo e(asset('frontend/img/product/sp_products05.png')); ?>" alt=""></a>
                                     </div>
                                     <div class="sp-product-content">
                                         <div class="rating">
@@ -727,8 +714,10 @@
         <!-- main-area-end -->
 
 
-    @push('frontend-scripts')
+    <?php $__env->startPush('frontend-scripts'); ?>
 
-    @endpush
+    <?php $__env->stopPush(); ?>
 
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH E:\webdev\hemchhaya\resources\views/welcome.blade.php ENDPATH**/ ?>
