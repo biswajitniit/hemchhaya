@@ -85,7 +85,14 @@
                         <div class="col-md-5">
                             <div class="header-top-right">
                                 <ul>
-                                    <li><a href="contact.html">My Account</a></li>
+                                    <?php if(Auth::check()): ?>
+                                    <li><a href="<?php echo e(url('/user/dashboard')); ?>">My Account</a></li>
+                                    <?php else: ?>
+                                    <li><a href="<?php echo e(url('/login')); ?>">My Account</a></li>
+                                    <?php endif; ?>
+
+
+
                                     <li><a href="about-us.html">About Us</a></li>
                                     <li><a href="contact.html">Contact</a></li>
                                 </ul>

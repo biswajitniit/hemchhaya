@@ -1,4 +1,3 @@
-
 <?php $__env->startSection('title', 'Salesanta | Category wise landing page'); ?>
 <?php $__env->startSection('content'); ?>
 
@@ -52,7 +51,7 @@
     </section>
     <!-- services-area-emd -->
 
-
+    
 
 
 </main>

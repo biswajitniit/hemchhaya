@@ -85,7 +85,14 @@
                         <div class="col-md-5">
                             <div class="header-top-right">
                                 <ul>
-                                    <li><a href="contact.html">My Account</a></li>
+                                    @if(Auth::check())
+                                    <li><a href="{{ url('/user/dashboard') }}">My Account</a></li>
+                                    @else
+                                    <li><a href="{{ url('/login') }}">My Account</a></li>
+                                    @endif
+
+
+
                                     <li><a href="about-us.html">About Us</a></li>
                                     <li><a href="contact.html">Contact</a></li>
                                 </ul>

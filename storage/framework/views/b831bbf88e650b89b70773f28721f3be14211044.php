@@ -138,18 +138,21 @@
                                 </div>
 
 
+                                <form action="<?php echo e(route('cart.add-to-cart')); ?>" name="addtocart" method="POST">
+                                    <?php echo csrf_field(); ?>
+                                    <input type="hidden" name="productid" value="<?php echo e($product->id); ?>">
+                                    <div class="shop-perched-info">
+                                        <div class="sd-cart-wrap">
 
-                                <div class="shop-perched-info">
-                                    <div class="sd-cart-wrap">
-                                        <form action="#">
-                                            <div class="cart-plus-minus">
-                                                <input type="text" value="1">
-                                            </div>
-                                        </form>
+                                                <div class="cart-plus-minus">
+                                                    <input type="text" name="qty" value="1">
+                                                </div>
+
+                                        </div>
+                                        
+                                        <button type="submit" name="addtocart" class="btn">add to cart</button>
                                     </div>
-                                    <a href="#" class="btn">add to cart</a>
-                                </div>
-
+                                </form>
 
                                 <div class="shop-details-bottom">
                                     <?php if($productatwithattribute): ?>

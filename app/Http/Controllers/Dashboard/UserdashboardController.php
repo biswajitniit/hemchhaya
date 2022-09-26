@@ -15,7 +15,11 @@ class UserdashboardController extends Controller
 
     public function user_dashboard()
     {
+
+
         return view('dashboardarea.user-dashboard');
+
+
     }
 
 

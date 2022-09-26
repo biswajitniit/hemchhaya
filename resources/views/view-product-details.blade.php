@@ -139,18 +139,21 @@
                                 </div>
 
 
+                                <form action="{{ route('cart.add-to-cart') }}" name="addtocart" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="productid" value="{{ $product->id  }}">
+                                    <div class="shop-perched-info">
+                                        <div class="sd-cart-wrap">
 
-                                <div class="shop-perched-info">
-                                    <div class="sd-cart-wrap">
-                                        <form action="#">
-                                            <div class="cart-plus-minus">
-                                                <input type="text" value="1">
-                                            </div>
-                                        </form>
+                                                <div class="cart-plus-minus">
+                                                    <input type="text" name="qty" value="1">
+                                                </div>
+
+                                        </div>
+                                        {{-- <a href="#" class="btn">add to cart</a> --}}
+                                        <button type="submit" name="addtocart" class="btn">add to cart</button>
                                     </div>
-                                    <a href="#" class="btn">add to cart</a>
-                                </div>
-
+                                </form>
 
                                 <div class="shop-details-bottom">
                                     @if($productatwithattribute)

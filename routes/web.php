@@ -25,6 +25,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Dashboard\UserdashboardController;
 use App\Http\Controllers\Dashboard\UserlogoutController;
+use App\Http\Controllers\Cart\CartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -292,6 +293,14 @@ Route::any('/admin/get_attributecat_with_attribute_on_product_page', [ProductCon
     Route::get('/sub-category-wise-page',[HomeController::class, 'sub_category_wise_page'])->name('home.sub-category-wise-page');
     Route::get('/view-product-details',[HomeController::class, 'view_product_details'])->name('home.view-product-details');
 
+    //
+    Route::post('/add-to-cart',[CartController::class,'add_to_cart_items'])->name('cart.add-to-cart');
+    //Route::patch('update-cart', 'HomeController@update');
+    //Route::get('emptyCart', 'HomeController@emptyCart');
+    //Route::get('remove-from-cart/{id}', 'HomeController@remove');
+
+
+    Route::get('/cart',[CartController::class,'cart'])->name('cart');
 
   /**
  *

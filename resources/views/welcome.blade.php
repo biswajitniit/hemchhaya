@@ -21,7 +21,7 @@
                                         <a href="shop.html" class="btn rounded-btn" data-animation="fadeInUp" data-delay=".8s">Shop Now</a>
                                     </div>
                                 </div>
-                                <div class="single-slider slider-bg" data-background="{{ asset('frontend/img/slider/slider_bg01.jpg') }}">
+                                <div class="single-slider slider-bg" data-background="{{ asset('frontend/img/slider/slider_bg02.jpg') }}">
                                     <div class="slider-content">
                                         <h5 class="sub-title" data-animation="fadeInUp" data-delay=".2s">Real simple !</h5>
                                         <h2 class="title" data-animation="fadeInUp" data-delay=".4s">Time Grocery</h2>
@@ -29,7 +29,7 @@
                                         <a href="shop.html" class="btn rounded-btn" data-animation="fadeInUp" data-delay=".8s">Shop Now</a>
                                     </div>
                                 </div>
-                                <div class="single-slider slider-bg" data-background="{{ asset('frontend/img/slider/slider_bg01.jpg') }}">
+                                <div class="single-slider slider-bg" data-background="{{ asset('frontend/img/slider/slider_bg03.jpg') }}">
                                     <div class="slider-content">
                                         <h5 class="sub-title" data-animation="fadeInUp" data-delay=".2s">top deal !</h5>
                                         <h2 class="title" data-animation="fadeInUp" data-delay=".4s">organic food</h2>
@@ -321,7 +321,7 @@
                     </div>
                     <div class="special-products-wrap">
                         <div class="row">
-                            <div class="col-3 d-none d-lg-block">
+                            {{-- <div class="col-3 d-none d-lg-block">
                                 <div class="special-products-add">
                                     <div class="sp-add-thumb">
                                         <img src="{{ asset('frontend/img/product/special_products_add.jpg') }}" alt="">
@@ -333,8 +333,8 @@
                                         <a href="shop.html" class="btn rounded-btn">shop now</a>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-9">
+                            </div> --}}
+                            <div class="col-12">
                                 <div class="row justify-content-center">
                                     <div class="col-xl-3 col-md-4 col-sm-6">
                                         <div class="sp-product-item mb-20">
