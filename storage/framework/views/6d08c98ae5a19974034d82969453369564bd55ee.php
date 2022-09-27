@@ -27,75 +27,73 @@
             <div class="cart-area pt-90 pb-90">
                 <div class="container">
                     <div class="row justify-content-center">
-                        <div class="col-xl-7">
-                            <div class="cart-wrapper">
-                                <div class="table-responsive">
-                                    <table class="table mb-0">
-                                        <thead>
-                                            <tr>
-                                                <th class="product-thumbnail"></th>
-                                                <th class="product-name">Product</th>
-                                                <th class="product-price">Price</th>
-                                                <th class="product-quantity">QUANTITY</th>
-                                                <th class="product-subtotal">SUBTOTAL</th>
-                                                <th class="product-delete"></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php
-                                                $userId = auth()->user()->id; // or any string represents user identifier
-                                                $items = \Cart::session($userId)->getContent();
-                                            ?>
-
-                                            <?php if($items): ?>
-                                                <?php $__currentLoopData = $items; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-
+                        <form action="#" >
+                            <div class="col-xl-7">
+                                <div class="cart-wrapper">
+                                    <div class="table-responsive">
+                                        <?php if(count($cart) > 0): ?>
+                                            <table class="table mb-0">
+                                                <thead>
                                                     <tr>
-                                                        <td class="product-thumbnail"><a href="shop-details.html"><img src="<?php echo e($row->associatedModel->front_view_image); ?>" alt=""></a></td>
-                                                        <td class="product-name">
-                                                            <h4><a href="shop-details.html"><?php echo e($row->name); ?></a></h4>
-                                                        </td>
-                                                        <td class="product-price">&#8377; <?php echo e($row->price); ?></td>
-                                                        <td class="product-quantity">
-                                                            <div class="cart--plus--minus">
-                                                                <form action="#" class="num-block">
-                                                                    <input type="text" class="in-num" value="<?php echo e($row->qty); ?>" readonly="">
-                                                                    <div class="qtybutton-box">
-                                                                        <span class="plus"><i class="fas fa-angle-up"></i></span>
-                                                                        <span class="minus dis"><i class="fas fa-angle-down"></i></span>
-                                                                    </div>
-                                                                </form>
-                                                            </div>
-                                                        </td>
-                                                        <td class="product-subtotal"><span>$ 27.99</span></td>
-                                                        <td class="product-delete"><a href="#"><i class="far fa-trash-alt"></i></a></td>
+                                                        <th class="product-thumbnail">Image</th>
+                                                        <th class="product-name">Product</th>
+                                                        <th class="product-price">Price</th>
+                                                        <th class="product-quantity">QUANTITY</th>
+                                                        <th class="product-subtotal">SUBTOTAL</th>
+                                                        <th class="product-delete"></th>
                                                     </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <?php
+                                                        $subtotal = 0;
+                                                    ?>
+                                                        <?php $__currentLoopData = $cart; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                        <?php
+                                                            $subtotal = $subtotal + ($row->price * $row->qty);
+                                                        ?>
+                                                            <tr>
+                                                                <td class="product-thumbnail"><a href="shop-details.html"><img src="<?php echo e($row->image); ?>" alt=""></a></td>
+                                                                <td class="product-name">
+                                                                    <h4><a href="shop-details.html"><?php echo e($row->name); ?></a></h4>
+                                                                </td>
+                                                                <td class="product-price">&#8377; <?php echo e($row->price); ?></td>
+                                                                <td class="product-quantity">
+                                                                    <div class="cart--plus--minus">
+                                                                        
+                                                                        <input type="number" id="quantity" name="quantity" min="1" max="99" value="<?php echo e($row->qty); ?>">
+                                                                    </div>
+                                                                </td>
+                                                                <td class="product-subtotal"><span>&#8377; <?php echo e($row->price * $row->qty); ?></span></td>
+                                                                <td class="product-delete"><a href="<?php echo e(route('remove-cart-item',['rowid='.Crypt::encryptString($row->id)])); ?>"><i class="far fa-trash-alt"></i></a></td>
+                                                            </tr>
 
-                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                            <?php endif; ?>
-                                        </tbody>
-                                    </table>
+                                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
+                                                </tbody>
+                                            </table>
+                                        <?php else: ?>
+                                            <h3>Your Salesanta Cart is empty.</h3>
+                                        <?php endif; ?>
+
+                                    </div>
+                                </div>
+                                <div class="shop-cart-bottom">
+                                    <div class="cart-coupon">
+                                        
+                                    </div>
+                                    <div class="continue-shopping">
+                                        <a href="shop.html" class="btn">update Cart</a>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="shop-cart-bottom">
-                                <div class="cart-coupon">
-                                    <form action="#">
-                                        <input type="text" placeholder="Enter Coupon Code...">
-                                        <button class="btn">Apply Coupon</button>
-                                    </form>
-                                </div>
-                                <div class="continue-shopping">
-                                    <a href="shop.html" class="btn">update Cart</a>
-                                </div>
-                            </div>
-                        </div>
+                        </form>
                         <div class="col-xl-5 col-lg-12">
                             <div class="shop-cart-total">
                                 <h3 class="title">Cart Totals</h3>
                                 <div class="shop-cart-widget">
                                     <form action="#">
                                         <ul>
-                                            <li class="sub-total"><span>Subtotal</span> $ 136.00</li>
+                                            <li class="sub-total"><span>Subtotal</span>&#8377; <?php $subtotal ?></li>
                                             <li>
                                                 <span>Shipping</span>
                                                 <div class="shop-check-wrap">
@@ -123,6 +121,15 @@
 
         </main>
         <!-- main-area-end -->
+
+        <?php $__env->startPush('frontend-scripts'); ?>
+        <script type="text/javascript">
+            function Cartitemplus(){
+                alert("here"); return false;
+            }
+        </script>
+        <?php $__env->stopPush(); ?>
+
 
 <?php $__env->stopSection(); ?>
 

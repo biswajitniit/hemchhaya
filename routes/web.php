@@ -298,6 +298,7 @@ Route::any('/admin/get_attributecat_with_attribute_on_product_page', [ProductCon
     //Route::patch('update-cart', 'HomeController@update');
     //Route::get('emptyCart', 'HomeController@emptyCart');
     //Route::get('remove-from-cart/{id}', 'HomeController@remove');
+    Route::get('remove-cart-item', [CartController::class,'remove_cart_item'])->name('remove-cart-item');
 
 
     Route::get('/cart',[CartController::class,'cart'])->name('cart');
