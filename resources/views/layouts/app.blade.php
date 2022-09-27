@@ -93,8 +93,8 @@
 
 
 
-                                    <li><a href="about-us.html">About Us</a></li>
-                                    <li><a href="contact.html">Contact</a></li>
+                                        <li><a href="contact.html">My Account</a></li>
+                                         <li><a href="contact.html">Contact</a></li>
                                 </ul>
                             </div>
                         </div>

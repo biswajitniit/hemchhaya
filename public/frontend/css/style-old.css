@@ -4459,7 +4459,7 @@ label {
 .cart-wrapper {
     border: 1px solid #ebebeb;
     padding: 15px 30px 0px;
-    margin-right: -35px;
+    /* margin-right: -35px; */
 }
 .shop-cart-bottom {
     display: flex;
@@ -4475,8 +4475,8 @@ label {
     padding: 18px 18px 15px 30px;
     border: 1px solid #ebebeb;
     background: #f6f7f9;
-    min-width: 267px;
-    margin-top: 20px;
+    min-width: 95%;
+    /* margin-top: 20px; */
     border-radius: 50px 0  0 50px;
     font-size: 13px;
     color: #757473;
@@ -4490,7 +4490,7 @@ label {
 .cart-coupon form button {
     color: #fff;
     box-shadow: none;
-    margin-top: 20px;
+    /* margin-top: 20px; */
     border-radius: 0 50px 50px 0;
     min-height: 54px;
     margin-left: -1px;
@@ -4512,7 +4512,7 @@ label {
     padding: 17px 29px;
 }
 .shop-cart-total {
-    margin-left: 65px;
+    margin-top: 25px;
     background: #f6f7f9;
     border: 1px solid #ebebeb;
     padding: 40px 35px 50px;
