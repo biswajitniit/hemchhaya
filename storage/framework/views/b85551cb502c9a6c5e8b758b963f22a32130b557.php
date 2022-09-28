@@ -137,7 +137,8 @@
                                     <ul>
                                         <li class="header-phone">
                                             <div class="icon"><i class="flaticon-telephone"></i></div>
-                                            <a href="tel:1234566789"><span>Call Us Now</span>+91 9832250382</a>
+                                            <a href="tel:6291643488"><span>Call Us Now</span>+91 6291643488
+                                            </a>
                                         </li>
                                         <li class="header-user"><a href="#"><i class="flaticon-user"></i></a></li>
                                         <li class="header-wishlist">
@@ -326,7 +327,7 @@
                                         </li>
                                         <li>
                                             <div class="icon"><i class="flaticon-telephone-1"></i></div>
-                                            <h5 class="number"><a href="tel:12027993245">+91 9832250382</a></h5>
+                                            <h5 class="number"><a href="tel:12027993245">+91 6291643488</a></h5>
                                         </li>
                                         
                                         <li>
