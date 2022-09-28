@@ -116,7 +116,7 @@
                                                                 @if($rowvariationitem->id == $product->productwithvariationitem->variation_item_id)
                                                                     <li class="active"><a href="#">{{ $rowvariationitem->variation_item_name }}</a></li>
                                                                 @endif
-                                                                @endforeach
+                                                            @endforeach
                                                         @endif
 
                                                     </ul>

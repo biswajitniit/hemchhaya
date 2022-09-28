@@ -58,7 +58,7 @@ class Product extends Model
         return $this->belongsTo(Vendor::class,'vendor_id');
      }
      public function Productchildveriation(){
-        return $this->hasOne(Product_child_variation::class,'parent_product_id');
+        return $this->hasOne(Product_child_variation::class,'parent_product_id','id');
      }
      public function Productchildveriationitem(){
         return $this->hasOne(Product_child_variation_item::class,'product_child_variation_id');

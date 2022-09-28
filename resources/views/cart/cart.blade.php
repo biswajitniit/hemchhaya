@@ -13,9 +13,9 @@
                             <div class="breadcrumb-content">
                                 <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb">
-                                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                                        <li class="breadcrumb-item"><a href="index.html">Pages</a></li>
-                                        <li class="breadcrumb-item active" aria-current="page">Our Blog</li>
+                                        <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
+                                        {{-- <li class="breadcrumb-item"><a href="index.html">Pages</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page">Our Blog</li> --}}
                                     </ol>
                                 </nav>
                             </div>
@@ -31,9 +31,14 @@
                     <div class="row justify-content-center">
 
                             <div class="col-xl-7">
-                                <form action="#" >
+                                <form action="{{ route('update-cart') }}" name="updatecartitems" method="POST">
+                                    @csrf
                                     <div class="cart-wrapper">
                                         <div class="table-responsive">
+                                            @php
+                                                $subtotal = 0;
+                                            @endphp
+
                                             @if(count($cart) > 0)
                                                 <table class="table mb-0">
                                                     <thead>
@@ -47,9 +52,7 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        @php
-                                                            $subtotal = 0;
-                                                        @endphp
+
                                                             @foreach ($cart as $row)
                                                             @php
                                                                 $subtotal = $subtotal + ($row->price * $row->qty);
@@ -71,7 +74,8 @@
                                                                                     </div>
                                                                                 </div>
                                                                             </form> --}}
-                                                                            <input type="number" id="quantity" name="quantity" min="1" max="99" value="{{ $row->qty }}">
+                                                                            <input type="hidden" name="rowid[]" value="{{ $row->id }}">
+                                                                            <input type="number" id="quantity" name="quantity[]" min="1" max="99" value="{{ $row->qty }}">
                                                                         </div>
                                                                     </td>
                                                                     <td class="product-subtotal"><span>&#8377; {{ $row->price * $row->qty }}</span></td>
@@ -83,7 +87,7 @@
                                                     </tbody>
                                                 </table>
                                             @else
-                                                <h3>Your Salesanta Cart is empty.</h3>
+                                                <p class="text-center">Your Salesanta Cart is empty.</p>
                                             @endif
 
                                         </div>
@@ -95,40 +99,50 @@
                                                 <button class="btn">Apply Coupon</button>
                                             </form> --}}
                                         </div>
+
+                                        @if(count($cart) > 0)
                                         <div class="continue-shopping">
-                                            <a href="shop.html" class="btn">update Cart</a>
+                                            {{-- <a href="shop.html" class="btn">update Cart</a> --}}
+                                            <button type="submit" name="submit" class="btn">update Cart</button>
                                         </div>
+                                        @endif
+
                                     </div>
                                 </form>
                             </div>
 
-                        <div class="col-xl-5 col-lg-12">
-                            <div class="shop-cart-total">
-                                <h3 class="title">Cart Totals</h3>
-                                <div class="shop-cart-widget">
-                                    <form action="#">
-                                        <ul>
-                                            <li class="sub-total"><span>Subtotal</span>&#8377;  {{ $subtotal }} </li>
-                                            <li>
-                                                <span>Shipping</span>
-                                                <div class="shop-check-wrap">
-                                                    <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input" id="customCheck1">
-                                                        <label class="custom-control-label" for="customCheck1">Free Shipping</label>
+                            @if(count($cart) > 0)
+                            <div class="col-xl-5 col-lg-12">
+                                <div class="shop-cart-total">
+                                    <h3 class="title">Cart Totals</h3>
+                                    <div class="shop-cart-widget">
+                                        <form action="#">
+                                            <ul>
+                                                <li class="sub-total"><span>Subtotal</span> &#8377; {{ $subtotal }}</li>
+                                                {{-- <li>
+                                                    <span>Shipping</span>
+                                                    <div class="shop-check-wrap">
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input" id="customCheck1">
+                                                            <label class="custom-control-label" for="customCheck1">Free Shipping</label>
+                                                        </div>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input" id="customCheck2">
+                                                            <label class="custom-control-label" for="customCheck2">LOCAL PICKUP: $5.00</label>
+                                                        </div>
                                                     </div>
-                                                    <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input" id="customCheck2">
-                                                        <label class="custom-control-label" for="customCheck2">LOCAL PICKUP: $5.00</label>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li class="cart-total-amount"><span>Total Price</span> <span class="amount">$ 151.00</span></li>
-                                        </ul>
-                                        <a href="checkout.html" class="btn">PROCEED TO CHECKOUT</a>
-                                    </form>
+                                                </li> --}}
+                                                <li class="cart-total-amount"><span>Total Price</span> <span class="amount">&#8377; {{ $subtotal }}</span></li>
+                                            </ul>
+                                            <a href="{{ route('razorpay-payment',['payableamount='.$subtotal])  }}" class="btn">PROCEED TO CHECKOUT</a>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        @endif
+
+
+
                     </div>
                 </div>
             </div>

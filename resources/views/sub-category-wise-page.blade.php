@@ -199,6 +199,7 @@
                                                         </div>
                                                     </form>
                                                 </div>
+                                                {{-- <p><i class="fas fa-rupee-sign"></i>{{ number_format($rowproduct->sale_price,2) }} - {{ Get_Variation_item_Name($rowproduct->Productwithvariationitem->variation_item_id) }}</p> --}}
                                                 <p><i class="fas fa-rupee-sign"></i>{{ number_format($rowproduct->sale_price,2) }} - {{ Get_Variation_item_Name($rowproduct->Productwithvariationitem->variation_item_id) }}</p>
                                             </div>
                                         </div>

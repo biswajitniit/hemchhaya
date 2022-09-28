@@ -107,6 +107,11 @@ class HomeController extends Controller
         $subcategoryitem = Subcategoryitem::where('sub_category_id',Crypt::decryptString($request->subcatid))->where('status','1')->get();
         //GET ALL PRODUCT FOR THIS SUB CATEGORY WISE
         $product = Product::with('categorys','subcategory','subcategoryitem','vendors','productchildveriation','productchildveriationitem','productwithvariation','productwithvariationitem','productwithattribute','productwithattributeitem')->where('is_variation','0')->get();
+        //echo "<pre>";
+        //print_r($product->toArray()); // you will see the `fee` array
+        //echo "</pre>";
+        //die();
+
         //dd($productall); die;
         return view('sub-category-wise-page',compact('subcategory','subcategoryitem','product'));
     }

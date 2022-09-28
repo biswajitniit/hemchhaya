@@ -14,7 +14,7 @@ class Product_child_variation extends Model
         'is_default',
      ];
     public function Products(){
-        return $this->belongsTo(Product::class,'parent_product_id');
+        return $this->belongsTo(Product::class,'parent_product_id','id');
     }
 
 }

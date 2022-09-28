@@ -1,4 +1,3 @@
-
 <?php $__env->startSection('title', 'Salesanta | SUb category wise page'); ?>
 <?php $__env->startSection('content'); ?>
 
@@ -199,6 +198,7 @@
                                                         </div>
                                                     </form>
                                                 </div>
+                                                
                                                 <p><i class="fas fa-rupee-sign"></i><?php echo e(number_format($rowproduct->sale_price,2)); ?> - <?php echo e(Get_Variation_item_Name($rowproduct->Productwithvariationitem->variation_item_id)); ?></p>
                                             </div>
                                         </div>

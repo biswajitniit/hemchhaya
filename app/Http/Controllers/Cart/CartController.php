@@ -95,6 +95,31 @@ class CartController extends Controller
     }
 
    /**
+     * View cart details page.
+     *
+     * @return \Illuminate\Http\Response
+    */
+    public function update_cart(Request $request){
+        if(Auth::user()->id){
+
+            if($request->rowid){
+                foreach($request->rowid as $key => $value){
+
+                    $data = array(
+                        'qty'               => $request->quantity[$key],
+                    );
+                    Cart::where('id', $value)->update($data);
+
+                }
+            }
+            return redirect('cart');
+        }else{
+            return redirect('login');
+        }
+    }
+
+
+   /**
      * Remove cart items
      *
      * @return \Illuminate\Http\Response

@@ -26,6 +26,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Dashboard\UserdashboardController;
 use App\Http\Controllers\Dashboard\UserlogoutController;
 use App\Http\Controllers\Cart\CartController;
+use App\Http\Controllers\RazorpayPaymentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -295,13 +296,13 @@ Route::any('/admin/get_attributecat_with_attribute_on_product_page', [ProductCon
 
     //
     Route::post('/add-to-cart',[CartController::class,'add_to_cart_items'])->name('cart.add-to-cart');
-    //Route::patch('update-cart', 'HomeController@update');
-    //Route::get('emptyCart', 'HomeController@emptyCart');
-    //Route::get('remove-from-cart/{id}', 'HomeController@remove');
+    Route::post('update-cart', [CartController::class,'update_cart'])->name('update-cart');
     Route::get('remove-cart-item', [CartController::class,'remove_cart_item'])->name('remove-cart-item');
-
-
     Route::get('/cart',[CartController::class,'cart'])->name('cart');
+
+    Route::get('razorpay-payment', [RazorpayPaymentController::class, 'index'])->name('razorpay-payment');
+    Route::post('razorpay-payment', [RazorpayPaymentController::class, 'store'])->name('razorpay.payment.store');
+
 
   /**
  *
