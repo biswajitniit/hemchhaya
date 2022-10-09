@@ -150,6 +150,7 @@ class ProductController extends Controller
             $path_side_view_image = Storage::disk('s3')->put("product/large/" . $filename_side_view_image, $file_side_view_image, 'public');
             $path_side_view_image = Storage::disk('s3')->url($path_side_view_image);
         }else{
+            $filename_side_view_image = '';
             $path_side_view_image = '';
         }
 
@@ -160,6 +161,7 @@ class ProductController extends Controller
             $path_open_view_image = Storage::disk('s3')->put("product/large/" . $filename_open_view_image, $file_open_view_image, 'public');
             $path_open_view_image = Storage::disk('s3')->url($path_open_view_image);
         }else{
+            $filename_open_view_image = '';
             $path_open_view_image = '';
         }
 
