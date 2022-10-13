@@ -252,11 +252,14 @@ Route::any('/vendor/getvariationBysubcategoryitem', [VariationitemsController::c
 // Route::any('/vendor/edit-product/{attributeid}',[ProductController::class, 'edit_product'])->name('vendor.edit-product');
 // Route::post('/vendor/edit-product-post',[ProductController::class, 'edit_product_post'])->name('vendor.edit-product-post');
 
-// Route::any('/vendor/producttrash/{attributeid}',[ProductController::class, 'producttrash'])->name('vendor.producttrash');
+
+Route::get('/getvendorproduct', [ProductController::class, 'getvendorproductlistdata'])->name('vendor.getvendorproduct');
 
 Route::any('/admin/get_sub_category_on_product_page', [ProductController::class, 'ajax_get_sub_category_on_product_page'])->name('admin.get_sub_category_on_product_page');  // GET Subcategory LIST
 Route::any('/admin/get_sub_category_item_on_product_page', [ProductController::class, 'ajax_get_sub_category_item_on_product_page'])->name('admin.get_sub_category_item_on_product_page');  // GET Subcategory item LIST
 Route::any('/admin/get_attributecat_with_attribute_on_product_page', [ProductController::class, 'ajax_get_attributecat_with_attribute_on_product_page'])->name('admin.get_attributecat_with_attribute_on_product_page');  // GET attribute LIST
+
+
 
 
 /**

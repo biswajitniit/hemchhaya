@@ -40,19 +40,19 @@
           <div class="row">
             <div class="col-12">
               <div class="table-responsive">
-                {{-- <table id="order_listing" class="table order_listing"> --}}
-                {{-- <table class="table table-bordered table-striped mb-none" id="my-table">
+                <table class="table table-bordered table-striped mb-none" id="my-table">
                   <thead>
                     <tr>
                       <th>Category Name</th>
                       <th>Sub Category Name</th>
                       <th>Sub Category Item Name</th>
-                      <th>Status</th>
-                      <th>Actions</th>
+                      <th>Product Information</th>
+                      {{--<th>Current Stock</th> --}}
+                      <th>action</th>
                     </tr>
                   </thead>
 
-                </table> --}}
+                </table>
               </div>
             </div>
           </div>
@@ -83,7 +83,7 @@
                 processing: true,
                 serverSide: true,
                 lengthMenu: [[100, 200, 300], [100, 200, 300]],
-                order: [[ 2, "asc" ]],
+                order: [[ 0, "asc" ]],
                 columnDefs: [{
                     "searchable": true,
                     "orderable": false,
@@ -91,23 +91,30 @@
                 }],
                 "ajax": {
                     data: ({_token: '{{csrf_token()}}'}),
-                    url : "{{url('/')}}/subcategoryitemlist",
+                    url : "{{url('/')}}/getvendorproduct",
                     type : 'GET',
                 },
                 columns: [
                         {data: 'category_name' },
-                        {data: 'sub_category_name'},
-                        {data: 'sub_category_item_name'},
-                        {
-                            data: 'status',
+                         {data: 'sub_category_name'},
+                         {data: 'sub_category_item_name'},
+                         {
+                            data: 'product_info',
                             render: function (data, type, row){
-                                if(data == "Active"){
-                                    return '<label class="badge badge-success">Active</label>';
-                                }else{
-                                    return '<label class="badge badge-danger">In Active</label>';
-                                }
+                                return '<img src="'+data.frontimage+'" /></br><p>Name : '+data.name+'</p></br><p>SKU : '+data.skuid+'</p>';
+                                //return '<img src="'+data.frontimage+'" />';
                             },
                         },
+                        // {
+                        //     data: 'status',
+                        //     render: function (data, type, row){
+                        //         if(data == "Active"){
+                        //             return '<label class="badge badge-success">Active</label>';
+                        //         }else{
+                        //             return '<label class="badge badge-danger">In Active</label>';
+                        //         }
+                        //     },
+                        // },
                        {
                             data: 'action',
                             render: function (data, type, row){

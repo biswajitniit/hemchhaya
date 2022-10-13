@@ -24,7 +24,7 @@ use App\Models\Variationitems;
 use App\Models\Variations;
 use Illuminate\Support\Facades\Auth;
 use Embed;
-
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -462,6 +462,51 @@ class ProductController extends Controller
            echo '<h6>'.$rowattribute->attribute_category_name.'</h6><hr />';
 
         }
+
+    }
+
+    /**
+     * get vendor inventory list
+     *
+     * @return void
+     */
+    public function getvendorproductlistdata (Request $request){
+
+
+        //$query = Product::get();
+        \DB::statement("SET SQL_MODE=''");//this is the trick use it just before your query
+        $query = Product::with('categorys','subcategory','subcategoryitem','vendors','productchildveriation','productchildveriationitem','productwithvariation','productwithvariationitem','productwithattribute','productwithattributeitem')->where('products.vendor_id',Auth::user()->id)->where('products.is_default','1')->groupby('products.parent_product_id')->get();
+
+
+	    $totalData =count($query);
+        $totalFiltered = $totalData;  // when there is no search parameter then total number rows = total number filtered rows.
+        return Datatables::of($query)
+        ->addColumn('category_name', function ($query) {
+            return $query->categorys->category_name;
+        })
+        ->addColumn('sub_category_name', function ($query) {
+            return $query->subcategory->sub_category_name;
+        })
+        ->addColumn('sub_category_item_name', function ($query) {
+            return $query->Subcategoryitem->sub_category_item_name;
+        })
+        ->addColumn('product_info', function ($query) {
+            return array('frontimage'=>$query->front_view_image,'name'=>$query->name,'skuid'=>$query->sku);
+           //return array('frontimage'=>$query->front_view_image);
+        })
+        // ->addColumn('status', function ($query) {
+        //     if($query->status==1){
+        //         $mstatus='Active';
+        //     }else{
+        //         $mstatus='InActive';
+        //     }
+        //     return $mstatus;
+        // })
+        ->addColumn('action', function ($query) {
+            return $query->id;
+        })->rawColumns(['action'])
+        ->make('true');
+
 
     }
 
