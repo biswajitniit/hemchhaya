@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Crypt;
 use Illuminate\Contracts\Encryption\DecryptException;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -106,7 +107,9 @@ class HomeController extends Controller
         $subcategory = Subcategory::where('id',Crypt::decryptString($request->subcatid))->where('status','1')->first();
         $subcategoryitem = Subcategoryitem::where('sub_category_id',Crypt::decryptString($request->subcatid))->where('status','1')->get();
         //GET ALL PRODUCT FOR THIS SUB CATEGORY WISE
-        $product = Product::with('categorys','subcategory','subcategoryitem','vendors','productchildveriation','productchildveriationitem','productwithvariation','productwithvariationitem','productwithattribute','productwithattributeitem')->where('is_variation','0')->get();
+        //$product = Product::with('categorys','subcategory','subcategoryitem','vendors','productchildveriation','productchildveriationitem','productwithvariation','productwithvariationitem','productwithattribute','productwithattributeitem')->where('is_variation','0')->get();
+        \DB::statement("SET SQL_MODE=''");//this is the trick use it just before your query
+        $product = Product::with('categorys','subcategory','subcategoryitem','vendors','productchildveriation','productchildveriationitem','productwithvariation','productwithvariationitem','productwithattribute','productwithattributeitem')->where('products.sub_category_id',Crypt::decryptString($request->subcatid))->where('products.is_default','1')->groupby('products.parent_product_id')->get();
         //echo "<pre>";
         //print_r($product->toArray()); // you will see the `fee` array
         //echo "</pre>";
@@ -133,10 +136,10 @@ class HomeController extends Controller
         //GET PRODUCT Details
         $product = Product::with('categorys','subcategory','subcategoryitem','vendors','productchildveriation','productchildveriationitem','productwithvariation','productwithvariationitem','productwithattribute','productwithattributeitem')->where('id',Crypt::decryptString($request->pid))->first();
 
-         echo "<pre>";
-        print_r($productatwithattribute->toArray()); // you will see the `fee` array
-        echo "</pre>";
-        die();
+         //echo "<pre>";
+        //print_r($productatwithattribute->toArray()); // you will see the `fee` array
+        //echo "</pre>";
+        //die();
 
         return view('view-product-details',compact('category','subcategory','subcategoryitem','product','variation','variationitem','productatwithattribute','productatwithattributeitem'));
     }
