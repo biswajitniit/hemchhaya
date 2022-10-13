@@ -110,7 +110,6 @@ class ProductController extends Controller
     public function add_product_post_data(Request $request){
 
         //echo "<pre>"; print_r($request->attribute); die;
-
         $this->validate($request, [
             'front_view_image'      => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:10000000000000000000000',
         ],[
@@ -249,10 +248,13 @@ class ProductController extends Controller
 
         $productId = $product->id;
 
+        Product::where('id',$productId)->update(array('parent_product_id' => $productId, 'is_default' => 1));
+
+
         // SAVE DATA FROM Product_child_variation
         if(!empty($request->variation)){
             // SAVE CHILD PRODUCT
-                $productChild = new Product();
+               /* $productChild = new Product();
                 $productChild->vendor_id                                                             = Auth::id();
                 $productChild->category_id                                                           = $request['category_id'];
                 $productChild->sub_category_id                                                       = $request['sub_category_id'];
@@ -312,7 +314,7 @@ class ProductController extends Controller
                     $datapcvi->product_child_variation_id =   $datapcvId;
                     $datapcvi->variation_item_id          =   $productchildvariation;
                 $datapcvi->save();
-            }
+            } */
 
             // save data from product_with_variations
             $getvariation = Variations::where('category_id',$request['category_id'])->where('sub_category_id',$request['sub_category_id'])->where('sub_category_item_id',$request['sub_category_item_id'])->where('vendor_id',Auth::id())->get();
@@ -329,22 +331,39 @@ class ProductController extends Controller
             // save data from product_with_variation_items
             $getvariationitem = Variationitems::where('category_id',$request['category_id'])->where('sub_category_id',$request['sub_category_id'])->where('sub_category_item_id',$request['sub_category_item_id'])->where('vendor_id',Auth::id())->get();
             if($getvariationitem){
-                foreach($getvariationitem as $rowvariationitem){
+                // foreach($getvariationitem as $rowvariationitem){
+                //     $datapwvi = new Product_with_variation_item();
+                //         $datapwvi->variation_item_id          =   $rowvariationitem->id;
+                //         $datapwvi->product_id                 =   $productId;
+                //     $datapwvi->save();
+                // }
+
+                foreach($getvariationitem as $key => $value){
+
+                    if ( ! isset($request->variation[$key])) {
+                        $isselected = 0;
+                    }else{
+                        $isselected = 1;
+                    }
+
                     $datapwvi = new Product_with_variation_item();
-                        $datapwvi->variation_item_id          =   $rowvariationitem->id;
+                        $datapwvi->variation_item_id          =   $value->id;
+                        $datapwvi->is_selected                =   $isselected;
                         $datapwvi->product_id                 =   $productId;
                     $datapwvi->save();
                 }
+
             }
 
         }
 
-           // save data from product_with_attributes
+
+        // save data from product_with_attributes
         if(!empty($request->attribute)){
             foreach($request->attribute as $productchild_attribute){
                 $datapwiattributr = new Product_with_attribute();
                     $datapwiattributr->attribute_id               =   $productchild_attribute;
-                    $datapwiattributr->product_id                 =   $productChildId;
+                    $datapwiattributr->product_id                 =   $productId;
                     $datapwiattributr->order                      =   0;
                 $datapwiattributr->save();
             }
@@ -355,7 +374,7 @@ class ProductController extends Controller
             foreach($request->attributeitem as $key => $value){
                 // Save Data FROM product_with_attribute_items
                 $data_attribute_item = new Product_with_attribute_item();
-                    $data_attribute_item->product_id                 =   $productChildId;
+                    $data_attribute_item->product_id                 =   $productId;
                     $data_attribute_item->attribute_id               =   $this->Get_attribute_category_id($key);
                     $data_attribute_item->attribute_item_id          =   $key;
                     $data_attribute_item->attribute_item_value       =   $value;

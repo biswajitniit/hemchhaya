@@ -1,4 +1,3 @@
-
 <?php $__env->startSection('title', 'Add product summary'); ?>
 <?php $__env->startSection('content'); ?>
 <div class="main-panel">
@@ -198,7 +197,7 @@
                             <input type="text" name="sale_price"  class="form-control" />
                         </div>
                         <div class="col-sm-3">
-                            <label for="quantity" class="col-form-label">Quantity <span class="required">*</span></label>
+                            <label for="quantity" class="col-form-label">Stock Quantity <span class="required">*</span></label>
                             <input type="text" name="quantity"  class="form-control" />
                         </div>
                     </div>
