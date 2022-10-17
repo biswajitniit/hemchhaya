@@ -1,4 +1,5 @@
-<?php $__env->startSection('title', 'Product Listing'); ?>
+
+<?php $__env->startSection('title', 'Sub Category Listing'); ?>
 <?php $__env->startSection('content'); ?>
 
 
@@ -12,8 +13,9 @@
           
         </div>
         <div class="header-right d-flex flex-wrap mt-2 mt-sm-0">
-          <button type="button" onclick="location.href='<?php echo e(route('vendor.add-product-category')); ?>'" class="btn btn-primary mt-2 mt-sm-0 btn-icon-text">
-            <i class="mdi mdi-plus-circle"></i> Add Product</button>
+
+          <button type="button" onclick="location.href='<?php echo e(route('admin.add-sub-category')); ?>'" class="btn btn-primary mt-2 mt-sm-0 btn-icon-text">
+            <i class="mdi mdi-plus-circle"></i> Add Sub Category </button>
         </div>
       </div>
 
@@ -27,19 +29,22 @@
 
       <div class="card">
         <div class="card-body">
-          <h4 class="card-title">Product table</h4>
+          <h4 class="card-title">Sub Category table</h4>
           <div class="row">
             <div class="col-12">
               <div class="table-responsive">
+                
                 <table class="table table-bordered table-striped mb-none" id="my-table">
                   <thead>
-                    <tr>
+                    <tr class="bg-primary text-white">
                       <th>Category Name</th>
                       <th>Sub Category Name</th>
-                      <th>Sub Category Item Name</th>
-                      <th>Product Information</th>
-                      
-                      <th>action</th>
+                      <th>Sub Category Sort No</th>
+                      <th>Menu Dropdown</th>
+                      <th>Menu Show Sub Item</th>
+                      <th>Menu Show Div Column</th>
+                      <th>Status</th>
+                      <th>Actions</th>
                     </tr>
                   </thead>
 
@@ -82,34 +87,30 @@
                 }],
                 "ajax": {
                     data: ({_token: '<?php echo e(csrf_token()); ?>'}),
-                    url : "<?php echo e(url('/')); ?>/getvendorproduct",
+                    url : "<?php echo e(url('/')); ?>/subcategorylist",
                     type : 'GET',
                 },
                 columns: [
                         {data: 'category_name' },
-                         {data: 'sub_category_name'},
-                         {data: 'sub_category_item_name'},
-                         {
-                            data: 'product_info',
+                        {data: 'sub_category_name'},
+                        {data: 'sub_category_sort_no'},
+                        {data: 'menu_dropdown'},
+                        {data: 'menu_show_sub_item'},
+                        {data: 'menu_show_div'},
+                        {
+                            data: 'status',
                             render: function (data, type, row){
-                                return '<img src="'+data.frontimage+'" /></br><p>Name : '+data.name+'</p></br><p>SKU : '+data.skuid+'</p>';
-                                //return '<img src="'+data.frontimage+'" />';
+                                if(data == "Active"){
+                                    return '<label class="badge badge-success">Active</label>';
+                                }else{
+                                    return '<label class="badge badge-danger">In Active</label>';
+                                }
                             },
                         },
-                        // {
-                        //     data: 'status',
-                        //     render: function (data, type, row){
-                        //         if(data == "Active"){
-                        //             return '<label class="badge badge-success">Active</label>';
-                        //         }else{
-                        //             return '<label class="badge badge-danger">In Active</label>';
-                        //         }
-                        //     },
-                        // },
                        {
                             data: 'action',
                             render: function (data, type, row){
-                                return '<a href="add-product?catid='+data.catid+'&subcatid='+data.subcatid+'&subcatitemid='+data.subcatitemid+'&pid='+data.pid+'" class="btn btn-primary">Make Copy</a>';
+                                return '<a href="<?php echo url("admin/edit-sub-category")?>/'+data+'" title="Edit Sub Category"><i class="mdi mdi-table-edit"></i></a> | <a href="<?php echo url("admin/subcategorytrash")?>/'+data+'" title="Trash Category" onclick="return confirm("Are you sure?")"><i class="mdi mdi-delete-forever"></i></a> ';
                             },
                         },
 
@@ -129,4 +130,4 @@
 <?php $__env->stopPush(); ?>
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('layouts.vendor', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH E:\webdev\hemchhaya\resources\views/vendor/product/product-list.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.admin', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH E:\webdev\hemchhaya\resources\views/admin/subcategory/sub-category-list.blade.php ENDPATH**/ ?>

@@ -1,3 +1,4 @@
+
 <?php $__env->startSection('title', 'Add product summary'); ?>
 <?php $__env->startSection('content'); ?>
 <div class="main-panel">

@@ -24,6 +24,10 @@ class CreateProductsTable extends Migration
             $table->unsignedBigInteger('sub_category_item_id');
             $table->foreign('sub_category_item_id')->references('id')->on('subcategoryitems')->onDelete('cascade');
 
+            $table->enum('is_this_parent_product', ['0', '1'])->comment('0=No,1=Yes')->default('0');
+            $table->integer('parent_product_id')->nullable();
+
+
             $table->integer('brand');
             $table->string('product_name_slug');
 

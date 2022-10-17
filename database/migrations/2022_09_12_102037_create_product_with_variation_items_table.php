@@ -20,7 +20,7 @@ class CreateProductWithVariationItemsTable extends Migration
             $table->foreign('variation_item_id')->references('id')->on('variationitems')->onDelete('cascade');
             $table->unsignedBigInteger('product_id');
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
-
+            $table->enum('is_selected', ['0', '1'])->comment('0=NotSelected,1=Selected')->default('0');
             $table->timestamps();
             $table->softDeletes();
 

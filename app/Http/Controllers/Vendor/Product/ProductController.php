@@ -248,7 +248,7 @@ class ProductController extends Controller
 
         $productId = $product->id;
 
-        Product::where('id',$productId)->update(array('parent_product_id' => $productId, 'is_default' => 1));
+        Product::where('id',$productId)->update(array('is_this_parent_product' => 1, 'parent_product_id' => $productId));
 
 
         // SAVE DATA FROM Product_child_variation
@@ -340,15 +340,15 @@ class ProductController extends Controller
 
                 foreach($getvariationitem as $key => $value){
 
-                    if ( ! isset($request->variation[$key])) {
-                        $isselected = 0;
-                    }else{
-                        $isselected = 1;
-                    }
+                    // if ( ! isset($request->variation[$key])) {
+                    //     $isselected = 0;
+                    // }else{
+                    //     $isselected = 1;
+                    // }
 
                     $datapwvi = new Product_with_variation_item();
                         $datapwvi->variation_item_id          =   $value->id;
-                        $datapwvi->is_selected                =   $isselected;
+                        $datapwvi->is_selected                =   0;
                         $datapwvi->product_id                 =   $productId;
                     $datapwvi->save();
                 }
@@ -475,7 +475,7 @@ class ProductController extends Controller
 
         //$query = Product::get();
         \DB::statement("SET SQL_MODE=''");//this is the trick use it just before your query
-        $query = Product::with('categorys','subcategory','subcategoryitem','vendors','productchildveriation','productchildveriationitem','productwithvariation','productwithvariationitem','productwithattribute','productwithattributeitem')->where('products.vendor_id',Auth::user()->id)->where('products.is_default','1')->groupby('products.parent_product_id')->get();
+        $query = Product::with('categorys','subcategory','subcategoryitem','vendors','productchildveriation','productchildveriationitem','productwithvariation','productwithvariationitem','productwithattribute','productwithattributeitem')->where('products.vendor_id',Auth::user()->id)->get();
 
 
 	    $totalData =count($query);
@@ -503,7 +503,7 @@ class ProductController extends Controller
         //     return $mstatus;
         // })
         ->addColumn('action', function ($query) {
-            return $query->id;
+            return array('pid'=>$query->id,'catid'=>$query->category_id,'subcatid'=>$query->sub_category_id,'subcatitemid'=>$query->sub_category_id);
         })->rawColumns(['action'])
         ->make('true');
 

@@ -109,7 +109,7 @@ class HomeController extends Controller
         //GET ALL PRODUCT FOR THIS SUB CATEGORY WISE
         //$product = Product::with('categorys','subcategory','subcategoryitem','vendors','productchildveriation','productchildveriationitem','productwithvariation','productwithvariationitem','productwithattribute','productwithattributeitem')->where('is_variation','0')->get();
         \DB::statement("SET SQL_MODE=''");//this is the trick use it just before your query
-        $product = Product::with('categorys','subcategory','subcategoryitem','vendors','productchildveriation','productchildveriationitem','productwithvariation','productwithvariationitem','productwithattribute','productwithattributeitem')->where('products.sub_category_id',Crypt::decryptString($request->subcatid))->where('products.is_default','1')->groupby('products.parent_product_id')->get();
+        $product = Product::with('categorys','subcategory','subcategoryitem','vendors','productchildveriation','productchildveriationitem','productwithvariation','productwithvariationitem','productwithattribute','productwithattributeitem')->where('products.sub_category_id',Crypt::decryptString($request->subcatid))->get();
         //echo "<pre>";
         //print_r($product->toArray()); // you will see the `fee` array
         //echo "</pre>";
