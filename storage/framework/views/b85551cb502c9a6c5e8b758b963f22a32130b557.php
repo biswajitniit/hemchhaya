@@ -33,18 +33,7 @@
         <header>
 
             <!-- header-message -->
-            <div class="header-message-wrap">
-                <div class="container custom-container">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="top-notify-message">
-                                <p>place your complaints (if any) within 24hrs of receiving your delivery</p>
-                                <span class="message-remove">X</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            
             <!-- header-message-end -->
 
             <!-- header-top-start -->

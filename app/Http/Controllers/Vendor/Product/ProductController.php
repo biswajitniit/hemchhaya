@@ -253,69 +253,6 @@ class ProductController extends Controller
 
         // SAVE DATA FROM Product_child_variation
         if(!empty($request->variation)){
-            // SAVE CHILD PRODUCT
-               /* $productChild = new Product();
-                $productChild->vendor_id                                                             = Auth::id();
-                $productChild->category_id                                                           = $request['category_id'];
-                $productChild->sub_category_id                                                       = $request['sub_category_id'];
-                $productChild->sub_category_item_id                                                  = $request['sub_category_item_id'];
-
-                $productChild->product_name_slug                                                     = $this->slugify($request['name'],'-');
-                $productChild->brand                                                                 = 1;
-                $productChild->name                                                                  = $request['name'];
-
-                $productChild->front_view_image_name                                                 = $filename_front_view_image;
-                $productChild->back_view_image_name                                                  = $filename_back_view_image;
-                $productChild->side_view_image_name                                                  = $filename_side_view_image;
-                $productChild->open_view_image_name                                                  = $filename_open_view_image;
-
-                $productChild->front_view_image                                                      = $path_front_view_image;
-                $productChild->back_view_image                                                       = $path_back_view_image;
-                $productChild->side_view_image                                                       = $path_side_view_image;
-                $productChild->open_view_image                                                       = $path_open_view_image;
-
-                $productChild->video_link                                                            = $videolink;
-
-                $productChild->product_pdf_name                                                      = $filename_product_pdf;
-                $productChild->product_pdf                                                           = $path_product_pdf;
-
-                $productChild->sku                                                                   = $request['sku'];
-                $productChild->price                                                                 = $request['price'];
-                $productChild->sale_price                                                            = $request['sale_price'];
-                $productChild->quantity                                                              = $request['quantity'];
-                $productChild->allow_customer_checkout_when_this_product_out_of_stock                = $request['allow_customer_checkout_when_this_product_out_of_stock'];
-
-                $productChild->is_variation                                                          = '1';
-
-
-                $productChild->weight                                                                = $request['weight'];
-                $productChild->length                                                                = $request['length'];
-                $productChild->breadth                                                               = $request['breadth'];
-                $productChild->height                                                                = $request['height'];
-
-
-                $productChild->is_featured                                                           = $request['is_featured'];
-                $productChild->status                                                                = '1';
-
-            $productChild->save();
-
-            $productChildId = $productChild->id;
-
-            $datapcv = new Product_child_variation();
-                $datapcv->parent_product_id = $productId;
-                $datapcv->child_product_id  = $productChildId;
-                $datapcv->is_default        = 1;
-            $datapcv->save();
-            $datapcvId = $datapcv->id;
-
-
-            foreach($request->variation as $productchildvariation){
-                $datapcvi = new Product_child_variation_item();
-                    $datapcvi->product_child_variation_id =   $datapcvId;
-                    $datapcvi->variation_item_id          =   $productchildvariation;
-                $datapcvi->save();
-            } */
-
             // save data from product_with_variations
             $getvariation = Variations::where('category_id',$request['category_id'])->where('sub_category_id',$request['sub_category_id'])->where('sub_category_item_id',$request['sub_category_item_id'])->where('vendor_id',Auth::id())->get();
             if($getvariation){
@@ -348,7 +285,7 @@ class ProductController extends Controller
 
                     $datapwvi = new Product_with_variation_item();
                         $datapwvi->variation_item_id          =   $value->id;
-                        $datapwvi->is_selected                =   0;
+                        $datapwvi->is_selected                =   '0';
                         $datapwvi->product_id                 =   $productId;
                     $datapwvi->save();
                 }
@@ -364,7 +301,7 @@ class ProductController extends Controller
                 $datapwiattributr = new Product_with_attribute();
                     $datapwiattributr->attribute_id               =   $productchild_attribute;
                     $datapwiattributr->product_id                 =   $productId;
-                    $datapwiattributr->order                      =   0;
+                    $datapwiattributr->order                      =   '0';
                 $datapwiattributr->save();
             }
         }

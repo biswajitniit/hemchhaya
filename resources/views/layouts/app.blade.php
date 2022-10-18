@@ -33,7 +33,7 @@
         <header>
 
             <!-- header-message -->
-            <div class="header-message-wrap">
+            {{-- <div class="header-message-wrap">
                 <div class="container custom-container">
                     <div class="row">
                         <div class="col-12">
@@ -44,7 +44,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
             <!-- header-message-end -->
 
             <!-- header-top-start -->
