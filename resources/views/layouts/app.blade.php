@@ -90,11 +90,8 @@
                                     @else
                                     <li><a href="{{ url('/login') }}">My Account</a></li>
                                     @endif
-
-
-
-                                        <li><a href="contact.html">My Account</a></li>
-                                         <li><a href="contact.html">Contact</a></li>
+                                    <li><a href="{{ url('about-us') }}">About Us</a></li>
+                                    <li><a href="{{ url('contact-us') }}">Contact</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -137,7 +134,7 @@
                                     <ul>
                                         <li class="header-phone">
                                             <div class="icon"><i class="flaticon-telephone"></i></div>
-                                            <a href="tel:6291643488"><span>Call Us Now</span>+91 6291643488
+                                            <a href="tel:6291643488"><span>Call Us Now</span>6291643488
                                             </a>
                                         </li>
                                         <li class="header-user"><a href="#"><i class="flaticon-user"></i></a></li>
@@ -145,57 +142,109 @@
                                             <a href="#"><i class="flaticon-heart-shape-outline"></i></a>
                                             <span class="item-count">0</span>
                                         </li>
+
+
+
                                         <li class="header-cart-action">
                                             <div class="header-cart-wrap">
                                                 <a href="cart.html"><i class="flaticon-shopping-basket"></i></a>
-                                                <span class="item-count">2</span>
+                                                <span class="item-count">
+                                                    @if(Auth::check())
+                                                        @php
+                                                            $cartcontent = Get_session_user_cart_info(Auth::user()->id);
+                                                        @endphp
+                                                        {{ sizeof($cartcontent) }}
+                                                    @else
+                                                        0
+                                                    @endif
+
+                                                </span>
                                                 <ul class="minicart">
-                                                    <li class="d-flex align-items-start">
-                                                        <div class="cart-img">
-                                                            <a href="shop-details.html"><img src="{{ asset('frontend/img/product/cart_p01.jpg') }}" alt=""></a>
-                                                        </div>
-                                                        <div class="cart-content">
-                                                            <h4><a href="shop-details.html">Organic Farm Fresh Nuts</a></h4>
-                                                            <div class="cart-price">
-                                                                <span class="new"><i class="fas fa-rupee-sign"></i>229.9</span>
-                                                                <span><del><i class="fas fa-rupee-sign"></i>229.9</del></span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="del-icon">
-                                                            <a href="#"><i class="far fa-trash-alt"></i></a>
-                                                        </div>
-                                                    </li>
-                                                    <li class="d-flex align-items-start">
-                                                        <div class="cart-img">
-                                                            <a href="shop-details.html"><img src="img/product/cart_p02.jpg" alt=""></a>
-                                                        </div>
-                                                        <div class="cart-content">
-                                                            <h4><a href="shop-details.html">Organic Fresh Nuts Vanla Butter</a></h4>
-                                                            <div class="cart-price">
-                                                                <span class="new"><i class="fas fa-rupee-sign"></i>229.9</span>
-                                                                <span><del><i class="fas fa-rupee-sign"></i>229.9</del></span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="del-icon">
-                                                            <a href="#"><i class="far fa-trash-alt"></i></a>
-                                                        </div>
-                                                    </li>
+
+
+
+
+
+
+
+                                                @if(Auth::check())
+                                                    @php
+                                                        $cartcontent = Get_session_user_cart_info(Auth::user()->id);
+                                                    @endphp
+                                                    @if ($cartcontent)
+                                                        @php
+                                                            $total1 = 0;
+                                                        @endphp
+                                                        @foreach ($cartcontent as $row1)
+                                                        @php
+                                                        $total1 = $total1 + $row1->price;
+                                                        @endphp
+                                                            <li class="d-flex align-items-start">
+                                                                <div class="cart-img">
+                                                                    <a href="shop-details.html"><img src="{{ $row1->image }}" alt=""></a>
+                                                                </div>
+                                                                <div class="cart-content">
+                                                                    <h4><a href="shop-details.html">{{ $row1->name }}</a></h4>
+                                                                    <div class="cart-price">
+                                                                        <span class="new"><i class="fas fa-rupee-sign"></i>{{ str_replace(',', '', number_format($row1->price, 2)) }}</span>
+                                                                        {{-- <span><del><i class="fas fa-rupee-sign"></i>229.9</del></span> --}}
+                                                                    </div>
+                                                                </div>
+                                                                <div class="del-icon">
+                                                                    <a href="#"><i class="far fa-trash-alt"></i></a>
+                                                                </div>
+                                                            </li>
+
+                                                        @endforeach
+
+                                                    @endif
+
+
+
+
                                                     <li>
                                                         <div class="total-price">
                                                             <span class="f-left">Total:</span>
-                                                            <span class="f-right"><i class="fas fa-rupee-sign"></i>239.9</span>
+                                                            <span class="f-right"><i class="fas fa-rupee-sign"></i>{{ str_replace(',', '', number_format($total1, 2)) }}</span>
                                                         </div>
                                                     </li>
                                                     <li>
                                                         <div class="checkout-link">
-                                                            <a href="cart.html">Shopping Cart</a>
+                                                            <a href="{{ url('/cart') }}">Shopping Cart</a>
                                                             <a class="black-color" href="checkout.html">Checkout</a>
                                                         </div>
                                                     </li>
+
+                                                @endif
+
+
+
+
                                                 </ul>
                                             </div>
-                                            <div class="cart-amount"><i class="fas fa-rupee-sign"></i>0.00</div>
+                                            <div class="cart-amount"><i class="fas fa-rupee-sign"></i>
+                                            @if(Auth::check())
+                                                @php
+                                                    $cartcontent = Get_session_user_cart_info(Auth::user()->id);
+                                                @endphp
+                                                @if ($cartcontent)
+                                                    @php
+                                                        $total = 0;
+                                                    @endphp
+                                                    @foreach ($cartcontent as $row)
+                                                        @php
+                                                        $total = $total + $row->price;
+                                                        @endphp
+                                                    @endforeach
+                                                    {{ str_replace(',', '', number_format($total, 2)) }}
+                                                @endif
+                                            @else
+                                                0.00
+                                            @endif
+                                            </div>
                                         </li>
+
+
                                     </ul>
                                 </div>
                             </div>

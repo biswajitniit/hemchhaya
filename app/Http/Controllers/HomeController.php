@@ -145,5 +145,23 @@ class HomeController extends Controller
     }
 
 
+    /**
+     * View about us
+     *
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function about_us(){
+        return view('about-us');
+    }
 
+    /**
+     * View contact us
+     *
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function contact_us(){
+        return view('contact-us');
+    }
 }

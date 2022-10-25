@@ -79,11 +79,8 @@
                                     <?php else: ?>
                                     <li><a href="<?php echo e(url('/login')); ?>">My Account</a></li>
                                     <?php endif; ?>
-
-
-
-                                        <li><a href="contact.html">My Account</a></li>
-                                         <li><a href="contact.html">Contact</a></li>
+                                    <li><a href="<?php echo e(url('about-us')); ?>">About Us</a></li>
+                                    <li><a href="<?php echo e(url('contact-us')); ?>">Contact</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -126,7 +123,7 @@
                                     <ul>
                                         <li class="header-phone">
                                             <div class="icon"><i class="flaticon-telephone"></i></div>
-                                            <a href="tel:6291643488"><span>Call Us Now</span>+91 6291643488
+                                            <a href="tel:6291643488"><span>Call Us Now</span>6291643488
                                             </a>
                                         </li>
                                         <li class="header-user"><a href="#"><i class="flaticon-user"></i></a></li>
@@ -134,57 +131,111 @@
                                             <a href="#"><i class="flaticon-heart-shape-outline"></i></a>
                                             <span class="item-count">0</span>
                                         </li>
+
+
+
                                         <li class="header-cart-action">
                                             <div class="header-cart-wrap">
                                                 <a href="cart.html"><i class="flaticon-shopping-basket"></i></a>
-                                                <span class="item-count">2</span>
+                                                <span class="item-count">
+                                                    <?php if(Auth::check()): ?>
+                                                        <?php
+                                                            $cartcontent = Get_session_user_cart_info(Auth::user()->id);
+                                                        ?>
+                                                        <?php echo e(sizeof($cartcontent)); ?>
+
+                                                    <?php else: ?>
+                                                        0
+                                                    <?php endif; ?>
+
+                                                </span>
                                                 <ul class="minicart">
-                                                    <li class="d-flex align-items-start">
-                                                        <div class="cart-img">
-                                                            <a href="shop-details.html"><img src="<?php echo e(asset('frontend/img/product/cart_p01.jpg')); ?>" alt=""></a>
-                                                        </div>
-                                                        <div class="cart-content">
-                                                            <h4><a href="shop-details.html">Organic Farm Fresh Nuts</a></h4>
-                                                            <div class="cart-price">
-                                                                <span class="new"><i class="fas fa-rupee-sign"></i>229.9</span>
-                                                                <span><del><i class="fas fa-rupee-sign"></i>229.9</del></span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="del-icon">
-                                                            <a href="#"><i class="far fa-trash-alt"></i></a>
-                                                        </div>
-                                                    </li>
-                                                    <li class="d-flex align-items-start">
-                                                        <div class="cart-img">
-                                                            <a href="shop-details.html"><img src="img/product/cart_p02.jpg" alt=""></a>
-                                                        </div>
-                                                        <div class="cart-content">
-                                                            <h4><a href="shop-details.html">Organic Fresh Nuts Vanla Butter</a></h4>
-                                                            <div class="cart-price">
-                                                                <span class="new"><i class="fas fa-rupee-sign"></i>229.9</span>
-                                                                <span><del><i class="fas fa-rupee-sign"></i>229.9</del></span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="del-icon">
-                                                            <a href="#"><i class="far fa-trash-alt"></i></a>
-                                                        </div>
-                                                    </li>
+
+
+
+
+
+
+
+                                                <?php if(Auth::check()): ?>
+                                                    <?php
+                                                        $cartcontent = Get_session_user_cart_info(Auth::user()->id);
+                                                    ?>
+                                                    <?php if($cartcontent): ?>
+                                                        <?php
+                                                            $total1 = 0;
+                                                        ?>
+                                                        <?php $__currentLoopData = $cartcontent; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row1): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                        <?php
+                                                        $total1 = $total1 + $row1->price;
+                                                        ?>
+                                                            <li class="d-flex align-items-start">
+                                                                <div class="cart-img">
+                                                                    <a href="shop-details.html"><img src="<?php echo e($row1->image); ?>" alt=""></a>
+                                                                </div>
+                                                                <div class="cart-content">
+                                                                    <h4><a href="shop-details.html"><?php echo e($row1->name); ?></a></h4>
+                                                                    <div class="cart-price">
+                                                                        <span class="new"><i class="fas fa-rupee-sign"></i><?php echo e(str_replace(',', '', number_format($row1->price, 2))); ?></span>
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                                <div class="del-icon">
+                                                                    <a href="#"><i class="far fa-trash-alt"></i></a>
+                                                                </div>
+                                                            </li>
+
+                                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
+                                                    <?php endif; ?>
+
+
+
+
                                                     <li>
                                                         <div class="total-price">
                                                             <span class="f-left">Total:</span>
-                                                            <span class="f-right"><i class="fas fa-rupee-sign"></i>239.9</span>
+                                                            <span class="f-right"><i class="fas fa-rupee-sign"></i><?php echo e(str_replace(',', '', number_format($total1, 2))); ?></span>
                                                         </div>
                                                     </li>
                                                     <li>
                                                         <div class="checkout-link">
-                                                            <a href="cart.html">Shopping Cart</a>
+                                                            <a href="<?php echo e(url('/cart')); ?>">Shopping Cart</a>
                                                             <a class="black-color" href="checkout.html">Checkout</a>
                                                         </div>
                                                     </li>
+
+                                                <?php endif; ?>
+
+
+
+
                                                 </ul>
                                             </div>
-                                            <div class="cart-amount"><i class="fas fa-rupee-sign"></i>0.00</div>
+                                            <div class="cart-amount"><i class="fas fa-rupee-sign"></i>
+                                            <?php if(Auth::check()): ?>
+                                                <?php
+                                                    $cartcontent = Get_session_user_cart_info(Auth::user()->id);
+                                                ?>
+                                                <?php if($cartcontent): ?>
+                                                    <?php
+                                                        $total = 0;
+                                                    ?>
+                                                    <?php $__currentLoopData = $cartcontent; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                        <?php
+                                                        $total = $total + $row->price;
+                                                        ?>
+                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                    <?php echo e(str_replace(',', '', number_format($total, 2))); ?>
+
+                                                <?php endif; ?>
+                                            <?php else: ?>
+                                                0.00
+                                            <?php endif; ?>
+                                            </div>
                                         </li>
+
+
                                     </ul>
                                 </div>
                             </div>

@@ -279,7 +279,7 @@ Route::any('/admin/get_attributecat_with_attribute_on_product_page', [ProductCon
         return view('welcome');
     });
 
-    //user login
+    //user section
     Route::get('/login', [LoginController::class,'login'])->name('login');
     Route::post('/user/loginpost', [LoginController::class,'loginpost'])->name('user.loginpost');
     Route::get('/user/logout', [UserlogoutController::class,'userlogout'])->name('user.logout');
@@ -297,11 +297,21 @@ Route::any('/admin/get_attributecat_with_attribute_on_product_page', [ProductCon
     Route::get('/sub-category-wise-page',[HomeController::class, 'sub_category_wise_page'])->name('home.sub-category-wise-page');
     Route::get('/view-product-details',[HomeController::class, 'view_product_details'])->name('home.view-product-details');
 
+    // cms pages
+    Route::get('/about-us',[HomeController::class,'about_us'])->name('about-us');
+    Route::get('/contact-us',[HomeController::class,'contact_us'])->name('contact-us');
+
+
+
     //
     Route::post('/add-to-cart',[CartController::class,'add_to_cart_items'])->name('cart.add-to-cart');
     Route::post('update-cart', [CartController::class,'update_cart'])->name('update-cart');
     Route::get('remove-cart-item', [CartController::class,'remove_cart_item'])->name('remove-cart-item');
     Route::get('/cart',[CartController::class,'cart'])->name('cart');
+
+
+
+
 
     Route::get('razorpay-payment', [RazorpayPaymentController::class, 'index'])->name('razorpay-payment');
     Route::post('razorpay-payment', [RazorpayPaymentController::class, 'store'])->name('razorpay.payment.store');

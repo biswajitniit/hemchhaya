@@ -9,6 +9,7 @@ use App\Models\Attributecategory;
 use App\Models\Brand;
 use App\Models\Variationitems;
 use App\Models\Variations;
+use App\Models\Cart;
 
 if (! function_exists('create_slug')) {
     function create_slug($string) {
@@ -112,5 +113,11 @@ if (! function_exists('Get_Attribute_Name')) {
 if (! function_exists('Get_attribute_item_name')) {
     function Get_attribute_item_name($attributeitemid) {
        return Attribute::where('id',$attributeitemid)->first()->column_name;
+    }
+}
+
+if (! function_exists('Get_session_user_cart_info')) {
+    function Get_session_user_cart_info($userid) {
+       return Cart::where('user_id',$userid)->get();
     }
 }

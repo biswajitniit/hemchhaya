@@ -1,6 +1,5 @@
-@extends('layouts.app')
-@section('title', 'Salesanta | User Dashboard')
-@section('content')
+<?php $__env->startSection('title', 'Salesanta | User Dashboard'); ?>
+<?php $__env->startSection('content'); ?>
 
 	<!-- page header section ending here -->
 	<section class="breadcrumb-area breadcrumb-bg">
@@ -54,7 +53,7 @@
 									MY ORDER HISTORY</a>
 							</li>
 							<li>
-								<a href="{{ route('user.logout') }}"> <i class="fa fa-lock"></i>
+								<a href="<?php echo e(route('user.logout')); ?>"> <i class="fa fa-lock"></i>
 									LOGOUT</a>
 							</li>
 						</ul>
@@ -144,4 +143,6 @@
 
 
 
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH E:\webdev\hemchhaya\resources\views/dashboardarea/user-dashboard.blade.php ENDPATH**/ ?>
