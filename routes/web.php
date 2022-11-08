@@ -27,6 +27,7 @@ use App\Http\Controllers\Dashboard\UserdashboardController;
 use App\Http\Controllers\Dashboard\UserlogoutController;
 use App\Http\Controllers\Cart\CartController;
 use App\Http\Controllers\RazorpayPaymentController;
+use App\Http\Controllers\Dashboard\MyaddressController;
 
 /*
 |--------------------------------------------------------------------------
@@ -316,6 +317,15 @@ Route::any('/admin/get_attributecat_with_attribute_on_product_page', [ProductCon
     Route::get('razorpay-payment', [RazorpayPaymentController::class, 'index'])->name('razorpay-payment');
     Route::post('razorpay-payment', [RazorpayPaymentController::class, 'store'])->name('razorpay.payment.store');
 
+
+
+
+    // USER DASHBOARD AREA
+    Route::get('/manage-addresses', [MyaddressController::class, 'index'])->name('manage-addresses');
+    Route::get('/add-new-addresses', [MyaddressController::class, 'add_new_addresses'])->name('add-new-addresses');
+    Route::post('/add-addresses-save', [MyaddressController::class, 'add_addresses_save'])->name('add-addresses-save');
+    Route::get('/edit-my-addresses/{addressesid}', [MyaddressController::class, 'edit_my_addresses'])->name('edit-my-addresses');
+    Route::post('/edit-user-addresses-post/{addressesid}', [MyaddressController::class, 'edit_user_addresses_post'])->name('edit-user-addresses-post');
 
   /**
  *
