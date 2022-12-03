@@ -129,5 +129,13 @@ class CartController extends Controller
         return redirect()->back()->with('message', 'Record deleted successfully.');
     }
 
+   /**
+     * View cart checkout page.
+     *
+     * @return \Illuminate\Http\Response
+    */
+    public function checkout(Request $request){
+        return view("cart.checkout");
+    }
 
 }

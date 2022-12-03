@@ -211,7 +211,7 @@
                                                     <li>
                                                         <div class="checkout-link">
                                                             <a href="{{ url('/cart') }}">Shopping Cart</a>
-                                                            <a class="black-color" href="checkout.html">Checkout</a>
+                                                            <a class="black-color" href="{{ url('/checkout') }}">Checkout</a>
                                                         </div>
                                                     </li>
 
@@ -222,26 +222,7 @@
 
                                                 </ul>
                                             </div>
-                                            <div class="cart-amount"><i class="fas fa-rupee-sign"></i>
-                                            @if(Auth::check())
-                                                @php
-                                                    $cartcontent = Get_session_user_cart_info(Auth::user()->id);
-                                                @endphp
-                                                @if ($cartcontent)
-                                                    @php
-                                                        $total = 0;
-                                                    @endphp
-                                                    @foreach ($cartcontent as $row)
-                                                        @php
-                                                        $total = $total + $row->price;
-                                                        @endphp
-                                                    @endforeach
-                                                    {{ str_replace(',', '', number_format($total, 2)) }}
-                                                @endif
-                                            @else
-                                                0.00
-                                            @endif
-                                            </div>
+
                                         </li>
 
 

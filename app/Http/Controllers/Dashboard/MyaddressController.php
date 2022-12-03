@@ -80,13 +80,16 @@ class MyaddressController extends Controller
         ]);
 
         $data = array(
-                        'addresses_title'         => $request['addresses_title'],
-                        'address1'                => $request['address1'],
-                        'address2'                => $request['address2'],
-                        'city_id'                 => Getcityid($request['area_id']),
-                        'area_id'                 => $request['area_id'],
-                        'zone_id'                 => Getzoneid($request['area_id']),
-                        'primary_address'         => $request['primary_address']
+                        'address_type'                     => $request['address_type'],
+                        'name'                             => $request['name'],
+                        'mobileno'                         => $request['mobileno'],
+                        'pincode'                          => $request['pincode'],
+                        'locality'                         => $request['locality'],
+                        'address_area_and_street'          => $request['address_area_and_street'],
+                        'city_or_district_or_town'         => $request['city_or_district_or_town'],
+                        'state'                            => $request['state'],
+                        'landmark'                         => $request['landmark'],
+                        'alternate_phone'                  => $request['alternate_phone']
                     );
         Useraddresses::where('id', $addressesid)->update($data);
 

@@ -309,7 +309,7 @@ label {
 	background: var(--color-secondary);
 }
 .logo img {
-    height: 66px;
+    height: 55px;
 }
 .footer-logo img {
     height: 66px;
@@ -2079,7 +2079,7 @@ label {
     max-width: 100%;
     height: 150px;
     object-fit: scale-down;
-    
+
 }
 .sp-product-thumb .batch {
     position: absolute;
@@ -5509,10 +5509,10 @@ ul.swatch-quantity {
 .profile {
 	margin: 20px 0;
   }
-  
+
   /* Profile sidebar */
   .profile-sidebar {
-	
+
 	background: #f1f1f1;
   }
   .profile-userpic {
@@ -5528,19 +5528,19 @@ ul.swatch-quantity {
     border-radius: 50% !important;
     border: 5px solid #FFF;
 }
-  
+
   .profile-usertitle {
 	text-align: center;
 	margin-top: 20px;
   }
-  
+
   .profile-usertitle-name {
 	color: #5a7391;
 	font-size: 16px;
 	font-weight: 600;
 	margin-bottom: 7px;
   }
-  
+
   .profile-usertitle-job {
 	text-transform: uppercase;
 	color: #5b9bd1;
@@ -5548,12 +5548,12 @@ ul.swatch-quantity {
 	font-weight: 600;
 	margin-bottom: 15px;
   }
-  
+
   .profile-userbuttons {
 	text-align: center;
 	margin-top: 10px;
   }
-  
+
   .profile-userbuttons .btn {
     text-transform: uppercase;
     font-size: 14px;
@@ -5564,7 +5564,7 @@ ul.swatch-quantity {
 .profile-userbuttons .btn:last-child {
 	margin-right: 0px;
 }
-  
+
   .profile-usermenu ul li {
     border-bottom: 1px solid #d00f05;
     width: 100%;
@@ -5574,7 +5574,7 @@ ul.swatch-quantity {
   .profile-usermenu ul li:last-child {
 	border-bottom: none;
   }
-  
+
   .profile-usermenu ul li a {
     color: #d00f05;
     font-size: 14px;
@@ -5584,27 +5584,27 @@ ul.swatch-quantity {
     padding-left: 10px;
     display: block;
 }
-  
+
   .profile-usermenu ul li a i {
 	margin-right: 8px;
 	font-size: 14px;
   }
-  
+
   .profile-usermenu ul li a:hover {
 	background-color: #fafcfd;
 	color: #000;
   }
-  
+
   .profile-usermenu ul li.active {
 	border-bottom: none;
   }
-  
+
 .profile-usermenu ul li.active a {
     color: #ffffff;
     background-color: #d00f05;
     border-left: 4px solid #910b04;
 }
-  
+
   /* Profile Content */
   .profile-content {
     padding: 20px;

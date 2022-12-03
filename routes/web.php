@@ -309,6 +309,7 @@ Route::any('/admin/get_attributecat_with_attribute_on_product_page', [ProductCon
     Route::post('update-cart', [CartController::class,'update_cart'])->name('update-cart');
     Route::get('remove-cart-item', [CartController::class,'remove_cart_item'])->name('remove-cart-item');
     Route::get('/cart',[CartController::class,'cart'])->name('cart');
+    Route::get('/checkout',[CartController::class,'checkout'])->name('checkout');
 
 
 

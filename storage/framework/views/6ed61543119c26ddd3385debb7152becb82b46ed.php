@@ -6,7 +6,11 @@
         </li>
         <li>
             <a href="<?php echo e(url('/manage-addresses')); ?>"> <i class="fa fa-user"></i>
-                Manage Addresses</a>
+                MY ADDRESS</a>
+        </li>
+        <li>
+            <a href="order_history.html"> <i class="fa fa-flag"></i>
+                MY ORDER HISTORY</a>
         </li>
         <li>
             <a href="my_wishlist.html"> <i class="fa fa-heart"></i>
@@ -14,15 +18,11 @@
         </li>
         <li>
             <a href="delivery_location.html"> <i class="fa fa-map-pin"></i>
-                DELIVERY LOCATION</a>
+                My REVIEWS</a>
         </li>
         <li>
             <a href="password.html"> <i class="fa fa-lock"></i>
                 RESET PASSWORD</a>
-        </li>
-        <li>
-            <a href="order_history.html"> <i class="fa fa-flag"></i>
-                MY ORDER HISTORY</a>
         </li>
         <li>
             <a href="<?php echo e(route('user.logout')); ?>"> <i class="fa fa-lock"></i>

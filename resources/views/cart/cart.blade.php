@@ -134,7 +134,8 @@
                                                 </li> --}}
                                                 <li class="cart-total-amount"><span>Total Price</span> <span class="amount">&#8377; {{ $subtotal }}</span></li>
                                             </ul>
-                                            <a href="{{ route('razorpay-payment',['payableamount='.$subtotal])  }}" class="btn">PROCEED TO CHECKOUT</a>
+                                            {{-- <a href="{{ route('razorpay-payment',['payableamount='.$subtotal])  }}" class="btn">PROCEED TO CHECKOUT</a> --}}
+                                            <a href="{{ route('checkout')  }}" class="btn">PROCEED TO CHECKOUT</a>
                                         </form>
                                     </div>
                                 </div>

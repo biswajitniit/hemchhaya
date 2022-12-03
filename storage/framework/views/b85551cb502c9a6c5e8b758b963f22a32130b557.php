@@ -201,7 +201,7 @@
                                                     <li>
                                                         <div class="checkout-link">
                                                             <a href="<?php echo e(url('/cart')); ?>">Shopping Cart</a>
-                                                            <a class="black-color" href="checkout.html">Checkout</a>
+                                                            <a class="black-color" href="<?php echo e(url('/checkout')); ?>">Checkout</a>
                                                         </div>
                                                     </li>
 
@@ -212,27 +212,7 @@
 
                                                 </ul>
                                             </div>
-                                            <div class="cart-amount"><i class="fas fa-rupee-sign"></i>
-                                            <?php if(Auth::check()): ?>
-                                                <?php
-                                                    $cartcontent = Get_session_user_cart_info(Auth::user()->id);
-                                                ?>
-                                                <?php if($cartcontent): ?>
-                                                    <?php
-                                                        $total = 0;
-                                                    ?>
-                                                    <?php $__currentLoopData = $cartcontent; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                        <?php
-                                                        $total = $total + $row->price;
-                                                        ?>
-                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                                    <?php echo e(str_replace(',', '', number_format($total, 2))); ?>
 
-                                                <?php endif; ?>
-                                            <?php else: ?>
-                                                0.00
-                                            <?php endif; ?>
-                                            </div>
                                         </li>
 
 
