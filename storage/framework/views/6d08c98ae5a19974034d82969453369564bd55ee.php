@@ -1,3 +1,4 @@
+<?php $__env->startSection('title', 'Salesanta | Cart'); ?>
 <?php $__env->startSection('content'); ?>
 
         <!-- main-area -->
@@ -94,27 +95,51 @@
                                         <?php endif; ?>
 
                                     </div>
+
+
+
+
+
                                 </form>
                             </div>
 
                             <?php if(count($cart) > 0): ?>
-                            <div class="col-xl-5 col-lg-12">
-                                <div class="shop-cart-total">
-                                    <h3 class="title">Cart Totals</h3>
-                                    <div class="shop-cart-widget">
-                                        <form action="#">
-                                            <ul>
-                                                <li class="sub-total"><span>Subtotal</span> &#8377; <?php echo e($subtotal); ?></li>
+                                <div class="col-xl-5 col-lg-12">
+                                    <div class="shop-cart-total">
+                                        <h3 class="title">PRICE DETAILS</h3>
+                                        <div class="shop-cart-widget">
+                                            <form action="#">
+                                                <ul>
+                                                    <li class="sub-total"><span>Price (<?php echo e(count($cart)); ?> item)</span> &#8377; <?php echo e($subtotal); ?></li>
+                                                    <li class="sub-total"><span>Delivery Charges</span> &#8377; 5</li>
+
+                                                    <li class="cart-total-amount"><span>Total Payable</span> <span class="amount">&#8377; <?php echo e($subtotal + 5); ?></span></li>
+                                                </ul>
+
+                                                <div class="payment-method-info">
+                                                    <div class="paypal-method-flex">
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input" id="customCheck5">
+                                                            <label class="custom-control-label" for="customCheck5">Cash on delivery</label>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="paypal-method-flex">
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input" id="customCheck6">
+                                                            <label class="custom-control-label" for="customCheck6">Pay with Razorpay</label>
+                                                        </div>
+                                                        <div class="paypal-logo"><img src="<?php echo e(asset('frontend/img/images/card.png')); ?>" alt=""></div>
+                                                    </div>
+                                                </div>
+
+                                                <a href="<?php echo e(route('razorpay-payment',['payableamount='.$subtotal])); ?>" class="btn">Place order</a>
                                                 
-                                                <li class="cart-total-amount"><span>Total Price</span> <span class="amount">&#8377; <?php echo e($subtotal); ?></span></li>
-                                            </ul>
-                                            
-                                            <a href="<?php echo e(route('checkout')); ?>" class="btn">PROCEED TO CHECKOUT</a>
-                                        </form>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        <?php endif; ?>
+                            <?php endif; ?>
 
 
 

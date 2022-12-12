@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('title', 'Salesanta | Cart')
 @section('content')
 
         <!-- main-area -->
@@ -108,39 +108,51 @@
                                         @endif
 
                                     </div>
+
+
+
+
+
                                 </form>
                             </div>
 
                             @if(count($cart) > 0)
-                            <div class="col-xl-5 col-lg-12">
-                                <div class="shop-cart-total">
-                                    <h3 class="title">Cart Totals</h3>
-                                    <div class="shop-cart-widget">
-                                        <form action="#">
-                                            <ul>
-                                                <li class="sub-total"><span>Subtotal</span> &#8377; {{ $subtotal }}</li>
-                                                {{-- <li>
-                                                    <span>Shipping</span>
-                                                    <div class="shop-check-wrap">
+                                <div class="col-xl-5 col-lg-12">
+                                    <div class="shop-cart-total">
+                                        <h3 class="title">PRICE DETAILS</h3>
+                                        <div class="shop-cart-widget">
+                                            <form action="#">
+                                                <ul>
+                                                    <li class="sub-total"><span>Price ({{count($cart)}} item)</span> &#8377; {{ $subtotal }}</li>
+                                                    <li class="sub-total"><span>Delivery Charges</span> &#8377; 5</li>
+
+                                                    <li class="cart-total-amount"><span>Total Payable</span> <span class="amount">&#8377; {{ $subtotal + 5}}</span></li>
+                                                </ul>
+
+                                                <div class="payment-method-info">
+                                                    <div class="paypal-method-flex">
                                                         <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input" id="customCheck1">
-                                                            <label class="custom-control-label" for="customCheck1">Free Shipping</label>
-                                                        </div>
-                                                        <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input" id="customCheck2">
-                                                            <label class="custom-control-label" for="customCheck2">LOCAL PICKUP: $5.00</label>
+                                                            <input type="checkbox" class="custom-control-input" id="customCheck5">
+                                                            <label class="custom-control-label" for="customCheck5">Cash on delivery</label>
+
                                                         </div>
                                                     </div>
-                                                </li> --}}
-                                                <li class="cart-total-amount"><span>Total Price</span> <span class="amount">&#8377; {{ $subtotal }}</span></li>
-                                            </ul>
-                                            {{-- <a href="{{ route('razorpay-payment',['payableamount='.$subtotal])  }}" class="btn">PROCEED TO CHECKOUT</a> --}}
-                                            <a href="{{ route('checkout')  }}" class="btn">PROCEED TO CHECKOUT</a>
-                                        </form>
+                                                    <div class="paypal-method-flex">
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input" id="customCheck6">
+                                                            <label class="custom-control-label" for="customCheck6">Pay with Razorpay</label>
+                                                        </div>
+                                                        <div class="paypal-logo"><img src="{{ asset('frontend/img/images/card.png') }}" alt=""></div>
+                                                    </div>
+                                                </div>
+
+                                                <a href="{{ route('razorpay-payment',['payableamount='.$subtotal])  }}" class="btn">Place order</a>
+                                                {{-- <a href="{{ route('checkout')  }}" class="btn">PROCEED TO CHECKOUT</a> --}}
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        @endif
+                            @endif
 
 
 

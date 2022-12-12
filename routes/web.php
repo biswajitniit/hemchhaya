@@ -311,15 +311,8 @@ Route::any('/admin/get_attributecat_with_attribute_on_product_page', [ProductCon
     Route::get('/cart',[CartController::class,'cart'])->name('cart');
     Route::get('/checkout',[CartController::class,'checkout'])->name('checkout');
 
-
-
-
-
     Route::get('razorpay-payment', [RazorpayPaymentController::class, 'index'])->name('razorpay-payment');
     Route::post('razorpay-payment', [RazorpayPaymentController::class, 'store'])->name('razorpay.payment.store');
-
-
-
 
     // USER DASHBOARD AREA
     Route::get('/manage-addresses', [MyaddressController::class, 'index'])->name('manage-addresses');

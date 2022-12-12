@@ -126,7 +126,13 @@
                                             <a href="tel:6291643488"><span>Call Us Now</span>6291643488
                                             </a>
                                         </li>
-                                        <li class="header-user"><a href="#"><i class="flaticon-user"></i></a></li>
+                                        <li class="header-user">
+                                            <?php if(Auth::check()): ?>
+                                                <a href="<?php echo e(url('/user/dashboard')); ?>"><i class="flaticon-user"></i></a>
+                                            <?php else: ?>
+                                                <a href="<?php echo e(url('/login')); ?>"><i class="flaticon-user"></i></a>
+                                            <?php endif; ?>
+                                        </li>
                                         <li class="header-wishlist">
                                             <a href="#"><i class="flaticon-heart-shape-outline"></i></a>
                                             <span class="item-count">0</span>
