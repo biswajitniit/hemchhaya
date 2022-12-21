@@ -22,10 +22,11 @@ use App\Models\Product_with_attribute;
 use App\Models\Product_with_attribute_item;
 use App\Models\Variationitems;
 use App\Models\Variations;
+use App\Models\Product_image;
 use Illuminate\Support\Facades\Auth;
 use Embed;
 use Illuminate\Support\Facades\DB;
-
+use Image;
 class ProductController extends Controller
 {
     public function __construct()
@@ -111,57 +112,98 @@ class ProductController extends Controller
 
         //echo "<pre>"; print_r($request->attribute); die;
         $this->validate($request, [
-            'front_view_image'      => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:10000000000000000000000',
+            'front_view_image'               => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:10000000000000000000000',
         ],[
             'front_view_image.required'      => 'Please add front view image',
         ]);
 
-
-
-
-
+        $imagedata = array();
         if($request->front_view_image){
-            $file_front_view_image = $request->front_view_image;
-            $filename_front_view_image = time().'.'.$request->front_view_image->extension();
 
-            $path_front_view_image = Storage::disk('s3')->put("product/large/" . $filename_front_view_image, $file_front_view_image, 'public');
-            $path_front_view_image = Storage::disk('s3')->url($path_front_view_image);
-        }else{
-            $filename_front_view_image = '';
-            $path_front_view_image = '';
+            $filename_front_view_image = $request->file('front_view_image')->hashname();
+
+            $imagelarge = Image::make($request->file('front_view_image'))->resize(439, 398);
+            Storage::disk('s3')->put('product/large/'.$filename_front_view_image, $imagelarge->stream(), 'public');
+            $large = Storage::disk('s3')->url('product/large/'.$filename_front_view_image);
+            $imagedata[] = array('image_url'=>$large,'image_size'=>'large','image_category'=>'front_view_image');
+
+            $imagemedium = Image::make($request->file('front_view_image'))->resize(200, 200);
+            Storage::disk('s3')->put('product/medium/'.$filename_front_view_image, $imagemedium->stream(), 'public');
+            $medium = Storage::disk('s3')->url('product/medium/'.$filename_front_view_image);
+            $imagedata[] = array('image_url'=>$medium,'image_size'=>'medium','image_category'=>'front_view_image');
+
+            $imagesmall = Image::make($request->file('front_view_image'))->resize(128, 82);
+            Storage::disk('s3')->put('product/small/'.$filename_front_view_image, $imagesmall->stream(), 'public');
+            $small = Storage::disk('s3')->url('product/small/'.$filename_front_view_image);
+            $imagedata[] = array('image_url'=>$small,'image_size'=>'small','image_category'=>'front_view_image');
+
+
+
         }
+
 
         if($request->back_view_image){
-            $file_back_view_image = $request->back_view_image;
-            $filename_back_view_image = time().'.'.$request->back_view_image->extension();
 
-            $path_back_view_image = Storage::disk('s3')->put("product/large/" . $filename_back_view_image, $file_back_view_image, 'public');
-            $path_back_view_image = Storage::disk('s3')->url($path_back_view_image);
-        }else{
-            $filename_back_view_image ='';
-            $path_back_view_image = '';
+            $filename_back_view_image = $request->file('back_view_image')->hashname();
+
+            $imagelarge = Image::make($request->file('back_view_image'))->resize(439, 398);
+            Storage::disk('s3')->put('product/large/'.$filename_back_view_image, $imagelarge->stream(), 'public');
+            $large = Storage::disk('s3')->url('product/large/'.$filename_back_view_image);
+            $imagedata[] = array('image_url'=>$large,'image_size'=>'large','image_category'=>'back_view_image');
+
+            $imagemedium = Image::make($request->file('back_view_image'))->resize(200, 200);
+            Storage::disk('s3')->put('product/medium/'.$filename_back_view_image, $imagemedium->stream(), 'public');
+            $medium = Storage::disk('s3')->url('product/medium/'.$filename_back_view_image);
+            $imagedata[] = array('image_url'=>$medium,'image_size'=>'medium','image_category'=>'back_view_image');
+
+            $imagesmall = Image::make($request->file('back_view_image'))->resize(128, 82);
+            Storage::disk('s3')->put('product/small/'.$filename_back_view_image, $imagesmall->stream(), 'public');
+            $small = Storage::disk('s3')->url('product/small/'.$filename_back_view_image);
+            $imagedata[] = array('image_url'=>$small,'image_size'=>'small','image_category'=>'back_view_image');
+
         }
 
-        if($request->side_view_image){
-            $file_side_view_image = $request->side_view_image;
-            $filename_side_view_image = time().'.'.$request->side_view_image->extension();
 
-            $path_side_view_image = Storage::disk('s3')->put("product/large/" . $filename_side_view_image, $file_side_view_image, 'public');
-            $path_side_view_image = Storage::disk('s3')->url($path_side_view_image);
-        }else{
-            $filename_side_view_image = '';
-            $path_side_view_image = '';
+        if($request->side_view_image){
+
+            $filename_side_view_image = $request->file('side_view_image')->hashname();
+
+            $imagelarge = Image::make($request->file('side_view_image'))->resize(439, 398);
+            Storage::disk('s3')->put('product/large/'.$filename_side_view_image, $imagelarge->stream(), 'public');
+            $large = Storage::disk('s3')->url('product/large/'.$filename_side_view_image);
+            $imagedata[] = array('image_url'=>$large,'image_size'=>'large','image_category'=>'side_view_image');
+
+            $imagemedium = Image::make($request->file('side_view_image'))->resize(200, 200);
+            Storage::disk('s3')->put('product/medium/'.$filename_side_view_image, $imagemedium->stream(), 'public');
+            $medium = Storage::disk('s3')->url('product/medium/'.$filename_side_view_image);
+            $imagedata[] = array('image_url'=>$medium,'image_size'=>'medium','image_category'=>'side_view_image');
+
+            $imagesmall = Image::make($request->file('side_view_image'))->resize(128, 82);
+            Storage::disk('s3')->put('product/small/'.$filename_side_view_image, $imagesmall->stream(), 'public');
+            $small = Storage::disk('s3')->url('product/small/'.$filename_side_view_image);
+            $imagedata[] = array('image_url'=>$small,'image_size'=>'small','image_category'=>'side_view_image');
+
         }
 
         if($request->open_view_image){
-            $file_open_view_image = $request->open_view_image;
-            $filename_open_view_image = time().'.'.$request->open_view_image->extension();
 
-            $path_open_view_image = Storage::disk('s3')->put("product/large/" . $filename_open_view_image, $file_open_view_image, 'public');
-            $path_open_view_image = Storage::disk('s3')->url($path_open_view_image);
-        }else{
-            $filename_open_view_image = '';
-            $path_open_view_image = '';
+            $filename_open_view_image = $request->file('open_view_image')->hashname();
+
+            $imagelarge = Image::make($request->file('open_view_image'))->resize(439, 398);
+            Storage::disk('s3')->put('product/large/'.$filename_open_view_image, $imagelarge->stream(), 'public');
+            $large = Storage::disk('s3')->url('product/large/'.$filename_open_view_image);
+            $imagedata[] = array('image_url'=>$large,'image_size'=>'large','image_category'=>'open_view_image');
+
+            $imagemedium = Image::make($request->file('open_view_image'))->resize(200, 200);
+            Storage::disk('s3')->put('product/medium/'.$filename_open_view_image, $imagemedium->stream(), 'public');
+            $medium = Storage::disk('s3')->url('product/medium/'.$filename_open_view_image);
+            $imagedata[] = array('image_url'=>$medium,'image_size'=>'medium','image_category'=>'open_view_image');
+
+            $imagesmall = Image::make($request->file('open_view_image'))->resize(128, 82);
+            Storage::disk('s3')->put('product/small/'.$filename_open_view_image, $imagesmall->stream(), 'public');
+            $small = Storage::disk('s3')->url('product/small/'.$filename_open_view_image);
+            $imagedata[] = array('image_url'=>$small,'image_size'=>'small','image_category'=>'open_view_image');
+
         }
 
         if($request->video_link){
@@ -205,16 +247,6 @@ class ProductController extends Controller
             $product->highlights                                                            = $request['highlights'];
             $product->description                                                           = $request['description'];
 
-            $product->front_view_image_name                                                 = $filename_front_view_image;
-            $product->back_view_image_name                                                  = $filename_back_view_image;
-            $product->side_view_image_name                                                  = $filename_side_view_image;
-            $product->open_view_image_name                                                  = $filename_open_view_image;
-
-            $product->front_view_image                                                      = $path_front_view_image;
-            $product->back_view_image                                                       = $path_back_view_image;
-            $product->side_view_image                                                       = $path_side_view_image;
-            $product->open_view_image                                                       = $path_open_view_image;
-
             $product->video_link                                                            = $videolink;
 
             $product->product_pdf_name                                                      = $filename_product_pdf;
@@ -245,10 +277,25 @@ class ProductController extends Controller
             $product->status                                                                = '1';
 
 		$product->save();
-
         $productId = $product->id;
-
         Product::where('id',$productId)->update(array('is_this_parent_product' => 1, 'parent_product_id' => $productId));
+
+        // SAVE PRODUCT IMAGE
+        if(!empty($imagedata)){
+            foreach($imagedata as $rowimage){
+                $productimage = new Product_image();
+                    $productimage->product_id     = $productId;
+                    $productimage->image_url      = $rowimage['image_url'];
+                    $productimage->image_size     = $rowimage['image_size'];
+                    $productimage->image_category = $rowimage['image_category'];
+                $productimage->save();
+            }
+
+        }
+
+
+
+
 
 
         // SAVE DATA FROM Product_child_variation
@@ -412,7 +459,7 @@ class ProductController extends Controller
 
         //$query = Product::get();
         \DB::statement("SET SQL_MODE=''");//this is the trick use it just before your query
-        $query = Product::with('categorys','subcategory','subcategoryitem','vendors','productchildveriation','productchildveriationitem','productwithvariation','productwithvariationitem','productwithattribute','productwithattributeitem')->where('products.vendor_id',Auth::user()->id)->get();
+        $query = Product::with('categorys','subcategory','subcategoryitem','vendors','productchildveriation','productchildveriationitem','productwithvariation','productwithvariationitem','productwithattribute','productwithattributeitem','productimage')->where('products.vendor_id',Auth::user()->id)->get();
 
 
 	    $totalData =count($query);
@@ -428,7 +475,7 @@ class ProductController extends Controller
             return $query->Subcategoryitem->sub_category_item_name;
         })
         ->addColumn('product_info', function ($query) {
-            return array('frontimage'=>$query->front_view_image,'name'=>$query->name,'skuid'=>$query->sku);
+            return array('frontimage'=>$query->productimage->image_url,'name'=>$query->name,'skuid'=>$query->sku);
            //return array('frontimage'=>$query->front_view_image);
         })
         // ->addColumn('status', function ($query) {
@@ -439,9 +486,10 @@ class ProductController extends Controller
         //     }
         //     return $mstatus;
         // })
-        ->addColumn('action', function ($query) {
-            return array('pid'=>$query->id,'catid'=>$query->category_id,'subcatid'=>$query->sub_category_id,'subcatitemid'=>$query->sub_category_id);
-        })->rawColumns(['action'])
+        ->addColumn('stock', function ($query) {
+            //return array('pid'=>$query->id,'catid'=>$query->category_id,'subcatid'=>$query->sub_category_id,'subcatitemid'=>$query->sub_category_id);
+            return array('stock' => $query->quantity);
+        })->rawColumns(['stock'])
         ->make('true');
 
 

@@ -19,10 +19,6 @@ class Product extends Model
         'name',
         'highlights',
         'description',
-        'front_view_image',
-        'back_view_image',
-        'side_view_image',
-        'open_view_image',
         'sku',
         'price',
         'sale_price',
@@ -75,7 +71,9 @@ class Product extends Model
      public function Productwithattributeitem(){
         return $this->hasOne(Product_with_attribute_item::class,'product_id');
      }
-
+     public function Productimage(){
+        return $this->hasOne(Product_image::class,'product_id');
+     }
     //  public function Productvariationitem(){
     //     return $this->hasOne(Variationitems::class,'id');
     //  }

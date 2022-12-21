@@ -1,4 +1,3 @@
-
 <?php $__env->startSection('title', 'Salesanta | SUb category wise page'); ?>
 <?php $__env->startSection('content'); ?>
 
@@ -43,26 +42,25 @@
                             </div>
                             <div class="shop-details-img-wrap">
                                 <div class="tab-content" id="myTabContent">
-                                    <div class="tab-pane fade show active" id="item-one" role="tabpanel" aria-labelledby="item-one-tab">
-                                        <div class="shop-details-img">
-                                            <img src="<?php echo e($product->front_view_image); ?>" alt="">
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane fade" id="item-two" role="tabpanel" aria-labelledby="item-two-tab">
-                                        <div class="shop-details-img">
-                                            <img src="<?php echo e($product->back_view_image); ?>" alt="">
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane fade" id="item-three" role="tabpanel" aria-labelledby="item-three-tab">
-                                        <div class="shop-details-img">
-                                            <img src="<?php echo e($product->side_view_image); ?>" alt="">
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane fade" id="item-four" role="tabpanel" aria-labelledby="item-four-tab">
-                                        <div class="shop-details-img">
-                                            <img src="<?php echo e($product->open_view_image); ?>" alt="">
-                                        </div>
-                                    </div>
+                                    
+
+                                    <?php if($productimage): ?>
+                                        <?php $__currentLoopData = $productimage; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $rowimage => $imagevalue): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <?php if($imagevalue->image_size == 'large'): ?>
+
+
+
+                                                <div class="tab-pane fade <?php if($rowimage == 0): ?> show active <?php endif; ?> " id="item-<?php echo e($rowimage); ?>" role="tabpanel" aria-labelledby="item-<?php echo e($rowimage); ?>-tab">
+                                                    <div class="shop-details-img">
+                                                        <img src="<?php echo e($imagevalue->image_url); ?>" alt="">
+                                                    </div>
+                                                </div>
+                                            <?php endif; ?>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                    <?php endif; ?>
+
+
+
                                 </div>
                             </div>
                         </div>

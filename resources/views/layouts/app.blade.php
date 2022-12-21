@@ -299,7 +299,8 @@
                                             @endphp
                                             @if ($menuheadershow)
                                                 @foreach ($menuheadershow as $rowactivemenu)
-                                                    <li><a href="{{ route('home.category-wise-landing-page',['catname='.create_slug($rowactivemenu->category_name).'&catid='.Crypt::encryptString($rowactivemenu->id)]) }}">{{ $rowactivemenu->category_name }}</a></li>
+                                                    {{-- <li><a href="{{ route('home.category-wise-landing-page',['catname='.create_slug($rowactivemenu->category_name).'&catid='.Crypt::encryptString($rowactivemenu->id)]) }}">{{ $rowactivemenu->sub_category_item_name }}</a></li> --}}
+                                                    <li><a href="{{ route('home.sub-cat-item-landing-page',['subcatitemname='.create_slug($rowactivemenu->sub_category_item_name).'&cid='.Crypt::encryptString($rowactivemenu->category_id).'&scid='.Crypt::encryptString($rowactivemenu->sub_category_id).'&sciid='.Crypt::encryptString($rowactivemenu->id)]) }}">{{ $rowactivemenu->sub_category_item_name }}</a></li>
                                                 @endforeach
                                             @endif
 

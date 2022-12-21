@@ -35,17 +35,6 @@ class CreateProductsTable extends Migration
             $table->longText('highlights')->nullable();
             $table->longText('description')->nullable();
 
-
-            $table->string('front_view_image_name');
-            $table->string('back_view_image_name')->nullable();
-            $table->string('side_view_image_name')->nullable();
-            $table->string('open_view_image_name')->nullable();
-
-            $table->string('front_view_image');
-            $table->string('back_view_image')->nullable();
-            $table->string('side_view_image')->nullable();
-            $table->string('open_view_image')->nullable();
-
             $table->string('video_link')->nullable();
 
             $table->string('product_pdf_name')->nullable();

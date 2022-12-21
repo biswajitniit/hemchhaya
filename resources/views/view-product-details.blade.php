@@ -51,7 +51,7 @@
                             </div>
                             <div class="shop-details-img-wrap">
                                 <div class="tab-content" id="myTabContent">
-                                    <div class="tab-pane fade show active" id="item-one" role="tabpanel" aria-labelledby="item-one-tab">
+                                    {{-- <div class="tab-pane fade show active" id="item-one" role="tabpanel" aria-labelledby="item-one-tab">
                                         <div class="shop-details-img">
                                             <img src="{{ $product->front_view_image }}" alt="">
                                         </div>
@@ -70,7 +70,25 @@
                                         <div class="shop-details-img">
                                             <img src="{{ $product->open_view_image }}" alt="">
                                         </div>
-                                    </div>
+                                    </div> --}}
+
+                                    @if($productimage)
+                                        @foreach ($productimage as $rowimage => $imagevalue)
+                                            @if($imagevalue->image_size == 'large')
+
+
+
+                                                <div class="tab-pane fade @if($rowimage == 0) show active @endif " id="item-{{$rowimage}}" role="tabpanel" aria-labelledby="item-{{$rowimage}}-tab">
+                                                    <div class="shop-details-img">
+                                                        <img src="{{ $imagevalue->image_url }}" alt="">
+                                                    </div>
+                                                </div>
+                                            @endif
+                                        @endforeach
+                                    @endif
+
+
+
                                 </div>
                             </div>
                         </div>

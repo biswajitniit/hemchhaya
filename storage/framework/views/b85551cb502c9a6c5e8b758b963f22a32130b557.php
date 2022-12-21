@@ -289,7 +289,8 @@
                                             ?>
                                             <?php if($menuheadershow): ?>
                                                 <?php $__currentLoopData = $menuheadershow; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $rowactivemenu): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                    <li><a href="<?php echo e(route('home.category-wise-landing-page',['catname='.create_slug($rowactivemenu->category_name).'&catid='.Crypt::encryptString($rowactivemenu->id)])); ?>"><?php echo e($rowactivemenu->category_name); ?></a></li>
+                                                    
+                                                    <li><a href="<?php echo e(route('home.sub-cat-item-landing-page',['subcatitemname='.create_slug($rowactivemenu->sub_category_item_name).'&cid='.Crypt::encryptString($rowactivemenu->category_id).'&scid='.Crypt::encryptString($rowactivemenu->sub_category_id).'&sciid='.Crypt::encryptString($rowactivemenu->id)])); ?>"><?php echo e($rowactivemenu->sub_category_item_name); ?></a></li>
                                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                             <?php endif; ?>
 

@@ -177,6 +177,7 @@ return [
         Yajra\DataTables\DataTablesServiceProvider::class,
         Darryldecode\Cart\CartServiceProvider::class,
         'Cohensive\Embed\EmbedServiceProvider',
+        Intervention\Image\ImageServiceProvider::class,
 
     ],
 
@@ -235,6 +236,7 @@ return [
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
         'Cart' => Darryldecode\Cart\Facades\CartFacade::class,
         'Embed' => 'Cohensive\Embed\Facades\Embed',
+        'Image' => Intervention\Image\Facades\Image::class,
 
     ],
 

@@ -14,6 +14,7 @@ use App\Models\Product_with_variation;
 use App\Models\Product_with_variation_item;
 use App\Models\Product_with_attribute;
 use App\Models\Product_with_attribute_item;
+use App\Models\Product_image;
 use App\Models\Variationitems;
 use App\Models\Variations;
 use Illuminate\Http\Request;
@@ -120,6 +121,21 @@ class HomeController extends Controller
     }
 
     /**
+     * Page open sub category item wise landing page
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function sub_cat_item_landing_page(Request $request){
+        $category = Categorys::where('id',Crypt::decryptString($request->cid))->where('status','1')->first();
+        $subcategory = Subcategory::where('id',Crypt::decryptString($request->scid))->where('status','1')->first();
+        $subcategoryitem = Subcategoryitem::where('sub_category_id',Crypt::decryptString($request->scid))->where('status','1')->get();
+        \DB::statement("SET SQL_MODE=''");//this is the trick use it just before your query
+        $product = Product::with('productimage')->where('category_id',Crypt::decryptString($request->cid))->where('sub_category_id',Crypt::decryptString($request->scid))->where('sub_category_item_id',Crypt::decryptString($request->sciid))->get();
+        return view('sub-category-item-wise-landing-page',compact('category','subcategory','subcategoryitem','product'));
+    }
+
+
+    /**
      * View product details
      *
      * @return \Illuminate\Contracts\Support\Renderable
@@ -135,13 +151,14 @@ class HomeController extends Controller
         $productatwithattributeitem = Product_with_attribute_item::where('product_id',Crypt::decryptString($request->pid))->get();
         //GET PRODUCT Details
         $product = Product::with('categorys','subcategory','subcategoryitem','vendors','productchildveriation','productchildveriationitem','productwithvariation','productwithvariationitem','productwithattribute','productwithattributeitem')->where('id',Crypt::decryptString($request->pid))->first();
+        $productimage = Product_image::where('product_id',Crypt::decryptString($request->pid))->get();
 
-         //echo "<pre>";
-        //print_r($productatwithattribute->toArray()); // you will see the `fee` array
-        //echo "</pre>";
-        //die();
+        // echo "<pre>";
+        // print_r($productimage->toArray()); // you will see the `fee` array
+        // echo "</pre>";
+        // die();
 
-        return view('view-product-details',compact('category','subcategory','subcategoryitem','product','variation','variationitem','productatwithattribute','productatwithattributeitem'));
+        return view('view-product-details',compact('category','subcategory','subcategoryitem','product','variation','variationitem','productatwithattribute','productatwithattributeitem','productimage'));
     }
 
 
