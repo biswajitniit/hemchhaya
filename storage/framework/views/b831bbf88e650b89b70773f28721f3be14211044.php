@@ -34,32 +34,40 @@
                         <div class="shop-details-flex-wrap _78xt5Y">
                             <div class="shop-details-nav-wrap">
                                 <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                    <li class="nav-item" role="presentation">
-                                        <a class="nav-link active" id="item-one-tab" data-toggle="tab" href="#item-one" role="tab" aria-controls="item-one" aria-selected="true"><img src="<?php echo e($product->front_view_image); ?>" alt="" /></a>
-                                    </li>
-                                    
-                                </ul>
-                            </div>
-                            <div class="shop-details-img-wrap">
-                                <div class="tab-content" id="myTabContent">
-                                    
 
                                     <?php if($productimage): ?>
-                                        <?php $__currentLoopData = $productimage; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $rowimage => $imagevalue): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                            <?php if($imagevalue->image_size == 'large'): ?>
+                                        <?php $count = 1; ?>
+                                        <?php $__currentLoopData = $productimage; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $rowimagesmall => $imagevaluesmall): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <?php if($imagevaluesmall->image_size == 'small'): ?>
 
-
-
-                                                <div class="tab-pane fade <?php if($rowimage == 0): ?> show active <?php endif; ?> " id="item-<?php echo e($rowimage); ?>" role="tabpanel" aria-labelledby="item-<?php echo e($rowimage); ?>-tab">
-                                                    <div class="shop-details-img">
-                                                        <img src="<?php echo e($imagevalue->image_url); ?>" alt="">
-                                                    </div>
-                                                </div>
+                                                <li class="nav-item" role="presentation">
+                                                    <a class="nav-link <?php if($count == 1): ?> active <?php endif; ?>" id="item-<?php echo e($count); ?>-tab" data-toggle="tab" href="#item-<?php echo e($count); ?>" role="tab" aria-controls="item-<?php echo e($count); ?>" aria-selected="true">
+                                                        <img src="<?php echo e($imagevaluesmall->image_url); ?>" alt="" />
+                                                    </a>
+                                                </li>
+                                                <?php $count++; ?>
                                             <?php endif; ?>
                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     <?php endif; ?>
 
+                                </ul>
+                            </div>
+                            <div class="shop-details-img-wrap">
+                                <div class="tab-content" id="myTabContent">
 
+                                    <?php if($productimage): ?>
+                                        <?php $countone = 1; ?>
+                                        <?php $__currentLoopData = $productimage; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $rowimage => $imagevalue): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <?php if($imagevalue->image_size == 'large'): ?>
+                                                <div class="tab-pane fade <?php if($countone == 1): ?> show active <?php endif; ?> " id="item-<?php echo e($countone); ?>" role="tabpanel" aria-labelledby="item-<?php echo e($countone); ?>-tab">
+                                                    <div class="shop-details-img">
+                                                        <img src="<?php echo e($imagevalue->image_url); ?>" alt="">
+                                                    </div>
+                                                </div>
+                                                <?php $countone++; ?>
+                                            <?php endif; ?>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                    <?php endif; ?>
 
                                 </div>
                             </div>
@@ -147,7 +155,7 @@
                                             <h6><?php echo e(Get_Attribute_Name($rowproductattribute->attribute_id)); ?></h6>
                                             <?php if($productatwithattributeitem): ?>
                                                 <?php $__currentLoopData = $productatwithattributeitem; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $rowproductatwithattributeitem): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                    <?php if($rowproductatwithattributeitem->attribute_id == $rowproductattribute->id): ?>
+                                                    <?php if($rowproductatwithattributeitem->attribute_id == $rowproductattribute->attribute_id): ?>
 
                                                         <div class="row">
                                                             <div class="col-md-4">
@@ -196,7 +204,7 @@
                                         <div class="row">
                                             <div class="col-xl-3 col-md-5">
                                                 <div class="product-desc-img">
-                                                    <img src="<?php echo e($product->front_view_image); ?>" alt="">
+                                                    <img src="<?php echo e($frontviewimage->image_url); ?>" alt="">
                                                 </div>
                                             </div>
                                             <div class="col-xl-9 col-md-7">

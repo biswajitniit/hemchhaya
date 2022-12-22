@@ -152,13 +152,14 @@ class HomeController extends Controller
         //GET PRODUCT Details
         $product = Product::with('categorys','subcategory','subcategoryitem','vendors','productchildveriation','productchildveriationitem','productwithvariation','productwithvariationitem','productwithattribute','productwithattributeitem')->where('id',Crypt::decryptString($request->pid))->first();
         $productimage = Product_image::where('product_id',Crypt::decryptString($request->pid))->get();
+        $frontviewimage = Product_image::where('product_id',Crypt::decryptString($request->pid))->where('image_size','large')->where('image_category','front_view_image')->first();
 
-        // echo "<pre>";
-        // print_r($productimage->toArray()); // you will see the `fee` array
-        // echo "</pre>";
-        // die();
+        //  echo "<pre>";
+        //  print_r($productatwithattributeitem->toArray()); // you will see the `fee` array
+        //  echo "</pre>";
+        //  die();
 
-        return view('view-product-details',compact('category','subcategory','subcategoryitem','product','variation','variationitem','productatwithattribute','productatwithattributeitem','productimage'));
+        return view('view-product-details',compact('category','subcategory','subcategoryitem','product','variation','variationitem','productatwithattribute','productatwithattributeitem','productimage','frontviewimage'));
     }
 
 
