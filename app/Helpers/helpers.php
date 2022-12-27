@@ -9,6 +9,7 @@ use App\Models\Attributecategory;
 use App\Models\Brand;
 use App\Models\Variationitems;
 use App\Models\Variations;
+use App\Models\Product_image;
 use App\Models\Cart;
 
 if (! function_exists('create_slug')) {
@@ -125,5 +126,13 @@ if (! function_exists('Get_attribute_item_name')) {
 if (! function_exists('Get_session_user_cart_info')) {
     function Get_session_user_cart_info($userid) {
        return Cart::where('user_id',$userid)->get();
+    }
+}
+
+if (! function_exists('Getimageurllarge')) {
+    function Getimageurllarge($productid) {
+      // DB::enableQueryLog(); // Enable query log
+       return Product_image::where('product_id',$productid)->where('image_size','large')->where('image_category','front_view_image')->first()->image_url;
+      // dd(DB::getQueryLog()); // Show results of log
     }
 }

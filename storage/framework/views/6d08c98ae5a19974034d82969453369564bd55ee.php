@@ -1,6 +1,5 @@
-@extends('layouts.app')
-@section('title', 'Salesanta | Cart')
-@section('content')
+<?php $__env->startSection('title', 'Salesanta | Cart'); ?>
+<?php $__env->startSection('content'); ?>
 
         <!-- main-area -->
         <main>
@@ -13,9 +12,8 @@
                             <div class="breadcrumb-content">
                                 <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb">
-                                        <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
-                                        {{-- <li class="breadcrumb-item"><a href="index.html">Pages</a></li>
-                                        <li class="breadcrumb-item active" aria-current="page">Our Blog</li> --}}
+                                        <li class="breadcrumb-item"><a href="<?php echo e(url('/')); ?>">Home</a></li>
+                                        
                                     </ol>
                                 </nav>
                             </div>
@@ -51,15 +49,15 @@
 
 
 
-                                <form action="{{ route('update-cart') }}" name="updatecartitems" method="POST">
-                                    @csrf
+                                <form action="<?php echo e(route('update-cart')); ?>" name="updatecartitems" method="POST">
+                                    <?php echo csrf_field(); ?>
                                     <div class="cart-wrapper">
                                         <div class="table-responsive">
-                                            @php
+                                            <?php
                                                 $subtotal = 0;
-                                            @endphp
+                                            ?>
 
-                                            @if(count($cart) > 0)
+                                            <?php if(count($cart) > 0): ?>
                                                 <table class="table mb-0">
                                                     <thead>
                                                         <tr>
@@ -73,59 +71,48 @@
                                                     </thead>
                                                     <tbody>
 
-                                                            @foreach ($cart as $row)
-                                                            @php
+                                                            <?php $__currentLoopData = $cart; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                            <?php
                                                                 $subtotal = $subtotal + ($row->price * $row->qty);
-                                                            @endphp
+                                                            ?>
                                                                 <tr>
-                                                                    <td class="product-thumbnail"><a href="shop-details.html"><img src="{{ $row->image }}" alt=""></a></td>
+                                                                    <td class="product-thumbnail"><a href="shop-details.html"><img src="<?php echo e($row->image); ?>" alt=""></a></td>
                                                                     <td class="product-name">
-                                                                        <h4><a href="shop-details.html">{{ $row->name }}</a></h4>
+                                                                        <h4><a href="shop-details.html"><?php echo e($row->name); ?></a></h4>
                                                                     </td>
-                                                                    <td class="product-price">&#8377; {{ $row->price }}</td>
+                                                                    <td class="product-price">&#8377; <?php echo e($row->price); ?></td>
                                                                     <td class="product-quantity">
                                                                         <div class="cart--plus--minus">
-                                                                            {{-- <form action="#" class="num-block">
-                                                                                <div class="num-block">
-                                                                                    <input type="number" class="in-num" value="{{ $row->qty }}" readonly="">
-                                                                                    <div class="qtybutton-box">
-                                                                                        <span class="plus" onchange="Cartitemplus()"><i class="fas fa-angle-up"></i></span>
-                                                                                        <span class="minus dis"><i class="fas fa-angle-down"></i></span>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </form> --}}
-                                                                            <input type="hidden" name="rowid[]" value="{{ $row->id }}">
-                                                                            <input type="number" id="quantity" name="quantity[]" min="1" max="99" value="{{ $row->qty }}">
+                                                                            
+                                                                            <input type="hidden" name="rowid[]" value="<?php echo e($row->id); ?>">
+                                                                            <input type="number" id="quantity" name="quantity[]" min="1" max="99" value="<?php echo e($row->qty); ?>">
                                                                         </div>
                                                                     </td>
-                                                                    <td class="product-subtotal"><span>&#8377; {{ $row->price * $row->qty }}</span></td>
-                                                                    <td class="product-delete"><a href="{{ route('remove-cart-item',['rowid='.Crypt::encryptString($row->id)]) }}"><i class="far fa-trash-alt"></i></a></td>
+                                                                    <td class="product-subtotal"><span>&#8377; <?php echo e($row->price * $row->qty); ?></span></td>
+                                                                    <td class="product-delete"><a href="<?php echo e(route('remove-cart-item',['rowid='.Crypt::encryptString($row->id)])); ?>"><i class="far fa-trash-alt"></i></a></td>
                                                                 </tr>
 
-                                                            @endforeach
+                                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
                                                     </tbody>
                                                 </table>
-                                            @else
+                                            <?php else: ?>
                                                 <p class="text-center">Your Salesanta Cart is empty.</p>
-                                            @endif
+                                            <?php endif; ?>
 
                                         </div>
                                     </div>
                                     <div class="shop-cart-bottom">
                                         <div class="cart-coupon">
-                                            {{-- <form action="#">
-                                                <input type="text" placeholder="Enter Coupon Code...">
-                                                <button class="btn">Apply Coupon</button>
-                                            </form> --}}
+                                            
                                         </div>
 
-                                        @if(count($cart) > 0)
+                                        <?php if(count($cart) > 0): ?>
                                         <div class="continue-shopping">
-                                            {{-- <a href="shop.html" class="btn">update Cart</a> --}}
+                                            
                                             <button type="submit" name="submit" class="btn">update Cart</button>
                                         </div>
-                                        @endif
+                                        <?php endif; ?>
 
                                     </div>
 
@@ -136,17 +123,17 @@
                                 </form>
                             </div>
 
-                            @if(count($cart) > 0)
+                            <?php if(count($cart) > 0): ?>
                                 <div class="col-xl-5 col-lg-12">
                                     <div class="shop-cart-total">
                                         <h3 class="title">PRICE DETAILS</h3>
                                         <div class="shop-cart-widget">
                                             <form action="#">
                                                 <ul>
-                                                    <li class="sub-total"><span>Price ({{count($cart)}} item)</span> &#8377; {{ $subtotal }}</li>
+                                                    <li class="sub-total"><span>Price (<?php echo e(count($cart)); ?> item)</span> &#8377; <?php echo e($subtotal); ?></li>
                                                     <li class="sub-total"><span>Delivery Charges</span> &#8377; 5</li>
 
-                                                    <li class="cart-total-amount"><span>Total Payable</span> <span class="amount">&#8377; {{ $subtotal + 5}}</span></li>
+                                                    <li class="cart-total-amount"><span>Total Payable</span> <span class="amount">&#8377; <?php echo e($subtotal + 5); ?></span></li>
                                                 </ul>
 
                                                 <div class="payment-method-info">
@@ -162,17 +149,17 @@
                                                             <input type="checkbox" class="custom-control-input" id="customCheck6">
                                                             <label class="custom-control-label" for="customCheck6">Pay with Razorpay</label>
                                                         </div>
-                                                        <div class="paypal-logo"><img src="{{ asset('frontend/img/images/card.png') }}" alt=""></div>
+                                                        <div class="paypal-logo"><img src="<?php echo e(asset('frontend/img/images/card.png')); ?>" alt=""></div>
                                                     </div>
                                                 </div>
 
-                                                <a href="{{ route('razorpay-payment',['payableamount='.$subtotal])  }}" class="btn">Place order</a>
-                                                {{-- <a href="{{ route('checkout')  }}" class="btn">PROCEED TO CHECKOUT</a> --}}
+                                                <a href="<?php echo e(route('razorpay-payment',['payableamount='.$subtotal])); ?>" class="btn">Place order</a>
+                                                
                                             </form>
                                         </div>
                                     </div>
                                 </div>
-                            @endif
+                            <?php endif; ?>
 
 
 
@@ -184,13 +171,15 @@
         </main>
         <!-- main-area-end -->
 
-        @push('frontend-scripts')
+        <?php $__env->startPush('frontend-scripts'); ?>
         <script type="text/javascript">
             function Cartitemplus(){
                 alert("here"); return false;
             }
         </script>
-        @endpush('')
+        <?php $__env->stopPush(); ?>
 
 
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH E:\webdev\hemchhaya\resources\views/cart/cart.blade.php ENDPATH**/ ?>

@@ -140,9 +140,7 @@
                                     </div>
                                     <button type="submit" name="addtocart" class="btn">add to cart</button> &nbsp;
                                 </form>
-                                <form action="<?php echo e(route('cart.add-to-cart')); ?>" name="addtocart" method="POST">
-                                    <a href="#" class="btn"><i class="far fa-heart"></i></a>
-                                </form>
+                                
                             </div>
 
 

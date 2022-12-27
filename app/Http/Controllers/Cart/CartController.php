@@ -49,7 +49,7 @@ class CartController extends Controller
                     $cart->name                   = $Product->name;
                     $cart->price                  = $Product->sale_price;
                     $cart->qty                    = $request->qty;
-                    $cart->image                  = $Product->front_view_image;
+                    $cart->image                  = Getimageurllarge($request->productid);
                     $cart->attributes             = $attribute_String;
                 $cart->save();
 
@@ -57,9 +57,11 @@ class CartController extends Controller
 
             }else{
 
+
                 $Product = Product::find($request->productid); // assuming you have a Product model with id, name, description & price
                 $attributes = array('size'=>30,'color'=>'red');
                 $attribute_String = json_encode($attributes);
+
 
                 $cart = new Cart();
                     $cart->user_id                = $userId;
@@ -67,7 +69,7 @@ class CartController extends Controller
                     $cart->name                   = $Product->name;
                     $cart->price                  = $Product->sale_price;
                     $cart->qty                    = $request->qty;
-                    $cart->image                  = $Product->front_view_image;
+                    $cart->image                  = Getimageurllarge($request->productid);
                     $cart->attributes             = $attribute_String;
                 $cart->save();
 

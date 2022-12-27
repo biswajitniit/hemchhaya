@@ -136,8 +136,8 @@
                                         </div>
                                     </form>
                                 </div>
-                                <a href="#" class="btn">add to cart</a> &nbsp;
-                                <a href="#" class="btn"><i class="far fa-heart"></i></a>
+                                <a href="#" class="btn" >add to cart</a> &nbsp;
+                                <a href="#" class="btn" ><i class="far fa-heart"></i></a>
                             </div> --}}
 
                             <div class="shop-perched-info">
@@ -151,9 +151,9 @@
                                     </div>
                                     <button type="submit" name="addtocart" class="btn">add to cart</button> &nbsp;
                                 </form>
-                                <form action="{{ route('cart.add-to-cart') }}" name="addtocart" method="POST">
+                                {{-- <form action="{{ route('cart.add-to-cart') }}" name="addtocart" method="POST">
                                     <a href="#" class="btn"><i class="far fa-heart"></i></a>
-                                </form>
+                                </form> --}}
                             </div>
 
 
