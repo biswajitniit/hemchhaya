@@ -1,4 +1,3 @@
-
 <?php $__env->startSection('title', 'Salesanta | SUb category item wise page'); ?>
 <?php $__env->startSection('content'); ?>
 

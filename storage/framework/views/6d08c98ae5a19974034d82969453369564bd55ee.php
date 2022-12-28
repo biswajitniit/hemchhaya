@@ -24,23 +24,9 @@
             <!-- breadcrumb-area-end -->
 
             <!-- cart-area -->
-            <div class="cart-area pt-90 pb-90">
+            <div class="cart-area pt-25 pb-15">
 
-                <section>
-                    <div class="container">
-
-                        <div class="row">
-                            <div class="col-xl-6">
-                                <h6>Delivery to : Biswajit Maity, 713216</h6>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                            </div>
-                            <div class="col-xl-2">
-                                <a href="#" class="btn btn-light" id="myBtn">Change</a>
-                            </div>
-                        </div>
-                        <hr>
-                    </div>
-                </section>
+                
                 <div class="container">
                     <div class="row justify-content-center">
 

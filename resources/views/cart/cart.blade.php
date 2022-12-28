@@ -26,11 +26,10 @@
             <!-- breadcrumb-area-end -->
 
             <!-- cart-area -->
-            <div class="cart-area pt-90 pb-90">
+            <div class="cart-area pt-25 pb-15">
 
-                <section>
+                {{-- <section>
                     <div class="container">
-
                         <div class="row">
                             <div class="col-xl-6">
                                 <h6>Delivery to : Biswajit Maity, 713216</h6>
@@ -42,7 +41,7 @@
                         </div>
                         <hr>
                     </div>
-                </section>
+                </section> --}}
                 <div class="container">
                     <div class="row justify-content-center">
 

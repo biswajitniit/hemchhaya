@@ -136,3 +136,11 @@ if (! function_exists('Getimageurllarge')) {
       // dd(DB::getQueryLog()); // Show results of log
     }
 }
+
+if (! function_exists('Checkuseralreadyaddedtocart')) {
+    function Checkuseralreadyaddedtocart($userid,$productid) {
+      // DB::enableQueryLog(); // Enable query log
+       return Cart::where('user_id',$userid)->where('product_id',$productid)->count();
+      // dd(DB::getQueryLog()); // Show results of log
+    }
+}

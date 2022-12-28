@@ -1,4 +1,4 @@
-<?php $__env->startSection('title', 'Salesanta | SUb category wise page'); ?>
+<?php $__env->startSection('title', 'Salesanta | Product details page'); ?>
 <?php $__env->startSection('content'); ?>
 
     <!-- main-area -->
@@ -13,9 +13,7 @@
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="<?php echo e(url('/')); ?>">Home</a></li>
-                                    <li class="breadcrumb-item"><a href="<?php echo e(url('/')); ?>"><?php echo e($category->category_name); ?></a></li>
-                                    <li class="breadcrumb-item"><a href="<?php echo e(url('/')); ?>"><?php echo e($subcategory->sub_category_name); ?></a></li>
-                                    <li class="breadcrumb-item"><a href="<?php echo e(url('/')); ?>"><?php echo e($subcategoryitem->sub_category_item_name); ?></a></li>
+                                    <li class="breadcrumb-item"><a href="<?php echo e(route('home.sub-cat-item-landing-page',['subcatitemname='.create_slug($subcategoryitem->sub_category_item_name).'&cid='.Crypt::encryptString($category->id).'&scid='.Crypt::encryptString($subcategory->id).'&sciid='.Crypt::encryptString($subcategoryitem->id)])); ?>"><?php echo e($subcategoryitem->sub_category_item_name); ?></a></li>
                                     <li class="breadcrumb-item active" aria-current="page"><?php echo e($product->name); ?></li>
                                 </ol>
                             </nav>
@@ -27,7 +25,7 @@
         <!-- breadcrumb-area-end -->
 
         <!-- shop-details-area -->
-        <section class="shop-details-area pt-90 pb-90">
+        <section class="shop-details-area pt-15 pb-15">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-6">
@@ -127,21 +125,42 @@
                             <div class="shop-details-list">
                                 <?php echo $product->highlights ?>
                             </div>
-                            
 
-                            <div class="shop-perched-info">
-                                <form action="<?php echo e(route('cart.add-to-cart')); ?>" name="addtocart" method="POST">
-                                    <?php echo csrf_field(); ?>
-                                    <input type="hidden" name="productid" value="<?php echo e($product->id); ?>">
-                                    <div class="sd-cart-wrap">
-                                        <div class="cart-plus-minus">
-                                            <input type="text" name="qty" value="1">
-                                        </div>
-                                    </div>
-                                    <button type="submit" name="addtocart" class="btn">add to cart</button> &nbsp;
-                                </form>
-                                
-                            </div>
+
+                            <?php if(Auth::user()): ?>
+                                <?php
+                                    $countcartexistcheck = Checkuseralreadyaddedtocart(Auth::user()->id,$product->id);
+                                ?>
+                                <?php if($countcartexistcheck > 0): ?>
+                                <div class="shop-perched-info">
+                                    <a href="<?php echo e(route('cart')); ?>" class="btn">Go to cart</a>
+                                </div>
+
+                                <?php else: ?>
+                                <div class="shop-perched-info">
+                                    <form action="<?php echo e(route('cart.add-to-cart')); ?>" name="addtocart" method="POST">
+                                        <?php echo csrf_field(); ?>
+                                        <input type="hidden" name="productid" value="<?php echo e($product->id); ?>">
+                                        <input type="hidden" name="qty" value="1">
+                                        <button type="submit" name="addtocart" class="btn">add to cart</button> &nbsp;
+                                    </form>
+                                </div>
+                                <?php endif; ?>
+
+                            <?php else: ?>
+                                <div class="shop-perched-info">
+                                    <form action="<?php echo e(route('cart.add-to-cart')); ?>" name="addtocart" method="POST">
+                                        <?php echo csrf_field(); ?>
+                                        <input type="hidden" name="productid" value="<?php echo e($product->id); ?>">
+                                        <input type="hidden" name="qty" value="1">
+                                        <button type="submit" name="addtocart" class="btn">add to cart</button> &nbsp;
+                                    </form>
+                                    
+                                </div>
+
+                            <?php endif; ?>
+
+
 
 
                             
@@ -170,82 +189,37 @@
                                                     <?php endif; ?>
                                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                             <?php endif; ?>
+
                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                  <?php endif; ?>
 
+                                 <h6>Description</h6>
+                                 <div class="row">
+                                     <div class="col-md-4">
+                                         <p>Description</p>
+                                     </div>
+                                     <div class="col-md-8">
+                                             <?php echo $product->description ?>
+                                     </div>
+                                 </div>
+
+                                 <h6>Ratings & Reviews</h6>
+                                 <div class="row">
+                                     <div class="col-md-4">
+                                         <p>Description</p>
+                                     </div>
+                                     <div class="col-md-8">
+                                             <?php echo $product->description ?>
+                                     </div>
+                                 </div>
+
+
                             </div>
-
-
 
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-12">
-                        <div class="product-desc-wrap">
-                            <ul class="nav nav-tabs" id="myTabTwo" role="tablist">
-                                <li class="nav-item">
-                                    <a class="nav-link active" id="details-tab" data-toggle="tab" href="#details"
-                                        role="tab" aria-controls="details" aria-selected="true">Product Details</a>
-                                </li>
 
-                                <li class="nav-item">
-                                    <a class="nav-link" id="review-tab" data-toggle="tab" href="#review" role="tab"
-                                        aria-controls="review" aria-selected="false">Product Reviews</a>
-                                </li>
-                            </ul>
-                            <div class="tab-content" id="myTabContentTwo">
-                                <div class="tab-pane fade show active" id="details" role="tabpanel"
-                                    aria-labelledby="details-tab">
-                                    <div class="product-desc-content">
-                                        <h4 class="title">Product Details</h4>
-                                        <div class="row">
-                                            <div class="col-xl-3 col-md-5">
-                                                <div class="product-desc-img">
-                                                    <img src="<?php echo e($frontviewimage->image_url); ?>" alt="">
-                                                </div>
-                                            </div>
-                                            <div class="col-xl-9 col-md-7">
-                                                <?php echo $product->description ?>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="tab-pane fade" id="review" role="tabpanel" aria-labelledby="review-tab">
-                                    <div class="product-desc-content">
-                                        <h4 class="title">Product Details</h4>
-                                        <div class="row">
-                                            <div class="col-xl-3 col-md-5">
-                                                <div class="product-desc-img">
-                                                    <img src="img/product/desc_img.jpg" alt="">
-                                                </div>
-                                            </div>
-                                            <div class="col-xl-9 col-md-7">
-                                                <h5 class="small-title">100% Natural Vitamin</h5>
-                                                <p>Cramond Leopard & Pythong Print Anorak Jacket In Beige but also the
-                                                    leap into electronic typesetting, remaining Lorem
-                                                    Ipsum is simply dummy text of the printing and typesetting industry.
-                                                    Lorem Ipsum has been the industry's standard dummy
-                                                    text ever since the 1500s, when an unknown printer took a galley of
-                                                    type and scrambled it to make a type specimen book.</p>
-                                                <ul class="product-desc-list">
-                                                    <li>65% poly, 35% rayon</li>
-                                                    <li>Hand wash cold</li>
-                                                    <li>Partially lined</li>
-                                                    <li>Hidden front button closure with keyhole accents</li>
-                                                    <li>Button cuff sleeves</li>
-                                                    <li>Lightweight semi-sheer fabrication</li>
-                                                    <li>Made in USA</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </section>
         <!-- shop-details-area-end -->
