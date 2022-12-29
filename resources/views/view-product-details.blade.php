@@ -121,7 +121,7 @@
 
                             </div>
 
-                            <?php echo substr($product->description,0,240).'...'; ?>
+
 
                             <div class="shop-details-list">
                                 <?php echo $product->highlights ?>
@@ -208,25 +208,25 @@
                                     @endforeach
                                  @endif
 
-                                 <h6>Description</h6>
-                                 <div class="row">
-                                     <div class="col-md-4">
-                                         <p>Description</p>
-                                     </div>
-                                     <div class="col-md-8">
-                                             <?php echo $product->description ?>
-                                     </div>
-                                 </div>
+                                <h6>Description</h6>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <p>Description</p>
+                                    </div>
+                                    <div class="col-md-8">
+                                            <?php echo $product->description ?>
+                                    </div>
+                                </div>
 
-                                 <h6>Ratings & Reviews</h6>
-                                 <div class="row">
-                                     <div class="col-md-4">
-                                         <p>Description</p>
-                                     </div>
-                                     <div class="col-md-8">
-                                             <?php echo $product->description ?>
-                                     </div>
-                                 </div>
+                                {{-- <h6>Ratings & Reviews</h6>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <p>Description</p>
+                                    </div>
+                                    <div class="col-md-8">
+                                            <?php echo $product->description ?>
+                                    </div>
+                                </div> --}}
 
 
                             </div>
@@ -240,7 +240,7 @@
         <!-- shop-details-area-end -->
 
         <!-- coupon-area -->
-        <div class="coupon-area">
+        {{-- <div class="coupon-area">
             <div class="container">
                 <div class="row">
                     <div class="col-12">
@@ -257,11 +257,11 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
         <!-- coupon-area-end -->
 
         <!-- best-sellers-area -->
-        {{-- <section class="best-sellers-area pt-85 pb-70">
+        <section class="best-sellers-area pt-25 pb-15">
             <div class="container">
                 <div class="row align-items-end mb-40">
                     <div class="col-md-8 col-sm-9">
@@ -416,7 +416,7 @@
                     </div>
                 </div>
             </div>
-        </section> --}}
+        </section>
         <!-- best-sellers-area-end -->
 
     </main>

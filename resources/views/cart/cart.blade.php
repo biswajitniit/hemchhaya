@@ -28,7 +28,7 @@
             <!-- cart-area -->
             <div class="cart-area pt-25 pb-15">
 
-                {{-- <section>
+                <section>
                     <div class="container">
                         <div class="row">
                             <div class="col-xl-6">
@@ -41,7 +41,7 @@
                         </div>
                         <hr>
                     </div>
-                </section> --}}
+                </section>
                 <div class="container">
                     <div class="row justify-content-center">
 
