@@ -142,7 +142,7 @@
 
                                         <li class="header-cart-action">
                                             <div class="header-cart-wrap">
-                                                <a href="cart.html"><i class="flaticon-shopping-basket"></i></a>
+                                                <a href="<?php echo e(url('cart')); ?>"><i class="flaticon-shopping-basket"></i></a>
                                                 <span class="item-count">
                                                     <?php if(Auth::check()): ?>
                                                         <?php

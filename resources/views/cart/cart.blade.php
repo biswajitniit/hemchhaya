@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Salesanta | Cart')
+@section('title', 'Salesanta | Shopping cart')
 @section('content')
 
         <!-- main-area -->
@@ -14,8 +14,8 @@
                                 <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb">
                                         <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
-                                        {{-- <li class="breadcrumb-item"><a href="index.html">Pages</a></li>
-                                        <li class="breadcrumb-item active" aria-current="page">Our Blog</li> --}}
+                                        {{-- <li class="breadcrumb-item"><a href="index.html">Pages</a></li>--}}
+                                        <li class="breadcrumb-item active" aria-current="page">Shopping cart</li>
                                     </ol>
                                 </nav>
                             </div>
@@ -28,7 +28,7 @@
             <!-- cart-area -->
             <div class="cart-area pt-25 pb-15">
 
-                <section>
+                {{-- <section>
                     <div class="container">
                         <div class="row">
                             <div class="col-xl-6">
@@ -41,15 +41,11 @@
                         </div>
                         <hr>
                     </div>
-                </section>
+                </section> --}}
                 <div class="container">
                     <div class="row justify-content-center">
 
                             <div class="col-xl-7">
-
-
-
-
                                 <form action="{{ route('update-cart') }}" name="updatecartitems" method="POST">
                                     @csrf
                                     <div class="cart-wrapper">

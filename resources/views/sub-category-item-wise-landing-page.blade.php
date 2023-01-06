@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Salesanta | SUb category item wise page')
+@section('title', 'Salesanta | Listing page sub category item')
 @section('content')
 
 
@@ -28,7 +28,7 @@
     <!-- breadcrumb-area-end -->
 
     <!-- shop-area -->
-    <section class="shop--area pt-90 pb-90">
+    <section class="shop--area pt-40 pb-15">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-3 order-2 order-lg-0">
@@ -61,13 +61,13 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="widget shop-widget">
+                        {{-- <div class="widget shop-widget">
                             <div class="shop-widget-title">
                                 <h6 class="title">NEW PRODUCT</h6>
                             </div>
                             <div class="sidebar-product-list">
                                 <ul>
-                                    <li>
+                                     <li>
                                         <div class="sidebar-product-thumb">
                                             <a href="shop-details.html"><img src="{{ asset('frontend/img/product/sidebar_product01.jpg') }}" alt=""></a>
                                         </div>
@@ -114,10 +114,10 @@
                                             <h5><a href="shop-details.html">Vanla Greek Pice</a></h5>
                                             <span><i class="fas fa-rupee-sign"></i>35.00</span>
                                         </div>
-                                    </li>
+                                    </li>-
                                 </ul>
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="widget shop-widget">
                             <div class="shop-widget-title">
                                 <h6 class="title">BRANDS</h6>
@@ -131,11 +131,11 @@
                                 </ul>
                             </div>
                         </div>
-                        <div class="widget">
+                        {{-- <div class="widget">
                             <div class="shop-widget-banner text-center">
                                 <a href="shop.html"><img src="{{ asset('frontend/img/product/sidebar_shop_ad.jpg') }}" alt=""></a>
                             </div>
-                        </div>
+                        </div> --}}
                     </aside>
                 </div>
                 <div class="col-9">
@@ -152,8 +152,8 @@
                             <div class="col-md-6 col-sm-7">
                                 <div class="shop-top-left">
                                     <ul>
-                                        <li><a href="#"><i class="fas fa-bars"></i> FILTER</a></li>
-                                        <li>Showing 1–9 of 80 results</li>
+                                        <li><a href="#"><i class="fas fa-bars"></i> Page 1 of 100</a></li>
+
                                     </ul>
                                 </div>
                             </div>
@@ -161,10 +161,10 @@
                                 <div class="shop-top-right">
                                     <form action="#">
                                         <select name="select">
-                                            <option value="popularity">Popularity</option>
+                                            {{-- <option value="popularity">Popularity</option> --}}
                                             <option value="price-low-to-high">Price -- Low to High</option>
                                             <option value="price-high-to-low">Price -- High to Low</option>
-                                            <option value="discount">Discount</option>
+                                            {{-- <option value="discount">Discount</option> --}}
                                         </select>
                                     </form>
                                 </div>

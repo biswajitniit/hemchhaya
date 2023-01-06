@@ -14,6 +14,7 @@
                                     <ol class="breadcrumb">
                                         <li class="breadcrumb-item"><a href="<?php echo e(url('/')); ?>">Home</a></li>
                                         
+                                        <li class="breadcrumb-item active" aria-current="page">Our Blog</li>
                                     </ol>
                                 </nav>
                             </div>
@@ -26,28 +27,11 @@
             <!-- cart-area -->
             <div class="cart-area pt-25 pb-15">
 
-                <section>
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-xl-6">
-                                <h6>Delivery to : Biswajit Maity, 713216</h6>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                            </div>
-                            <div class="col-xl-2">
-                                <a href="#" class="btn btn-light" id="myBtn">Change</a>
-                            </div>
-                        </div>
-                        <hr>
-                    </div>
-                </section>
+                
                 <div class="container">
                     <div class="row justify-content-center">
 
                             <div class="col-xl-7">
-
-
-
-
                                 <form action="<?php echo e(route('update-cart')); ?>" name="updatecartitems" method="POST">
                                     <?php echo csrf_field(); ?>
                                     <div class="cart-wrapper">
