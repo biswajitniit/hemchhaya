@@ -88,7 +88,8 @@ if (! function_exists('Get_Sub_Category_Item_List_Menu')) {
 
 if (! function_exists('Get_active_menu_show_in_header')) {
     function Get_active_menu_show_in_header() {
-       return Subcategoryitem::where('status','1')->get();
+      // return Subcategoryitem::where('menu_show_in_header','1')->where('status','1')->get();
+      return Subcategoryitem::where('status','1')->get();
     }
 }
 

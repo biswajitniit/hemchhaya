@@ -249,7 +249,7 @@
                             <div class="menu-wrap">
                                 <nav class="menu-nav">
                                     <div class="logo d-block d-lg-none">
-                                        <a href="index.html"><img src="{{ asset('frontend/img/logo/logo.png') }}" alt=""></a>
+                                        <a href="{{ url('/') }}"><img src="{{ asset('frontend/img/logo/logo.png') }}" alt=""></a>
                                     </div>
                                     <div class="header-category d-none d-lg-block">
                                         <a href="#" class="cat-toggle"><i class="fas fa-bars"></i>ALL Categories<i class="fas fa-angle-down"></i></a>
