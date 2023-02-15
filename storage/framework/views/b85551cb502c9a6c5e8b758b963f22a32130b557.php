@@ -243,42 +243,7 @@
                                     </div>
                                     <div class="header-category d-none d-lg-block">
                                         <a href="#" class="cat-toggle"><i class="fas fa-bars"></i>ALL Categories<i class="fas fa-angle-down"></i></a>
-                                        <ul class="category-menu">
-                                            <?php
-                                                $getCategory = Get_Category_List_Menu();
-                                            ?>
-                                            <?php if($getCategory): ?>
-                                                <?php $__currentLoopData = $getCategory; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $rowcategory): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                    <?php if($rowcategory->menu_dropdown): ?> <!-- // FOR MENU DROP DOWN -->
-                                                        <li class="menu-item-has-children"><a href="<?php echo e(url('/')); ?>"><i class="flaticon-groceries"></i> <?php echo e($rowcategory->category_name); ?></a>
-                                                            <ul class="megamenu">
-                                                                <?php
-                                                                  $getSubCategory = Get_Sub_Category_List_Menu($rowcategory->id);
-                                                                ?>
-                                                                <?php if($getSubCategory): ?>
-                                                                    <?php $__currentLoopData = $getSubCategory; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $rowsubcategory): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                                        <li class="sub-column-item"><a href="<?php echo e(url('/')); ?>"><?php echo e($rowsubcategory->sub_category_name); ?></a>
-                                                                            <ul>
-                                                                                <?php
-                                                                                    $getSubCategoryItem = Get_Sub_Category_Item_List_Menu($rowsubcategory->id);
-                                                                                ?>
-                                                                                <?php if($getSubCategoryItem): ?>
-                                                                                    <?php $__currentLoopData = $getSubCategoryItem; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $rowsubcategoryitem): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                                                        <li><a href="<?php echo e(url('/')); ?>"><?php echo e($rowsubcategoryitem->sub_category_item_name); ?></a></li>
-                                                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                                                                <?php endif; ?>
-                                                                            </ul>
-                                                                        </li>
-                                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                                                <?php endif; ?>
-                                                            </ul>
-                                                        </li>
-                                                    <?php else: ?> <!-- // FOR MENU SINGLE -->
-                                                        <li><a href="<?php echo e(url('/')); ?>"><i class="flaticon-broccoli"></i> <?php echo e($rowcategory->category_name); ?> </a></li>
-                                                    <?php endif; ?>
-                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                            <?php endif; ?>
-                                        </ul>
+
                                     </div>
                                     <div class="navbar-wrap main-menu d-none d-lg-flex">
                                         <ul class="navigation">
