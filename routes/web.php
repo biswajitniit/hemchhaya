@@ -299,6 +299,8 @@ Route::any('/admin/get_attributecat_with_attribute_on_product_page', [ProductCon
 
     Route::get('/sub-cat-item-landing-page',[HomeController::class, 'sub_cat_item_landing_page'])->name('home.sub-cat-item-landing-page');
 
+    Route::get('/all-subcategory-item-list',[HomeController::class, 'all_subcategory_item_list'])->name('all-subcategory-item-list');
+
 
     // cms pages
     Route::get('/about-us',[HomeController::class,'about_us'])->name('about-us');

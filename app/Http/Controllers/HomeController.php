@@ -134,6 +134,15 @@ class HomeController extends Controller
         return view('sub-category-item-wise-landing-page',compact('category','subcategory','subcategoryitem','product'));
     }
 
+        /**
+     * Page open sub category item wise landing page
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function all_subcategory_item_list(Request $request){
+        $subcategoryitem =  Subcategoryitem::where('status','1')->get();
+        return view('all-subcategory-item-list',compact('subcategoryitem'));
+    }
 
     /**
      * View product details

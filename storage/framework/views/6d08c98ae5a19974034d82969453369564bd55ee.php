@@ -1,4 +1,5 @@
-<?php $__env->startSection('title', 'Salesanta | Cart'); ?>
+
+<?php $__env->startSection('title', 'Salesanta | Shopping cart'); ?>
 <?php $__env->startSection('content'); ?>
 
         <!-- main-area -->
@@ -14,7 +15,7 @@
                                     <ol class="breadcrumb">
                                         <li class="breadcrumb-item"><a href="<?php echo e(url('/')); ?>">Home</a></li>
                                         
-                                        <li class="breadcrumb-item active" aria-current="page">Our Blog</li>
+                                        <li class="breadcrumb-item active" aria-current="page">Shopping cart</li>
                                     </ol>
                                 </nav>
                             </div>

@@ -21,6 +21,9 @@
         <link rel="stylesheet" href="<?php echo e(asset('frontend/css/default.css')); ?>">
         <link rel="stylesheet" href="<?php echo e(asset('frontend/css/style.css')); ?>">
         <link rel="stylesheet" href="<?php echo e(asset('frontend/css/responsive.css')); ?>">
+        <style type="text/css">
+
+        </style>
 </head>
 <body>
 		<!-- Scroll-top -->
@@ -43,28 +46,80 @@
                         <div class="col-md-7">
                             <div class="header-top-left">
                                 <ul>
-                                    <!-- <li class="header-top-lang">
+                                     <li class="header-top-lang">
+                                        
                                         <div class="dropdown">
-                                            <button class="dropdown-toggle" type="button" id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true"
-                                                aria-expanded="false">English</button>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
-                                                <a class="dropdown-item" href="index.html">Spanish</a>
-                                                <a class="dropdown-item" href="index.html">Chinese</a>
-                                                <a class="dropdown-item" href="index.html">Hindi</a>
-                                            </div>
+                                            <a id="google_translate_element"></a>
                                         </div>
-                                    </li> -->
-                                    <!-- <li class="header-top-currency">
+                                    </li>
+                                    <li class="header-top-currency">
                                         <div class="dropdown">
                                             <button class="dropdown-toggle" type="button" id="dropdownMenuButton3" data-toggle="dropdown" aria-haspopup="true"
                                                 aria-expanded="false">USD - US Dollar</button>
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton3">
-                                                <a class="dropdown-item" href="index.html">INR - IN Rupe</a>
-                                                <a class="dropdown-item" href="index.html">BDT - BD Taka</a>
-                                                <a class="dropdown-item" href="index.html">SAR - SA Riyal</a>
+                                                <a class="dropdown-item" href="index.html">USD</span> - US Dollar (Default)</span></a>
+                                                <a class="dropdown-item" href="index.html">CLP</span> - Chilean Peso</span></a>
+                                                <a class="dropdown-item" href="index.html">COP</span> - Colombian Peso</span></a>
+                                                <a class="dropdown-item" href="index.html">HKD</span> - Hong Kong Dollar</a>
+                                                <a class="dropdown-item" href="index.html">ILS</span> - Israeli New Shekel</a>
+                                                <a class="dropdown-item" href="index.html">KRW</span> - South Korean Won</a>
+                                                <a class="dropdown-item" href="index.html">MYR</span> - Malaysian Ringgit</a>
+                                                <a class="dropdown-item" href="index.html">NZD</span> - New Zealand Dollar</span></a>
+                                                <a class="dropdown-item" href="index.html">TWD</span> - New Taiwan Dollar</span></a>
+                                                <a class="dropdown-item" href="index.html">CRC</span> - Costa Rican Colón</span></a>
+                                                <a class="dropdown-item" href="index.html">PEN</span> - Peruvian Sol</span></a>
+                                                <a class="dropdown-item" href="index.html">BRL</span> - Brazilian Real</span></a>
+                                                <a class="dropdown-item" href="index.html">AUD</span> - Australian Dollar</span></a>
+                                                <a class="dropdown-item" href="index.html">CAD</span> - Canadian Dollar</span></a>
+                                                <a class="dropdown-item" href="index.html">CNY</span> - Chinese Yuan</span></a>
+                                                <a class="dropdown-item" href="index.html">EUR</span> - Euro</span></a>
+                                                <a class="dropdown-item" href="index.html">JPY</span> - Japanese Yen</span></a>
+                                                <a class="dropdown-item" href="index.html">MXN</span> - Mexican Peso</span></a>
+                                                <a class="dropdown-item" href="index.html">GBP</span> - British Pound</span></a>
+                                                <a class="dropdown-item" href="index.html">AED</span> - United Arab Emirates Dirham</span></a>
+                                                <a class="dropdown-item" href="index.html">SGD</span> - Singapore Dollar</span></a>
+                                                <a class="dropdown-item" href="index.html">SAR</span> - Saudi Riyal</span></a>
+                                                <a class="dropdown-item" href="index.html">NOK</span> - Norwegian Krone</span></a>
+                                                <a class="dropdown-item" href="index.html">ARS</span> - Argentine Peso</span></a>
+                                                <a class="dropdown-item" href="index.html">AMD</span> - Armenian Dram</span></a>
+                                                <a class="dropdown-item" href="index.html">AWG</span> - Aruban Florin</span></a>
+                                                <a class="dropdown-item" href="index.html">AZN</span> - Azerbaijani Manat</span></a>
+                                                <a class="dropdown-item" href="index.html">BSD</span> - Bahamian Dollar</span></a>
+                                                <a class="dropdown-item" href="index.html">BZD</span> - Belize Dollar</span></a>
+                                                <a class="dropdown-item" href="index.html">BOB</span> - Bolivian Boliviano</span></a>
+                                                <a class="dropdown-item" href="index.html">BND</span> - Brunei Dollar</span></a>
+                                                <a class="dropdown-item" href="index.html">BGN</span> - Bulgarian Lev</span></a>
+                                                <a class="dropdown-item" href="index.html">KHR</span> - Cambodian Riel</span></a>
+                                                <a class="dropdown-item" href="index.html">KYD</span> - Cayman Islands Dollar</span></a>
+                                                <a class="dropdown-item" href="index.html">DOP</span> - Dominican Peso</span></a>
+                                                <a class="dropdown-item" href="index.html">XCD</span> - East Caribbean Dollar</span></a>
+                                                <a class="dropdown-item" href="index.html">EGP</span> - Egyptian Pound</span></a>
+                                                <a class="dropdown-item" href="index.html">GHS</span> - Ghanaian Cedi</span></a>
+                                                <a class="dropdown-item" href="index.html">GTQ</span> - Guatemalan Quetzal</span></a>
+                                                <a class="dropdown-item" href="index.html">HUF</span> - Hungarian Forint</span></a>
+                                                <a class="dropdown-item" href="index.html">INR</span> - Indian Rupee</span></a>
+                                                <a class="dropdown-item" href="index.html">JMD</span> - Jamaican Dollar</span></a>
+                                                <a class="dropdown-item" href="index.html">KZT</span> - Kazakhstani Tenge</span></a>
+                                                <a class="dropdown-item" href="index.html">KES</span> - Kenyan Shilling</span></a>
+                                                <a class="dropdown-item" href="index.html">LBP</span> - Lebanese Pound</span></a>
+                                                <a class="dropdown-item" href="index.html">HNL</span> - Honduran Lempira</span></a>
+                                                <a class="dropdown-item" href="index.html">MOP</span> - Macanese Pataca</span></a>
+                                                <a class="dropdown-item" href="index.html">MUR</span> - Mauritian Rupee</span></a>
+                                                <a class="dropdown-item" href="index.html">MAD</span> - Moroccan Dirham</span></a>
+                                                <a class="dropdown-item" href="index.html">NAD</span> - Namibian Dollar</span></a>
+                                                <a class="dropdown-item" href="index.html">NGN</span> - Nigerian Naira</span></a>
+
+                                                <a class="dropdown-item" href="index.html">PAB</span> - Panamanian Balboa</span></a></a>
+                                                <a class="dropdown-item" href="index.html">PYG</span> - Paraguayan Guarani</span></a>
+                                                <a class="dropdown-item" href="index.html">QAR</span> - Qatari Riyal</span></a>
+                                                <a class="dropdown-item" href="index.html">RUB</span> - Russian Ruble</span></a>
+                                                <a class="dropdown-item" href="index.html">ZAR</span> - South African Rand</span></a>
+                                                <a class="dropdown-item" href="index.html">TZS</span> - Tanzanian Shilling</span></a>
+                                                <a class="dropdown-item" href="index.html">PHP</span> - Philippine Peso</span></a>
+                                                <a class="dropdown-item" href="index.html">TTD</span> - Trinidad &amp; Tobago Dollar</span></a></a>
                                             </div>
                                         </div>
-                                    </li> -->
+                                    </li>
                                         <li class="header-work-time">
                                             Working time: <span> Mon - Sat : 8:00 - 21:0</span>
                                         </li>
@@ -243,6 +298,19 @@
                                     </div>
                                     <div class="header-category d-none d-lg-block">
                                         <a href="#" class="cat-toggle"><i class="fas fa-bars"></i>ALL Categories<i class="fas fa-angle-down"></i></a>
+                                        <ul class="category-menu">
+
+                                            <?php
+                                            $menuheadershow = Get_active_menu_show_in_header();
+                                            ?>
+                                            <?php if($menuheadershow): ?>
+                                                <?php $__currentLoopData = $menuheadershow; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $rowactivemenu): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                    <li><a href="<?php echo e(route('home.sub-cat-item-landing-page',['subcatitemname='.create_slug($rowactivemenu->sub_category_item_name).'&cid='.Crypt::encryptString($rowactivemenu->category_id).'&scid='.Crypt::encryptString($rowactivemenu->sub_category_id).'&sciid='.Crypt::encryptString($rowactivemenu->id)])); ?>"><?php echo e($rowactivemenu->sub_category_item_name); ?></a></li>
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                            <?php endif; ?>
+                                            <li><a href="<?php echo e(route('all-subcategory-item-list')); ?>"> <i class="fa fa-plus" aria-hidden="true"></i>  More Categories </a></li>
+
+                                        </ul>
 
                                     </div>
                                     <div class="navbar-wrap main-menu d-none d-lg-flex">
@@ -441,6 +509,12 @@
         <script src="<?php echo e(asset('frontend/js/plugins.js')); ?>"></script>
         <script src="<?php echo e(asset('frontend/js/main.js')); ?>"></script>
 
+        <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+        <script type="">
+            function googleTranslateElementInit() {
+                new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+            }
+        </script>
         <?php echo $__env->yieldPushContent('frontend-scripts'); ?>
     </body>
 </html>

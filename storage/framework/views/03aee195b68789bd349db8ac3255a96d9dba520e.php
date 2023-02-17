@@ -1,4 +1,3 @@
-
 <?php $__env->startSection('title', 'Salesanta | Listing page sub category item'); ?>
 <?php $__env->startSection('content'); ?>
 
@@ -26,7 +25,7 @@
                                     <li><a href="#">All<span>+</span></a></li>
                                     <?php if($subcategoryitem): ?>
                                         <?php $__currentLoopData = $subcategoryitem; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                        <li><a href="shop.html"><?php echo e($row->sub_category_item_name); ?><span>+</span></a></li>
+                                        <li><a href="<?php echo e(route('home.sub-cat-item-landing-page',['subcatitemname='.create_slug($row->sub_category_item_name).'&cid='.Crypt::encryptString($row->category_id).'&scid='.Crypt::encryptString($row->sub_category_id).'&sciid='.Crypt::encryptString($row->id)])); ?>"><?php echo e($row->sub_category_item_name); ?><span>+</span></a></li>
                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     <?php endif; ?>
 

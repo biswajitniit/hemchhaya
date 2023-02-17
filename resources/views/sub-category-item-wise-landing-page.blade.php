@@ -42,7 +42,7 @@
                                     <li><a href="#">All<span>+</span></a></li>
                                     @if ($subcategoryitem)
                                         @foreach ($subcategoryitem as $row)
-                                        <li><a href="shop.html">{{ $row->sub_category_item_name }}<span>+</span></a></li>
+                                        <li><a href="{{ route('home.sub-cat-item-landing-page',['subcatitemname='.create_slug($row->sub_category_item_name).'&cid='.Crypt::encryptString($row->category_id).'&scid='.Crypt::encryptString($row->sub_category_id).'&sciid='.Crypt::encryptString($row->id)]) }}">{{ $row->sub_category_item_name }}<span>+</span></a></li>
                                         @endforeach
                                     @endif
 
