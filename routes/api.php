@@ -24,8 +24,11 @@ Route::get('getproducts', [ApiController::class, 'get_product'])->name('getprodu
 Route::get('getproductdetails', [ApiController::class, 'view_product_details'])->name('getproductsdetails');
 
 Route::namespace('Api')->group(function() {
+  Route::post('/login', 'LoginController@login');
+  Route::post('/signup', 'LoginController@signup');
   Route::get('/products', 'ProductController@product_list');
   Route::get('/categories', 'CategoryController@category_list');
+  Route::post('/cart', 'CartController@add_cart');
 });
 
 // Route::group(['middleware' => 'auth:api'], function(){
