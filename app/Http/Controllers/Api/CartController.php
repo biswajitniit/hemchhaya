@@ -39,4 +39,8 @@ class CartController extends Controller
             return response()->json($e,500);
         }
     }
+    public function get_cart(Request $request){
+        $cart = Cart::where('user_id','=',$request->user()->id)->get();
+        
+    }
 }
