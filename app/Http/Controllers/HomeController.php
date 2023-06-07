@@ -21,8 +21,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Contracts\Encryption\DecryptException;
 use App\Models\User;
+use App\Models\UserVerify;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 
 class HomeController extends Controller
 {
@@ -66,10 +69,10 @@ class HomeController extends Controller
 			'name'                          => 'required',
 			'email'                         => 'required|unique:users|max:191',
 			'phone'                         => 'required',
-			'password'                      => 'required',
-			'confirmpassword'               => 'required',
+			'password'                      => 'required|string|min:8|regex:/[a-z]/|regex:/[A-Z]/|regex:/[0-9]/|regex:/[@$!%*#?&]/',
+			'confirmpassword'               => 'required|string|min:8|regex:/[a-z]/|regex:/[A-Z]/|regex:/[0-9]/|regex:/[@$!%*#?&]/|same:password',
         ],[
-            'name.required' => 'Please your name',
+            'name.required' => 'Please enter your name',
             'email.required' => 'Please enter your email',
             'phone.required' => 'Please enter your phone',
             'password.required' => 'Please enter your password',
@@ -84,10 +87,54 @@ class HomeController extends Controller
             $user->status                 = '1';
         $user->save();
 
-        return redirect()->back()->with('message', 'Thanks for signing up. Welcome to our salesanta. We are happy to have you on board.');
 
+        $token = Str::random(64);
+
+        UserVerify::create([
+              'user_id' => $user->id,
+              'token' => $token
+        ]);
+
+        Mail::send('email.email-verification-mail', ['token' => $token], function($message) use($request){
+              $message->to($request['email']);
+              $message->subject('Email Verification Mail');
+        });
+
+        //return redirect()->back()->with('message', 'Thanks for signing up. Welcome to our salesanta. We are happy to have you on board.');
+        return redirect()->back()->with('message', 'Thanks for signing up. please verify your email account.');
     }
 
+/**
+     * Write code on Method
+     *
+     * @return response()
+     */
+    public function verifyAccount($token)
+    {
+        $verifyUser = UserVerify::where('token', $token)->first();
+
+        $message = 'Sorry your email cannot be identified.';
+
+        if(!is_null($verifyUser) ){
+            $user = $verifyUser->user;
+
+            if(!$user->is_email_verified) {
+                $verifyUser->user->is_email_verified = 1;
+                $verifyUser->user->save();
+
+                Mail::send('email.email-verify-account', ['name' => $user->name], function($message) use($user){
+                    $message->to($user->email);
+                    $message->subject('Email Verification Mail');
+                });
+
+                $message = "Your e-mail is verified. You can now login.";
+            } else {
+                $message = "Your e-mail is already verified. You can now login.";
+            }
+        }
+
+      return redirect()->route('login')->with('message', $message);
+    }
 
     /**
      * Open Landing Page On Category WIse

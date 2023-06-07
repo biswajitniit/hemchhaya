@@ -29,7 +29,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    //protected $redirectTo = RouteServiceProvider::HOME;
 
     /**
      * Create a new controller instance.
@@ -47,12 +47,24 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data)
-    {
+    protected function validator(array $data){
+
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+                    'name' => ['required', 'string', 'max:255'],
+                    'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                    'phone' => ['required'],
+                    'password' => ['required', 'string', 'min:8', 'regex:/[a-z]/', 'regex:/[A-Z]/', 'regex:/[0-9]/', 'regex:/[@$!%*#?&]/'], // must be at least 8 characters in length
+                                                                                                                                            // must contain at least one lowercase letter
+                                                                                                                                            // must contain at least one uppercase letter
+                                                                                                                                            // must contain at least one digit
+                                                                                                                                            // must contain a special character
+                    'confirmpassword' => ['required', 'string', 'min:8', 'regex:/[a-z]/', 'regex:/[A-Z]/', 'regex:/[0-9]/', 'regex:/[@$!%*#?&]/', 'same:password'],
+                ],[
+                    'name.required' => 'Please enter your name',
+                    'email.required' => 'Please enter your email',
+                    'phone.required' => 'Please enter your phone',
+                    'password.required' => 'Please enter your password',
+                    'confirmpassword.required' => 'Please enter your confirm password',
         ]);
     }
 
@@ -64,10 +76,15 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
+
+
+         return User::create([
+            'name'     => $data['name'],
+            'email'    => $data['email'],
+            'phone'    => $data['phone'],
             'password' => Hash::make($data['password']),
+            'status'   => 1
         ]);
+
     }
 }

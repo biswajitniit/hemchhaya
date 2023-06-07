@@ -8,7 +8,7 @@
 <main>
 
     <!-- breadcrumb-area -->
-    {{-- <div class="breadcrumb-area breadcrumb-bg-two">
+    <div class="breadcrumb-area breadcrumb-bg-two">
         <div class="container custom-container">
             <div class="row">
                 <div class="col-12">
@@ -24,7 +24,7 @@
                 </div>
             </div>
         </div>
-    </div> --}}
+    </div>
     <!-- breadcrumb-area-end -->
 
     <!-- shop-area -->
@@ -39,7 +39,7 @@
                             </div>
                             <div class="shop-cat-list">
                                 <ul>
-                                    <li><a href="#">All<span>+</span></a></li>
+                                    <li><a href="{{ route('all-subcategory-item-list') }}">All<span>+</span></a></li>
                                     @if ($subcategoryitem)
                                         @foreach ($subcategoryitem as $row)
                                         <li><a href="{{ route('home.sub-cat-item-landing-page',['subcatitemname='.create_slug($row->sub_category_item_name).'&cid='.Crypt::encryptString($row->category_id).'&scid='.Crypt::encryptString($row->sub_category_id).'&sciid='.Crypt::encryptString($row->id)]) }}">{{ $row->sub_category_item_name }}<span>+</span></a></li>
@@ -49,128 +49,11 @@
                                 </ul>
                             </div>
                         </div>
-                        <div class="widget shop-widget">
-                            <div class="shop-widget-title">
-                                <h6 class="title">Filter By Price</h6>
-                            </div>
-                            <div class="price_filter">
-                                <div id="slider-range"></div>
-                                <div class="price_slider_amount">
-                                    <span>Price :</span>
-                                    <input type="text" id="amount" name="price" placeholder="Add Your Price" />
-                                </div>
-                            </div>
-                        </div>
-                        {{-- <div class="widget shop-widget">
-                            <div class="shop-widget-title">
-                                <h6 class="title">NEW PRODUCT</h6>
-                            </div>
-                            <div class="sidebar-product-list">
-                                <ul>
-                                     <li>
-                                        <div class="sidebar-product-thumb">
-                                            <a href="shop-details.html"><img src="{{ asset('frontend/img/product/sidebar_product01.jpg') }}" alt=""></a>
-                                        </div>
-                                        <div class="sidebar-product-content">
-                                            <div class="rating">
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                            </div>
-                                            <h5><a href="shop-details.html">Uncle Bens Vanla</a></h5>
-                                            <span><i class="fas fa-rupee-sign"></i>39.00</span>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="sidebar-product-thumb">
-                                            <a href="shop-details.html"><img src="{{ asset('frontend/img/product/sidebar_product02.jpg') }}" alt=""></a>
-                                        </div>
-                                        <div class="sidebar-product-content">
-                                            <div class="rating">
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                            </div>
-                                            <h5><a href="shop-details.html">Dannon Max</a></h5>
-                                            <span><i class="fas fa-rupee-sign"></i>29.00</span>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="sidebar-product-thumb">
-                                            <a href="shop-details.html"><img src="{{ asset('frontend/img/product/sidebar_product03.jpg') }}" alt=""></a>
-                                        </div>
-                                        <div class="sidebar-product-content">
-                                            <div class="rating">
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                            </div>
-                                            <h5><a href="shop-details.html">Vanla Greek Pice</a></h5>
-                                            <span><i class="fas fa-rupee-sign"></i>35.00</span>
-                                        </div>
-                                    </li>-
-                                </ul>
-                            </div>
-                        </div> --}}
-                        <div class="widget shop-widget">
-                            <div class="shop-widget-title">
-                                <h6 class="title">BRANDS</h6>
-                            </div>
-                            <div class="shop-cat-list">
-                                <ul>
-                                    <li><a href="shop.html">Adara <span>+</span></a></li>
-                                    <li><a href="shop.html">Carnation <span>+</span></a></li>
-                                    <li><a href="shop.html">We Beyond <span>+</span></a></li>
-                                    <li><a href="shop.html">Agrifram <span>+</span></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        {{-- <div class="widget">
-                            <div class="shop-widget-banner text-center">
-                                <a href="shop.html"><img src="{{ asset('frontend/img/product/sidebar_shop_ad.jpg') }}" alt=""></a>
-                            </div>
-                        </div> --}}
                     </aside>
                 </div>
                 <div class="col-9">
-                    {{-- <div class="shop-discount-area">
-                        <div class="discount-content shop-discount-content">
-                            <span>healthy food</span>
-                            <h4 class="title"><a href="shop.html">organic farm for ganic</a></h4>
-                            <p>Super Offer TO 50% OFF</p>
-                            <a href="shop.html" class="btn rounded-btn">shop now</a>
-                        </div>
-                    </div> --}}
-                    <div class="shop-top-meta mb-30">
-                        <div class="row">
-                            <div class="col-md-6 col-sm-7">
-                                <div class="shop-top-left">
-                                    <ul>
-                                        <li><a href="#"><i class="fas fa-bars"></i> Page 1 of 100</a></li>
 
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-sm-5">
-                                <div class="shop-top-right">
-                                    <form action="#">
-                                        <select name="select">
-                                            {{-- <option value="popularity">Popularity</option> --}}
-                                            <option value="price-low-to-high">Price -- Low to High</option>
-                                            <option value="price-high-to-low">Price -- High to Low</option>
-                                            {{-- <option value="discount">Discount</option> --}}
-                                        </select>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
                     <div class="shop-products-wrap">
                         <div class="row justify-content-center">
 
@@ -206,28 +89,9 @@
                                     </div>
                                 @endforeach
                             @endif
-
-
-
-
-
-
-
-
                         </div>
                     </div>
-                    <div class="pagination-wrap">
-                        <ul>
-                            <li class="prev"><a href="shop.html">Prev</a></li>
-                            <li><a href="shop.html">1</a></li>
-                            <li class="active"><a href="shop.html">2</a></li>
-                            <li><a href="shop.html">3</a></li>
-                            <li><a href="shop.html">4</a></li>
-                            <li><a href="shop.html">...</a></li>
-                            <li><a href="shop.html">10</a></li>
-                            <li class="next"><a href="shop.html">Next</a></li>
-                        </ul>
-                    </div>
+
                 </div>
             </div>
         </div>

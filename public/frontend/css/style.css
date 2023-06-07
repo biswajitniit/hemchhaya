@@ -446,7 +446,7 @@ label {
     border-radius: 4px;
 	position: relative;
 }
-.header-search-wrap form:before {
+/* .header-search-wrap form:before {
     content: "";
     position: absolute;
     left: 185px;
@@ -455,7 +455,7 @@ label {
     width: 1px;
     height: 24px;
     background: #dbdada;
-}
+} */
 .header-search-wrap form .custom-select {
 	display: inline-block;
 	padding: 10px 42px 10px 25px;
