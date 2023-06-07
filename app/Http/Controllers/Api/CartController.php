@@ -36,11 +36,35 @@ class CartController extends Controller
             ]);
             return response()->json($cart,200);
         }catch(Exception $e){
-            return response()->json($e,500);
+            return response()->json($e->getMessage(),500);
         }
     }
     public function get_cart(Request $request){
-        $cart = Cart::where('user_id','=',$request->user()->id)->get();
-        
+        try{
+            $cart = Cart::where('user_id','=',$request->user()->id)->get();
+            return response()->json($cart,200);
+        }
+        catch(Exception $e){
+            return response()->json($e->getMessage(),500);
+        }
+    }
+    public function updare_cart(Request $request){
+        $validator = Validator::make($request->all(), [
+            'id' => 'required',
+            "qty"=> 'required|integer',
+            'attribute' => 'required',
+        ]);
+        if ($validator->fails()) {
+            return response()->json( $validator->errors(), 422);
+        }
+        try{
+            $cart = Cart::where('id',$request->id)->first();
+            $cart->qty = $request->qty;
+            $cart->attribute = $request->attribute;
+            $cart->save();
+            return response()->json(["message"=>"Cart updated successfully"],200);
+        }catch(Exception $e){
+            return response()->json($e->getMessage(),500);
+        }
     }
 }

@@ -23,18 +23,22 @@ class LoginController extends Controller
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()], 422);
         }
-        $user = User::where('email', $request->email)->first();
+        try{
+            $user = User::where('email', $request->email)->first();
+        
+            if ( !$user || ! Hash::check($request->password, $user->password)) {
+                return response()->json(['error' => 'The provided credentials are incorrect!'], 422);
+            }
+            
+            $token = $user->createToken($request->device_name)->plainTextToken;
 
-        if (! $user || ! Hash::check($request->password, $user->password)) {
-            throw ValidationException::withMessages(['errors' => ['email' => ['The provided credentials are incorrect!']]], 422);
+            return response()->json([
+                'access_token' => $token,
+                'token_type' => 'Bearer',
+            ], 200);
+        } catch(Exception $e){
+            return response()->json(['error' => $e->getMessage()],500);
         }
-
-        $token = $user->createToken($request->device_name)->plainTextToken;
-
-        return response()->json([
-            'access_token' => $token,
-            'token_type' => 'Bearer',
-        ], 200);
     }
     public function signup(Request $request)
     {
