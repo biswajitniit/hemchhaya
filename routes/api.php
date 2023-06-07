@@ -15,6 +15,7 @@ use App\Http\Controllers\ApiController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
 Route::post('register', [UserAuthController::class, 'register']);
 Route::post('login', [UserAuthController::class, 'login']);
 
@@ -22,6 +23,10 @@ Route::get('getactegories', [ApiController::class, 'get_categories'])->name('all
 Route::get('getproducts', [ApiController::class, 'get_product'])->name('getproducts');
 Route::get('getproductdetails', [ApiController::class, 'view_product_details'])->name('getproductsdetails');
 
+Route::namespace('Api')->group(function() {
+  Route::get('/products', 'ProductController@product_list');
+  Route::get('/categories', 'CategoryController@category_list');
+});
 
 // Route::group(['middleware' => 'auth:api'], function(){
 //     Route::post('user-details', [UserController::class, 'userDetails']);
