@@ -1,3 +1,4 @@
+
 <?php $__env->startSection('title', 'Salesanta | Product details page'); ?>
 <?php $__env->startSection('content'); ?>
 

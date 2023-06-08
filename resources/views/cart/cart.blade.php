@@ -73,9 +73,9 @@
                                                                 $subtotal = $subtotal + ($row->price * $row->qty);
                                                             @endphp
                                                                 <tr>
-                                                                    <td class="product-thumbnail"><a href="shop-details.html"><img src="{{ $row->image }}" alt=""></a></td>
+                                                                    <td class="product-thumbnail"><a href="{{ ViewProductDetails($row->product_id) }}"><img src="{{ $row->image }}" alt=""></a></td>
                                                                     <td class="product-name">
-                                                                        <h4><a href="shop-details.html">{{ $row->name }}</a></h4>
+                                                                        <h4><a href="{{ ViewProductDetails($row->product_id) }}">{{ $row->name }}</a></h4>
                                                                     </td>
                                                                     <td class="product-price">&#8377; {{ $row->price }}</td>
                                                                     <td class="product-quantity">
@@ -139,7 +139,27 @@
                                             <form action="#">
                                                 <ul>
                                                     <li class="sub-total"><span>Price ({{count($cart)}} item)</span> &#8377; {{ $subtotal }}</li>
-                                                    <li class="sub-total"><span>Delivery Charges</span> &#8377; 5</li>
+                                                    <li class="sub-total"><span>Delivery Charges</span>
+                                                        @php
+                                                            $get_courier_serviceability = GetCourierServiceability();
+                                                            //echo "<pre>"; print_r($get_courier_serviceability->data->available_courier_companies);
+                                                            $countcou = 1;
+                                                        @endphp
+                                                        <div class="shop-check-wrap">
+                                                            @foreach ($get_courier_serviceability->data->available_courier_companies as $courierlist)
+                                                                <div class="custom-control custom-checkbox">
+                                                                    <input type="checkbox" class="custom-control-input" id="customCheck{{$countcou}}">
+                                                                    <label class="custom-control-label" for="customCheck{{$countcou}}">{{$courierlist->courier_name}} &#8377;{{$courierlist->cod_charges}}
+                                                                        <br>Delivery by
+                                                                        <br>{{$courierlist->etd}}
+                                                                    </label>
+                                                                </div>
+                                                                @php
+                                                                    $countcou++;
+                                                                @endphp
+                                                            @endforeach
+                                                        </div>
+                                                    </li>
 
                                                     <li class="cart-total-amount"><span>Total Payable</span> <span class="amount">&#8377; {{ $subtotal + 5}}</span></li>
                                                 </ul>
@@ -147,9 +167,8 @@
                                                 <div class="payment-method-info">
                                                     <div class="paypal-method-flex">
                                                         <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input" id="customCheck5">
+                                                            <input type="checkbox" checked class="custom-control-input" id="customCheck5">
                                                             <label class="custom-control-label" for="customCheck5">Cash on delivery</label>
-
                                                         </div>
                                                     </div>
                                                     <div class="paypal-method-flex">

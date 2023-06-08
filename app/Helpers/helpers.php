@@ -11,6 +11,8 @@ use App\Models\Variationitems;
 use App\Models\Variations;
 use App\Models\Product_image;
 use App\Models\Cart;
+use App\Models\Product;
+use Illuminate\Support\Facades\Crypt;
 
 if (! function_exists('create_slug')) {
     function create_slug($string) {
@@ -143,5 +145,53 @@ if (! function_exists('Checkuseralreadyaddedtocart')) {
       // DB::enableQueryLog(); // Enable query log
        return Cart::where('user_id',$userid)->where('product_id',$productid)->count();
       // dd(DB::getQueryLog()); // Show results of log
+    }
+}
+
+if (! function_exists('GetCourierServiceability')) {
+    function GetCourierServiceability() {
+
+
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+          CURLOPT_URL => 'https://apiv2.shiprocket.in/v1/external/courier/serviceability/',
+          CURLOPT_RETURNTRANSFER => true,
+          CURLOPT_ENCODING => '',
+          CURLOPT_MAXREDIRS => 10,
+          CURLOPT_TIMEOUT => 0,
+          CURLOPT_FOLLOWLOCATION => true,
+          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+          CURLOPT_CUSTOMREQUEST => 'GET',
+          CURLOPT_POSTFIELDS =>'{
+          "pickup_postcode": "713216",
+          "delivery_postcode": "721447",
+          "order_id": "",
+          "cod": "1",
+          "weight": "1",
+          "length": "",
+          "breadth": "",
+          "declared_value": "",
+          "mode": "Surface",
+          "couriers_type": "",
+          "only_local": ""
+        }',
+          CURLOPT_HTTPHEADER => array(
+            'Content-Type: application/json',
+            'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjMwNjQ0OTgsImlzcyI6Imh0dHBzOi8vYXBpdjIuc2hpcHJvY2tldC5pbi92MS9leHRlcm5hbC9hdXRoL2xvZ2luIiwiaWF0IjoxNjg2MDUwMjY2LCJleHAiOjE2ODY5MTQyNjYsIm5iZiI6MTY4NjA1MDI2NiwianRpIjoiRG5JSkdFem5zMjZtWG5JWCJ9.6e94-skdCUxv5eBXm53CmEtgbeYa0ACcy7PiheT_5Q0'
+          ),
+        ));
+
+        $response = curl_exec($curl);
+
+        curl_close($curl);
+        return json_decode($response);
+    }
+}
+
+if (! function_exists('ViewProductDetails')) {
+    function ViewProductDetails($productid) {
+       $product = Product::where('id',$productid)->first();
+       return url('/view-product-details?pid='.Crypt::encryptString($product->id).'&cid='.Crypt::encryptString($product->category_id).'&scid='.Crypt::encryptString($product->sub_category_id).'&scitemid='.Crypt::encryptString($product->sub_category_item_id));
     }
 }

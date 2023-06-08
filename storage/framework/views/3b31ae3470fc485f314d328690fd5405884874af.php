@@ -66,12 +66,12 @@
                                 </tr>
                                 <tr>
                                     <td style="text-align: center; background: #fff; padding: 20px 30px; border-radius: 10px;">
-                                        <h5 style="color: #6d717a; font-size: 20px; line-height: 23px;">Welcome to Salesanta! You have successfully created an account. Your account has been confirmed. You can start project now.</h5>
+                                        <h5 style="color: #6d717a; font-size: 20px; line-height: 23px;">Welcome to Salesanta! You have successfully created an account. Your account has been confirmed. You can login now.</h5>
                                         <p style="font-size: 20px; margin-top: 20px;">
                                             If you have any questions, reach out to us at <br />
                                             <a href="#" style="font-size: 20px; text-decoration: none; color: #ee5719;">sales@salesanta.com</a>
                                         </p>
-                                        <h5 style="color: #061a48; font-size: 16px; line-height: 23px; text-align: center; margin-bottom: 10px;">Team Fixmybuild</h5>
+                                        <h5 style="color: #061a48; font-size: 16px; line-height: 23px; text-align: center; margin-bottom: 10px;">Team Salesanta</h5>
                                         <a href="#" style="margin-right: 10px; text-decoration: none;">
                                             <svg width="9" height="16" viewBox="0 0 9 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path

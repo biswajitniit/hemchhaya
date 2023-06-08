@@ -1,4 +1,3 @@
-
 <?php $__env->startSection('title', 'Salesanta | Shopping cart'); ?>
 <?php $__env->startSection('content'); ?>
 
@@ -60,9 +59,9 @@
                                                                 $subtotal = $subtotal + ($row->price * $row->qty);
                                                             ?>
                                                                 <tr>
-                                                                    <td class="product-thumbnail"><a href="shop-details.html"><img src="<?php echo e($row->image); ?>" alt=""></a></td>
+                                                                    <td class="product-thumbnail"><a href="<?php echo e(ViewProductDetails($row->product_id)); ?>"><img src="<?php echo e($row->image); ?>" alt=""></a></td>
                                                                     <td class="product-name">
-                                                                        <h4><a href="shop-details.html"><?php echo e($row->name); ?></a></h4>
+                                                                        <h4><a href="<?php echo e(ViewProductDetails($row->product_id)); ?>"><?php echo e($row->name); ?></a></h4>
                                                                     </td>
                                                                     <td class="product-price">&#8377; <?php echo e($row->price); ?></td>
                                                                     <td class="product-quantity">
@@ -115,7 +114,29 @@
                                             <form action="#">
                                                 <ul>
                                                     <li class="sub-total"><span>Price (<?php echo e(count($cart)); ?> item)</span> &#8377; <?php echo e($subtotal); ?></li>
-                                                    <li class="sub-total"><span>Delivery Charges</span> &#8377; 5</li>
+                                                    <li class="sub-total"><span>Delivery Charges</span>
+                                                        <?php
+                                                            $get_courier_serviceability = GetCourierServiceability();
+                                                            //echo "<pre>"; print_r($get_courier_serviceability->data->available_courier_companies);
+                                                            $countcou = 1;
+                                                        ?>
+                                                        <div class="shop-check-wrap">
+                                                            <?php $__currentLoopData = $get_courier_serviceability->data->available_courier_companies; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $courierlist): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                                <div class="custom-control custom-checkbox">
+                                                                    <input type="checkbox" class="custom-control-input" id="customCheck<?php echo e($countcou); ?>">
+                                                                    <label class="custom-control-label" for="customCheck<?php echo e($countcou); ?>"><?php echo e($courierlist->courier_name); ?> &#8377;<?php echo e($courierlist->cod_charges); ?>
+
+                                                                        <br>Delivery by
+                                                                        <br><?php echo e($courierlist->etd); ?>
+
+                                                                    </label>
+                                                                </div>
+                                                                <?php
+                                                                    $countcou++;
+                                                                ?>
+                                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                        </div>
+                                                    </li>
 
                                                     <li class="cart-total-amount"><span>Total Payable</span> <span class="amount">&#8377; <?php echo e($subtotal + 5); ?></span></li>
                                                 </ul>
@@ -123,9 +144,8 @@
                                                 <div class="payment-method-info">
                                                     <div class="paypal-method-flex">
                                                         <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input" id="customCheck5">
+                                                            <input type="checkbox" checked class="custom-control-input" id="customCheck5">
                                                             <label class="custom-control-label" for="customCheck5">Cash on delivery</label>
-
                                                         </div>
                                                     </div>
                                                     <div class="paypal-method-flex">

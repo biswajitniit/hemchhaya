@@ -1,3 +1,5 @@
+
+<?php $__env->startSection('title', 'Salesanta | Registration'); ?>
 <?php $__env->startSection('content'); ?>
 <!-- main-area -->
 <main>
