@@ -151,7 +151,6 @@ if (! function_exists('Checkuseralreadyaddedtocart')) {
 if (! function_exists('GetCourierServiceability')) {
     function GetCourierServiceability() {
 
-
         $curl = curl_init();
 
         curl_setopt_array($curl, array(

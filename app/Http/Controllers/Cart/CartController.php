@@ -137,7 +137,12 @@ class CartController extends Controller
      * @return \Illuminate\Http\Response
     */
     public function checkout(Request $request){
-        return view("cart.checkout");
+        if(Auth::user()->id){
+            $cart = Cart::where('user_id',Auth::user()->id)->get();
+            return view("cart.checkout",compact('cart'));
+        }else{
+            return redirect('login');
+        }
     }
 
 }

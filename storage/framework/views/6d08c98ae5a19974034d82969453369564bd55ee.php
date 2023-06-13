@@ -31,7 +31,7 @@
                 <div class="container">
                     <div class="row justify-content-center">
 
-                            <div class="col-xl-7">
+                            <div class="col-xl-12">
                                 <form action="<?php echo e(route('update-cart')); ?>" name="updatecartitems" method="POST">
                                     <?php echo csrf_field(); ?>
                                     <div class="cart-wrapper">
@@ -85,15 +85,15 @@
 
                                         </div>
                                     </div>
-                                    <div class="shop-cart-bottom">
+                                    <div class="shop-cart-bottom ml-auto">
                                         <div class="cart-coupon">
                                             
                                         </div>
 
                                         <?php if(count($cart) > 0): ?>
                                         <div class="continue-shopping">
-                                            
                                             <button type="submit" name="submit" class="btn">update Cart</button>
+                                            <a href="<?php echo e(route('checkout')); ?>" class="btn">PROCEED TO CHECKOUT</a>
                                         </div>
                                         <?php endif; ?>
 
@@ -106,64 +106,7 @@
                                 </form>
                             </div>
 
-                            <?php if(count($cart) > 0): ?>
-                                <div class="col-xl-5 col-lg-12">
-                                    <div class="shop-cart-total">
-                                        <h3 class="title">PRICE DETAILS</h3>
-                                        <div class="shop-cart-widget">
-                                            <form action="#">
-                                                <ul>
-                                                    <li class="sub-total"><span>Price (<?php echo e(count($cart)); ?> item)</span> &#8377; <?php echo e($subtotal); ?></li>
-                                                    <li class="sub-total"><span>Delivery Charges</span>
-                                                        <?php
-                                                            $get_courier_serviceability = GetCourierServiceability();
-                                                            //echo "<pre>"; print_r($get_courier_serviceability->data->available_courier_companies);
-                                                            $countcou = 1;
-                                                        ?>
-                                                        <div class="shop-check-wrap">
-                                                            <?php $__currentLoopData = $get_courier_serviceability->data->available_courier_companies; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $courierlist): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                                <div class="custom-control custom-checkbox">
-                                                                    <input type="checkbox" class="custom-control-input" id="customCheck<?php echo e($countcou); ?>">
-                                                                    <label class="custom-control-label" for="customCheck<?php echo e($countcou); ?>"><?php echo e($courierlist->courier_name); ?> &#8377;<?php echo e($courierlist->cod_charges); ?>
 
-                                                                        <br>Delivery by
-                                                                        <br><?php echo e($courierlist->etd); ?>
-
-                                                                    </label>
-                                                                </div>
-                                                                <?php
-                                                                    $countcou++;
-                                                                ?>
-                                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                                        </div>
-                                                    </li>
-
-                                                    <li class="cart-total-amount"><span>Total Payable</span> <span class="amount">&#8377; <?php echo e($subtotal + 5); ?></span></li>
-                                                </ul>
-
-                                                <div class="payment-method-info">
-                                                    <div class="paypal-method-flex">
-                                                        <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" checked class="custom-control-input" id="customCheck5">
-                                                            <label class="custom-control-label" for="customCheck5">Cash on delivery</label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="paypal-method-flex">
-                                                        <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input" id="customCheck6">
-                                                            <label class="custom-control-label" for="customCheck6">Pay with Razorpay</label>
-                                                        </div>
-                                                        <div class="paypal-logo"><img src="<?php echo e(asset('frontend/img/images/card.png')); ?>" alt=""></div>
-                                                    </div>
-                                                </div>
-
-                                                <a href="<?php echo e(route('razorpay-payment',['payableamount='.$subtotal])); ?>" class="btn">Place order</a>
-                                                
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            <?php endif; ?>
 
 
 

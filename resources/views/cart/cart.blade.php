@@ -45,7 +45,7 @@
                 <div class="container">
                     <div class="row justify-content-center">
 
-                            <div class="col-xl-7">
+                            <div class="col-xl-12">
                                 <form action="{{ route('update-cart') }}" name="updatecartitems" method="POST">
                                     @csrf
                                     <div class="cart-wrapper">
@@ -107,7 +107,7 @@
 
                                         </div>
                                     </div>
-                                    <div class="shop-cart-bottom">
+                                    <div class="shop-cart-bottom ml-auto">
                                         <div class="cart-coupon">
                                             {{-- <form action="#">
                                                 <input type="text" placeholder="Enter Coupon Code...">
@@ -117,8 +117,8 @@
 
                                         @if(count($cart) > 0)
                                         <div class="continue-shopping">
-                                            {{-- <a href="shop.html" class="btn">update Cart</a> --}}
                                             <button type="submit" name="submit" class="btn">update Cart</button>
+                                            <a href="{{ route('checkout')  }}" class="btn">PROCEED TO CHECKOUT</a>
                                         </div>
                                         @endif
 
@@ -131,62 +131,7 @@
                                 </form>
                             </div>
 
-                            @if(count($cart) > 0)
-                                <div class="col-xl-5 col-lg-12">
-                                    <div class="shop-cart-total">
-                                        <h3 class="title">PRICE DETAILS</h3>
-                                        <div class="shop-cart-widget">
-                                            <form action="#">
-                                                <ul>
-                                                    <li class="sub-total"><span>Price ({{count($cart)}} item)</span> &#8377; {{ $subtotal }}</li>
-                                                    <li class="sub-total"><span>Delivery Charges</span>
-                                                        @php
-                                                            $get_courier_serviceability = GetCourierServiceability();
-                                                            //echo "<pre>"; print_r($get_courier_serviceability->data->available_courier_companies);
-                                                            $countcou = 1;
-                                                        @endphp
-                                                        <div class="shop-check-wrap">
-                                                            @foreach ($get_courier_serviceability->data->available_courier_companies as $courierlist)
-                                                                <div class="custom-control custom-checkbox">
-                                                                    <input type="checkbox" class="custom-control-input" id="customCheck{{$countcou}}">
-                                                                    <label class="custom-control-label" for="customCheck{{$countcou}}">{{$courierlist->courier_name}} &#8377;{{$courierlist->cod_charges}}
-                                                                        <br>Delivery by
-                                                                        <br>{{$courierlist->etd}}
-                                                                    </label>
-                                                                </div>
-                                                                @php
-                                                                    $countcou++;
-                                                                @endphp
-                                                            @endforeach
-                                                        </div>
-                                                    </li>
 
-                                                    <li class="cart-total-amount"><span>Total Payable</span> <span class="amount">&#8377; {{ $subtotal + 5}}</span></li>
-                                                </ul>
-
-                                                <div class="payment-method-info">
-                                                    <div class="paypal-method-flex">
-                                                        <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" checked class="custom-control-input" id="customCheck5">
-                                                            <label class="custom-control-label" for="customCheck5">Cash on delivery</label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="paypal-method-flex">
-                                                        <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input" id="customCheck6">
-                                                            <label class="custom-control-label" for="customCheck6">Pay with Razorpay</label>
-                                                        </div>
-                                                        <div class="paypal-logo"><img src="{{ asset('frontend/img/images/card.png') }}" alt=""></div>
-                                                    </div>
-                                                </div>
-
-                                                <a href="{{ route('razorpay-payment',['payableamount='.$subtotal])  }}" class="btn">Place order</a>
-                                                {{-- <a href="{{ route('checkout')  }}" class="btn">PROCEED TO CHECKOUT</a> --}}
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endif
 
 
 
