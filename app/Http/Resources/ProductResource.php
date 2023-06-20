@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use App\Models\Attribute;
+use App\Models\Product_image;
 use App\Models\Product_with_attribute;
 use App\Models\Product_with_attribute_item;
 use App\Models\Product_with_variation;
@@ -26,7 +27,7 @@ class ProductResource extends JsonResource
             'category' => $this->Categorys(),
             'sub_category' => $this->Subcategory(),
             'sub_category_item' => $this->Subcategoryitem(),
-            'vendor' => $this->Vendors(),
+            'vendor' => $this->vendor_id,
             'brand' => $this->brand,
             'product_name_slug' => $this->product_name_slug,
             'name' => $this->name,
@@ -94,6 +95,11 @@ class ProductResource extends JsonResource
         }
 
         $product['variations'] = $variations;
+         // product image
+         $image = Product_image::where('product_id',$this->id)->get();
+
+
+        $product['image'] = $image;
 
         return $product;
     }
