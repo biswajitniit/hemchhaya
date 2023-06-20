@@ -16,16 +16,29 @@ use App\Http\Controllers\ApiController;
 |
 */
 
-Route::post('register', [UserAuthController::class, 'register']);
-Route::post('login', [UserAuthController::class, 'login']);
+// Route::post('register', [UserAuthController::class, 'register']);
+// Route::post('login', [UserAuthController::class, 'login']);
 
-Route::get('getactegories', [ApiController::class, 'get_categories'])->name('allcategories');
-Route::get('getproducts', [ApiController::class, 'get_product'])->name('getproducts');
-Route::get('getproductdetails', [ApiController::class, 'view_product_details'])->name('getproductsdetails');
+// Route::get('getactegories', [ApiController::class, 'get_categories'])->name('allcategories');
+// Route::get('getproducts', [ApiController::class, 'get_product'])->name('getproducts');
+// Route::get('getproductdetails', [ApiController::class, 'view_product_details'])->name('getproductsdetails');
 
 Route::namespace('Api')->group(function() {
+  Route::post('/login', 'LoginController@login');
+  Route::post('/signup', 'LoginController@signup');
   Route::get('/products', 'ProductController@product_list');
+  Route::get('/products/{product}', 'ProductController@products_with_options');
   Route::get('/categories', 'CategoryController@category_list');
+
+  Route::middleware('auth:sanctum')->group(function() {
+    Route::post('/change-password', 'UserController@change_password');
+    Route::get('/profile', 'UserController@get_user');
+    Route::post('/profile', 'UserController@update_user');
+    Route::apiResource('address', 'AddressController',);
+    Route::post('/cart', 'CartController@add_cart');
+    Route::get('/cart', 'CartController@get_cart');
+    Route::put('/cart', 'CartController@update_cart');
+  });
 });
 
 // Route::group(['middleware' => 'auth:api'], function(){
