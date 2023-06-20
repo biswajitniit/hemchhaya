@@ -323,6 +323,8 @@ Route::any('/admin/get_attributecat_with_attribute_on_product_page', [ProductCon
     Route::get('remove-cart-item', [CartController::class,'remove_cart_item'])->name('remove-cart-item');
     Route::get('/cart',[CartController::class,'cart'])->name('cart');
     Route::get('/checkout',[CartController::class,'checkout'])->name('checkout');
+    Route::post('/order-store',[CartController::class,'order_store'])->name('order-store');
+
 
     Route::get('razorpay-payment', [RazorpayPaymentController::class, 'index'])->name('razorpay-payment');
     Route::post('razorpay-payment', [RazorpayPaymentController::class, 'store'])->name('razorpay.payment.store');

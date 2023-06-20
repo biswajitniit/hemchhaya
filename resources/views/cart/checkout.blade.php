@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title', 'Salesanta | Checkout')
 <style>
 ._1AtVbE {
     display: block;
@@ -209,69 +210,81 @@
 
                 @php
                 $subtotal = 0;
+                $weight = 0;
                 @endphp
 
                 @if(count($cart) > 0)
                     @foreach ($cart as $row)
                         @php
                             $subtotal = $subtotal + ($row->price * $row->qty);
+                            $productinfo = json_decode($row->attributes);
+                            $weight      = $weight + ($productinfo->weight * $row->qty);
                         @endphp
                     @endforeach
                 @endif
-
-
-
 
                 <div class="col-lg-5">
                     <div class="shop-cart-total order-summary-wrap">
                         <h3 class="title">Price Details</h3>
                         <div class="shop-cart-widget">
-                            <form action="#">
+                            <form action="{{route('order-store')}}" name="order-store" method="POST" id="order-store">
+                                @csrf
+
+                                @php
+                                $get_courier_serviceability = GetCourierServiceability($weight);
+                                @endphp
+                                <input type="hidden" name="courier_name" value="{{$get_courier_serviceability->data->available_courier_companies[0]->courier_name}}">
+                                <input type="hidden" name="delivery_charges" value="{{$get_courier_serviceability->data->available_courier_companies[0]->cod_charges}}">
+
                                 <ul>
-                                    <li class="sub-total"><span>Price ({{count($cart)}} item)</span> &#8377; {{ $subtotal }}</li>
-                                    <li class="sub-total"><span>Delivery Charges</span>
+                                    <li class="sub-total"><span>Price ({{count($cart)}} item)</span>&#8377;{{ $subtotal }}</li>
+                                     {{--<li class="sub-total"><span>Delivery Charges</span>
                                         @php
-                                        $get_courier_serviceability = GetCourierServiceability();
-                                        $countcou = 1;
-                                    @endphp
-                                    <div class="shop-check-wrap">
-                                        @foreach ($get_courier_serviceability->data->available_courier_companies as $courierlist)
-                                            <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input" id="customCheck{{$countcou}}">
-                                                <label class="custom-control-label" for="customCheck{{$countcou}}">{{$courierlist->courier_name}} &#8377;{{$courierlist->cod_charges}}
-                                                    <br>Delivery by
-                                                    <br>{{$courierlist->etd}}
-                                                </label>
-                                            </div>
-                                            @php
-                                                $countcou++;
-                                            @endphp
-                                        @endforeach
-                                    </div>
-                                </li>
-                                    <li class="cart-total-amount"><span>Total Price</span> <span class="amount">$ 151.00</span></li>
+                                            $get_courier_serviceability = GetCourierServiceability($weight);
+                                            $countcou = 1;
+                                        @endphp
+                                        <div class="shop-check-wrap">
+                                            @foreach ($get_courier_serviceability->data->available_courier_companies as $courierlist)
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" name="shippingcharge" class="custom-control-input" value="{{$courierlist->cod_charges}}" id="customCheck{{$countcou}}">
+                                                    <label class="custom-control-label" for="customCheck{{$countcou}}">{{$courierlist->courier_name}} &#8377;{{$courierlist->cod_charges}}
+                                                        <br>Delivery by
+                                                        <br>{{$courierlist->etd}}
+                                                    </label>
+                                                </div>
+                                                @php
+                                                    $countcou++;
+                                                @endphp
+                                            @endforeach
+                                        </div>
+                                    </li>--}}
+
+                                    <li class="sub-total"><span>Delivery Charges </span>&#8377;{{ $get_courier_serviceability->data->available_courier_companies[0]->cod_charges}} </li>
+                                    <li class="cart-total-amount"><span>Total Price</span> <span class="amount">&#8377;{{ $subtotal + $get_courier_serviceability->data->available_courier_companies[0]->cod_charges}}</span></li>
                                 </ul>
 
 
                                 <div class="payment-method-info">
                                     <div class="paypal-method-flex">
                                         <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" checked class="custom-control-input" id="customCheck5">
-                                            <label class="custom-control-label" for="customCheck5">Cash on delivery</label>
+                                            <input type="checkbox" class="custom-control-input" name="paymentmethod" value="cod" id="customCheck12">
+                                            <label class="custom-control-label" for="customCheck12">Cash on delivery</label>
                                         </div>
                                     </div>
                                     <div class="paypal-method-flex">
                                         <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="customCheck6">
-                                            <label class="custom-control-label" for="customCheck6">Pay with Razorpay</label>
+                                            <input type="checkbox" class="custom-control-input" name="paymentmethod" value="razorpay" id="customCheck13">
+                                            <label class="custom-control-label" for="customCheck13">Pay with Razorpay</label>
                                         </div>
                                         <div class="paypal-logo"><img src="{{ asset('frontend/img/images/card.png') }}" alt=""></div>
                                     </div>
                                 </div>
 
-                                <a href="{{ route('razorpay-payment',['payableamount='.$subtotal])  }}" class="btn">Place order</a>
-
+                                {{-- <a href="{{ route('razorpay-payment',['payableamount='.$subtotal])  }}" class="btn">Place order</a> --}}
+                                <button class="btn">Place order</button>
                             </form>
+
+
                         </div>
                     </div>
                 </div>
@@ -282,5 +295,20 @@
 </main>
 <!-- main-area-end -->
 
+@push('frontend-scripts')
+<script>
+    $(document).ready(function(){
+        //for change event
+          $('input[name="shippingcharge"]').on('change', function() {
+            //To allow users select only one checkbox
+              $('input[name="shippingcharge"]').not(this).prop('checked', false);
+            //Get selected checkbox value
+               alert($('input[name="shippingcharge"]:checked').val());
+          });
+    });
+    </script>
 
+
+
+@endpush
 @endsection

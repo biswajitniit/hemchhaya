@@ -1,3 +1,4 @@
+
 <?php $__env->startSection('title', 'Salesanta | Shopping cart'); ?>
 <?php $__env->startSection('content'); ?>
 

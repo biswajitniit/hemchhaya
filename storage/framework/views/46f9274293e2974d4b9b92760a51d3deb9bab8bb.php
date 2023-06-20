@@ -1,4 +1,4 @@
-
+<?php $__env->startSection('title', 'Salesanta | Checkout'); ?>
 <style>
 ._1AtVbE {
     display: block;
@@ -188,71 +188,62 @@
 
                 <?php
                 $subtotal = 0;
+                $weight = 0;
                 ?>
 
                 <?php if(count($cart) > 0): ?>
                     <?php $__currentLoopData = $cart; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <?php
                             $subtotal = $subtotal + ($row->price * $row->qty);
+                            $productinfo = json_decode($row->attributes);
+                            $weight      = $weight + ($productinfo->weight * $row->qty);
                         ?>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 <?php endif; ?>
-
-
-
 
                 <div class="col-lg-5">
                     <div class="shop-cart-total order-summary-wrap">
                         <h3 class="title">Price Details</h3>
                         <div class="shop-cart-widget">
-                            <form action="#">
+                            <form action="<?php echo e(route('order-store')); ?>" name="order-store" method="POST" id="order-store">
+                                <?php echo csrf_field(); ?>
+
+                                <?php
+                                $get_courier_serviceability = GetCourierServiceability($weight);
+                                ?>
+                                <input type="hidden" name="courier_name" value="<?php echo e($get_courier_serviceability->data->available_courier_companies[0]->courier_name); ?>">
+                                <input type="hidden" name="delivery_charges" value="<?php echo e($get_courier_serviceability->data->available_courier_companies[0]->cod_charges); ?>">
+
                                 <ul>
-                                    <li class="sub-total"><span>Price (<?php echo e(count($cart)); ?> item)</span> &#8377; <?php echo e($subtotal); ?></li>
-                                    <li class="sub-total"><span>Delivery Charges</span>
-                                        <?php
-                                        $get_courier_serviceability = GetCourierServiceability();
-                                        $countcou = 1;
-                                    ?>
-                                    <div class="shop-check-wrap">
-                                        <?php $__currentLoopData = $get_courier_serviceability->data->available_courier_companies; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $courierlist): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                            <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input" id="customCheck<?php echo e($countcou); ?>">
-                                                <label class="custom-control-label" for="customCheck<?php echo e($countcou); ?>"><?php echo e($courierlist->courier_name); ?> &#8377;<?php echo e($courierlist->cod_charges); ?>
+                                    <li class="sub-total"><span>Price (<?php echo e(count($cart)); ?> item)</span>&#8377;<?php echo e($subtotal); ?></li>
+                                     
 
-                                                    <br>Delivery by
-                                                    <br><?php echo e($courierlist->etd); ?>
-
-                                                </label>
-                                            </div>
-                                            <?php
-                                                $countcou++;
-                                            ?>
-                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                    </div>
-                                </li>
-                                    <li class="cart-total-amount"><span>Total Price</span> <span class="amount">$ 151.00</span></li>
+                                    <li class="sub-total"><span>Delivery Charges </span>&#8377;<?php echo e($get_courier_serviceability->data->available_courier_companies[0]->cod_charges); ?> </li>
+                                    <li class="cart-total-amount"><span>Total Price</span> <span class="amount">&#8377;<?php echo e($subtotal + $get_courier_serviceability->data->available_courier_companies[0]->cod_charges); ?></span></li>
                                 </ul>
 
 
                                 <div class="payment-method-info">
                                     <div class="paypal-method-flex">
                                         <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" checked class="custom-control-input" id="customCheck5">
-                                            <label class="custom-control-label" for="customCheck5">Cash on delivery</label>
+                                            <input type="checkbox" class="custom-control-input" name="paymentmethod" value="cod" id="customCheck12">
+                                            <label class="custom-control-label" for="customCheck12">Cash on delivery</label>
                                         </div>
                                     </div>
                                     <div class="paypal-method-flex">
                                         <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="customCheck6">
-                                            <label class="custom-control-label" for="customCheck6">Pay with Razorpay</label>
+                                            <input type="checkbox" class="custom-control-input" name="paymentmethod" value="razorpay" id="customCheck13">
+                                            <label class="custom-control-label" for="customCheck13">Pay with Razorpay</label>
                                         </div>
                                         <div class="paypal-logo"><img src="<?php echo e(asset('frontend/img/images/card.png')); ?>" alt=""></div>
                                     </div>
                                 </div>
 
-                                <a href="<?php echo e(route('razorpay-payment',['payableamount='.$subtotal])); ?>" class="btn">Place order</a>
-
+                                
+                                <button class="btn">Place order</button>
                             </form>
+
+
                         </div>
                     </div>
                 </div>
@@ -263,7 +254,22 @@
 </main>
 <!-- main-area-end -->
 
+<?php $__env->startPush('frontend-scripts'); ?>
+<script>
+    $(document).ready(function(){
+        //for change event
+          $('input[name="shippingcharge"]').on('change', function() {
+            //To allow users select only one checkbox
+              $('input[name="shippingcharge"]').not(this).prop('checked', false);
+            //Get selected checkbox value
+               alert($('input[name="shippingcharge"]:checked').val());
+          });
+    });
+    </script>
 
+
+
+<?php $__env->stopPush(); ?>
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH E:\webdev\hemchhaya\resources\views/cart/checkout.blade.php ENDPATH**/ ?>
