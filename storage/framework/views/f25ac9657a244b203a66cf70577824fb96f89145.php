@@ -1,6 +1,4 @@
-@extends('layouts.app')
-@section('title', 'Salesanta | Registration')
-@section('content')
+<?php $__env->startSection('content'); ?>
 <!-- main-area -->
 <main>
     <!-- contact-area -->
@@ -13,42 +11,43 @@
                             <h5 class="sub-title">Sign Up to view your profile</h5>
                         </div>
 
-                        @if($errors->any())
+                        <?php if($errors->any()): ?>
                         <div class="alert alert-danger">
                             <ul>
-                                @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                                @endforeach
+                                <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <li><?php echo e($error); ?></li>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </ul>
                         </div>
-                        @endif @if(session()->has('message'))
+                        <?php endif; ?> <?php if(session()->has('message')): ?>
                         <div class="alert alert-success">
-                            {{ session()->get('message') }}
+                            <?php echo e(session()->get('message')); ?>
+
                         </div>
-                        @endif
+                        <?php endif; ?>
 
                         <div class="contact-wrap-content">
-                            <form action="{{ route('user.save-user') }}" name="userregistration" id="userregistration" class="contact-form" method="POST">
-                                @csrf
+                            <form action="<?php echo e(route('register')); ?>" name="userregistration" class="contact-form" method="POST">
+                                <?php echo csrf_field(); ?>
                                 <div class="form-grp">
                                     <label for="name">Your Name <span>*</span></label>
-                                    <input type="text" name="name" id="name" placeholder="Your Name" value="{{ old('name') }}" class="validate[required]"/>
+                                    <input type="text" name="name" id="name" placeholder="Your Name" value="<?php echo e(old('name')); ?>"/>
                                 </div>
                                 <div class="form-grp">
                                     <label for="email">Your Email <span>*</span></label>
-                                    <input type="email" name="email" id="email" placeholder="Your Email" value="{{ old('email') }}" class="validate[required]"/>
+                                    <input type="email" name="email" id="email" placeholder="Your Email" value="<?php echo e(old('email')); ?>" />
                                 </div>
                                 <div class="form-grp">
                                     <label for="phone">Your Phone No. <span>*</span></label>
-                                    <input type="text" name="phone" id="phone" placeholder="Your Phone No." value="{{ old('phone') }}" class="validate[required]"/>
+                                    <input type="text" name="phone" id="phone" placeholder="Your Phone No."  value="<?php echo e(old('phone')); ?>" />
                                 </div>
                                 <div class="form-grp">
                                     <label for="password">Password <span>*</span></label>
-                                    <input type="password" name="password" id="password" placeholder="password" class="validate[required]"/>
+                                    <input type="password" name="password" id="password" placeholder="password" />
                                 </div>
                                 <div class="form-grp">
                                     <label for="confirmpassword">Confirm Password <span>*</span></label>
-                                    <input type="password" name="confirmpassword" id="confirmpassword" placeholder="Confirm Password" class="validate[required]"/>
+                                    <input type="password" name="confirmpassword" id="confirmpassword" placeholder="Confirm Password" />
                                 </div>
                                 <div class="row">
                                     <div class="col-md-5">
@@ -61,7 +60,7 @@
                             </form>
                             <hr />
                             <div class="text-center">
-                                <p>Already Have An Account? <a href="{{ route('login') }}">Login</a></p>
+                                <p>Already Have An Account? <a href="<?php echo e(route('login')); ?>">Login</a></p>
                             </div>
                         </div>
                     </div>
@@ -72,11 +71,7 @@
     <!-- contact-area-end -->
 </main>
 <!-- main-area-end -->
-@push('frontend-scripts')
-<script>
-    $(document).ready(function () {
-        $("#userregistration").validationEngine();
-    });
-</script>
-@endpush
-@endsection
+
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH E:\webdev\hemchhaya\resources\views/auth/register.blade.php ENDPATH**/ ?>

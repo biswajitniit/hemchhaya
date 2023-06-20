@@ -28,7 +28,7 @@ use App\Http\Controllers\Dashboard\UserlogoutController;
 use App\Http\Controllers\Cart\CartController;
 use App\Http\Controllers\RazorpayPaymentController;
 use App\Http\Controllers\Dashboard\MyaddressController;
-
+use App\Http\Controllers\Auth\ForgotPasswordController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -288,6 +288,15 @@ Route::any('/admin/get_attributecat_with_attribute_on_product_page', [ProductCon
 
     Route::get('/user/registration', [HomeController::class,'registration'])->name('user.registration');
     Route::post('/user/save-user', [HomeController::class,'save_user'])->name('user.save-user');
+    Route::get('account/verify/{token}', [HomeController::class, 'verifyAccount'])->name('user.verify');
+
+
+    Route::get('forget-password', [ForgotPasswordController::class, 'showForgetPasswordForm'])->name('forget.password.get');
+    Route::post('forget-password', [ForgotPasswordController::class, 'submitForgetPasswordForm'])->name('forget.password.post');
+    Route::get('reset-password/{token}', [ForgotPasswordController::class, 'showResetPasswordForm'])->name('reset.password.get');
+    Route::post('reset-password', [ForgotPasswordController::class, 'submitResetPasswordForm'])->name('reset.password.post');
+
+
 
     Route::get('/user/dashboard', [UserdashboardController::class,'user_dashboard'])->name('user.dashboard');
 
@@ -314,6 +323,8 @@ Route::any('/admin/get_attributecat_with_attribute_on_product_page', [ProductCon
     Route::get('remove-cart-item', [CartController::class,'remove_cart_item'])->name('remove-cart-item');
     Route::get('/cart',[CartController::class,'cart'])->name('cart');
     Route::get('/checkout',[CartController::class,'checkout'])->name('checkout');
+    Route::post('/order-store',[CartController::class,'order_store'])->name('order-store');
+
 
     Route::get('razorpay-payment', [RazorpayPaymentController::class, 'index'])->name('razorpay-payment');
     Route::post('razorpay-payment', [RazorpayPaymentController::class, 'store'])->name('razorpay.payment.store');

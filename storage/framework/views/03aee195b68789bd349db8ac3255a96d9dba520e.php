@@ -1,3 +1,4 @@
+
 <?php $__env->startSection('title', 'Salesanta | Listing page sub category item'); ?>
 <?php $__env->startSection('content'); ?>
 
@@ -7,7 +8,23 @@
 <main>
 
     <!-- breadcrumb-area -->
-    
+    <div class="breadcrumb-area breadcrumb-bg-two">
+        <div class="container custom-container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadcrumb-content">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                                <li class="breadcrumb-item"><a href="<?php echo e(route('home.category-wise-landing-page',['catname='.create_slug($subcategory->categorys->category_name).'&catid='.Crypt::encryptString($subcategory->categorys->id)])); ?>"><?php echo e($subcategory->categorys->category_name); ?></a></li>
+                                <li class="breadcrumb-item active" aria-current="page"><?php echo e($subcategory->sub_category_name); ?></li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- breadcrumb-area-end -->
 
     <!-- shop-area -->
@@ -22,7 +39,7 @@
                             </div>
                             <div class="shop-cat-list">
                                 <ul>
-                                    <li><a href="#">All<span>+</span></a></li>
+                                    <li><a href="<?php echo e(route('all-subcategory-item-list')); ?>">All<span>+</span></a></li>
                                     <?php if($subcategoryitem): ?>
                                         <?php $__currentLoopData = $subcategoryitem; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                         <li><a href="<?php echo e(route('home.sub-cat-item-landing-page',['subcatitemname='.create_slug($row->sub_category_item_name).'&cid='.Crypt::encryptString($row->category_id).'&scid='.Crypt::encryptString($row->sub_category_id).'&sciid='.Crypt::encryptString($row->id)])); ?>"><?php echo e($row->sub_category_item_name); ?><span>+</span></a></li>
@@ -32,61 +49,11 @@
                                 </ul>
                             </div>
                         </div>
-                        <div class="widget shop-widget">
-                            <div class="shop-widget-title">
-                                <h6 class="title">Filter By Price</h6>
-                            </div>
-                            <div class="price_filter">
-                                <div id="slider-range"></div>
-                                <div class="price_slider_amount">
-                                    <span>Price :</span>
-                                    <input type="text" id="amount" name="price" placeholder="Add Your Price" />
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="widget shop-widget">
-                            <div class="shop-widget-title">
-                                <h6 class="title">BRANDS</h6>
-                            </div>
-                            <div class="shop-cat-list">
-                                <ul>
-                                    <li><a href="shop.html">Adara <span>+</span></a></li>
-                                    <li><a href="shop.html">Carnation <span>+</span></a></li>
-                                    <li><a href="shop.html">We Beyond <span>+</span></a></li>
-                                    <li><a href="shop.html">Agrifram <span>+</span></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        
                     </aside>
                 </div>
                 <div class="col-9">
-                    
-                    <div class="shop-top-meta mb-30">
-                        <div class="row">
-                            <div class="col-md-6 col-sm-7">
-                                <div class="shop-top-left">
-                                    <ul>
-                                        <li><a href="#"><i class="fas fa-bars"></i> Page 1 of 100</a></li>
 
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-sm-5">
-                                <div class="shop-top-right">
-                                    <form action="#">
-                                        <select name="select">
-                                            
-                                            <option value="price-low-to-high">Price -- Low to High</option>
-                                            <option value="price-high-to-low">Price -- High to Low</option>
-                                            
-                                        </select>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
                     <div class="shop-products-wrap">
                         <div class="row justify-content-center">
 
@@ -122,28 +89,9 @@
                                     </div>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             <?php endif; ?>
-
-
-
-
-
-
-
-
                         </div>
                     </div>
-                    <div class="pagination-wrap">
-                        <ul>
-                            <li class="prev"><a href="shop.html">Prev</a></li>
-                            <li><a href="shop.html">1</a></li>
-                            <li class="active"><a href="shop.html">2</a></li>
-                            <li><a href="shop.html">3</a></li>
-                            <li><a href="shop.html">4</a></li>
-                            <li><a href="shop.html">...</a></li>
-                            <li><a href="shop.html">10</a></li>
-                            <li class="next"><a href="shop.html">Next</a></li>
-                        </ul>
-                    </div>
+
                 </div>
             </div>
         </div>

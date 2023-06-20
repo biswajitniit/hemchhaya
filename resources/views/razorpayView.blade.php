@@ -5,11 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Laravel - Razorpay Payment Gateway Integration</title>
+    {{-- <title>Laravel - Razorpay Payment Gateway Integration</title> --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script>
+        $(window).on('load', function() {
+          $('.razorpay-payment-button').click();
+        });
+      </script>
 </head>
-<body>
+{{-- <body onload="setTimeout(function() { document.razorpayautosubmit.submit() }, 100)"> --}}
+    <body>
     <div id="app">
         <main class="py-4">
             <div class="container">
@@ -35,20 +41,20 @@
                         @endif
 
                         <div class="card card-default">
-                            <div class="card-header">
+                            {{-- <div class="card-header">
                                 Laravel - Razorpay Payment Gateway Integration
-                            </div>
+                            </div> --}}
 
                             <div class="card-body text-center">
-                                <form action="{{ route('razorpay.payment.store') }}" method="POST" >
+                                <form action="{{ route('razorpay.payment.store') }}" method="POST" name="razorpayautosubmit" id="razorpayautosubmit">
                                     @csrf
                                     <script src="https://checkout.razorpay.com/v1/checkout.js"
                                             data-key="{{ env('RAZORPAY_KEY') }}"
                                             data-amount="{{ 100 * request()->payableamount}}"
                                             data-buttontext="Submit"
                                             data-name="Salesanta.com"
-                                            data-description="Rozerpay"
-                                            data-image="http://localhost:8000/frontend/img/logo/logo.png"
+                                            data-description="Razorpay"
+                                            data-image="{{ asset('frontend/img/logo/logo.png') }}"
                                             data-prefill.name="name"
                                             data-prefill.email="email"
                                             data-theme.color="#ff7529">

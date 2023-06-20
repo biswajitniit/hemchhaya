@@ -11,6 +11,8 @@ use App\Models\Variationitems;
 use App\Models\Variations;
 use App\Models\Product_image;
 use App\Models\Cart;
+use App\Models\Product;
+use Illuminate\Support\Facades\Crypt;
 
 if (! function_exists('create_slug')) {
     function create_slug($string) {
@@ -143,5 +145,87 @@ if (! function_exists('Checkuseralreadyaddedtocart')) {
       // DB::enableQueryLog(); // Enable query log
        return Cart::where('user_id',$userid)->where('product_id',$productid)->count();
       // dd(DB::getQueryLog()); // Show results of log
+    }
+}
+
+if (! function_exists('GetShiprocketToken')) {
+    function GetShiprocketToken() {
+
+        $postvalue = array(
+            'email'   =>  config('constants.Shiprocket.email'),
+            'password' =>  config('constants.Shiprocket.password')
+        );
+
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+          CURLOPT_URL => 'https://apiv2.shiprocket.in/v1/external/auth/login',
+          CURLOPT_RETURNTRANSFER => true,
+          CURLOPT_ENCODING => '',
+          CURLOPT_MAXREDIRS => 10,
+          CURLOPT_TIMEOUT => 0,
+          CURLOPT_FOLLOWLOCATION => true,
+          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+          CURLOPT_CUSTOMREQUEST => 'POST',
+          CURLOPT_POSTFIELDS =>json_encode($postvalue),
+          CURLOPT_HTTPHEADER => array(
+            'Content-Type: application/json'
+          ),
+        ));
+
+        $response = curl_exec($curl);
+
+        curl_close($curl);
+        $token = json_decode($response);
+        return $token->token;
+    }
+}
+
+
+if (! function_exists('GetCourierServiceability')) {
+    function GetCourierServiceability($weight) {
+
+        $postvalue = array(
+                        'pickup_postcode'   => '721447',
+                        'delivery_postcode' => '713216',
+                        'order_id'          => '',
+                        'cod'               => '1',
+                        'weight'            => $weight, // kgs
+                        'length'            => '',
+                        'breadth'           => '',
+                        'height'            => '',
+                        'declared_value'    => '',
+                        'mode'              => 'Surface',
+                        'couriers_type'     => '',
+                        'only_local'        => ''
+                    );
+
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+          CURLOPT_URL => 'https://apiv2.shiprocket.in/v1/external/courier/serviceability/',
+          CURLOPT_RETURNTRANSFER => true,
+          CURLOPT_ENCODING => '',
+          CURLOPT_MAXREDIRS => 10,
+          CURLOPT_TIMEOUT => 0,
+          CURLOPT_FOLLOWLOCATION => true,
+          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+          CURLOPT_CUSTOMREQUEST => 'GET',
+          CURLOPT_POSTFIELDS => json_encode($postvalue),
+          CURLOPT_HTTPHEADER => array(
+            'Content-Type: application/json',
+            'Authorization: Bearer '.GetShiprocketToken()
+          ),
+        ));
+
+        $response = curl_exec($curl);
+
+        curl_close($curl);
+        return json_decode($response);
+    }
+}
+
+if (! function_exists('ViewProductDetails')) {
+    function ViewProductDetails($productid) {
+       $product = Product::where('id',$productid)->first();
+       return url('/view-product-details?pid='.Crypt::encryptString($product->id).'&cid='.Crypt::encryptString($product->category_id).'&scid='.Crypt::encryptString($product->sub_category_id).'&scitemid='.Crypt::encryptString($product->sub_category_item_id));
     }
 }

@@ -446,7 +446,7 @@ label {
     border-radius: 4px;
 	position: relative;
 }
-.header-search-wrap form:before {
+/* .header-search-wrap form:before {
     content: "";
     position: absolute;
     left: 185px;
@@ -455,7 +455,7 @@ label {
     width: 1px;
     height: 24px;
     background: #dbdada;
-}
+} */
 .header-search-wrap form .custom-select {
 	display: inline-block;
 	padding: 10px 42px 10px 25px;
@@ -4467,6 +4467,7 @@ label {
     align-items: center;
     flex-wrap: wrap;
     margin-top: 7px;
+    float: right;
 }
 .cart-coupon form {
     display: flex;
@@ -4655,7 +4656,8 @@ label {
 }
 .checkout-form-wrap {
     margin-right: -30px;
-    padding: 35px 40px 60px;
+    /* padding: 35px 40px 60px; */
+    padding: 35px 40px 35px;
     border: 1px solid #ebebeb;
 }
 .checkout-form-top {
