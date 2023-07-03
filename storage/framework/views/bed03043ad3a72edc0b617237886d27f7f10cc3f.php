@@ -14,7 +14,6 @@
         });
       </script>
 </head>
-
     <body>
     <div id="app">
         <main class="py-4">
@@ -47,10 +46,11 @@
 
                             <div class="card-body text-center">
                                 <form action="<?php echo e(route('razorpay.payment.store')); ?>" method="POST" name="razorpayautosubmit" id="razorpayautosubmit">
+                                    <input type="hidden" name="delivery_charges" value="<?php echo e(request()->delivery_charges); ?>">
                                     <?php echo csrf_field(); ?>
                                     <script src="https://checkout.razorpay.com/v1/checkout.js"
                                             data-key="<?php echo e(env('RAZORPAY_KEY')); ?>"
-                                            data-amount="<?php echo e(100 * request()->payableamount); ?>"
+                                            data-amount="<?php echo e(100 * Crypt::decryptString(request()->payableamount)); ?>"
                                             data-buttontext="Submit"
                                             data-name="Salesanta.com"
                                             data-description="Razorpay"

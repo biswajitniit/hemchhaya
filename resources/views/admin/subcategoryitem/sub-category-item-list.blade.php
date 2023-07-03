@@ -47,6 +47,7 @@
                       <th>Category Name</th>
                       <th>Sub Category Name</th>
                       <th>Sub Category Item Name</th>
+                      <th>Image</th>
                       <th>Status</th>
                       <th>Actions</th>
                     </tr>
@@ -98,6 +99,12 @@
                         {data: 'category_name' },
                         {data: 'sub_category_name'},
                         {data: 'sub_category_item_name'},
+                        {
+                            data: 'sub_category_item_image',
+                            render: function (data, type, row){
+                                  return '<img src='+data+'>';
+                            },
+                        },
                         {
                             data: 'status',
                             render: function (data, type, row){

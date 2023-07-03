@@ -5,23 +5,31 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AdminLoginController;
 use App\Http\Controllers\Auth\VendorLoginController;
-use App\Http\Controllers\Admin\Category\CategoryController;
-use App\Http\Controllers\Admin\Dashboard\DashboardController;
-use App\Http\Controllers\Vendor\Variations\VariationsController;
-use App\Http\Controllers\Vendor\Variationitems\VariationitemsController;
 
-use App\Http\Controllers\Vendor\CatController;
+
 
 use App\Http\Controllers\Vendor\Dashboard\VendorDashboardController;
+use App\Http\Controllers\Vendor\Variations\VariationsController;
+use App\Http\Controllers\Vendor\Variationitems\VariationitemsController;
+use App\Http\Controllers\Vendor\CatController;
+use App\Http\Controllers\Vendor\Product\ProductController;
+
 use App\Http\Controllers\Admin\Subcategoryitem\SubCategoryItemController;
 use App\Http\Controllers\Admin\Subcategory\SubCategoryController;
 use App\Http\Controllers\Admin\Attributecategory\AttributecategoryController;
 use App\Http\Controllers\Admin\Attribute\AttributeController;
-use App\Http\Controllers\Vendor\Product\ProductController;
+use App\Http\Controllers\Admin\Brand\BrandController;
+use App\Http\Controllers\Admin\Banner\BannerController;
+use App\Http\Controllers\Admin\Category\CategoryController;
+use App\Http\Controllers\Admin\Dashboard\DashboardController;
 use App\Http\Controllers\Admin\LogoutController;
 
-use App\Http\Controllers\Admin\Brand\BrandController;
+
+
+
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MyOrdersController;
+
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Dashboard\UserdashboardController;
 use App\Http\Controllers\Dashboard\UserlogoutController;
@@ -174,6 +182,20 @@ Route::any('/admin/brand-list-search', [BrandController::class, 'brand_list_sear
 Route::any('/admin/search-brand-list-datatable', [BrandController::class, 'ajax_search_brand_list_datatable'])->name('admin.search-brand-list-datatable');
 
 
+ // Banner
+ Route::any('/admin/banner', [BannerController::class, 'banner_list'])->name('admin.banner');
+ Route::get('/bannerlist', [BannerController::class, 'bannerlistdata'])->name('bannerlist');
+
+ Route::get('/admin/add-banner',[BannerController::class, 'add_banner'])->name('admin.add-banner');
+ Route::post('/admin/add-banner-post-data',[BannerController::class, 'add_banner_post_data'])->name('admin.add-banner-post-data');
+
+ Route::any('/admin/edit-banner/{bannerid}',[BannerController::class, 'edit_banner'])->name('admin.edit-banner');
+ Route::post('/admin/edit-banner-post',[BannerController::class, 'edit_banner_post'])->name('admin.edit-banner-post');
+
+ Route::any('/admin/bannertrash/{bannerid}',[BannerController::class, 'bannertrash'])->name('admin.bannertrash');
+
+
+
 /**
  *
  * Admin section End
@@ -262,7 +284,6 @@ Route::any('/admin/get_attributecat_with_attribute_on_product_page', [ProductCon
 
 
 
-
 /**
  *
  * Vendor section end
@@ -276,9 +297,11 @@ Route::any('/admin/get_attributecat_with_attribute_on_product_page', [ProductCon
  * Frontend section start
  *
  */
-    Route::get('/', function () {
-        return view('welcome');
-    });
+    // Route::get('/', function () {
+    //     return view('welcome');
+    // });
+
+    Route::get('/', [HomeController::class,'index']);
 
     //user section
     Route::get('/login', [LoginController::class,'login'])->name('login');
@@ -299,6 +322,16 @@ Route::any('/admin/get_attributecat_with_attribute_on_product_page', [ProductCon
 
 
     Route::get('/user/dashboard', [UserdashboardController::class,'user_dashboard'])->name('user.dashboard');
+    Route::post('/user-update-profile', [UserdashboardController::class,'user_update_profile'])->name('user-update-profile');
+
+
+    // MY ORDER HISTORY
+    Route::get('/my-orders-history', [MyOrdersController::class,'my_orders_history'])->name('my-orders-history');
+    Route::get('/view-order-details/{orderid}', [MyOrdersController::class,'view_order_details'])->name('view-order-details');
+
+
+
+
 
 
     Route::get('/category-wise-landing-page',[HomeController::class, 'category_wise_landing_page'])->name('home.category-wise-landing-page');
@@ -324,7 +357,7 @@ Route::any('/admin/get_attributecat_with_attribute_on_product_page', [ProductCon
     Route::get('/cart',[CartController::class,'cart'])->name('cart');
     Route::get('/checkout',[CartController::class,'checkout'])->name('checkout');
     Route::post('/order-store',[CartController::class,'order_store'])->name('order-store');
-
+    Route::get('/order-success',[CartController::class,'order_success'])->name('order-success');
 
     Route::get('razorpay-payment', [RazorpayPaymentController::class, 'index'])->name('razorpay-payment');
     Route::post('razorpay-payment', [RazorpayPaymentController::class, 'store'])->name('razorpay.payment.store');

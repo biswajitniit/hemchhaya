@@ -14,7 +14,6 @@
         });
       </script>
 </head>
-{{-- <body onload="setTimeout(function() { document.razorpayautosubmit.submit() }, 100)"> --}}
     <body>
     <div id="app">
         <main class="py-4">
@@ -47,10 +46,11 @@
 
                             <div class="card-body text-center">
                                 <form action="{{ route('razorpay.payment.store') }}" method="POST" name="razorpayautosubmit" id="razorpayautosubmit">
+                                    <input type="hidden" name="delivery_charges" value="{{request()->delivery_charges}}">
                                     @csrf
                                     <script src="https://checkout.razorpay.com/v1/checkout.js"
                                             data-key="{{ env('RAZORPAY_KEY') }}"
-                                            data-amount="{{ 100 * request()->payableamount}}"
+                                            data-amount="{{ 100 * Crypt::decryptString(request()->payableamount)}}"
                                             data-buttontext="Submit"
                                             data-name="Salesanta.com"
                                             data-description="Razorpay"

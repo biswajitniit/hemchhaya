@@ -30,8 +30,10 @@ class CreateUseraddressesTable extends Migration
             $table->string('landmark')->nullable();
             $table->string('alternate_phone')->nullable();
 
+            $table->enum('primary_address', ['1', '2'])->comment('1=primary address,2=not selected')->default('2');
+
             $table->timestamps();
-            $table->softDeletes();
+            //$table->softDeletes();
         });
     }
 

@@ -13,298 +13,30 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="slider-active">
-                                <div class="single-slider slider-bg" data-background="{{ asset('frontend/img/slider/slider_bg01.jpg') }}">
-                                    <div class="slider-content">
-                                        <h5 class="sub-title" data-animation="fadeInUp" data-delay=".2s">top deal !</h5>
-                                        <h2 class="title" data-animation="fadeInUp" data-delay=".4s">organic food</h2>
-                                        <p data-animation="fadeInUp" data-delay=".6s">Get up to 50% OFF Today Only</p>
-                                        <a href="shop.html" class="btn rounded-btn" data-animation="fadeInUp" data-delay=".8s">Shop Now</a>
-                                    </div>
-                                </div>
-                                <div class="single-slider slider-bg" data-background="{{ asset('frontend/img/slider/slider_bg02.jpg') }}">
-                                    <div class="slider-content">
-                                        <h5 class="sub-title" data-animation="fadeInUp" data-delay=".2s">Real simple !</h5>
-                                        <h2 class="title" data-animation="fadeInUp" data-delay=".4s">Time Grocery</h2>
-                                        <p data-animation="fadeInUp" data-delay=".6s">Get up to 50% OFF Today Only</p>
-                                        <a href="shop.html" class="btn rounded-btn" data-animation="fadeInUp" data-delay=".8s">Shop Now</a>
-                                    </div>
-                                </div>
-                                <div class="single-slider slider-bg" data-background="{{ asset('frontend/img/slider/slider_bg03.jpg') }}">
-                                    <div class="slider-content">
-                                        <h5 class="sub-title" data-animation="fadeInUp" data-delay=".2s">top deal !</h5>
-                                        <h2 class="title" data-animation="fadeInUp" data-delay=".4s">organic food</h2>
-                                        <p data-animation="fadeInUp" data-delay=".6s">Get up to 50% OFF Today Only</p>
-                                        <a href="shop.html" class="btn rounded-btn" data-animation="fadeInUp" data-delay=".8s">Shop Now</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        {{-- <div class="col-3">
-                            <div class="slider-banner-img mb-20">
-                                <a href="shop.html"><img src="{{ asset('frontend/img/slider/slider_banner01.jpg') }}" alt=""></a>
-                            </div>
-                            <div class="slider-banner-img">
-                                <a href="shop.html"><img src="{{ asset('frontend/img/slider/slider_banner02.jpg') }}" alt=""></a>
-                            </div>
-                        </div>
-                        <div class="col-3">
-                            <div class="slider-banner-img">
-                                <a href="shop.html"><img src="{{ asset('frontend/img/slider/slider_banner03.jpg') }}" alt=""></a>
-                            </div>
-                        </div> --}}
-                    </div>
-                </div>
 
-                <!-- category-area -->
-                <div class="container custom-container">
-                    <div class="slider-category-wrap">
-                        <div class="row category-active">
-                            <div class="col-lg-2">
-                                <div class="category-item active">
-                                    <a href="shop.html" class="category-link"></a>
-                                    <div class="category-thumb">
-                                        <img src="{{ asset('frontend/img/product/category_img01.png') }}" alt="">
-                                    </div>
-                                    <div class="category-content">
-                                        <h6 class="title">Juice & Drinks</h6>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-2">
-                                <div class="category-item">
-                                    <a href="shop.html" class="category-link"></a>
-                                    <div class="category-thumb">
-                                        <img src="{{ asset('frontend/img/product/category_img02.png') }}" alt="">
-                                    </div>
-                                    <div class="category-content">
-                                        <h6 class="title">Vegetables</h6>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-2">
-                                <div class="category-item">
-                                    <a href="shop.html" class="category-link"></a>
-                                    <div class="category-thumb">
-                                        <img src="{{ asset('frontend/img/product/category_img03.png') }}" alt="">
-                                    </div>
-                                    <div class="category-content">
-                                        <h6 class="title">Fresh Nuts</h6>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-2">
-                                <div class="category-item">
-                                    <a href="shop.html" class="category-link"></a>
-                                    <div class="category-thumb">
-                                        <img src="{{ asset('frontend/img/product/category_img04.png') }}" alt="">
-                                    </div>
-                                    <div class="category-content">
-                                        <h6 class="title">Cleaning</h6>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-2">
-                                <div class="category-item">
-                                    <a href="shop.html" class="category-link"></a>
-                                    <div class="category-thumb">
-                                        <img src="{{ asset('frontend/img/product/category_img05.png') }}" alt="">
-                                    </div>
-                                    <div class="category-content">
-                                        <h6 class="title">fresh meat</h6>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-2">
-                                <div class="category-item">
-                                    <a href="shop.html" class="category-link"></a>
-                                    <div class="category-thumb">
-                                        <img src="{{ asset('frontend/img/product/category_img06.png') }}" alt="">
-                                    </div>
-                                    <div class="category-content">
-                                        <h6 class="title">Powders</h6>
-                                    </div>
-                                </div>
+                                @if(!$banner->isEmpty())
+                                    @foreach($banner as $row)
+                                        <div class="single-slider slider-bg" data-background="{{ $row->banner_image }}">
+                                            <div class="slider-content">
+                                                <h5 class="sub-title" data-animation="fadeInUp" data-delay=".2s">{{ $row->banner_text_top }}</h5>
+                                                <h2 class="title" data-animation="fadeInUp" data-delay=".4s">{{ $row->banner_text_middle }}</h2>
+                                                <p data-animation="fadeInUp" data-delay=".6s">{{ $row->banner_text_buttom }}</p>
+                                                <a href="{{ $row->banner_url }}" class="btn rounded-btn" data-animation="fadeInUp" data-delay=".8s">Shop Now</a>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                @endif
+
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- category-area-end -->
 
             </section>
             <!-- slider-area-end -->
 
-            <!-- discount-area -->
-            <section class="discount-area pt-80">
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-xl-4 col-lg-6 col-md-8">
-                            <div class="discount-item mb-20">
-                                <div class="discount-thumb">
-                                    <img src="{{ asset('frontend/img/product/discount_img01.jpg') }}" alt="">
-                                </div>
-                                <div class="discount-content">
-                                    <span>healthy food</span>
-                                    <h4 class="title"><a href="shop.html">100 organic UP TO 35%</a></h4>
-                                    <a href="shop.html" class="btn">shop now</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-6 col-md-8">
-                            <div class="discount-item mb-20">
-                                <div class="discount-thumb">
-                                    <img src="{{ asset('frontend/img/product/discount_img02.jpg') }}" alt="">
-                                </div>
-                                <div class="discount-content">
-                                    <span>healthy food</span>
-                                    <h4 class="title"><a href="shop.html">Hygienically Packed</a></h4>
-                                    <a href="shop.html" class="btn">shop now</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-6 col-md-8">
-                            <div class="discount-item style-two mb-20">
-                                <div class="discount-thumb">
-                                    <img src="{{ asset('frontend/img/product/discount_img03.jpg') }}" alt="">
-                                </div>
-                                <div class="discount-content">
-                                    <span>healthy food</span>
-                                    <h4 class="title"><a href="shop.html">baby favorite UP TO 15%</a></h4>
-                                    <a href="shop.html" class="btn">shop now</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <!-- discount-area-end -->
-
-            <!-- best-deal-area -->
-            <section class="best-deal-area pt-60 pb-80">
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-xl-7 col-lg-9">
-                            <div class="best-deal-top-wrap">
-                                <div class="bd-section-title">
-                                    <h3 class="title">Best Deals <span>of this Week!</span></h3>
-                                    <p>A virtual assistant collects the products from your list</p>
-                                </div>
-                                <div class="coming-time" data-countdown="2021/10/20"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row best-deal-active">
-                        <div class="col-xl-3">
-                            <div class="best-deal-item">
-                                <div class="best-deal-thumb">
-                                    <a href="shop-details.html"><img src="{{ asset('frontend/img/product/best_deal_product01.png') }}" alt=""></a>
-                                </div>
-                                <div class="best-deal-content">
-                                    <div class="main-content">
-                                        <div class="rating">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                        </div>
-                                        <h4 class="title"><a href="shop-details.html">Walnuts Max</a></h4>
-                                        <p><i class="fas fa-rupee-sign"></i>1.50/ kg</p>
-                                    </div>
-                                    <div class="icon"><a href="shop-details.html">+</a></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-3">
-                            <div class="best-deal-item">
-                                <div class="best-deal-thumb">
-                                    <a href="shop-details.html"><img src="{{ asset('frontend/img/product/best_deal_product02.png') }}" alt=""></a>
-                                </div>
-                                <div class="best-deal-content">
-                                    <div class="main-content">
-                                        <div class="rating">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                        </div>
-                                        <h4 class="title"><a href="shop-details.html">Fresh Nuts</a></h4>
-                                        <p><i class="fas fa-rupee-sign"></i>3.50/ kg</p>
-                                    </div>
-                                    <div class="icon"><a href="shop-details.html">+</a></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-3">
-                            <div class="best-deal-item">
-                                <div class="best-deal-thumb">
-                                    <a href="shop-details.html"><img src="{{ asset('frontend/img/product/best_deal_product03.png') }}" alt=""></a>
-                                </div>
-                                <div class="best-deal-content">
-                                    <div class="main-content">
-                                        <div class="rating">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                        </div>
-                                        <h4 class="title"><a href="shop-details.html">Fresh Butter</a></h4>
-                                        <p><i class="fas fa-rupee-sign"></i>5.50/ kg</p>
-                                    </div>
-                                    <div class="icon"><a href="shop-details.html">+</a></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-3">
-                            <div class="best-deal-item">
-                                <div class="best-deal-thumb">
-                                    <a href="shop-details.html"><img src="{{ asset('frontend/img/product/best_deal_product04.png') }}" alt=""></a>
-                                </div>
-                                <div class="best-deal-content">
-                                    <div class="main-content">
-                                        <div class="rating">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                        </div>
-                                        <h4 class="title"><a href="shop-details.html">Mat Orange</a></h4>
-                                        <p><i class="fas fa-rupee-sign"></i>9.00/ kg</p>
-                                    </div>
-                                    <div class="icon"><a href="shop-details.html">+</a></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-3">
-                            <div class="best-deal-item">
-                                <div class="best-deal-thumb">
-                                    <a href="shop-details.html"><img src="{{ asset('frontend/img/product/best_deal_product05.png') }}" alt=""></a>
-                                </div>
-                                <div class="best-deal-content">
-                                    <div class="main-content">
-                                        <div class="rating">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                        </div>
-                                        <h4 class="title"><a href="shop-details.html">France Potato</a></h4>
-                                        <p><i class="fas fa-rupee-sign"></i>3.99/ kg</p>
-                                    </div>
-                                    <div class="icon"><a href="shop-details.html">+</a></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <!-- best-deal-area-end -->
-
             <!-- special-products-area -->
-            <section class="special-products-area gray-bg pt-75 pb-60">
+            <section class="special-products-area gray-bg pt-20 pb-60">
                 <div class="container">
                     <div class="row align-items-end mb-50">
                         <div class="col-md-8 col-sm-9">
@@ -559,6 +291,53 @@
                 </div>
             </section>
             <!-- special-products-area-end -->
+
+
+
+            <!-- discount-area -->
+            <section class="discount-area">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-xl-4 col-lg-6 col-md-8">
+                            <div class="discount-item mb-20">
+                                <div class="discount-thumb">
+                                    <img src="{{ asset('frontend/img/product/discount_img01.jpg') }}" alt="">
+                                </div>
+                                <div class="discount-content">
+                                    <span>healthy food</span>
+                                    <h4 class="title"><a href="shop.html">100 organic UP TO 35%</a></h4>
+                                    <a href="shop.html" class="btn">shop now</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-6 col-md-8">
+                            <div class="discount-item mb-20">
+                                <div class="discount-thumb">
+                                    <img src="{{ asset('frontend/img/product/discount_img02.jpg') }}" alt="">
+                                </div>
+                                <div class="discount-content">
+                                    <span>healthy food</span>
+                                    <h4 class="title"><a href="shop.html">Hygienically Packed</a></h4>
+                                    <a href="shop.html" class="btn">shop now</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-6 col-md-8">
+                            <div class="discount-item style-two mb-20">
+                                <div class="discount-thumb">
+                                    <img src="{{ asset('frontend/img/product/discount_img03.jpg') }}" alt="">
+                                </div>
+                                <div class="discount-content">
+                                    <span>healthy food</span>
+                                    <h4 class="title"><a href="shop.html">baby favorite UP TO 15%</a></h4>
+                                    <a href="shop.html" class="btn">shop now</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- discount-area-end -->
 
 
 

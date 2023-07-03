@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Banner;
+
 use App\Models\Categorys;
 
 use App\Models\Subcategory;
@@ -46,7 +48,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $banner = Banner::where('status','1')->get();
+        return view('welcome',compact('banner'));
     }
 
     /**

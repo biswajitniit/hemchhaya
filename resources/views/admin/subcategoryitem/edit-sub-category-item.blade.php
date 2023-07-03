@@ -39,7 +39,7 @@
 
 
 
-              <form class="cmxform" id="editsubcategoryitem" method="post" action="{{ route('admin.edit-sub-category-item-post') }}" name="editsubcategoryitem">
+              <form class="cmxform" id="editsubcategoryitem" method="post" action="{{ route('admin.edit-sub-category-item-post') }}" name="editsubcategoryitem" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" name="subcatitemid" value="{{ $subcategoryitem->id }}">
                 <fieldset>
@@ -73,7 +73,10 @@
                         <input id="sub_category_item_name" class="form-control" name="sub_category_item_name" type="text" value="{{ $subcategoryitem->sub_category_item_name }}">
                       </div>
 
-
+                      <div class="form-group">
+                        <label for="image">Sub Category Item Name </label>
+                        <input id="image" class="form-control" name="image" type="file">
+                      </div>
 
                       <div class="form-group row">
                         <label class="col-sm-3 col-form-label">Status</label>

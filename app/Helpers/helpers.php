@@ -229,3 +229,20 @@ if (! function_exists('ViewProductDetails')) {
        return url('/view-product-details?pid='.Crypt::encryptString($product->id).'&cid='.Crypt::encryptString($product->category_id).'&scid='.Crypt::encryptString($product->sub_category_id).'&scitemid='.Crypt::encryptString($product->sub_category_item_id));
     }
 }
+
+if (! function_exists('GetProductpkgsize')) {
+    function GetProductpkgsize($productid) {
+		return DB::table('products')->select('products.weight')
+					->where('products.id',$productid)
+					->get()[0]->weight;
+    }
+}
+
+if (! function_exists('GetProductName')) {
+    function GetProductName($productid) {
+		return DB::table('products')->select('products.name')
+					->where('products.id',$productid)
+					->get()[0]->name;
+
+    }
+}

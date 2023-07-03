@@ -9,6 +9,9 @@ use App\Models\Subcategory;
 use App\Models\Subcategoryitem;
 use DataTables;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use Image;
+use Embed;
 
 class SubCategoryItemController extends Controller
 {
@@ -90,10 +93,19 @@ class SubCategoryItemController extends Controller
             'sub_category_item_name.required' => 'Please enter a sub category item name',
         ]);
 
+        $imageurl = '';
+        if($request->image){
+            $filename = $request->file('image')->hashname();
+            $imagelarge = Image::make($request->file('image'))->resize(295, 258);
+            Storage::disk('s3')->put('subcategoryitem/image/'.$filename, $imagelarge->stream(), 'public');
+            $imageurl = Storage::disk('s3')->url('subcategoryitem/image/'.$filename);
+        }
+
         $data = array(
             'category_id'              => $request['category_id'],
             'sub_category_id'          => $request['sub_category_id'],
             'sub_category_item_name'   => $request['sub_category_item_name'],
+            'sub_category_item_image'  => $imageurl,
             'status'                   => $request['status']
         );
         //DB::enableQueryLog();
@@ -133,6 +145,9 @@ class SubCategoryItemController extends Controller
         })
         ->addColumn('sub_category_item_name', function ($query) {
             return $query->sub_category_item_name;
+        })
+        ->addColumn('sub_category_item_image', function ($query) {
+            return $query->sub_category_item_image;
         })
         ->addColumn('status', function ($query) {
             if($query->status==1){

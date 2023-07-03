@@ -11,7 +11,7 @@
 						<h2 class="title">MY PROFILE</h2>
 						<nav aria-label="breadcrumb">
 							<ol class="breadcrumb">
-								<li class="breadcrumb-item"><a href="index.html">Home</a></li>
+								<li class="breadcrumb-item"><a href="{{url('/')}}">Home</a></li>
 								<li class="breadcrumb-item active" aria-current="page">My PROFILE</li>
 							</ol>
 						</nav>
@@ -33,78 +33,55 @@
 			</div>
 			<div class="col-md-9">
 				<div class="profile-content">
-					<form class="form" action="##" method="post" id="registrationForm">
+
+					<?php if(Session::has('message')) { ?>
+						<div class="alert alert-success"> <?php echo Session::get('message'); ?> </div>
+					<?php } ?>
+
+					<?php if ($errors->any()){ ?>
+						<div class="alert alert-danger">
+							<ul>
+								<?php foreach ($errors->all() as $error){ ?>
+									<li><?php echo  $error ; ?></li>
+								<?php } ?>
+							</ul>
+						</div>
+					<?php } ?>
+
+                    <form class="form" action="{{route('user-update-profile')}}" method="post" id="registrationForm">
+                        @csrf
 						<div class="form-group">
 							<div class="col-12">
 								<label for="last_name">
-									<h4>Address Titel</h4>
+									<h4>Name</h4>
 								</label>
-								<input type="text" class="form-control" name="last_name" id="last_name" placeholder="last name" title="enter your last name if any.">
+								<input type="text" class="form-control" name="name" id="name" placeholder="Name" title="enter your name." value="{{ Auth::user()->name }}">
 							</div>
 						</div>
 						<div class="form-group">
 							<div class="col-12">
 								<label for="last_name">
-									<h4>Address 1</h4>
-								</label>
-								<input type="text" class="form-control" name="last_name" id="last_name" placeholder="last name" title="enter your last name if any.">
-							</div>
-						</div>
-						<div class="form-group">
-							<div class="col-12">
-								<label for="last_name">
-									<h4>Address 2</h4>
-								</label>
-								<input type="text" class="form-control" name="last_name" id="last_name" placeholder="last name" title="enter your last name if any.">
-							</div>
-						</div>
-						<div class="form-group">
-							<div class="col-12">
-								<label for="phone">
-									<h4>Area</h4>
-								</label>
-								<input type="text" class="form-control" name="phone" id="phone" placeholder="enter phone" title="enter your phone number if any.">
-							</div>
-						</div>
-						<div class="form-group">
-							<div class="col-12">
-								<label for="first_name">
-									<h4>Full name</h4>
-								</label>
-								<input type="text" class="form-control" name="first_name" id="first_name" placeholder="first name" title="enter your first name if any.">
-							</div>
-						</div>
-						<div class="form-group">
-							<div class="col-12">
-								<label for="mobile">
-									<h4>Telephone No</h4>
-								</label>
-								<input type="text" class="form-control" name="mobile" id="mobile" placeholder="enter mobile number" title="enter your mobile number if any.">
-							</div>
-						</div>
-						<div class="form-group">
-							<div class="col-12">
-								<label for="mobile">
-									<h4>Mobile</h4>
-								</label>
-								<input type="text" class="form-control" name="mobile" id="mobile" placeholder="enter mobile number" title="enter your mobile number if any.">
-							</div>
-						</div>
-						<div class="form-group">
-							<div class="col-12">
-								<label for="email">
 									<h4>Email</h4>
 								</label>
-								<input type="email" class="form-control" name="email" id="email" placeholder="you@email.com" title="enter your email.">
+								<input type="email" class="form-control" name="email" id="email" placeholder="Email" title="enter your email." value="{{ Auth::user()->email }}" readonly>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-12">
+								<label for="last_name">
+									<h4>Phone</h4>
+								</label>
+								<input type="text" class="form-control" name="phone" id="phone" placeholder="Phone" title="enter your phone." value="{{ Auth::user()->phone }}">
 							</div>
 						</div>
 						<div class="form-group">
 							<div class="col-12">
 								   <button class="btn btn-lg btn-success" type="submit">Save</button>
-									<button class="btn btn-lg" type="reset">Reset</button>
+									{{-- <button class="btn btn-lg" type="reset">Reset</button> --}}
 							 </div>
 					   </div>
 					</form>
+
 				</div>
 			</div>
 		</div>

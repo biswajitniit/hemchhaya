@@ -135,7 +135,7 @@
             </a>
             <div class="collapse" id="HPS">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="">Sliders</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<?php echo e(route('admin.banner')); ?>">Sliders</a></li>
                 <li class="nav-item"> <a class="nav-link" href="">Top Banner</a></li>
                 <li class="nav-item"> <a class="nav-link" href="">Large Banner</a></li>
                 <li class="nav-item"> <a class="nav-link" href="">Left Banner</a></li>

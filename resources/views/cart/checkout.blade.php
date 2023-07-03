@@ -235,7 +235,7 @@
                                 @endphp
                                 <input type="hidden" name="courier_name" value="{{$get_courier_serviceability->data->available_courier_companies[0]->courier_name}}">
                                 <input type="hidden" name="delivery_charges" value="{{$get_courier_serviceability->data->available_courier_companies[0]->cod_charges}}">
-
+                                <input type="hidden" name="delivery_edd" value="{{$get_courier_serviceability->data->available_courier_companies[0]->etd}}">
                                 <ul>
                                     <li class="sub-total"><span>Price ({{count($cart)}} item)</span>&#8377;{{ $subtotal }}</li>
                                      {{--<li class="sub-total"><span>Delivery Charges</span>

@@ -429,7 +429,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
+                        {{-- <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
                             <div class="footer-widget mb-50">
                                 <div class="fw-title">
                                     <h5 class="title">Customer Service</h5>
@@ -447,7 +447,7 @@
                                     </ul>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
                             <div class="footer-widget mb-50">
                                 <div class="fw-title">
@@ -498,7 +498,7 @@
                     <div class="row align-items-center">
                         <div class="col-md-6">
                             <div class="copyright-text">
-                                <p>Copyright &copy; 2022 Salesanta || All Rights Reserved</p>
+                                <p>Copyright &copy; {{date('Y')}} Salesanta || All Rights Reserved</p>
                             </div>
                         </div>
                         <div class="col-md-6">

@@ -291,25 +291,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
-                            <div class="footer-widget mb-50">
-                                <div class="fw-title">
-                                    <h5 class="title">Customer Service</h5>
-                                </div>
-                                <div class="fw-link">
-                                    <ul>
-                                        <li><a href="shop.html">Secure Shopping</a></li>
-                                        <li><a href="cart.html">Order Status</a></li>
-                                        <li><a href="shop.html">International Shipping</a></li>
-                                        <li><a href="checkout.html">Payment Method</a></li>
-                                        <li><a href="blog.html">Our Blog</a></li>
-                                        <li><a href="terms-conditios.html">Orders and Returns</a></li>
-                                        <li><a href="checkout.html">Track Your Orders</a></li>
-                                        <li><a href="index.html">Footer Links</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
+                        
                         <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
                             <div class="footer-widget mb-50">
                                 <div class="fw-title">
@@ -360,7 +342,7 @@
                     <div class="row align-items-center">
                         <div class="col-md-6">
                             <div class="copyright-text">
-                                <p>Copyright &copy; 2022 Salesanta || All Rights Reserved</p>
+                                <p>Copyright &copy; <?php echo e(date('Y')); ?> Salesanta || All Rights Reserved</p>
                             </div>
                         </div>
                         <div class="col-md-6">
