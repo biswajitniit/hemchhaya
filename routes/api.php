@@ -26,7 +26,7 @@ use App\Http\Controllers\ApiController;
 Route::namespace('Api')->group(function() {
   Route::post('/login', 'LoginController@login');
   Route::post('/signup', 'LoginController@signup');
-  Route::get('/products', 'ProductController@product_list');
+  Route::get('/products', 'ProductController@product_list ');
   Route::get('/products/{product}', 'ProductController@products_with_options');
   Route::get('/categories', 'CategoryController@category_list');
 
@@ -38,6 +38,11 @@ Route::namespace('Api')->group(function() {
     Route::post('/cart', 'CartController@add_cart');
     Route::get('/cart', 'CartController@get_cart');
     Route::put('/cart', 'CartController@update_cart');
+    Route::delete('/cart/{cart}', 'CartController@update_cart');
+    Route::get('/order', 'OrderController@my_orders_history');
+    Route::get('/order/{order}', 'OrderController@view_order_details');
+    Route::post('/single-order', 'OrderController@create_single_order');
+    Route::post('/cart-order', 'OrderController@cart_order');
   });
 });
 
