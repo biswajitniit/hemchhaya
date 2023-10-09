@@ -107,7 +107,7 @@
             </li>
 
             <li class="nav-item">
-              <a class="nav-link" href="<?php echo e(url('/')); ?>">
+              <a class="nav-link" href="<?php echo e(url('/vendor/orders')); ?>">
                 <i class="mdi mdi-cart menu-icon"></i>
                 <span class="menu-title">Orders</span>
               </a>

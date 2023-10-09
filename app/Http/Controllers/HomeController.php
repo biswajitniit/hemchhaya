@@ -49,7 +49,9 @@ class HomeController extends Controller
     public function index()
     {
         $banner = Banner::where('status','1')->get();
-        return view('welcome',compact('banner'));
+        $specialproduct = Product::with('categorys','subcategory','subcategoryitem','vendors','productchildveriation','productchildveriationitem','productwithvariation','productwithvariationitem','productwithattribute','productwithattributeitem')->where('products.special_products','1')->get();
+        $bestofferproduct = Product::with('categorys','subcategory','subcategoryitem','vendors','productchildveriation','productchildveriationitem','productwithvariation','productwithvariationitem','productwithattribute','productwithattributeitem')->where('products.best_offers','1')->get();
+        return view('welcome',compact('banner','specialproduct','bestofferproduct'));
     }
 
     /**
@@ -213,12 +215,16 @@ class HomeController extends Controller
         $productimage = Product_image::where('product_id',Crypt::decryptString($request->pid))->get();
         $frontviewimage = Product_image::where('product_id',Crypt::decryptString($request->pid))->where('image_size','large')->where('image_category','front_view_image')->first();
 
+        // Rendom Four Product
+        $rendomproduct = Product::with('categorys','subcategory','subcategoryitem','vendors','productchildveriation','productchildveriationitem','productwithvariation','productwithvariationitem','productwithattribute','productwithattributeitem')->orderByRaw('RAND()')->limit(5)->get();
+
+
         //  echo "<pre>";
-        //  print_r($productatwithattributeitem->toArray()); // you will see the `fee` array
+        //  print_r($rendomproduct->toArray()); // you will see the `fee` array
         //  echo "</pre>";
         //  die();
 
-        return view('view-product-details',compact('category','subcategory','subcategoryitem','product','variation','variationitem','productatwithattribute','productatwithattributeitem','productimage','frontviewimage'));
+        return view('view-product-details',compact('category','subcategory','subcategoryitem','product','variation','variationitem','productatwithattribute','productatwithattributeitem','productimage','frontviewimage','rendomproduct'));
     }
 
 

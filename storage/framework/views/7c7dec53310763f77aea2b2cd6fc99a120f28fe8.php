@@ -1,4 +1,3 @@
-
 <?php $__env->startSection('title', 'Product Listing'); ?>
 <?php $__env->startSection('content'); ?>
 
@@ -35,12 +34,11 @@
                 <table class="table table-bordered table-striped mb-none" id="my-table">
                   <thead>
                     <tr>
-                      <th>Category Name</th>
-                      <th>Sub Category Name</th>
-                      <th>Sub Category Item Name</th>
-                      <th>Product Information</th>
                       
+                      <th>Product Information</th>
+                      <th>Status</th>
                       <th>Stock</th>
+                      <th>Action</th>
                     </tr>
                   </thead>
 
@@ -87,47 +85,49 @@
                     type : 'GET',
                 },
                 columns: [
-                         {data: 'category_name' },
-                         {data: 'sub_category_name'},
-                         {data: 'sub_category_item_name'},
+                        //  {data: 'category_name' },
+                        //  {data: 'sub_category_name'},
+                        //  {data: 'sub_category_item_name'},
                          {
                             data: 'product_info',
                             render: function (data, type, row){
                                 return '<img src="'+data.frontimage+'" /></br><p>Name : '+data.name+'</p></br><p>SKU : '+data.skuid+'</p>';
-                                //return '<img src="'+data.frontimage+'" />';
                             },
                         },
-                        // {
-                        //     data: 'status',
-                        //     render: function (data, type, row){
-                        //         if(data == "Active"){
-                        //             return '<label class="badge badge-success">Active</label>';
-                        //         }else{
-                        //             return '<label class="badge badge-danger">In Active</label>';
-                        //         }
-                        //     },
-                        // },
-
+                        {
+                            data: 'status',
+                            render: function (data, type, row){
+                                if(data == "Active"){
+                                    return '<label class="badge badge-success">Active</label>';
+                                }else{
+                                    return '<label class="badge badge-danger">In Active</label>';
+                                }
+                            },
+                        },
                         {
                             data: 'stock',
                             render: function (data, type, row){
                                 return '<input type="textbox" name="stockqty" value="'+data.stock+'">';
                             },
                         },
-                    //    {
-                    //         data: 'action',
-                    //         render: function (data, type, row){
-                    //             return '<a href="add-product?catid='+data.catid+'&subcatid='+data.subcatid+'&subcatitemid='+data.subcatitemid+'&pid='+data.pid+'" class="btn btn-primary">Make Copy</a>';
-                    //         },
-                    //     },
-
+                        //    {
+                        //         data: 'action',
+                        //         render: function (data, type, row){
+                        //             return '<a href="add-product?catid='+data.catid+'&subcatid='+data.subcatid+'&subcatitemid='+data.subcatitemid+'&pid='+data.pid+'" class="btn btn-primary">Make Copy</a>';
+                        //         },
+                        //     },
                         // {
                         //     data: 'action',
                         //     render: function (data, type, row){
                         //         return '<a href="add-product?catid='+data.catid+'&subcatid='+data.subcatid+'&subcatitemid='+data.subcatitemid+'&pid='+data.pid+'" class="btn btn-primary">Make Copy</a>';
                         //     },
                         // },
-
+                        {
+                            data: 'action',
+                            render: function (data, type, row){
+                                return '<a href="http://localhost:8000/vendor/edit-variation/'+data+'" onclick="geturldata(event)" title="Edit Variation"><i class="mdi mdi-table-edit"></i></a>';
+                            },
+                        },
                 ]
             });
         });

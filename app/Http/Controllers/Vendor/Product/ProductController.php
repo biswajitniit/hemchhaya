@@ -455,41 +455,39 @@ class ProductController extends Controller
      * @return void
      */
     public function getvendorproductlistdata (Request $request){
-
-
         //$query = Product::get();
         \DB::statement("SET SQL_MODE=''");//this is the trick use it just before your query
         $query = Product::with('categorys','subcategory','subcategoryitem','vendors','productchildveriation','productchildveriationitem','productwithvariation','productwithvariationitem','productwithattribute','productwithattributeitem','productimage')->where('products.vendor_id',Auth::user()->id)->get();
 
-
 	    $totalData =count($query);
         $totalFiltered = $totalData;  // when there is no search parameter then total number rows = total number filtered rows.
         return Datatables::of($query)
-        ->addColumn('category_name', function ($query) {
-            return $query->categorys->category_name;
-        })
-        ->addColumn('sub_category_name', function ($query) {
-            return $query->subcategory->sub_category_name;
-        })
-        ->addColumn('sub_category_item_name', function ($query) {
-            return $query->Subcategoryitem->sub_category_item_name;
-        })
+        // ->addColumn('category_name', function ($query) {
+        //     return $query->categorys->category_name;
+        // })
+        // ->addColumn('sub_category_name', function ($query) {
+        //     return $query->subcategory->sub_category_name;
+        // })
+        // ->addColumn('sub_category_item_name', function ($query) {
+        //     return $query->Subcategoryitem->sub_category_item_name;
+        // })
         ->addColumn('product_info', function ($query) {
             return array('frontimage'=>$query->productimage->image_url,'name'=>$query->name,'skuid'=>$query->sku);
-           //return array('frontimage'=>$query->front_view_image);
         })
-        // ->addColumn('status', function ($query) {
-        //     if($query->status==1){
-        //         $mstatus='Active';
-        //     }else{
-        //         $mstatus='InActive';
-        //     }
-        //     return $mstatus;
-        // })
+        ->addColumn('status', function ($query) {
+            if($query->status==1){
+                $mstatus='Active';
+            }else{
+                $mstatus='InActive';
+            }
+            return $mstatus;
+        })
         ->addColumn('stock', function ($query) {
-            //return array('pid'=>$query->id,'catid'=>$query->category_id,'subcatid'=>$query->sub_category_id,'subcatitemid'=>$query->sub_category_id);
             return array('stock' => $query->quantity);
-        })->rawColumns(['stock'])
+        })
+        ->addColumn('action', function ($query) {
+            return $query->id;
+        })->rawColumns(['action'])
         ->make('true');
 
 

@@ -28,6 +28,71 @@ class CartController extends Controller
     }
 
    /**
+     * Product add to cart items by ajax.
+     *
+     * @return \Illuminate\Http\Response
+    */
+    public function add_to_cart_items_by_ajax(Request $request){
+        $userId = Auth::user()->id; // or any string represents user identifier
+        if($userId){
+            $checkcartisempty = Cart::where('user_id',$userId)->count();
+            if($checkcartisempty){ //if cart is not empty for session user
+
+                $Product = Product::find($request->productid); // assuming you have a Product model with id, name, description & price
+               //find product if already exist in cart table for session user
+               $cartdata = Cart::where('user_id',$userId)->where('product_id',$request->productid)->get();
+               if(count($cartdata) > 0){ // Record already exist
+
+                if($request->qty == 0){
+                    Cart::where('product_id',$request->productid)->delete();
+                    echo $Product->name;
+                }else{
+                    $data = array(
+                        'price'             => $Product->sale_price,
+                        //'qty'               => $request->qty + $cartdata[0]->qty,
+                        'qty'               => $request->qty,
+                    );
+                    Cart::where('id', $cartdata[0]->id)->update($data);
+                    echo $Product->name;
+                }
+
+               }else{ // If this product is not added to cart
+                    $Product = Product::find($request->productid); // assuming you have a Product model with id, name, description & price
+                    $attributes = array('sku'=>$Product->sku,'weight'=>$Product->weight,'length'=>$Product->length,'breadth'=>$Product->breadth,'height'=>$Product->height,'vendor_id'=>$Product->vendor_id);
+                    $attribute_String = json_encode($attributes);
+                    $cart = new Cart();
+                        $cart->user_id                = $userId;
+                        $cart->product_id             = $request->productid;
+                        $cart->name                   = $Product->name;
+                        $cart->price                  = $Product->sale_price;
+                        $cart->qty                    = $request->qty;
+                        $cart->image                  = Getimageurllarge($request->productid);
+                        $cart->attributes             = $attribute_String;
+                    $cart->save();
+                    echo $Product->name;
+               }
+            }else{
+
+                $Product = Product::find($request->productid); // assuming you have a Product model with id, name, description & price
+                $attributes = array('sku'=>$Product->sku,'weight'=>$Product->weight,'length'=>$Product->length,'breadth'=>$Product->breadth,'height'=>$Product->height,'vendor_id'=>$Product->vendor_id);
+                $attribute_String = json_encode($attributes);
+                $cart = new Cart();
+                    $cart->user_id                = $userId;
+                    $cart->product_id             = $request->productid;
+                    $cart->name                   = $Product->name;
+                    $cart->price                  = $Product->sale_price;
+                    $cart->qty                    = $request->qty;
+                    $cart->image                  = Getimageurllarge($request->productid);
+                    $cart->attributes             = $attribute_String;
+                $cart->save();
+                echo $Product->name;
+            }
+        }else{
+            return redirect('login');
+        }
+    }
+
+   /**
      * Product add to cart.
      *
      * @return \Illuminate\Http\Response
@@ -50,8 +115,9 @@ class CartController extends Controller
 
                }else{ // If this product is not added to cart
                 $Product = Product::find($request->productid); // assuming you have a Product model with id, name, description & price
-                $attributes = array('sku'=>$Product->sku,'weight'=>$Product->weight,'length'=>$Product->length,'breadth'=>$Product->breadth,'height'=>$Product->height,'vendor_id'=>$Product->vendor_id);
+                $attributes = array();
                 $attribute_String = json_encode($attributes);
+
                 $cart = new Cart();
                     $cart->user_id                = $userId;
                     $cart->product_id             = $request->productid;
@@ -61,12 +127,17 @@ class CartController extends Controller
                     $cart->image                  = Getimageurllarge($request->productid);
                     $cart->attributes             = $attribute_String;
                 $cart->save();
+
                }
+
             }else{
 
+
                 $Product = Product::find($request->productid); // assuming you have a Product model with id, name, description & price
-                $attributes = array('sku'=>$Product->sku,'weight'=>$Product->weight,'length'=>$Product->length,'breadth'=>$Product->breadth,'height'=>$Product->height,'vendor_id'=>$Product->vendor_id);
+                $attributes = array('size'=>30,'color'=>'red');
                 $attribute_String = json_encode($attributes);
+
+
                 $cart = new Cart();
                     $cart->user_id                = $userId;
                     $cart->product_id             = $request->productid;
@@ -76,6 +147,7 @@ class CartController extends Controller
                     $cart->image                  = Getimageurllarge($request->productid);
                     $cart->attributes             = $attribute_String;
                 $cart->save();
+
             }
             return redirect('cart');
         }else{

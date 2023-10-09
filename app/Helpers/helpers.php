@@ -246,3 +246,21 @@ if (! function_exists('GetProductName')) {
 
     }
 }
+
+if (! function_exists('GetCartCount')) {
+    function GetCartCount($productid) {
+        $row =  Cart::where('product_id',$productid)->first();
+        if ($row === null) {
+            // record doesn't exist
+            return 0;
+        }else{
+            return $row->qty;
+        }
+    }
+}
+
+if (! function_exists('getSubCategoryProductList')) {
+    function getSubCategoryProductList() {
+        return Subcategoryitem::where('status','1')->get();
+    }
+}

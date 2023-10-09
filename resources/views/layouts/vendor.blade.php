@@ -145,7 +145,7 @@
             </li>
 
             <li class="nav-item">
-              <a class="nav-link" href="{{ url('/') }}">
+              <a class="nav-link" href="{{ url('/vendor/orders') }}">
                 <i class="mdi mdi-cart menu-icon"></i>
                 <span class="menu-title">Orders</span>
               </a>

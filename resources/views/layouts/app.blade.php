@@ -22,7 +22,11 @@
         <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}" />
         <link rel="stylesheet" href="{{ asset('frontend/css/responsive.css') }}" />
         <link rel="stylesheet" href="{{ asset('frontend/css/validationEngine.jquery.css') }}" />
-        <style type="text/css"></style>
+        <style type="text/css">
+            .ui-menu .ui-menu-item a {
+                cursor: pointer;
+            }
+        </style>
     </head>
     <body>
         <!-- Scroll-top -->
@@ -141,7 +145,7 @@
                                         </div>
                                     </li>
                                     --}}
-                                    <li class="header-work-time">Working time: <span> Mon - Sat : 8:00 - 21:0</span></li>
+                                    <li class="header-work-time">Working time: <span> Mon - Sat : 8:00 - 21:00</span></li>
                                 </ul>
                             </div>
                         </div>
@@ -176,8 +180,8 @@
                             <div class="d-block d-sm-flex align-items-center justify-content-end">
                                 <div class="header-search-wrap">
                                     <form action="#">
-                                        {{--
-                                        <select class="custom-select">
+
+                                        {{-- <select class="custom-select">
                                             <option selected="">All Categories</option>
                                             <option>-- Grocery & Frozen</option>
                                             <option>-- Fresh Fruits</option>
@@ -189,13 +193,13 @@
                                             <option>-- Kids Food</option>
                                             <option>-- Dried Fruits</option>
                                             <option>-- Others Food</option>
-                                        </select>
-                                        --}}
-                                        <input type="text" placeholder="Search Product..." />
+                                        </select> --}}
+
+                                        <input type="text" id="autocomplete" placeholder="Search Product..." />
                                         <button><i class="flaticon-loupe-1"></i></button>
                                     </form>
                                 </div>
-                                <div class="header-action">
+                                <div class="header-action" id="divToReload_WithDAta">
                                     <ul>
                                         <li class="header-phone">
                                             <div class="icon"><i class="flaticon-telephone"></i></div>
@@ -224,10 +228,10 @@
                                                     $total1 + $row1->price; @endphp
                                                     <li class="d-flex align-items-start">
                                                         <div class="cart-img">
-                                                            <a href="shop-details.html"><img src="{{ $row1->image }}" alt="" /></a>
+                                                            <a href="{{ ViewProductDetails($row1->product_id) }}"><img src="{{ $row1->image }}" alt="" /></a>
                                                         </div>
                                                         <div class="cart-content">
-                                                            <h4><a href="shop-details.html">{{ $row1->name }}</a></h4>
+                                                            <h4><a href="{{ ViewProductDetails($row1->product_id) }}">{{ $row1->name }}</a></h4>
                                                             <div class="cart-price">
                                                                 <span class="new"><i class="fas fa-rupee-sign"></i>{{ str_replace(',', '', number_format($row1->price, 2)) }}</span>
                                                                 {{--
@@ -522,7 +526,8 @@
         <script src="{{ asset('frontend/js/imagesloaded.pkgd.min.js') }}"></script>
         <script src="{{ asset('frontend/js/jquery.magnific-popup.min.js') }}"></script>
         <script src="{{ asset('frontend/js/jquery.countdown.min.js') }}"></script>
-        <script src="{{ asset('frontend/js/jquery-ui.min.js') }}"></script>
+        {{-- <script src="{{ asset('frontend/js/jquery-ui.min.js') }}"></script> --}}
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
         <script src="{{ asset('frontend/js/slick.min.js') }}"></script>
         <script src="{{ asset('frontend/js/ajax-form.js') }}"></script>
         <script src="{{ asset('frontend/js/wow.min.js') }}"></script>
@@ -537,6 +542,33 @@
             function googleTranslateElementInit() {
                 new google.translate.TranslateElement({ pageLanguage: "en" }, "google_translate_element");
             }
+
+            $(document).ready(function() {
+                var data = [
+                        @php
+                        $subcategoryitem = getSubCategoryProductList();
+                        if(!$subcategoryitem->isEmpty()) {
+                            foreach($subcategoryitem as $rowsubcategory){
+                        @endphp
+                            { label: '@php echo $rowsubcategory->sub_category_item_name @endphp', value: '@php echo route('home.sub-cat-item-landing-page',['subcatitemname='.create_slug($rowsubcategory->sub_category_item_name).'&cid='.Crypt::encryptString($rowsubcategory->category_id).'&scid='.Crypt::encryptString($rowsubcategory->sub_category_id).'&sciid='.Crypt::encryptString($rowsubcategory->id)]) @endphp'},
+                        @php
+                            }
+                        }
+                        @endphp
+                    ];
+                $("input#autocomplete").autocomplete({
+                    source: data,
+                    focus: function (event, ui) {
+                        $(event.target).val(ui.item.label);
+                        return false;
+                    },
+                    select: function (event, ui) {
+                        $(event.target).val(ui.item.label);
+                        window.location = ui.item.value;
+                        return false;
+                    }
+                });
+            });
         </script>
         @stack('frontend-scripts')
     </body>

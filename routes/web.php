@@ -13,6 +13,8 @@ use App\Http\Controllers\Vendor\Variations\VariationsController;
 use App\Http\Controllers\Vendor\Variationitems\VariationitemsController;
 use App\Http\Controllers\Vendor\CatController;
 use App\Http\Controllers\Vendor\Product\ProductController;
+use App\Http\Controllers\Vendor\Order\VendororderController;
+
 
 use App\Http\Controllers\Admin\Subcategoryitem\SubCategoryItemController;
 use App\Http\Controllers\Admin\Subcategory\SubCategoryController;
@@ -228,8 +230,6 @@ Route::any('/admin/search-brand-list-datatable', [BrandController::class, 'ajax_
  Route::any('/vendor/getsubcategoryitemcpt', [CatController::class, 'ajax_getsubcategoryitemcpt'])->name('vendor.getsubcategoryitemcpt');  // GET Subcategory Item LIST
 
 
-
-
 // Vendor Variation
 Route::get('/vendor/variation', [VariationsController::class, 'variation_list'])->name('vendor.variation');
 
@@ -275,8 +275,14 @@ Route::any('/vendor/getvariationBysubcategoryitem', [VariationitemsController::c
 // Route::any('/vendor/edit-product/{attributeid}',[ProductController::class, 'edit_product'])->name('vendor.edit-product');
 // Route::post('/vendor/edit-product-post',[ProductController::class, 'edit_product_post'])->name('vendor.edit-product-post');
 
+Route::get('/getvendorproduct', [VendororderController::class, 'getvendororders'])->name('vendor.orders');
 
-Route::get('/getvendorproduct', [ProductController::class, 'getvendorproductlistdata'])->name('vendor.getvendorproduct');
+
+
+ // Vendor Orders
+ Route::get('/vendor/orders', [VendororderController::class, 'order_list'])->name('products');
+
+
 
 Route::any('/admin/get_sub_category_on_product_page', [ProductController::class, 'ajax_get_sub_category_on_product_page'])->name('admin.get_sub_category_on_product_page');  // GET Subcategory LIST
 Route::any('/admin/get_sub_category_item_on_product_page', [ProductController::class, 'ajax_get_sub_category_item_on_product_page'])->name('admin.get_sub_category_item_on_product_page');  // GET Subcategory item LIST
@@ -351,6 +357,7 @@ Route::any('/admin/get_attributecat_with_attribute_on_product_page', [ProductCon
 
 
     //
+    Route::post('/add-to-cart-by-ajax',[CartController::class,'add_to_cart_items_by_ajax'])->name('cart.add-to-cart-by-ajax');
     Route::post('/add-to-cart',[CartController::class,'add_to_cart_items'])->name('cart.add-to-cart');
     Route::post('update-cart', [CartController::class,'update_cart'])->name('update-cart');
     Route::get('remove-cart-item', [CartController::class,'remove_cart_item'])->name('remove-cart-item');

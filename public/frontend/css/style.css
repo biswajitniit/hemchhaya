@@ -447,14 +447,14 @@ label {
 	position: relative;
 }
 .header-search-wrap form:before {
-    content: "";
+    /* content: "";
     position: absolute;
     left: 185px;
     top: 50%;
     transform: translateY(-50%);
     width: 1px;
     height: 24px;
-    background: #dbdada;
+    background: #dbdada; */
 }
 .header-search-wrap form .custom-select {
 	display: inline-block;

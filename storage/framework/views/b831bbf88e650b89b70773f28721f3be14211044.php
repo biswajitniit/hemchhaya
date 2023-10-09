@@ -1,4 +1,3 @@
-
 <?php $__env->startSection('title', 'Salesanta | Product details page'); ?>
 <?php $__env->startSection('content'); ?>
 
@@ -66,17 +65,8 @@
                         <h4 class="title"><?php echo e($product->name); ?></h4>
                         <div class="shop-details-meta">
                             <ul>
-                                <li>Brand : <a href="shop.html"><?php echo e(GetProductBrand($product->brand)); ?></a></li>
-                                <li class="shop-details-review">
-                                    <div class="rating">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-                                    <span>Review</span>
-                                </li>
+                                <li>Brand : <?php echo e(GetProductBrand($product->brand)); ?> </li>
+                                
                                 <li>ID : <span><?php echo e($product->sku); ?></span></li>
                             </ul>
                         </div>
@@ -188,147 +178,42 @@
                 </div>
                 <div class="col-md-4 col-sm-3">
                     <div class="section-btn text-left text-md-right">
-                        <a href="shop.html" class="btn">View All</a>
+                        <a href="<?php echo e(route('all-subcategory-item-list')); ?>" class="btn">View All</a>
                     </div>
                 </div>
             </div>
             <div class="best-sellers-products">
                 <div class="row justify-content-center">
+
+                    <?php if($rendomproduct): ?> <?php $__currentLoopData = $rendomproduct; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $rowrandproduct): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <div class="col-3">
                         <div class="sp-product-item mb-20">
                             <div class="sp-product-thumb">
                                 <span class="batch">New</span>
-                                <a href="shop-details.html"><img src="img/product/sp_products09.png" alt="" /></a>
+                                <a href=<?php echo e(url('/view-product-details?pid='.Crypt::encryptString($rowrandproduct->id).'&cid='.Crypt::encryptString($rowrandproduct->category_id).'&scid='.Crypt::encryptString($rowrandproduct->sub_category_id).'&scitemid='.Crypt::encryptString($rowrandproduct->sub_category_item_id))); ?>">
+                                    <img src="<?php echo e($rowrandproduct->productimage->image_url); ?>" alt="" />
+                                </a>
                             </div>
                             <div class="sp-product-content">
-                                <div class="rating">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </div>
-                                <h6 class="title"><a href="shop-details.html">Uncle Orange Vanla Ready Pice</a></h6>
+                                
+                                <h6 class="title"><a href="<?php echo e(url('/view-product-details?pid='.Crypt::encryptString($rowrandproduct->id).'&cid='.Crypt::encryptString($rowrandproduct->category_id).'&scid='.Crypt::encryptString($rowrandproduct->sub_category_id).'&scitemid='.Crypt::encryptString($rowrandproduct->sub_category_item_id))); ?>"><?php echo e($rowrandproduct->name); ?></a></h6>
                                 <span class="product-status">IN Stock</span>
                                 <div class="sp-cart-wrap">
-                                    <form action="#">
-                                        <div class="cart-plus-minus">
-                                            <input type="text" value="1" />
-                                        </div>
-                                    </form>
+                                    
+                                    <div class="cart-plus-minus specialproduct">
+                                        <?php if(Auth::check()): ?>
+                                        <input type="text" value="<?php echo e(GetCartCount($rowrandproduct->id)); ?>" id="<?php echo e($rowrandproduct->id); ?>" />
+                                        <?php else: ?>
+                                        <input type="text" value="0" id="<?php echo e($rowrandproduct->id); ?>" />
+                                        <?php endif; ?>
+                                    </div>
                                 </div>
-                                <p><i class="fas fa-rupee-sign"></i>1.50 - 1 kg</p>
+                                <p><i class="fas fa-rupee-sign"></i><?php echo e(number_format($rowrandproduct->sale_price,2)); ?> - <?php echo e(Get_Variation_item_Name($rowrandproduct->Productwithvariationitem->variation_item_id)); ?></p>
                             </div>
                         </div>
                     </div>
-                    <div class="col-3">
-                        <div class="sp-product-item mb-20">
-                            <div class="sp-product-thumb">
-                                <span class="batch discount">15%</span>
-                                <a href="shop-details.html"><img src="img/product/sp_products02.png" alt="" /></a>
-                            </div>
-                            <div class="sp-product-content">
-                                <div class="rating">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </div>
-                                <h6 class="title"><a href="shop-details.html">Dannon Max Vanla ice cream</a></h6>
-                                <span class="product-status">IN Stock</span>
-                                <div class="sp-cart-wrap">
-                                    <form action="#">
-                                        <div class="cart-plus-minus">
-                                            <input type="text" value="1" />
-                                        </div>
-                                    </form>
-                                </div>
-                                <p><i class="fas fa-rupee-sign"></i>3.50 - 1 lt</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="sp-product-item mb-20">
-                            <div class="sp-product-thumb">
-                                <span class="batch discount">25%</span>
-                                <a href="shop-details.html"><img src="img/product/sp_products03.png" alt="" /></a>
-                            </div>
-                            <div class="sp-product-content">
-                                <div class="rating">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </div>
-                                <h6 class="title"><a href="shop-details.html">Walnuts Max Vanla Greek Pice</a></h6>
-                                <span class="product-status">IN Stock</span>
-                                <div class="sp-cart-wrap">
-                                    <form action="#">
-                                        <div class="cart-plus-minus">
-                                            <input type="text" value="1" />
-                                        </div>
-                                    </form>
-                                </div>
-                                <p><i class="fas fa-rupee-sign"></i>2.99 - 1 kg</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="sp-product-item mb-20">
-                            <div class="sp-product-thumb">
-                                <span class="batch">new</span>
-                                <a href="shop-details.html"><img src="img/product/sp_products04.png" alt="" /></a>
-                            </div>
-                            <div class="sp-product-content">
-                                <div class="rating">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </div>
-                                <h6 class="title"><a href="shop-details.html">Brachs Bens Vanla Ready Pice</a></h6>
-                                <span class="product-status">IN Stock</span>
-                                <div class="sp-cart-wrap">
-                                    <form action="#">
-                                        <div class="cart-plus-minus">
-                                            <input type="text" value="1" />
-                                        </div>
-                                    </form>
-                                </div>
-                                <p><i class="fas fa-rupee-sign"></i>2.99 - 1 kg</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="sp-product-item mb-20">
-                            <div class="sp-product-thumb">
-                                <span class="batch discount">25%</span>
-                                <a href="shop-details.html"><img src="img/product/sp_products05.png" alt="" /></a>
-                            </div>
-                            <div class="sp-product-content">
-                                <div class="rating">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </div>
-                                <h6 class="title"><a href="shop-details.html">Black Lady Vanla Greek Grapes</a></h6>
-                                <span class="product-status">IN Stock</span>
-                                <div class="sp-cart-wrap">
-                                    <form action="#">
-                                        <div class="cart-plus-minus">
-                                            <input type="text" value="1" />
-                                        </div>
-                                    </form>
-                                </div>
-                                <p><i class="fas fa-rupee-sign"></i>5.99 - 1 kg</p>
-                            </div>
-                        </div>
-                    </div>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?> <?php endif; ?>
+
                 </div>
             </div>
         </div>
@@ -336,8 +221,140 @@
     <!-- best-sellers-area-end -->
 </main>
 <!-- main-area-end -->
-
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-body"></div>
+        </div>
+    </div>
+</div>
 <?php $__env->startPush('frontend-scripts'); ?>
+<script>
+    $(".specialproduct").append('<div class="dec qtybutton">-</div><div class="inc qtybutton">+</div>');
+    $(".qtybutton").on("click", function () {
+        var $button = $(this);
+        var oldValue = $button.parent().find("input").val();
+        if ($button.text() == "+") {
+            var newVal = parseFloat(oldValue) + 1;
+
+            $button.parent().find("input").val(newVal);
+            if(newVal>0){
+                $productid = $button.parent().find("input").attr("id");
+                <?php
+                    if(Auth::check()){
+                ?>
+                    $.ajax({
+                            type:'POST',
+                            url:'<?php echo e(route("cart.add-to-cart-by-ajax")); ?>',
+                            data:{productid:$productid, qty:newVal, _token: '<?php echo e(csrf_token()); ?>'},
+                            success:function(result){
+                                    $("#divToReload_WithDAta").load(location.href + " #divToReload_WithDAta");
+                                    $(".modal-body").html(result+' Items Added To Cart Successfully.');
+                                    $("#myModal").modal('show');
+                                    var myInterval = setInterval(function() {
+                                    $("#myModal").modal('hide');
+                                    }, 3000);
+                                    return false;
+                            }
+                    });
+                <?php
+                }else{
+                ?>
+                    window.location.href = "<?php echo e(route('login')); ?>";
+                <?php
+                }
+                ?>
+            }
+        } else {
+            // Don't allow decrementing below zero
+            if (oldValue > 0) {
+                var newVal = parseFloat(oldValue) - 1;
+                $button.parent().find("input").val(newVal);
+                if(newVal>0){
+                    $productid = $button.parent().find("input").attr("id");
+                    <?php
+                        if(Auth::check()){
+                    ?>
+
+                        $.ajax({
+                                type:'POST',
+                                url:'<?php echo e(route("cart.add-to-cart-by-ajax")); ?>',
+                                data:{productid:$productid, qty:newVal, _token: '<?php echo e(csrf_token()); ?>'},
+                                success:function(result){
+                                        //alert(result); return false;
+                                        $("#divToReload_WithDAta").load(location.href + " #divToReload_WithDAta");
+
+                                        // $("#number_count_"+productid).val(qty);
+
+                                        $(".modal-body").html(result+' Remove Item From Cart.');
+                                        $("#myModal").modal('show');
+
+                                        var myInterval = setInterval(function() {
+                                        $("#myModal").modal('hide');
+
+                                        }, 3000);
+
+
+                                        return false;
+
+                                }
+
+                        });
+                    <?php
+                    }else{
+                    ?>
+                        window.location.href = "<?php echo e(route('login')); ?>";
+                    <?php
+                    }
+                    ?>
+                }
+                if(newVal == 0){
+                    $productid = $button.parent().find("input").attr("id");
+                    <?php
+                        if(Auth::check()){
+                    ?>
+                        $.ajax({
+                                type:'POST',
+                                url:'<?php echo e(route("cart.add-to-cart-by-ajax")); ?>',
+                                data:{productid:$productid, qty:0, _token: '<?php echo e(csrf_token()); ?>'},
+                                success:function(result){
+                                    $("#divToReload_WithDAta").load(location.href + " #divToReload_WithDAta");
+                                    $(".modal-body").html(result+' Remove Item From Cart.');
+                                    $("#myModal").modal('show');
+
+                                    var myInterval = setInterval(function() {
+                                    $("#myModal").modal('hide');
+
+                                    }, 3000);
+
+                                    return false;
+                                }
+                        });
+                    <?php
+                    }else{
+                    ?>
+                        window.location.href = "<?php echo e(route('login')); ?>";
+                    <?php
+                    }
+                    ?>
+                }
+            } else {
+                newVal = 0;
+                $(".modal-body").html('Quantity should be at least one.');
+                $("#myModal").modal('show');
+
+                var myInterval = setInterval(function() {
+                $("#myModal").modal('hide');
+
+                }, 3000);
+
+            }
+        }
+
+
+    });
+</script>
 <?php $__env->stopPush(); ?>
 <?php $__env->stopSection(); ?>
 
