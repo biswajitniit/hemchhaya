@@ -7,6 +7,7 @@ use App\Models\Cart;
 use App\Models\Product;
 use App\Models\Product_image;
 use Exception;
+use Facade\FlareClient\Http\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -22,16 +23,16 @@ class CartController extends Controller
             return response()->json( $validator->errors(), 422);
         }
         try{
-            $product = Product::where("id",'=',$request->product_id);
-            $product_image = Product_image::where('product_id','=',$request->product_id);
+            $product = Product::where("id",'=',$request->product_id)->first();
+            $product_image = Product_image::where('product_id','=',$request->product_id)->first();
             
             $cart = Cart::create([
                 'product_id'=>$request->product_id,
                 'user_id'=>$request->user()->id,
                 'qty'=>$request->qty,
                 "name"=>$product->name,
-                "attribute"=>$request->attribute,
-                "price"=>$product->price * $request->qty,
+                "attributes"=>$request->attribute,
+                "price"=>$product->price,
                 'image'=>$product_image->image_url,
             ]);
             return response()->json($cart,200);
@@ -48,7 +49,7 @@ class CartController extends Controller
             return response()->json($e->getMessage(),500);
         }
     }
-    public function updare_cart(Request $request){
+    public function update_cart(Request $request){
         $validator = Validator::make($request->all(), [
             'id' => 'required',
             "qty"=> 'required|integer',
@@ -58,11 +59,19 @@ class CartController extends Controller
             return response()->json( $validator->errors(), 422);
         }
         try{
-            $cart = Cart::where('id',$request->id)->first();
+            $cart = Cart::where('id',$request->id)->where('user_id',$request->user()->id)->first();
             $cart->qty = $request->qty;
-            $cart->attribute = $request->attribute;
+            $cart->attributes = $request->attribute;
             $cart->save();
             return response()->json(["message"=>"Cart updated successfully"],200);
+        }catch(Exception $e){
+            return response()->json($e->getMessage(),500);
+        }
+    }
+    public function delete_cart(Request $request, Cart $cart){
+        try{
+            $data = Cart::where('id',$cart->id)->where('user_id',$request->user()->id)->forceDelete();
+            return response()->json(["message"=>"Cart deleted successfully"],200);
         }catch(Exception $e){
             return response()->json($e->getMessage(),500);
         }

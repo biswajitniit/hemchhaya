@@ -38,6 +38,11 @@ Route::namespace('Api')->group(function() {
     Route::post('/cart', 'CartController@add_cart');
     Route::get('/cart', 'CartController@get_cart');
     Route::put('/cart', 'CartController@update_cart');
+    Route::delete('/cart/{cart}', 'CartController@delete_cart');
+    Route::get('/order', 'OrderController@my_orders_history');
+    Route::get('/order/{order}', 'OrderController@view_order_details');
+    Route::post('/single-order', 'OrderController@create_single_order');
+    Route::post('/cart-order', 'OrderController@cart_order');
   });
 });
 
