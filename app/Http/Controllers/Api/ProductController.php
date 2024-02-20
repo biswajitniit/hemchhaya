@@ -45,9 +45,9 @@ class ProductController extends Controller
     public function banners(Request $request){
         try{
             $data = Banner::all();
-           return response()->json($data, 200);
-          } catch(Exception $e) {
-           return response()->json(['error'=>$e->getMessage()],500);
-          }
-       }
+            return response()->json($data, 200);
+        } catch(Exception $e) {
+            return response()->json(['error'=>$e->getMessage()],500);
+        }
+    }
 }
