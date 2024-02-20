@@ -26,9 +26,14 @@ use App\Http\Controllers\ApiController;
 Route::namespace('Api')->group(function() {
   Route::post('/login', 'LoginController@login');
   Route::post('/signup', 'LoginController@signup');
+  Route::get('/banners', 'ProductController@banners');
   Route::get('/products', 'ProductController@product_list');
   Route::get('/products/{product}', 'ProductController@products_with_options');
+  Route::get('/product-search', 'ProductController@search_product_data');
   Route::get('/categories', 'CategoryController@category_list');
+  Route::post('/forgot-password', 'ForgotPasswordController@forgot_password');
+  Route::post('/verify-otp', 'ForgotPasswordController@verify_otp');
+  Route::post('/create-password', 'ForgotPasswordController@create_password');
 
   Route::middleware('auth:sanctum')->group(function() {
     Route::post('/change-password', 'UserController@change_password');
@@ -39,7 +44,7 @@ Route::namespace('Api')->group(function() {
     Route::get('/cart', 'CartController@get_cart');
     Route::put('/cart', 'CartController@update_cart');
     Route::delete('/cart/{cart}', 'CartController@delete_cart');
-    Route::get('/order', 'OrderController@my_orders_history');
+    Route::get('/orders', 'OrderController@my_orders_history');
     Route::get('/order/{order}', 'OrderController@view_order_details');
     Route::post('/single-order', 'OrderController@create_single_order');
     Route::post('/cart-order', 'OrderController@cart_order');

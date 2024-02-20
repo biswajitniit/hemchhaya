@@ -45,7 +45,7 @@ class LoginController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'phone' => 'required|string|max:50|unique:users',
+            'phone' => 'required|string',
             'password' => 'required|string|min:5|confirmed',
         ]);
 
@@ -59,7 +59,6 @@ class LoginController extends Controller
             'phone' => $request->phone,
             'password' => Hash::make($request->password),
         ]);
-
         if (!$user) {
             throw ValidationException::withMessages(['message' => 'Something went wrong, please try again!'], 400);
         }

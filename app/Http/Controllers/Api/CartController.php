@@ -23,7 +23,14 @@ class CartController extends Controller
             return response()->json( $validator->errors(), 422);
         }
         try{
+            $cartData = Cart::where('product_id',$request->product_id);
+            if($cartData){
+                return response()->json( ["message"=>"Product already added to cart"], 422);
+            }
             $product = Product::where("id",'=',$request->product_id)->first();
+            if(!$product){
+                return response()->json( ["message"=>"Product not found"], 422);
+            }
             $product_image = Product_image::where('product_id','=',$request->product_id)->first();
             
             $cart = Cart::create([
